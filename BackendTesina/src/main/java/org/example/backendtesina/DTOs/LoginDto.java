@@ -1,5 +1,9 @@
 package org.example.backendtesina.DTOs;
 
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Data
 public class LoginDto {
     private String email;
     private String password;

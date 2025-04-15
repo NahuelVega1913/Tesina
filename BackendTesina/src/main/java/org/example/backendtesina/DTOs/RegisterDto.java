@@ -1,14 +1,10 @@
-package org.example.backendtesina.entities;
+package org.example.backendtesina.DTOs;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.Data;
 
-@Entity
 @Data
-public class UserEntity {
+public class RegisterDto {
 
-    @Id
     private String email;
     private String password;
     private String name;
