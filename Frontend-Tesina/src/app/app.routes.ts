@@ -7,13 +7,14 @@ import { RepuestoComponent } from './repuesto/repuesto.component';
 import { DashboardsComponent } from './dashboards/dashboards.component';
 import { CasillaComponent } from './notificaciones/notificaciones.component';
 import { LandingComponent } from './landing/landing.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'landing', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent,
   },
+  { path: 'inicio', component: InicioComponent },
   { path: 'registrarse', component: RegistrarseComponent },
   { path: 'chatinteligente', component: ChatbotComponent },
   { path: 'repuestos', component: RepuestosComponent },
