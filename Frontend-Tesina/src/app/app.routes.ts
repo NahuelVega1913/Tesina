@@ -20,7 +20,6 @@ export const routes: Routes = [
   { path: 'repuestos', component: RepuestosComponent },
   { path: 'repuesto', component: RepuestoComponent },
   { path: 'dashboards', component: DashboardsComponent },
-  { path: 'chatinteligente', component: ChatbotComponent },
   { path: 'notificaciones', component: CasillaComponent },
   { path: 'landing', component: LandingComponent },
 ];

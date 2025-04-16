@@ -221,9 +221,8 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Repuestos</span>
         </a>
       </li>
-      <li routerLink="/login">
+      <li (click)="redirectTo('/login')">
         <a
-          href="#"
           class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
         >
           <svg
@@ -244,9 +243,8 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Ingresar</span>
         </a>
       </li>
-      <li routerLink="/registrarse">
+      <li (click)="redirectTo('/registrarse')">
         <a
-          href="#"
           class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
         >
           <svg

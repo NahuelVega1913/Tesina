@@ -1,16 +1,20 @@
 package org.example.backendtesina.controllers;
 
+import io.swagger.v3.core.util.Json;
 import org.example.backendtesina.DTOs.LoginDto;
 import org.example.backendtesina.DTOs.RegisterDto;
+import org.example.backendtesina.entities.UserEntity;
 import org.example.backendtesina.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth/login")
+@CrossOrigin("*")
 public class LoginController {
 
 
@@ -18,14 +22,37 @@ public class LoginController {
     LoginService service;
 
     @PostMapping("/authenticate")
-    public String login(@RequestBody LoginDto loginDto ) {
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto ) {
+        int response = service.validateUser(loginDto);
+        if(response == 1){
+            return ResponseEntity.ok("Usuario Validado Correctamente");
+        }else if( response == 0){
+            return ResponseEntity.badRequest().build();
 
-        return "Login successful";
+        }
+        else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterDto registerDto) {
-        // Aquí puedes agregar la lógica para registrar al usuario
-        return "User registered successfully";
+    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
+        if(registerDto.getEmail() == null || registerDto.getPassword() == null) {
+            return ResponseEntity.badRequest().body("Email and password are required");
+        }
+        if(service.registerUser(registerDto) == 0) {
+            return ResponseEntity.badRequest().body("Usuario ya existente");
+        }
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body("{\"message\": \"Usuario creado correctamente\"}");
+    }
+    @GetMapping("/getallusers")
+    public ResponseEntity<List<UserEntity>> getAllUsers(){
+        if(service.getAllUsers().size() == 0){
+            return ResponseEntity.badRequest().build();
+        }else{
+            return ResponseEntity.ok(service.getAllUsers());
+        }
     }
 }

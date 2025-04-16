@@ -1,154 +1,155 @@
-<div class="bg-yellow-300 w-full flex flex-col h-screen p-30">
-  <p class="font-bold text-black text-6xl mb-10">Crea una cuenta</p>
-
-  <form>
+<div class="bg-sky-500 w-full flex flex-col h-screen p-20 md:p-30">
+  <p class="font-bold text-white text-6xl mb-10 text-shadow-lg">
+    Crea una cuenta
+  </p>
+  <form [formGroup]="form" (submit)="save()">
     <div class="grid gap-6 mb-6 md:grid-cols-2">
       <div>
         <label
           for="first_name"
-          class="block mb-2 text-sm font-medium text-gray-900 j"
+          class="block mb-2 text-sm font-medium text-white text-shadow-lg"
           >Nombre</label
         >
         <input
           type="text"
+          formControlName="name"
+          [ngClass]="{
+            'is-invalid': form.get('name')?.touched && form.get('name')?.invalid
+          }"
           id="first_name"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 j dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
           placeholder="John"
-          required
         />
+        @if(form.get('name')?.invalid && form.get('name')?.touched){
+        <div class="text-gray-200 font-bold drop-shadow-md text-4xl">
+          Complete el nombre
+        </div>
+        }
       </div>
       <div>
-        <label
-          for="last_name"
-          class="block mb-2 text-sm font-medium text-gray-900 j"
+        <label for="last_name" class="block mb-2 text-sm font-medium text-white"
           >Apellido</label
         >
         <input
           type="text"
+          formControlName="lastname"
+          [ngClass]="{
+            'is-invalid':
+              form.get('lastname')?.touched && form.get('lastname')?.invalid
+          }"
           id="last_name"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 j dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
           placeholder="Doe"
-          required
         />
+        @if(form.get('lastname')?.invalid && form.get('lastname')?.touched){
+        <div class="text-gray-200 font-bold drop-shadow-md text-4xl">
+          Complete el apellido
+        </div>
+        }
       </div>
       <div>
-        <label
-          for="company"
-          class="block mb-2 text-sm font-medium text-gray-900 j"
+        <label for="company" class="block mb-2 text-sm font-medium text-white"
           >Email</label
         >
         <input
           type="email"
+          [ngClass]="{
+            'is-invalid':
+              form.get('email')?.touched && form.get('email')?.invalid
+          }"
+          formControlName="email"
           id="company"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 j dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="agustin@gmail.com"
-          required
         />
+        @if(form.get('email')?.invalid && form.get('email')?.touched){
+        <div class="text-gray-200 font-bold drop-shadow-md">
+          Complete el email
+        </div>
+        }
       </div>
+
       <div>
-        <label
-          for="phone"
-          class="block mb-2 text-sm font-medium text-gray-900 j"
+        <label for="phone" class="block mb-2 text-sm font-medium text-white j"
           >Phone number</label
         >
         <input
-          type="tel"
+          type="number"
+          [ngClass]="{
+            'is-invalid':
+              form.get('phone')?.touched && form.get('phone')?.invalid
+          }"
+          formControlName="phone"
           id="phone"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 j dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
           placeholder="+54 351-XXXXXXX"
           pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
           required
         />
-      </div>
-      <div>
-        <label
-          for="website"
-          class="block mb-2 text-sm font-medium text-gray-900 j"
-          >Website URL</label
-        >
-        <input
-          type="url"
-          id="website"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 j dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="flowbite.com"
-          required
-        />
-      </div>
-      <div>
-        <label
-          for="visitors"
-          class="block mb-2 text-sm font-medium text-gray-900 j"
-          >Unique visitors (per month)</label
-        >
-        <input
-          type="number"
-          id="visitors"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 j dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder=""
-          required
-        />
+        @if(form.get('phone')?.invalid && form.get('phone')?.touched){
+        <div class="text-gray-200 font-bold drop-shadow-md">
+          Complete el telefono
+        </div>
+        }
       </div>
     </div>
     <div class="mb-6">
-      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 j"
+      <label for="email" class="block mb-2 text-sm font-medium text-white"
         >Direccion</label
       >
       <input
         type="text"
-        id="email"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 j dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder=""
+        formControlName="address"
+        class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
+        placeholder="Calle falsa 123"
         required
       />
+      @if(form.get('address')?.invalid && form.get('address')?.touched){
+      <div class="text-gray-200 font-bold drop-shadow-md">
+        Complete la direccion
+      </div>
+      }
     </div>
+
     <div class="mb-6">
-      <label
-        for="password"
-        class="block mb-2 text-sm font-medium text-gray-900 j"
-        >Password</label
+      <label for="password" class="block mb-2 text-sm font-medium text-white"
+        >Contraseña</label
       >
       <input
         type="password"
+        formControlName="password"
         id="password"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 j dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
         placeholder="•••••••••"
         required
       />
+      @if(form.get('password')?.invalid && form.get('password')?.touched){
+      <div class="text-gray-200 font-bold drop-shadow-md">
+        Complete la contraseña
+      </div>
+      }
     </div>
-    <div class="mb-6">
-      <label
-        for="confirm_password"
-        class="block mb-2 text-sm font-medium text-gray-900 j"
-        >Confirm password</label
-      >
-      <input
-        type="password"
-        id="confirm_password"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 j dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="•••••••••"
-        required
-      />
-    </div>
+
     <div class="flex items-start mb-6">
       <div class="flex items-center h-5">
         <input
           id="remember"
           type="checkbox"
           value=""
-          class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+          class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600"
           required
         />
       </div>
-      <label for="remember" class="ms-2 text-sm font-medium text-gray-900"
+      <label for="remember" class="ms-2 text-sm font-medium text-white"
         >He leido y acepto los
-        <a href="#" class="text-blue-600 hover:underline dark:text-blue-500"
+        <a href="#" class="text-sky-950 hover:underline"
           >Terminos y Condiciones</a
         >.</label
       >
     </div>
     <button
       type="submit"
-      class="text-white bg-sky-400 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+      class="text-white bg-green-950 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
     >
       Crear
     </button>

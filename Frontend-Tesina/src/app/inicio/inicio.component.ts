@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RepuestosComponent } from '../repuestos/repuestos.component';
 import { ChatbotComponent } from '../chatbot/chatbot.component';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -9,4 +9,10 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
 })
-export class InicioComponent {}
+export class InicioComponent {
+  constructor(private router: Router) {}
+
+  redirectTo(url: string) {
+    this.router.navigate([`${url}`]);
+  }
+}
