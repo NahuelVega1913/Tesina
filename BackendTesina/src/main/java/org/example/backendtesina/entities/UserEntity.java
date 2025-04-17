@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "user",uniqueConstraints ={@UniqueConstraint(columnNames = {"email"})} )
 public class UserEntity implements UserDetails {
 
     @Id

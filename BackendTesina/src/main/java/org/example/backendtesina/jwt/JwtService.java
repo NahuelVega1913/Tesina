@@ -20,7 +20,7 @@ public class JwtService {
         return getToken(new HashMap<>(),user);
     }
 
-    public String getToken(Map<String, Objects> extraClaims, UserDetails user){
+    public String getToken(Map<String, Object> extraClaims, UserDetails user){
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(user.getUsername())
@@ -31,7 +31,7 @@ public class JwtService {
     }
 
     private Key getKey(){
-        byte[] keyBytes = Decoders.BASE64.decode("MECHANIC_KEY");
+        byte[] keyBytes = Decoders.BASE64.decode("YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ==");
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
