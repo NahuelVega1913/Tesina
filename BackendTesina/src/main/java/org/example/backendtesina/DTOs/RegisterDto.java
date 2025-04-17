@@ -1,10 +1,11 @@
 package org.example.backendtesina.DTOs;
 
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 @Data
 public class RegisterDto {
-
+    
     private String email;
     private String password;
     private String name;

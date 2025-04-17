@@ -11,9 +11,6 @@ export class AuthService {
   private readonly http: HttpClient = inject(HttpClient);
 
   crear(body: any): Observable<any> {
-    return this.http.post<any>(
-      'http://localhost:8080/auth/login/register',
-      body
-    );
+    return this.http.post<any>('http://localhost:8080/auth/register', body);
   }
 }

@@ -1,4 +1,4 @@
-package org.example.backendtesina.controllers;
+package org.example.backendtesina.DTOs;
 
 import lombok.Data;
 

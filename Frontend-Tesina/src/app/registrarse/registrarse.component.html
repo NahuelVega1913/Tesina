@@ -13,15 +13,13 @@
         <input
           type="text"
           formControlName="name"
-          [ngClass]="{
-            'is-invalid': form.get('name')?.touched && form.get('name')?.invalid
-          }"
           id="first_name"
           class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
           placeholder="John"
+          required
         />
         @if(form.get('name')?.invalid && form.get('name')?.touched){
-        <div class="text-gray-200 font-bold drop-shadow-md text-4xl">
+        <div class="text-gray-200 font-bold drop-shadow-md">
           Complete el nombre
         </div>
         }
@@ -33,16 +31,13 @@
         <input
           type="text"
           formControlName="lastname"
-          [ngClass]="{
-            'is-invalid':
-              form.get('lastname')?.touched && form.get('lastname')?.invalid
-          }"
           id="last_name"
           class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
           placeholder="Doe"
+          required
         />
         @if(form.get('lastname')?.invalid && form.get('lastname')?.touched){
-        <div class="text-gray-200 font-bold drop-shadow-md text-4xl">
+        <div class="text-gray-200 font-bold drop-shadow-md">
           Complete el apellido
         </div>
         }
@@ -61,6 +56,7 @@
           id="company"
           class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="agustin@gmail.com"
+          required
         />
         @if(form.get('email')?.invalid && form.get('email')?.touched){
         <div class="text-gray-200 font-bold drop-shadow-md">

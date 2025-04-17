@@ -13,15 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/auth/login")
-@CrossOrigin("*")
+@RequestMapping("/auth")
 public class LoginController {
 
 
     @Autowired
     LoginService service;
 
-    @PostMapping("/authenticate")
+    @PostMapping(value = "authenticate")
     public ResponseEntity<String> login(@RequestBody LoginDto loginDto ) {
         int response = service.validateUser(loginDto);
         if(response == 1){
@@ -35,7 +34,7 @@ public class LoginController {
         }
     }
 
-    @PostMapping("/register")
+    @PostMapping(value = "register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
         if(registerDto.getEmail() == null || registerDto.getPassword() == null) {
             return ResponseEntity.badRequest().body("Email and password are required");
@@ -47,7 +46,7 @@ public class LoginController {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body("{\"message\": \"Usuario creado correctamente\"}");
     }
-    @GetMapping("/getallusers")
+    @GetMapping(value = "getAllUsers")
     public ResponseEntity<List<UserEntity>> getAllUsers(){
         if(service.getAllUsers().size() == 0){
             return ResponseEntity.badRequest().build();
