@@ -1,6 +1,7 @@
 package org.example.backendtesina.controllers;
 
 import io.swagger.v3.core.util.Json;
+import org.example.backendtesina.DTOs.AuthResponse;
 import org.example.backendtesina.DTOs.LoginDto;
 import org.example.backendtesina.DTOs.RegisterDto;
 import org.example.backendtesina.entities.UserEntity;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/auth")
@@ -21,17 +23,13 @@ public class LoginController {
     LoginService service;
 
     @PostMapping(value = "authenticate")
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto ) {
-        int response = service.validateUser(loginDto);
-        if(response == 1){
-            return ResponseEntity.ok("Usuario Validado Correctamente");
-        }else if( response == 0){
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginDto loginDto ) {
+        AuthResponse response = service.validateUser(loginDto);
+        if(response.getToken() != null){
+            return ResponseEntity.ok(service.validateUser(loginDto) );
+        }
             return ResponseEntity.badRequest().build();
 
-        }
-        else{
-            return ResponseEntity.badRequest().build();
-        }
     }
 
     @PostMapping(value = "register")
@@ -39,7 +37,7 @@ public class LoginController {
         if(registerDto.getEmail() == null || registerDto.getPassword() == null) {
             return ResponseEntity.badRequest().body("Email and password are required");
         }
-        if(service.registerUser(registerDto) == 0) {
+        if(service.registerUser(registerDto) != null) {
             return ResponseEntity.badRequest().body("Usuario ya existente");
         }
             return ResponseEntity.ok()

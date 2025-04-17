@@ -1,29 +1,18 @@
 package org.example.backendtesina.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import org.springframework.context.annotation.Role;
 
-@Entity
-public class RoleEntity {
+import java.util.List;
 
-    @Id
-    private int id;
-    private String name;
 
-    public int getId() {
-        return id;
-    }
+public enum RoleEntity {
+    SUPERADMIN,
+    ADMIN,
+    USER,
+    EMPLOYEE
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
