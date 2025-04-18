@@ -24,7 +24,6 @@ export class LoginComponent {
       email: email,
       password: password,
     };
-    alert(body.email + body.password);
     const addSubscription = this.service.login(body).subscribe({
       next: () => {
         Swal.fire({
