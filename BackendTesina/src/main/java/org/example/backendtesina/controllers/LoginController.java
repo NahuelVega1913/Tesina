@@ -21,6 +21,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin("*")
 public class LoginController {
 
 
@@ -36,7 +37,7 @@ public class LoginController {
     @PostMapping(value = "authenticate")
     public AuthResponse login(@RequestBody LoginDto loginDto ) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(),loginDto.getPassword()));
-        UserDetails user= repository.findById(loginDto.getEmail()).orElseThrow();
+        UserDetails user= repository.findByEmail(loginDto.getEmail()).orElseThrow();
         String Token = jwtService.getToken(user);
         return new AuthResponse(Token);
     }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import Swal from 'sweetalert2';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,8 @@ import Swal from 'sweetalert2';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  private service: AuthService = inject(AuthService);
+
   goToRegister() {
     window.location.href = '/registrarse';
   }
@@ -21,31 +24,23 @@ export class LoginComponent {
       email: email,
       password: password,
     };
-
-    fetch('http://localhost:8080/auth/authenticate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    })
-      .then((response) => response.json())
-      .then((data) => {
+    alert(body.email + body.password);
+    const addSubscription = this.service.login(body).subscribe({
+      next: () => {
         Swal.fire({
           icon: 'success',
           title: '¡Usuario creado!',
           text: 'El usuario fue registrado exitosamente',
           confirmButtonColor: '#3085d6',
         });
-        // Aquí puedes manejar la respuesta del servidor, como redirigir al usuasrio o mostrar un mensaje de éxito
-      })
-      .catch((error) => {
+      },
+      error: (err) => {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Ocurrio un error al registrar el usuario',
+          text: 'Usuario o contraseña invalidos',
         });
-        // Aquí puedes manejar el error, como mostrar un mensaje de error al usuario
-      });
+      },
+    });
   }
 }

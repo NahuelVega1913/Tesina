@@ -14,6 +14,10 @@ export class AuthService {
     return this.http.post<any>('http://localhost:8080/auth/register', body);
   }
   login(body: any): Observable<any> {
-    return this.http.post<any>('http://localhost:8080/auth/authenticate', {});
+    return this.http.post<any>(
+      'http://localhost:8080/auth/authenticate',
+      body,
+      { headers: { 'Content-Type': 'application/json' } }
+    );
   }
 }

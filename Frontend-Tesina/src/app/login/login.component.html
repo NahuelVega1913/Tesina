@@ -11,13 +11,18 @@
     <div class="flex flex-col items-center gap-4">
       <div class="w-full">
         <label class="block mb-1 text-sky-900">Email</label>
-        <input type="email" class="border rounded w-full p-2" />
+        <input type="email" id="email" class="border rounded w-full p-2" />
       </div>
       <div class="w-full">
         <label class="block mb-1 text-sky-900">Contraseña</label>
-        <input type="password" class="border rounded w-full p-2" />
+        <input
+          type="password"
+          id="password"
+          class="border rounded w-full p-2"
+        />
       </div>
       <button
+        (click)="login()"
         class="rounded-full text-white font-bold bg-sky-950 w-full py-2 mt-4 hover:bg-white hover:text-sky-950 transition duration-300 ease-in-out hover:shadow-lg hover:shadow-cyan-500/50"
       >
         Ingresar

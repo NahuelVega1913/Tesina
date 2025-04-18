@@ -8,6 +8,7 @@ import org.example.backendtesina.entities.UserEntity;
 import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,22 +20,24 @@ public class LoginService {
     UserRepository repository;
     @Autowired
     JwtService jwtService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-    public AuthResponse validateUser(LoginDto login) {
-        UserEntity user = repository.findById(login.getEmail()).orElse(null);
-        if (user != null) {
-            if (user.getPassword().equals(login.getPassword())) {
-                return null ; // Usuario y contraseña válidos
-            } else {
-                return null; // Contraseña incorrecta
-            }
-        }
-        return null; // Usuario no encontrado
-    }
+//    public AuthResponse validateUser(LoginDto login) {
+//        UserEntity user = repository.findById(login.getEmail()).orElse(null);
+//        if (user != null) {
+//            if (user.getPassword().equals(login.getPassword())) {
+//                return null ; // Usuario y contraseña válidos
+//            } else {
+//                return null; // Contraseña incorrecta
+//            }
+//        }
+//        return null; // Usuario no encontrado
+//    }
     public AuthResponse  registerUser(RegisterDto register) {
         UserEntity user = new UserEntity();
         user.setEmail(register.getEmail());
-        user.setPassword(register.getPassword());
+        user.setPassword(passwordEncoder.encode(register.getPassword()));
         user.setName(register.getName());
         user.setLastname(register.getLastname());
         user.setPhone(register.getPhone());
