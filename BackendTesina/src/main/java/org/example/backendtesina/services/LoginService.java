@@ -35,6 +35,9 @@ public class LoginService {
 //        return null; // Usuario no encontrado
 //    }
     public AuthResponse  registerUser(RegisterDto register) {
+        if (repository.findByEmail(register.getEmail()).isPresent()) {
+            return null; // El usuario ya existe
+        }
         UserEntity user = new UserEntity();
         user.setEmail(register.getEmail());
         user.setPassword(passwordEncoder.encode(register.getPassword()));
@@ -43,10 +46,6 @@ public class LoginService {
         user.setPhone(register.getPhone());
         user.setAddress(register.getAddress());
         user.setRole(RoleEntity.USER);
-
-        if (repository.existsById(user.getEmail())) {
-            return null; // El usuario ya existe
-        }
         repository.save(user);
         if(repository.existsById(register.getEmail()) ){
             return new AuthResponse(jwtService.getToken(user));// Usuario registrado con éxito

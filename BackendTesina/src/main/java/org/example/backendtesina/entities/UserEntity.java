@@ -11,9 +11,11 @@ import java.util.List;
 
 @Entity
 @Data
+@Table(name = "USERS")
 public class UserEntity implements UserDetails {
 
     @Id
+    @Column(unique = true,nullable = false)
     private String email;
     @Column(nullable = false)
     private String password;
