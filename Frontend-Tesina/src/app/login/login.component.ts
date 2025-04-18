@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent {
   private service: AuthService = inject(AuthService);
+  constructor(private router: Router) {}
 
   goToRegister() {
     window.location.href = '/registrarse';
@@ -28,10 +30,12 @@ export class LoginComponent {
       next: () => {
         Swal.fire({
           icon: 'success',
-          title: '¡Usuario creado!',
-          text: 'El usuario fue registrado exitosamente',
+          title: '¡Bienvenido!',
+          text: ' Inicio de sesion exitoso',
           confirmButtonColor: '#3085d6',
         });
+
+        this.router.navigate(['/inicio']);
       },
       error: (err) => {
         Swal.fire({
