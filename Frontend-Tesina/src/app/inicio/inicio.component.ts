@@ -11,9 +11,9 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 export class InicioComponent {
   constructor(private router: Router) {}
 
-  nombre = localStorage.getItem('name');
-  apellido = localStorage.getItem('lastname');
-  rol = localStorage.getItem('role');
+  nombre: string | null = '';
+  apellido: string | null = '';
+  rol: string | null = '';
 
   rolAMostrar() {
     if (this.rol === 'ADMIN') {
@@ -25,6 +25,13 @@ export class InicioComponent {
     } else {
       return 'Empleado';
     }
+  }
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.nombre = localStorage.getItem('name');
+    this.apellido = localStorage.getItem('lastname');
+    this.rol = localStorage.getItem('role');
   }
 
   calcultarIniciales() {

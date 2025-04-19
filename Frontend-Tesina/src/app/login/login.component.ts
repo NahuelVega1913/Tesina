@@ -33,14 +33,16 @@ export class LoginComponent {
         localStorage.setItem('lastname', response.lastname);
         localStorage.setItem('role', response.role);
 
+        this.router.navigate(['/inicio']).then(() => {
+          location.reload(); // Fuerza que todo se reinicialice
+        });
+
         Swal.fire({
           icon: 'success',
           title: '¡Bienvenido!',
           text: ' Inicio de sesion exitoso',
           confirmButtonColor: '#3085d6',
         });
-
-        this.router.navigate(['/inicio']);
       },
       error: (err) => {
         Swal.fire({
