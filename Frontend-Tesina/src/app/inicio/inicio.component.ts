@@ -43,4 +43,8 @@ export class InicioComponent {
   redirectTo(url: string) {
     this.router.navigate([`${url}`]);
   }
+  salir(url: string) {
+    localStorage.clear();
+    this.router.navigate([`${url}`]);
+  }
 }
