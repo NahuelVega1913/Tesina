@@ -8,6 +8,7 @@ import { DashboardsComponent } from './dashboards/dashboards.component';
 import { CasillaComponent } from './notificaciones/notificaciones.component';
 import { LandingComponent } from './landing/landing.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { ActualizarPerfilComponent } from './actualizar-perfil/actualizar-perfil.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,7 @@ export const routes: Routes = [
   { path: 'repuestos', component: RepuestosComponent },
   { path: 'repuesto', component: RepuestoComponent },
   { path: 'dashboards', component: DashboardsComponent },
+  { path: 'actualizarPerfil', component: ActualizarPerfilComponent },
   { path: 'notificaciones', component: CasillaComponent },
   { path: 'landing', component: LandingComponent },
 ];

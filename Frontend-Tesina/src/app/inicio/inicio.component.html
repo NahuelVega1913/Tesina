@@ -27,7 +27,11 @@
           </svg>
         </button>
         <a class="flex ms-2 md:me-24">
-          <img src="logoMT.png" class="h-10 me-3 rounded-2xl" alt="Logo" />
+          <img
+            src="logoMT.png"
+            class="h-10 me-3 rounded-2xl scale-100"
+            alt="Logo"
+          />
           <span
             class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap"
             >MechanicTech</span
@@ -44,11 +48,11 @@
               data-dropdown-toggle="dropdown-user"
             >
               <span class="sr-only">Open user menu</span>
-              <img
-                class="w-8 h-8 rounded-full"
-                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                alt="user photo"
-              />
+              <div
+                class="bg-white text-sky-950 h-10 w-10 rounded-full font-bold flex items-center justify-center"
+              >
+                {{ calcultarIniciales() }}
+              </div>
             </button>
           </div>
           <div
@@ -56,15 +60,16 @@
             id="dropdown-user"
           >
             <div class="px-4 py-3" role="none">
-              <p class="text-sm text-gray-900" role="none">Neil Sims</p>
+              <p class="text-sm text-gray-900 fw-bold" role="none">
+                {{ nombre }} {{ apellido }}
+              </p>
               <p class="text-sm font-medium text-gray-900 truncate" role="none">
-                neil
+                {{ rolAMostrar() }}
               </p>
             </div>
             <ul class="py-1" role="none">
-              <li>
+              <li (click)="redirectTo('/actualizarPerfil')">
                 <a
-                  href="#"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   role="menuitem"
                   >Perfil</a
@@ -239,7 +244,7 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Ingresar</span>
         </a>
       </li>
-      <li (click)="redirectTo('/registrarse')">
+      <li (click)="redirectTo('/login')">
         <a
           class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
         >
@@ -260,7 +265,7 @@
               d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z"
             />
           </svg>
-          <span class="flex-1 ms-3 whitespace-nowrap">Registrarse</span>
+          <span class="flex-1 ms-3 whitespace-nowrap">Salir</span>
         </a>
       </li>
       <li router>

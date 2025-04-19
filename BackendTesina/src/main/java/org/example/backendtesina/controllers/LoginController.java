@@ -38,8 +38,9 @@ public class LoginController {
     public AuthResponse login(@RequestBody LoginDto loginDto ) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(),loginDto.getPassword()));
         UserDetails user= repository.findByEmail(loginDto.getEmail()).orElseThrow();
+        UserEntity userEntity= repository.findByEmail(loginDto.getEmail()).orElseThrow();
         String Token = jwtService.getToken(user);
-        return new AuthResponse(Token);
+        return new AuthResponse(Token,userEntity.getName(),userEntity.getLastname(),userEntity.getRole().toString());
     }
 
     @PostMapping(value = "register")

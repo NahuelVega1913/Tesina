@@ -27,7 +27,12 @@ export class LoginComponent {
       password: password,
     };
     const addSubscription = this.service.login(body).subscribe({
-      next: () => {
+      next: (response) => {
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('name', response.name);
+        localStorage.setItem('lastname', response.lastname);
+        localStorage.setItem('role', response.role);
+
         Swal.fire({
           icon: 'success',
           title: '¡Bienvenido!',
