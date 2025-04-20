@@ -15,13 +15,13 @@ import java.util.List;
 public class RolesController {
 
 
-    @GetMapping("/getAll")
-    public List<String> getAllRoles(){
-        List<String> roles = null;
-        for(RoleEntity role : RoleEntity.values()){
-            roles.add(role.toString());
-        }
-        return roles;
-    }
+//    @GetMapping("/getAll")
+//    public List<String> getAllRoles(){
+//        List<String> roles = null;
+//        for(RoleEntity role : RoleEntity.values()){
+//            roles.add(role.toString());
+//        }
+//        return roles;
+//    }
     
 }

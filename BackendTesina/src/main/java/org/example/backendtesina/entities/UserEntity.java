@@ -39,13 +39,14 @@ public class UserEntity implements UserDetails {
         return List.of(new SimpleGrantedAuthority((role.name())));
     }
 
+
     public String getPassword() {
         return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.getEmail();
     }
 
     @Override

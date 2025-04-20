@@ -1,5 +1,6 @@
 package org.example.backendtesina.jwt;
 
+import io.micrometer.common.lang.NonNull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,6 +47,37 @@ public class jwtAuthenticationFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request,response);
     }
+//@Override
+//protected void doFilterInternal(
+//        @NonNull HttpServletRequest request,
+//        @NonNull HttpServletResponse response,
+//        @NonNull     FilterChain filterChain)
+//        throws ServletException, IOException {
+//    // TODO Auto-generated method stub
+//    final String authHeader = request.getHeader("Authorization");
+//    final String jwt;
+//    final String username;
+//    if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+//        filterChain.doFilter(request, response);
+//        return;
+//    }
+//    jwt = authHeader.substring(7);
+//    username = jwtService.getEmailFromToken(jwt);
+//
+//    //check if the user is authorized or not
+//    if(username !=null && SecurityContextHolder.getContext().getAuthentication() == null) {
+//        UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+//        // check if token is valid or not
+//        if(jwtService.isTokenValid(jwt, userDetails)) {
+//            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+//                    username, null,userDetails.getAuthorities());
+//            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+//            // update authentication token
+//            SecurityContextHolder.getContext().setAuthentication(authToken);
+//        }
+//    }
+//    filterChain.doFilter(request, response);
+//}
 
     private String getTokenFromRequest(HttpServletRequest request) {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
