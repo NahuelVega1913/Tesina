@@ -34,7 +34,10 @@ public class UsersController {
         }
         return ResponseEntity.status(403).build();
     }
-
+    @GetMapping(value = "getAll")
+    public ResponseEntity<?> getAll(){
+        return null;
+    }
 
 
     @PutMapping( value = "putUser")

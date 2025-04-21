@@ -9,6 +9,12 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './inicio.component.css',
 })
 export class InicioComponent {
+  mostrarMenu = false;
+
+  toggleMenu() {
+    this.mostrarMenu = !this.mostrarMenu;
+  }
+
   constructor(private router: Router) {}
 
   nombre: string | null = '';

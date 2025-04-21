@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,6 +60,18 @@ public class UserService {
     }
 
     public List<RegisterDto> getAllUsers(){
-        return null;
+       List<RegisterDto> lstRegisters = new ArrayList<>();
+       List<UserEntity> lstUsers = new ArrayList<>();
+       lstUsers = repository.findAll();
+       for (UserEntity u:lstUsers){
+           RegisterDto dto = new RegisterDto();
+           dto.setPhone(u.getPhone());
+           dto.setEmail(u.getEmail());
+           dto.setName(u.getName());
+           dto.setLastname(u.getLastname());
+           dto.setAddress(u.getAddress());
+           lstRegisters.add(dto);
+       }
+       return lstRegisters;
     }
 }
