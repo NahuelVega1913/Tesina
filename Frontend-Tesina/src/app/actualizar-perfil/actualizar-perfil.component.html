@@ -63,9 +63,9 @@
             }"
             formControlName="email"
             id="company"
-            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            class="bg-gray-300 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="agustin@gmail.com"
-            required
+            readonly
           />
           @if(form.get('email')?.invalid && form.get('email')?.touched){
           <div class="text-white font-bold drop-shadow-md">
@@ -114,7 +114,7 @@
         </div>
         }
       </div>
-
+      <!-- 
       <div class="mb-6">
         <label for="password" class="block mb-2 text-sm font-medium text-white"
           >Contraseña</label
@@ -133,7 +133,7 @@
           Complete la contraseña
         </div>
         }
-      </div>
+      </div> -->
 
       <button
         type="submit"

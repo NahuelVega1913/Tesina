@@ -30,30 +30,39 @@ export class RegistrarseComponent {
     address: new UntypedFormControl('', []),
     email: new UntypedFormControl('', []),
     password: new UntypedFormControl('', []),
+    terms: new UntypedFormControl(false, []),
   });
 
   save() {
     if (this.form.valid) {
-      const entity: any = this.form.value;
-      const addSubscription = this.service.crear(entity).subscribe({
-        next: () => {
-          Swal.fire({
-            icon: 'success',
-            title: '¡Usuario creado!',
-            text: 'El usuario fue registrado exitosamente',
-            confirmButtonColor: '#3085d6',
-          });
+      if (this.form.get('terms')?.value == false) {
+        Swal.fire({
+          title: 'Terminos y Condiciones',
+          text: 'Debes aceptar los terminos y condiciones',
+          icon: 'info',
+        });
+      } else {
+        const entity: any = this.form.value;
+        const addSubscription = this.service.crear(entity).subscribe({
+          next: () => {
+            Swal.fire({
+              icon: 'success',
+              title: '¡Usuario creado!',
+              text: 'El usuario fue registrado exitosamente',
+              confirmButtonColor: '#3085d6',
+            });
 
-          this.router.navigate(['/login']);
-        },
-        error: (err) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Ocurrio un error al registrar el usuario',
-          });
-        },
-      });
+            this.router.navigate(['/login']);
+          },
+          error: (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Ocurrio un error al registrar el usuario',
+            });
+          },
+        });
+      }
     }
   }
 }

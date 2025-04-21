@@ -34,6 +34,11 @@ export class InicioComponent {
     this.rol = localStorage.getItem('role');
   }
 
+  inicioSesion() {
+    const token = localStorage.getItem('token');
+    return token !== null && token.trim() !== '';
+  }
+
   calcultarIniciales() {
     const nombreArray = localStorage.getItem('name')?.split('') || [];
     const apellidoArray = localStorage.getItem('lastname')?.split('') || [];

@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NgClass } from '@angular/common';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-actualizar-perfil',
@@ -16,7 +17,7 @@ import { NgClass } from '@angular/common';
   styleUrl: './actualizar-perfil.component.css',
 })
 export class ActualizarPerfilComponent {
-  private service: AuthService = inject(AuthService);
+  private service: UsuarioService = inject(UsuarioService);
 
   constructor(private router: Router) {}
 
@@ -29,27 +30,54 @@ export class ActualizarPerfilComponent {
     password: new UntypedFormControl('', []),
   });
 
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.service.getUsuario().subscribe((data) => {
+      this.form.patchValue({
+        name: data.name,
+        lastname: data.lastname,
+        phone: data.phone,
+        address: data.address,
+        email: data.email,
+        password: data.password,
+      });
+    });
+  }
+
   save() {
     if (this.form.valid) {
-      const entity: any = this.form.value;
-      const addSubscription = this.service.crear(entity).subscribe({
-        next: () => {
-          Swal.fire({
-            icon: 'success',
-            title: '¡Usuario creado!',
-            text: 'El usuario fue registrado exitosamente',
-            confirmButtonColor: '#3085d6',
-          });
+      Swal.fire({
+        title: 'Estas seguro?',
+        showDenyButton: true,
+        confirmButtonText: 'Actualizar',
+        denyButtonText: `Salir`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const entity: any = this.form.value;
+          const addSubscription = this.service.putUsuario(entity).subscribe({
+            next: () => {
+              Swal.fire({
+                icon: 'success',
+                title: '¡Usuario creado!',
+                text: 'El usuario fue registrado exitosamente',
+                confirmButtonColor: '#3085d6',
+              });
 
-          this.router.navigate(['/login']);
-        },
-        error: (err) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Ocurrio un error al registrar el usuario',
+              this.router.navigate(['/login']);
+            },
+            error: (err) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocurrio un error al registrar el usuario',
+              });
+            },
           });
-        },
+        } else if (result.isDenied) {
+          Swal.fire('Los cambios no se guardaran', '', 'info');
+          window.location.href = '/inicio';
+        }
       });
     }
   }

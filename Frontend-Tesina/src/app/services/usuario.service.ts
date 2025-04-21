@@ -9,7 +9,7 @@ export class UsuarioService {
   constructor() {}
 
   getUsuario() {
-    return this.http.get<any>(`http://localhost:8080/usuario`, {
+    return this.http.get<any>(`http://localhost:8080/users/getUser`, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         'Content-Type': 'application/json',
@@ -21,15 +21,11 @@ export class UsuarioService {
   getUsuarioByEmail(email: string) {}
 
   putUsuario(body: any) {
-    return this.http.put<any>(
-      `http://localhost:8080/usuario/${body.id}`,
-      body,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    return this.http.put<any>(`http://localhost:8080/users/putUser`, body, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
   }
 }
