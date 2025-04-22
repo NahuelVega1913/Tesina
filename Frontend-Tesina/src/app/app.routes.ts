@@ -10,6 +10,7 @@ import { LandingComponent } from './landing/landing.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { ActualizarPerfilComponent } from './actualizar-perfil/actualizar-perfil.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { RegistrarProveedorComponent } from './registrar-proveedor/registrar-proveedor.component';
 
 export const routes: Routes = [
   {
@@ -26,4 +27,5 @@ export const routes: Routes = [
   { path: 'notificaciones', component: CasillaComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'proveedores', component: ProveedoresComponent },
+  { path: 'registrarProveedor', component: RegistrarProveedorComponent },
 ];

@@ -8,6 +8,7 @@
 
         <div class="justify-end flex">
           <button
+            (click)="redirectTo('/registrarProveedor')"
             type="button"
             class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
           >
@@ -21,23 +22,24 @@
           <th scope="col" class="px-6 py-3">Nombre</th>
           <th scope="col" class="px-6 py-3">Ubicacion</th>
           <th scope="col" class="px-6 py-3">Categoria</th>
-          <th scope="col" class="px-6 py-3">Price</th>
+          <th scope="col" class="px-6 py-3">Telefono</th>
           <th scope="col" class="px-6 py-3">
             <span class="sr-only">Edit</span>
           </th>
         </tr>
       </thead>
       <tbody>
+        @for (i of lst; track $index) {
         <tr class="bg-white border-b border-gray-200">
           <th
             scope="row"
             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
           >
-            Apple MacBook Pro 17"
+            {{ i.name }}
           </th>
-          <td class="px-6 py-4">Cordoba</td>
-          <td class="px-6 py-4">Radiadores</td>
-          <td class="px-6 py-4">$2999</td>
+          <td class="px-6 py-4">{{ i.city + ", " + i.country }}</td>
+          <td class="px-6 py-4">{{ i.category }}</td>
+          <td class="px-6 py-4">{{ i.phone }}</td>
           <td class="px-6 py-4 text-right">
             <button
               type="button"
@@ -47,44 +49,7 @@
             </button>
           </td>
         </tr>
-        <tr class="bg-white border-b border-gray-200">
-          <th
-            scope="row"
-            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-          >
-            Microsoft Surface Pro
-          </th>
-          <td class="px-6 py-4">Rosario</td>
-          <td class="px-6 py-4">Motores</td>
-          <td class="px-6 py-4">$1999</td>
-          <td class="px-6 py-4 text-right">
-            <button
-              type="button"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            >
-              Editar
-            </button>
-          </td>
-        </tr>
-        <tr class="bg-white">
-          <th
-            scope="row"
-            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-          >
-            Magic Mouse 2
-          </th>
-          <td class="px-6 py-4">Buenos Aires</td>
-          <td class="px-6 py-4">Transmicion</td>
-          <td class="px-6 py-4">$99</td>
-          <td class="px-6 py-4 text-right">
-            <button
-              type="button"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            >
-              Editar
-            </button>
-          </td>
-        </tr>
+        }
       </tbody>
     </table>
   </div>

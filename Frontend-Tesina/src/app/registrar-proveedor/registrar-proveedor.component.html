@@ -1,1 +1,216 @@
-<p>registrar-proveedor works!</p>
+<div
+  class="bg-orange-400 min-h-screen flex flex-col justify-center align-middle h-full p-5 md:p-10"
+>
+  <div
+    class="bg-gray-800 w-full flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
+  >
+    <p
+      class="font-bold text-2xl text-white text-6xl text-shadow-lg ps-10 pt-5 sm:mb-5 md:mt-5"
+    >
+      Registrar Proveedor
+    </p>
+    <form [formGroup]="form" (submit)="save()" class="p-10">
+      <div class="grid gap-6 mb-6 md:grid-cols-2">
+        <div>
+          <label
+            for="first_name"
+            class="block mb-2 text-sm font-medium text-white text-shadow-lg"
+            >Nombre</label
+          >
+          <input
+            type="text"
+            formControlName="name"
+            id="first_name"
+            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
+            placeholder="Proveedor A"
+            required
+          />
+          @if(form.get('name')?.invalid && form.get('name')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete el nombre
+          </div>
+          }
+        </div>
+        <div>
+          <label
+            for="last_name"
+            class="block mb-2 text-sm font-medium text-white"
+            >CUIT</label
+          >
+          <input
+            type="number"
+            formControlName="cuit"
+            id="last_name"
+            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
+            placeholder="22-22222222-2"
+            required
+          />
+          @if(form.get('cuit')?.invalid && form.get('cuit')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete el CUIT
+          </div>
+          }
+        </div>
+        <div>
+          <label for="company" class="block mb-2 text-sm font-medium text-white"
+            >Email</label
+          >
+          <input
+            type="email"
+            [ngClass]="{
+              'is-invalid':
+                form.get('email')?.touched && form.get('email')?.invalid
+            }"
+            formControlName="email"
+            id="company"
+            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="agustin@gmail.com"
+            required
+          />
+          @if(form.get('email')?.invalid && form.get('email')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete el email
+          </div>
+          }
+        </div>
+
+        <div>
+          <label for="phone" class="block mb-2 text-sm font-medium text-white j"
+            >Telefono</label
+          >
+          <input
+            type="number"
+            [ngClass]="{
+              'is-invalid':
+                form.get('phone')?.touched && form.get('phone')?.invalid
+            }"
+            formControlName="phone"
+            id="phone"
+            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full p-2.5"
+            placeholder="+54 351-XXXXXXX"
+            required
+          />
+          @if(form.get('phone')?.invalid && form.get('phone')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete el telefono
+          </div>
+          }
+        </div>
+      </div>
+      <div
+        class="flex flex-row w-full gap-10 mb-6 md:grid-cols-2 justify-between"
+      >
+        <div>
+          <label for="company" class="block mb-2 text-sm font-medium text-white"
+            >Pais</label
+          >
+          <select
+            id="countries"
+            formControlName="country"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-80 p-2.5"
+          >
+            <option value="" selected>Elige un pais</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Chile">Chile</option>
+            <option value="Peru">Peru</option>
+            <option value="Uruguay">Uruguay</option>
+            <option value="Paraguay">Paraguay</option>
+            <option value="Bolivia">Bolivia</option>
+            <option value="Brasil">Brasil</option>
+            <option value="Estados Unidos">Estados Unidos</option>
+            <option value="China">China</option>
+          </select>
+          @if(form.get('country')?.value == "" && form.get('country')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete el pais
+          </div>
+          }
+        </div>
+        <div>
+          <label for="company" class="block mb-2 text-sm font-medium text-white"
+            >Categoria</label
+          >
+          <select
+            id="countries"
+            formControlName="category"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-80 p-2.5"
+          >
+            <option value="" selected>Elige una categoria</option>
+            <option value="MOTOR">Motor</option>
+            <option value="REFRIGERACION">Refrigeracion</option>
+            <option value="TRANSMICION">Transmicion</option>
+            <option value="LUBRICACION">Lubricacion</option>
+            <option value="FRENOS">Frenos</option>
+            <option value="FRENOS">Varias</option>
+          </select>
+          @if(form.get('category')?.value == "" &&
+          form.get('category')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete la categoria
+          </div>
+          }
+        </div>
+
+        <div>
+          <label for="phone" class="block mb-2 text-sm font-medium text-white j"
+            >Provincia/Estado</label
+          >
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                form.get('city')?.touched && form.get('city')?.invalid
+            }"
+            formControlName="city"
+            placeholder="Cordoba"
+            id="phone"
+            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-80 p-2.5"
+            required
+          />
+          @if(form.get('city')?.invalid && form.get('city')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete la Provincia
+          </div>
+          }
+        </div>
+      </div>
+      <div class="mb-6">
+        <label for="email" class="block mb-2 text-sm font-medium text-white"
+          >Direccion</label
+        >
+        <input
+          type="text"
+          formControlName="address"
+          class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
+          placeholder="Calle falsa 123"
+          required
+        />
+        @if(form.get('address')?.invalid && form.get('address')?.touched){
+        <div class="text-white font-bold drop-shadow-md">
+          Complete la direccion
+        </div>
+        }
+      </div>
+
+      <label
+        for="message"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Observaciones</label
+      >
+      <textarea
+        id="message"
+        rows="4"
+        formControlName="remarks"
+        class="block p-2.5 w-full text-sm mb-5 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Escribe tu mensaje aqui..."
+      ></textarea>
+
+      <button
+        type="submit"
+        class="text-white bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+      >
+        Crear
+      </button>
+    </form>
+  </div>
+</div>
