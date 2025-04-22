@@ -26,13 +26,20 @@ export class ModificarProoveedorComponent {
     phone: new UntypedFormControl('', []),
     adress: new UntypedFormControl('', []),
     category: new UntypedFormControl('', []),
-    sate: new UntypedFormControl('', []),
-
+    state: new UntypedFormControl('', []),
+    registerDate: new UntypedFormControl('', []),
     email: new UntypedFormControl('', []),
     country: new UntypedFormControl('', []),
     city: new UntypedFormControl('', []),
     remarks: new UntypedFormControl('', []),
   });
+  // calculateFecha() {
+  //   const fechaFormateada = this.form
+  //     .get('registerDate')
+  //     ?.getRawValue()
+  //     .toISOString()
+  //     .split('T')[0]; // "2023-11-01"
+  // }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -48,6 +55,16 @@ export class ModificarProoveedorComponent {
         next: (res) => {
           this.form.patchValue(res);
           console.log(this.form.value);
+          const fecha = new Date(res.registerDate);
+          const año = fecha.getFullYear();
+          const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+          const dia = String(fecha.getDate()).padStart(2, '0');
+          const fechaFormateada = `${año}-${mes}-${dia}`;
+
+          this.form.patchValue({
+            ...res,
+            registerDate: fechaFormateada,
+          });
         },
         error: (err) => {
           console.log(err);
@@ -57,17 +74,15 @@ export class ModificarProoveedorComponent {
 
   save() {
     if (this.form.valid) {
-      this.form
-        .get('city')
-        ?.setValue(this.form.get('city')?.value.toUpperCase());
       const entity: any = this.form.value;
+      entity.id = localStorage.getItem('idProveedor');
       console.log(entity);
-      const addSubscription = this.service.registerProveedor(entity).subscribe({
+      const addSubscription = this.service.putProveedor(entity).subscribe({
         next: () => {
           Swal.fire({
             icon: 'success',
-            title: '¡Usuario creado!',
-            text: 'El proveedor fue registrado exitosamente',
+            title: '¡Proveedor actualizado!',
+            text: 'El proveedor fue actualizado exitosamente',
             confirmButtonColor: '#3085d6',
           });
 

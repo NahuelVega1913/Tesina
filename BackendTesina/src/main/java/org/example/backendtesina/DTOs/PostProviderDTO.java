@@ -15,6 +15,7 @@ public class PostProviderDTO {
     private String name;
     private String adress;
 
+
     private CategorySpareEntity category;
 
     private String city;

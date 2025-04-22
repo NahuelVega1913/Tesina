@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,9 @@ public class ProviderService {
         provider.setRemarks(p.get().getRemarks());
         provider.setCUIT(p.get().getCUIT());
         provider.setAdress(p.get().getAdress());
+        provider.setState(p.get().isState());
         provider.setEmail(p.get().getEmail());
+        provider.setRegisterDate(p.get().getRegisterDate());
         provider.setRegisterDate(p.get().getRegisterDate());
 
         return provider;
@@ -105,9 +108,9 @@ public class ProviderService {
             entity.setPhone(dto.getPhone());
             entity.setRemarks(dto.getRemarks());
             entity.setCUIT(dto.getCUIT());
+            entity.setState(dto.isState());
             entity.setAdress(dto.getAdress());
             entity.setEmail(dto.getEmail());
-            entity.setRegisterDate(dto.getRegisterDate());
             repository.save(entity);
             return dto;
         }
@@ -117,6 +120,8 @@ public class ProviderService {
 
     public PostProviderDTO registerProvider(PostProviderDTO dto){
         ProviderEntity entity = this.dtoToEntity(dto);
+        entity.setState(true);
+        entity.setRegisterDate(new Date());
         repository.save(entity);
         return dto;
 

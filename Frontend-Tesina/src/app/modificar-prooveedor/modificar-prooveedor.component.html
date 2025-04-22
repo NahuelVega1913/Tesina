@@ -96,7 +96,52 @@
           </div>
           }
         </div>
+        <div>
+          <label for="company" class="block mb-2 text-sm font-medium text-white"
+            >Fecha de Registro</label
+          >
+          <input
+            type="date"
+            [ngClass]="{
+              'is-invalid':
+                form.get('registerDate')?.touched &&
+                form.get('registerDate')?.invalid
+            }"
+            formControlName="registerDate"
+            id="company"
+            class="bg-gray-300 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            placeholder="agustin@gmail.com"
+            readonly
+          />
+          @if(form.get('registerDate')?.invalid &&
+          form.get('registerDate')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete la fecha de registro
+          </div>
+          }
+        </div>
+
+        <div>
+          <label for="phone" class="block mb-2 text-sm font-medium text-white"
+            >Estado</label
+          >
+          <select
+            id="countries"
+            formControlName="state"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          >
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+            >
+          </select>
+          @if(form.get('phone')?.invalid && form.get('phone')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete el telefono
+          </div>
+          }
+        </div>
       </div>
+
       <div
         class="flex flex-col md:flex-row m w-full gap-10 mb-6 md:grid-cols-2 justify-between"
       >
@@ -174,6 +219,7 @@
           }
         </div>
       </div>
+
       <div class="mb-6">
         <label for="email" class="block mb-2 text-sm font-medium text-white"
           >Direccion</label
