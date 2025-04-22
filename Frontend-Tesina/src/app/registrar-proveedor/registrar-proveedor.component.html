@@ -98,27 +98,27 @@
         </div>
       </div>
       <div
-        class="flex flex-row w-full gap-10 mb-6 md:grid-cols-2 justify-between"
+        class="flex flex-col md:flex-row m w-full gap-10 mb-6 md:grid-cols-2 justify-between"
       >
-        <div>
+        <div class="w-full">
           <label for="company" class="block mb-2 text-sm font-medium text-white"
             >Pais</label
           >
           <select
             id="countries"
             formControlName="country"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-80 p-2.5"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
           >
             <option value="" selected>Elige un pais</option>
-            <option value="Argentina">Argentina</option>
-            <option value="Chile">Chile</option>
-            <option value="Peru">Peru</option>
-            <option value="Uruguay">Uruguay</option>
-            <option value="Paraguay">Paraguay</option>
-            <option value="Bolivia">Bolivia</option>
-            <option value="Brasil">Brasil</option>
-            <option value="Estados Unidos">Estados Unidos</option>
-            <option value="China">China</option>
+            <option value="ARGENTINA">Argentina</option>
+            <option value="CHILE">Chile</option>
+            <option value="PERU">Peru</option>
+            <option value="URUGUAY">Uruguay</option>
+            <option value="PARAGUAY">Paraguay</option>
+            <option value="BOLIVIA">Bolivia</option>
+            <option value="BRASIL">Brasil</option>
+            <option value="ESTADOS_UNIDO">Estados Unidos</option>
+            <option value="CHINA">China</option>
           </select>
           @if(form.get('country')?.value == "" && form.get('country')?.touched){
           <div class="text-white font-bold drop-shadow-md">
@@ -126,14 +126,14 @@
           </div>
           }
         </div>
-        <div>
+        <div class="w-full">
           <label for="company" class="block mb-2 text-sm font-medium text-white"
             >Categoria</label
           >
           <select
             id="countries"
             formControlName="category"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-80 p-2.5"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
           >
             <option value="" selected>Elige una categoria</option>
             <option value="MOTOR">Motor</option>
@@ -151,7 +151,7 @@
           }
         </div>
 
-        <div>
+        <div class="w-full">
           <label for="phone" class="block mb-2 text-sm font-medium text-white j"
             >Provincia/Estado</label
           >
@@ -164,7 +164,7 @@
             formControlName="city"
             placeholder="Cordoba"
             id="phone"
-            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-80 p-2.5"
+            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full md:w-80 p-2.5"
             required
           />
           @if(form.get('city')?.invalid && form.get('city')?.touched){
@@ -181,7 +181,7 @@
         <input
           type="text"
           formControlName="address"
-          class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
+          class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="Calle falsa 123"
           required
         />

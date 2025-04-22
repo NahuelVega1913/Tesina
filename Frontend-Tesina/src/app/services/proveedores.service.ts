@@ -17,7 +17,19 @@ export class ProveedoresService {
       },
     });
   }
-  getProveedorById(id: number) {}
+
+  getProveedorById(id: number) {
+    return this.http.get<any>(
+      `http://localhost:8080/providers/getProvider/${id}`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
+
   registerProveedor(body: any) {
     return this.http.post<any>(
       `http://localhost:8080/providers/postProvider`,

@@ -2,6 +2,7 @@ package org.example.backendtesina.controllers;
 
 import org.apache.coyote.Response;
 import org.example.backendtesina.DTOs.GetProvidersDTO;
+import org.example.backendtesina.DTOs.PostProviderDTO;
 import org.example.backendtesina.services.ProviderService;
 import org.example.backendtesina.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +26,28 @@ public class ProviderController {
         }
         return ResponseEntity.ok(lst);
     }
-    @GetMapping(value ="getAll{id}")
+    @GetMapping(value ="getProvider/{id}")
     public ResponseEntity<?> getProvider(@PathVariable int id){
-        return ResponseEntity.ok("");
+        PostProviderDTO lst = service.getProvider(id);
+        if(lst == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(lst);
     }
     @PostMapping(value ="postProvider")
-    public ResponseEntity<?> postProviders(){
-        return ResponseEntity.ok("");
+    public ResponseEntity<?> postProviders(@RequestBody PostProviderDTO dto){
+        PostProviderDTO lst = service.registerProvider(dto);
+        if(lst == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(lst);
     }
     @PutMapping(value ="putProvider")
-    public ResponseEntity<?> putProviders(){
-        return ResponseEntity.ok("");
+    public ResponseEntity<?> putProviders(@RequestBody PostProviderDTO dto){
+        PostProviderDTO lst = service.putProvider(dto);
+        if(lst == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(lst);
     }
 }

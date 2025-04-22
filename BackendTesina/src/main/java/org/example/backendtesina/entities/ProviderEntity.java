@@ -19,8 +19,8 @@ public class ProviderEntity {
     private String adress;
     @Enumerated(EnumType.STRING)
     private CategorySpareEntity category;
-    @Enumerated(EnumType.STRING)
-    private CityEntity city;
+
+    private String city;
     @Enumerated(EnumType.STRING)
     private CountryEntity country;
 
@@ -68,11 +68,11 @@ public class ProviderEntity {
         this.category = category;
     }
 
-    public CityEntity getCity() {
+    public String getCity() {
         return city;
     }
 
-    public void setCity(CityEntity city) {
+    public void setCity(String city) {
         this.city = city;
     }
 

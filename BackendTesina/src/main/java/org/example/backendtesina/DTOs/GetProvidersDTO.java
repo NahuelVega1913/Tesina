@@ -11,7 +11,7 @@ public class GetProvidersDTO {
     private int id;
     private String name;
     private CountryEntity country;
-    private CityEntity city;
+    private String city;
     private CategorySpareEntity category;
     private BigInteger phone;
 
@@ -39,11 +39,11 @@ public class GetProvidersDTO {
         this.country = country;
     }
 
-    public CityEntity getCity() {
+    public String getCity() {
         return city;
     }
 
-    public void setCity(CityEntity city) {
+    public void setCity(String city) {
         this.city = city;
     }
 

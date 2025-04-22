@@ -20,6 +20,11 @@ export class ProveedoresComponent {
     this.getProveedores();
   }
 
+  setProveedor(id: number) {
+    localStorage.setItem('idProveedor', id.toString());
+    this.router.navigate(['/modificarProveedor']);
+  }
+
   getProveedores() {
     const getSubscription = this.service.getProveedores().subscribe({
       next: (res) => {

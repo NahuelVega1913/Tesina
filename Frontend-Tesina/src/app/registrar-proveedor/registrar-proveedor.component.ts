@@ -35,7 +35,11 @@ export class RegistrarProveedorComponent {
 
   save() {
     if (this.form.valid) {
+      this.form
+        .get('city')
+        ?.setValue(this.form.get('city')?.value.toUpperCase());
       const entity: any = this.form.value;
+      console.log(entity);
       const addSubscription = this.service.registerProveedor(entity).subscribe({
         next: () => {
           Swal.fire({
