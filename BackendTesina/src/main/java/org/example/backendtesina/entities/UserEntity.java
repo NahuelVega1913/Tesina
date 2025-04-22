@@ -2,6 +2,7 @@ package org.example.backendtesina.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.example.backendtesina.entities.enums.RoleEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

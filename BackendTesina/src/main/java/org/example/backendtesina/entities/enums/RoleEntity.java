@@ -1,4 +1,4 @@
-package org.example.backendtesina.entities;
+package org.example.backendtesina.entities.enums;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
