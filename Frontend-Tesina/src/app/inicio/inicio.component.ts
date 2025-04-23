@@ -9,10 +9,14 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './inicio.component.css',
 })
 export class InicioComponent {
-  mostrarMenu = false;
+  SideBar = false;
+  UserMenu = false;
 
-  toggleMenu() {
-    this.mostrarMenu = !this.mostrarMenu;
+  OpenUserMenu() {
+    this.UserMenu = !this.UserMenu;
+  }
+  OpenSideBar() {
+    this.SideBar = !this.SideBar;
   }
 
   constructor(private router: Router) {}
@@ -35,6 +39,8 @@ export class InicioComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+    this.SideBar = false;
+    this.UserMenu = false;
     this.nombre = localStorage.getItem('name');
     this.apellido = localStorage.getItem('lastname');
     this.rol = localStorage.getItem('role');

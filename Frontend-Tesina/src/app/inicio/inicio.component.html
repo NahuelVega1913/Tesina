@@ -207,7 +207,7 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Empleados</span>
         </a>
       </li>
-      <li>
+      <li (click)="redirectTo('/repuestos')">
         <a
           class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
         >
@@ -297,7 +297,7 @@
 </aside>
 <!--seccion-->
 <div class="sm:ml-64 overflow-x-hidden">
-  <div class="rounded-lg w-1/1 mt-14 overflow-clip">
+  <div class="rounded-lg h-full mt-14 overflow-clip">
     <router-outlet></router-outlet>
   </div>
 </div>
