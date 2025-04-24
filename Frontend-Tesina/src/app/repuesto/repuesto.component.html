@@ -7,6 +7,7 @@
         @if(repuesto != null){ @for (item of repuesto.urlImages; track $index) {
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
           <img
+            (error)="repuesto.urlImages[$index] = true"
             src="{{ item }}"
             class="block mx-auto max-h-60 sm:max-h-80 object-contain"
           />
