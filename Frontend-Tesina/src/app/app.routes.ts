@@ -12,6 +12,7 @@ import { ActualizarPerfilComponent } from './actualizar-perfil/actualizar-perfil
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { RegistrarProveedorComponent } from './registrar-proveedor/registrar-proveedor.component';
 import { ModificarProoveedorComponent } from './modificar-prooveedor/modificar-prooveedor.component';
+import { RegistrarRepuestoComponent } from './registrar-repuesto/registrar-repuesto.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,7 @@ export const routes: Routes = [
       { path: 'proveedores', component: ProveedoresComponent },
       { path: 'registrarProveedor', component: RegistrarProveedorComponent },
       { path: 'modificarProveedor', component: ModificarProoveedorComponent },
+      { path: 'registrarRepuesto', component: RegistrarRepuestoComponent },
     ],
   },
 ];

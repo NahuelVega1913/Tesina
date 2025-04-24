@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { windowCount } from 'rxjs';
 
 @Component({
   selector: 'app-repuestos',
@@ -9,8 +10,14 @@ import { Router } from '@angular/router';
 })
 export class RepuestosComponent {
   constructor(private router: Router) {}
+  isOpen = false;
+
+  change() {
+    this.isOpen = !this.isOpen;
+  }
 
   redirectTo(url: string) {
-    this.router.navigate([`${url}`]);
+    window.location.href = url;
+    // this.router.navigate([`${url}`]);
   }
 }
