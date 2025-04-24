@@ -1,31 +1,3 @@
-<!-- <div class="flex h-1.5 items-center justify-center py-4 md:py-8 flex-wrap">
-  <button
-    type="button"
-    class="text-sky-500 text-xs hover:text-white border border-blue-600 bg-white hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full font-medium px-5 py-2.5 text-center me-3 mb-3"
-  >
-    All categories
-  </button>
-
-  <button
-    type="button"
-    class="text-gray-900 text-xs border border-white hover:border-gray-200 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full font-medium px-5 py-2.5 text-center me-3 mb-3"
-  >
-    Bags
-  </button>
-  <button
-    type="button"
-    class="text-gray-900 border border-white hover:border-gray-200 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-xs font-medium px-5 py-2.5 text-center me-3 mb-3"
-  >
-    Electronics
-  </button>
-  <button
-    type="button"
-    class="text-gray-900 border border-white hover:border-gray-200 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-sm font-medium px-5 py-2.5 text-center me-3 mb-3"
-  >
-    Gaming
-  </button>
-</div> -->
-
 <form class="py-4 md:py-8 p-4">
   <div class="flex">
     <select
@@ -68,7 +40,7 @@
       </button>
     </div>
     <button
-      (click)="redirectTo('/registrarRepuesto')"
+      (click)="redirectToTo('/registrarRepuesto')"
       type="button"
       class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 ms-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
     >
@@ -77,79 +49,87 @@
   </div>
 </form>
 
-<div class="flex flex-col h-full mt-10 shadow-lg">
-  <p class="p-2 font-bold ms-10 text-2xl">Motor</p>
-  <div class="flex flex-row h-full">
-    <div class="w-full m-2 p-5 flex flex-col items-baseline justify-center">
+<!-- Contenedor principal -->
+<p class="p-2 font-bold ms-10 text-3xl">Motor</p>
+<ng-scrollbar visibility="hover" track="horizontal">
+  <div class="flex gap-4 p-5">
+    @for (i of lst; track $index) { @if(i.category == 'MOTOR') {
+    <div class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded shadow">
       <img
-        class="h-50 w-55 rounded-2xl object-contain"
-        src="https://www.yenmak.com.tr/Upload/kaplamali_piston-24022020_160051.jpg"
+        class="h-50 w-full md:w-55 rounded-2xl object-contain"
+        src="{{ i.image1 }}"
         alt="image description"
       />
-      <p class="font-semibold ms-0.5 text-lg">Piston Fiat Duna / Motor 1.6</p>
-      <p class="font-semibold ms-0.5">$ 70.000</p>
-      <p class="text-green-500 text-xs">22% OFF</p>
+      <p class="font-bold mt-2">{{ i.name + " (" + i.brand + ")" }}</p>
+      <p class="text-gray-700">${{ i.price }}</p>
+      @if(i.discaunt != 0) {
+      <p class="text-green-500 text-xs">{{ i.discaunt }}% OFF</p>
+      }
       <button
-        (click)="redirectTo('/repuesto')"
+        (click)="redirectTo('/repuesto', i.id)"
         type="button"
         class="text-white mt-5 bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
       >
         Ver
       </button>
     </div>
-    <div class="w-full m-2 p-5 flex flex-col items-baseline justify-center">
-      <img
-        class="h-50 w-55 rounded-2xl bg-cover object-contain"
-        src="https://noticias.coches.com/wp-content/uploads/2020/09/ciguenal-6.jpeg"
-        alt="image description"
-      />
-      <p class="font-semibold ms-0.5 text-lg">Piston Fiat Duna / Motor 1.6</p>
-      <p class="font-semibold ms-0.5">$ 70.000</p>
-      <p class="text-green-500 text-xs">22% OFF</p>
-      <button
-        type="button"
-        class="text-white mt-5 bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      >
-        Ver
-      </button>
-    </div>
-
-    <div class="w-full m-2 p-5 flex flex-col items-baseline justify-center">
-      <img
-        class="h-50 w-55 rounded-2xl object-contain"
-        src="https://http2.mlstatic.com/D_NQ_NP_608260-MLA45667040956_042021-O.webp"
-        alt="image description"
-      />
-      <p class="font-semibold ms-0.5 text-lg">Piston Fiat Duna / Motor 1.6</p>
-      <p class="font-semibold ms-0.5">$ 70.000</p>
-      <p class="text-green-500 text-xs">22% OFF</p>
-      <button
-        type="button"
-        class="text-white mt-5 bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      >
-        Ver
-      </button>
-    </div>
-    <div class="w-full m-2 p-5 flex flex-col items-baseline justify-center">
-      <img
-        class="h-50 w-55 rounded-2xl object-contain"
-        src="https://www.fierrosclasicos.com/wp-content/uploads/2015/01/302.jpg"
-        alt="image description"
-      />
-      <p class="font-semibold ms-0.5 text-lg">Piston Fiat Duna / Motor 1.6</p>
-      <p class="font-semibold ms-0.5">$ 70.000</p>
-      <p class="text-green-500 text-xs">22% OFF</p>
-      <button
-        type="button"
-        class="text-white mt-5 bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      >
-        Ver
-      </button>
-    </div>
+    } }
   </div>
-</div>
+</ng-scrollbar>
 
-<div class="flex flex-col bg-green-300 h-40 mt-5"></div>
+<!--REFRIGERACION-->
+<p class="p-2 font-bold ms-10 text-3xl">Refrigeracion</p>
+<ng-scrollbar visibility="hover" track="horizontal">
+  <div class="flex gap-4 p-5">
+    @for (i of lst; track $index) { @if(i.category == 'REFRIGERACION') {
+    <div class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded shadow">
+      <img
+        class="h-50 w-full md:w-55 rounded-2xl object-contain"
+        src="{{ i.image1 }}"
+        alt="image description"
+      />
+      <p class="font-bold mt-2">{{ i.name + " (" + i.brand + ")" }}</p>
+      <p class="text-gray-700">${{ i.price }}</p>
+      @if(i.discaunt != 0) {
+      <p class="text-green-500 text-xs">{{ i.discaunt }}% OFF</p>
+      }
+      <button
+        (click)="redirectTo('/repuesto', i.id)"
+        type="button"
+        class="text-white mt-5 bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      >
+        Ver
+      </button>
+    </div>
+    } }
+  </div>
+</ng-scrollbar>
+<p class="p-2 font-bold ms-10 text-3xl">Lubricacion</p>
+<ng-scrollbar visibility="hover" track="horizontal">
+  <div class="flex gap-4 p-5">
+    @for (i of lst; track $index) { @if(i.category == 'LUBRICACION') {
+    <div class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded shadow">
+      <img
+        class="h-50 w-full md:w-55 rounded-2xl object-contain"
+        src="{{ i.image1 }}"
+        alt="image description"
+      />
+      <p class="font-bold mt-2">{{ i.name + " (" + i.brand + ")" }}</p>
+      <p class="text-gray-700">${{ i.price }}</p>
+      @if(i.discaunt != 0) {
+      <p class="text-green-500 text-xs">{{ i.discaunt }}% OFF</p>
+      }
+      <button
+        (click)="redirectTo('/repuesto', i.id)"
+        type="button"
+        class="text-white mt-5 bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      >
+        Ver
+      </button>
+    </div>
+    } }
+  </div>
+</ng-scrollbar>
 
 <!--<div class="flex items-center justify-center h-24 rounded-sm bg-gray-50">
   <div

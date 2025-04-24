@@ -33,7 +33,7 @@ export class LoginComponent {
         localStorage.setItem('lastname', response.lastname);
         localStorage.setItem('role', response.role);
 
-        this.router.navigate(['/inicio']).then(() => {
+        this.router.navigate(['']).then(() => {
           location.reload(); // Fuerza que todo se reinicialice
         });
 
