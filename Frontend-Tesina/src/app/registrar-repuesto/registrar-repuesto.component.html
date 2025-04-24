@@ -33,27 +33,48 @@
         </div>
         <div>
           <label
-            for="last_name"
-            class="block mb-2 text-sm font-medium text-white"
-            >CUIT</label
+            for="website-admin"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Precio</label
           >
-          <input
-            type="number"
-            formControlName="cuit"
-            id="last_name"
-            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
-            placeholder="22-22222222-2"
-            required
-          />
+          <div class="flex">
+            <span
+              class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md"
+            >
+              <svg
+                class="w-6 h-6 text-gray-800"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2"
+                />
+              </svg>
+            </span>
+            <input
+              type="text"
+              id="website-admin"
+              class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
+              placeholder="100000"
+            />
+          </div>
           @if(form.get('cuit')?.invalid && form.get('cuit')?.touched){
           <div class="text-white font-bold drop-shadow-md">
-            Complete el CUIT
+            Complete el Precio
           </div>
           }
         </div>
         <div>
           <label for="company" class="block mb-2 text-sm font-medium text-white"
-            >Email</label
+            >Descuento (%)</label
           >
           <input
             type="email"
@@ -64,8 +85,7 @@
             formControlName="email"
             id="company"
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="agustin@gmail.com"
-            required
+            placeholder="30"
           />
           @if(form.get('email')?.invalid && form.get('email')?.touched){
           <div class="text-white font-bold drop-shadow-md">
@@ -76,7 +96,7 @@
 
         <div>
           <label for="phone" class="block mb-2 text-sm font-medium text-white j"
-            >Telefono</label
+            >Stock</label
           >
           <input
             type="number"
@@ -87,12 +107,12 @@
             formControlName="phone"
             id="phone"
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full p-2.5"
-            placeholder="+54 351-XXXXXXX"
+            placeholder="50"
             required
           />
           @if(form.get('phone')?.invalid && form.get('phone')?.touched){
           <div class="text-white font-bold drop-shadow-md">
-            Complete el telefono
+            Complete el stock
           </div>
           }
         </div>
@@ -102,24 +122,20 @@
       >
         <div class="w-full">
           <label for="company" class="block mb-2 text-sm font-medium text-white"
-            >Pais</label
+            >Marca</label
           >
-          <select
-            id="countries"
-            formControlName="country"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
-          >
-            <option value="" selected>Elige un pais</option>
-            <option value="ARGENTINA">Argentina</option>
-            <option value="CHILE">Chile</option>
-            <option value="PERU">Peru</option>
-            <option value="URUGUAY">Uruguay</option>
-            <option value="PARAGUAY">Paraguay</option>
-            <option value="BOLIVIA">Bolivia</option>
-            <option value="BRASIL">Brasil</option>
-            <option value="ESTADOS_UNIDO">Estados Unidos</option>
-            <option value="CHINA">China</option>
-          </select>
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                form.get('city')?.touched && form.get('city')?.invalid
+            }"
+            formControlName="city"
+            placeholder="Bosh"
+            id="phone"
+            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full md:w-80 p-2.5"
+            required
+          />
           @if(form.get('country')?.value == "" && form.get('country')?.touched){
           <div class="text-white font-bold drop-shadow-md">
             Complete el pais
@@ -193,9 +209,21 @@
       </div>
 
       <label
+        class="block mb-2 text-sm font-medium text-white"
+        for="multiple_files"
+        >Imagenes</label
+      >
+      <input
+        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+        id="multiple_files"
+        type="file"
+        multiple
+      />
+
+      <label
         for="message"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >Observaciones</label
+        class="block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white"
+        >Descripcion</label
       >
       <textarea
         id="message"
