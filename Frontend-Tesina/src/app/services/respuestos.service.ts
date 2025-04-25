@@ -24,7 +24,7 @@ export class RespuestosService {
       },
     });
   }
-  postSpare(body: any) {
+  postSpare(body: FormData) {
     return this.http.post<any>(`http://localhost:8080/spares/postSpare`, body, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),

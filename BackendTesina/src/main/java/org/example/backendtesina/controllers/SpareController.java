@@ -7,8 +7,10 @@ import org.example.backendtesina.DTOs.PostSpareDTO;
 import org.example.backendtesina.services.ProviderService;
 import org.example.backendtesina.services.SpareService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class SpareController {
 
 
     @GetMapping(value ="getAll")
-    public ResponseEntity<?> getProviders(){
+    public ResponseEntity<?> getSpare(){
         List<GetSpareDTO> lst = service.getAll();
         if(lst.isEmpty()){
             return ResponseEntity.notFound().build();
@@ -28,7 +30,7 @@ public class SpareController {
         return ResponseEntity.ok(lst);
     }
     @GetMapping(value ="getSpare/{id}")
-    public ResponseEntity<?> getProvider(@PathVariable int id){
+    public ResponseEntity<?> getSpareById(@PathVariable int id){
         PostSpareDTO lst = service.getSpare(id);
         if(lst == null){
             return ResponseEntity.notFound().build();
@@ -36,15 +38,32 @@ public class SpareController {
         return ResponseEntity.ok(lst);
     }
     @PostMapping(value ="postSpare")
-    public ResponseEntity<?> postProviders(@RequestBody PostSpareDTO dto){
-        PostSpareDTO lst = service.postSpare(dto);
-        if(lst == null){
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> postSpare(
+            @RequestParam String name,
+            @RequestParam double price,
+            @RequestParam int discaunt,
+            @RequestParam int stock,
+            @RequestParam String brand,
+            @RequestParam String category,
+            @RequestParam String description,
+            @RequestParam String city,
+            @RequestParam(required = false) MultipartFile image1,
+            @RequestParam(required = false) MultipartFile image2,
+            @RequestParam(required = false) MultipartFile image3,
+            @RequestParam(required = false) MultipartFile image4,
+            @RequestParam(required = false) MultipartFile image5){
+        try {
+            service.postSpare(
+                    name, price, discaunt, stock, brand, category,
+                    description, image1, image2, image3, image4, image5
+            );
+            return ResponseEntity.ok("Spare guardado con éxito");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar repuesto");
         }
-        return ResponseEntity.ok(lst);
     }
     @PutMapping(value ="putSpare")
-    public ResponseEntity<?> putProviders(@RequestBody PostSpareDTO dto){
+    public ResponseEntity<?> putSpare(@RequestBody PostSpareDTO dto){
         PostSpareDTO lst = service.putSpare(dto);
         if(lst == null){
             return ResponseEntity.notFound().build();
