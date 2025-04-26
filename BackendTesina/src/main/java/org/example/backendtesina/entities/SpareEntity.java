@@ -18,9 +18,13 @@ public class SpareEntity {
     private boolean active;
     private int stock;
     private String brand;
+    @ManyToOne
+    @JoinColumn(name = "provider_id") // nombre de la FK en la tabla repuesto
+    private ProviderEntity provider;
     @Enumerated(EnumType.STRING)
     private CategorySpareEntity category;
     private String description;
+    private Double stars;
 
     private String image1;
     private String image2;
@@ -114,5 +118,21 @@ public class SpareEntity {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Double getStars() {
+        return stars;
+    }
+
+    public void setStars(Double stars) {
+        this.stars = stars;
+    }
+
+    public ProviderEntity getProvider() {
+        return provider;
+    }
+
+    public void setProvider(ProviderEntity proveedor) {
+        this.provider = proveedor;
     }
 }

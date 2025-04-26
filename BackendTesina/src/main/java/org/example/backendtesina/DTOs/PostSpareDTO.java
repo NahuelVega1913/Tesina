@@ -16,8 +16,9 @@ public class PostSpareDTO {
     private int stock;
     private boolean active;
     private String brand;
-
+    private Double stars;
     private String category;
+    private String Provider;
     private String description;
     private List<String> urlImages;
     private String image1;
@@ -144,5 +145,13 @@ public class PostSpareDTO {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Double getStars() {
+        return stars;
+    }
+
+    public void setStars(Double stars) {
+        this.stars = stars;
     }
 }

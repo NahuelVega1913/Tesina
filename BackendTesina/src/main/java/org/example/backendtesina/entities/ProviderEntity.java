@@ -7,6 +7,7 @@ import org.example.backendtesina.entities.enums.CountryEntity;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "PROVIDERS")
@@ -23,6 +24,9 @@ public class ProviderEntity {
     private String city;
     @Enumerated(EnumType.STRING)
     private CountryEntity country;
+
+    @OneToMany(mappedBy = "provider")
+    private List<SpareEntity> spares;
 
     private String CUIT;
     private String email;
@@ -130,5 +134,13 @@ public class ProviderEntity {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public List<SpareEntity> getSpares() {
+        return spares;
+    }
+
+    public void setSpares(List<SpareEntity> repuestos) {
+        this.spares = repuestos;
     }
 }

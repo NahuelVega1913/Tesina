@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { RespuestosService } from '../services/respuestos.service';
+import { ProveedoresService } from '../services/proveedores.service';
 
 @Component({
   selector: 'app-registrar-repuesto',
@@ -17,8 +18,10 @@ import { RespuestosService } from '../services/respuestos.service';
 })
 export class RegistrarRepuestoComponent {
   private service: RespuestosService = inject(RespuestosService);
+  private serviceProviders: ProveedoresService = inject(ProveedoresService);
 
   selectedFiles: File[] = [];
+  lstProviders: any[] = [];
 
   constructor(private router: Router) {}
 
@@ -30,16 +33,32 @@ export class RegistrarRepuestoComponent {
     brand: new UntypedFormControl('', []),
     category: new UntypedFormControl('', []),
     urlImage: new UntypedFormControl('', []),
-
+    stars: new UntypedFormControl('', []),
     city: new UntypedFormControl('', []),
     description: new UntypedFormControl('', []),
   });
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.getProviders();
+  }
 
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files) {
       this.selectedFiles = Array.from(input.files);
     }
+  }
+  getProviders() {
+    const getSubscription = this.serviceProviders.getProveedores().subscribe({
+      next: (res) => {
+        this.lstProviders = res;
+        console.log(this.lstProviders);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   save() {
@@ -50,6 +69,7 @@ export class RegistrarRepuestoComponent {
       formData.append('name', this.form.value.name || '');
       formData.append('price', this.form.value.price || '');
       formData.append('discaunt', this.form.value.discaunt || '');
+      formData.append('stars', this.form.value.stars || '');
       formData.append('stock', this.form.value.stock || '');
       formData.append('brand', this.form.value.brand || '');
       formData.append('category', this.form.value.category || '');

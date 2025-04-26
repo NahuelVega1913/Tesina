@@ -7,7 +7,7 @@
     <p
       class="font-bold text-2xl text-white text-6xl text-shadow-lg ps-10 pt-5 sm:mb-5 md:mt-5"
     >
-      Registrar Repuesto
+      Modificar Repuesto
     </p>
     <form [formGroup]="form" (submit)="save()" class="p-10">
       <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -169,14 +169,10 @@
 
         <div class="w-full">
           <label for="phone" class="block mb-2 text-sm font-medium text-white j"
-            >Estrellas (0-5)</label
+            >Estrellas</label
           >
           <input
             type="text"
-            [ngClass]="{
-              'is-invalid':
-                form.get('stars')?.touched && form.get('stars')?.invalid
-            }"
             formControlName="stars"
             placeholder="Cordoba"
             id="phone"
@@ -185,48 +181,24 @@
           />
           @if(form.get('stars')?.invalid && form.get('stars')?.touched){
           <div class="text-white font-bold drop-shadow-md">
-            Complete las estrellas
+            Complete la Provincia
           </div>
           }
         </div>
       </div>
-      <div
-        class="flex flex-col md:flex-row m w-full gap-10 mb-6 md:grid-cols-2"
+
+      <label
+        class="block mb-2 text-sm font-medium text-white"
+        for="multiple_files"
+        >Imagenes</label
       >
-        <div class="w-full">
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
-            >Imagenes</label
-          >
-          <input
-            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-            id="multiple_files"
-            (change)="onFileChange($event)"
-            type="file"
-            multiple
-          />
-        </div>
-        <div class="w-full">
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
-            >Proveedor</label
-          >
-          <select
-            id="countries"
-            formControlName="category"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
-          >
-            <option value="" selected>Elige una categoria</option>
-            @for (item of lstProviders; track $index) {
-            <option value="{{ item.id }}">{{ item.name }}</option>
-            }
-          </select>
-          @if(form.get('category')?.value == "" &&
-          form.get('category')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
-            Complete el proveedor
-          </div>
-          }
-        </div>
-      </div>
+      <input
+        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+        id="multiple_files"
+        (change)="onFileChange($event)"
+        type="file"
+        multiple
+      />
 
       <label
         for="message"
