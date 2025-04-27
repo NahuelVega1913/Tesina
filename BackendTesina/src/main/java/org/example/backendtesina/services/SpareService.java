@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -57,6 +58,9 @@ public class SpareService {
         SpareEntity spare = repository.findById(id).orElse(null);
         if(spare != null){
             PostSpareDTO dto = new PostSpareDTO();
+            if(spare.getProvider() !=null){
+                dto.setProvider(spare.getProvider().getId());
+            }
             dto.setId(spare.getId());
             dto.setBrand(spare.getBrand());
             dto.setName(spare.getName());
@@ -184,11 +188,16 @@ public class SpareService {
         return null;
     }
     public void eliminarImagen(String imagePath) {
-        Path path = Paths.get(uploadDir, imagePath);
-        try {
-            Files.deleteIfExists(path);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (imagePath != null && !imagePath.isEmpty()) {
+            try {
+                // Extraer el nombre del archivo sin usar URI (mejor)
+                String fileName = imagePath.substring(imagePath.lastIndexOf('/') + 1);
+
+                Path path = Paths.get(uploadDir, fileName);
+                Files.deleteIfExists(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

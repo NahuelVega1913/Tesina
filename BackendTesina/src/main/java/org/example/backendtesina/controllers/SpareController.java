@@ -66,9 +66,10 @@ public class SpareController {
 
     }
     @PutMapping(value ="putSpare")
-    public ResponseEntity<?> putSpare(
+    public ResponseEntity<PostSpareDTO> updateSpare(
+            @RequestParam int id,
             @RequestParam String name,
-            @RequestParam int idProvider,
+            @RequestParam int providerId,
             @RequestParam double price,
             @RequestParam int discaunt,
             @RequestParam int stock,
@@ -80,18 +81,16 @@ public class SpareController {
             @RequestParam(required = false) MultipartFile image2,
             @RequestParam(required = false) MultipartFile image3,
             @RequestParam(required = false) MultipartFile image4,
-            @RequestParam(required = false) MultipartFile image5) throws IOException {
-
-        PostSpareDTO carlos = service.postSpare(
-                name,idProvider ,price, discaunt, stock, brand,stars, category,
-                description, image1, image2, image3, image4, image5
-        );
-        if(carlos == null){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar repuesto");
+            @RequestParam(required = false) MultipartFile image5
+    ) {
+        try {
+            PostSpareDTO updatedSpare = service.putSpare(id, name, providerId, price, discaunt, stock, brand, stars,
+                    category, description, image1, image2, image3, image4, image5);
+            return ResponseEntity.ok(updatedSpare);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.ok("Spare guardado con éxito");
-
-    }
+    }}
 //    @PutMapping(value ="putSpare")
 //    public ResponseEntity<?> putSpare(@RequestBody PostSpareDTO dto){
 //        PostSpareDTO lst = service.putSpare(dto);
@@ -100,4 +99,4 @@ public class SpareController {
 //        }
 //        return ResponseEntity.ok(lst);
 //    }
-}
+

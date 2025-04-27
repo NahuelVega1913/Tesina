@@ -33,6 +33,7 @@ export class RegistrarRepuestoComponent {
     brand: new UntypedFormControl('', []),
     category: new UntypedFormControl('', []),
     urlImage: new UntypedFormControl('', []),
+    provider: new UntypedFormControl('', []),
     stars: new UntypedFormControl('', []),
     city: new UntypedFormControl('', []),
     description: new UntypedFormControl('', []),
@@ -70,6 +71,7 @@ export class RegistrarRepuestoComponent {
       formData.append('price', this.form.value.price || '');
       formData.append('discaunt', this.form.value.discaunt || '');
       formData.append('stars', this.form.value.stars || '');
+      formData.append('idProvider', this.form.value.provider || '');
       formData.append('stock', this.form.value.stock || '');
       formData.append('brand', this.form.value.brand || '');
       formData.append('category', this.form.value.category || '');

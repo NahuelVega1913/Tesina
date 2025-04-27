@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -31,11 +32,10 @@ export class RespuestosService {
       },
     });
   }
-  putSpare(body: any) {
+  putSpare(body: FormData) {
     return this.http.put<any>(`http://localhost:8080/spares/putSpare`, body, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
-        'Content-Type': 'application/json',
       },
     });
   }

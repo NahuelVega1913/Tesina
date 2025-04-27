@@ -18,7 +18,7 @@ public class PostSpareDTO {
     private String brand;
     private Double stars;
     private String category;
-    private String Provider;
+    private int Provider;
     private String description;
     private List<String> urlImages;
     private String image1;
@@ -153,5 +153,13 @@ public class PostSpareDTO {
 
     public void setStars(Double stars) {
         this.stars = stars;
+    }
+
+    public int getProvider() {
+        return Provider;
+    }
+
+    public void setProvider(int provider) {
+        Provider = provider;
     }
 }
