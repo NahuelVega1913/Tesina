@@ -2,21 +2,26 @@
   <div class="flex">
     <select
       id="countries"
+      name="category"
+      (change)="filter()"
+      [(ngModel)]="category"
       class="bg-gray-50 border me-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
     >
-      <option selected>Categorias</option>
-      <option value="US">Motor</option>
-      <option value="CA">Refrigeracion</option>
-      <option value="FR">Frenos</option>
-      <option value="DE">Tranmision</option>
+      <option value="" selected>Categorias</option>
+      <option value="MOTOR">Motor</option>
+      <option value="REFRIGERACION">Refrigeracion</option>
+      <option value="FRENOS">Frenos</option>
+      <option value="LUBRICACION">Lubricacion</option>
     </select>
     <div class="relative w-full">
       <input
         type="search"
+        [(ngModel)]="search"
+        name="search"
+        (input)="filter()"
         id="search-dropdown"
         class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
         placeholder="Search"
-        required
       />
       <button
         type="submit"
@@ -50,38 +55,13 @@
 </form>
 
 <!-- Contenedor principal -->
+@if(category == 'MOTOR' || category == '' && count("MOTOR") > 0) {
 <p class="p-2 font-bold ms-10 text-3xl">Motor</p>
 <ng-scrollbar visibility="hover" track="horizontal">
   <div class="flex gap-4 p-5">
-    @for (i of lst; track $index) { @if(i.category == 'MOTOR') {
-    <div class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded shadow">
-      <img
-        class="h-50 w-full md:w-55 rounded-2xl object-contain"
-        src="{{ i.image1 }}"
-        alt="image description"
-      />
-      <p class="font-bold mt-2">{{ i.name + " (" + i.brand + ")" }}</p>
-      <p class="text-gray-700">${{ i.price }}</p>
-      @if(i.discaunt != 0) {
-      <p class="text-green-500 text-xs">{{ i.discaunt }}% OFF</p>
-      }
-      <button
-        (click)="redirectTo('/repuesto', i.id)"
-        type="button"
-        class="text-white mt-5 bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      >
-        Ver
-      </button>
-    </div>
-    } }
-  </div>
-</ng-scrollbar>
-
-<!--REFRIGERACION-->
-<p class="p-2 font-bold ms-10 text-3xl">Refrigeracion</p>
-<ng-scrollbar visibility="hover" track="horizontal">
-  <div class="flex gap-4 p-5">
-    @for (i of lst; track $index) { @if(i.category == 'REFRIGERACION') {
+    @for (i of listFilteres; track $index) { @if(i.category == 'MOTOR' &&
+    i.name.toLowerCase().includes(search.toLowerCase()) || i.category == 'MOTOR'
+    && search == '') {
     <div class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded shadow">
       <img
         class="h-50 w-full md:w-55 rounded-2xl object-contain"
@@ -111,10 +91,16 @@
     } }
   </div>
 </ng-scrollbar>
-<p class="p-2 font-bold ms-10 text-3xl">Lubricacion</p>
+}
+<!--REFRIGERACION-->
+@if(category == 'REFRIGERACION' || category == ''&& count("REFRIGERACION") > 0)
+{
+<p class="p-2 font-bold ms-10 text-3xl">Refrigeracion</p>
 <ng-scrollbar visibility="hover" track="horizontal">
   <div class="flex gap-4 p-5">
-    @for (i of lst; track $index) { @if(i.category == 'LUBRICACION') {
+    @for (i of lst; track $index) { @if(i.category == 'REFRIGERACION'&&
+    i.name.toLowerCase().includes(search.toLowerCase()) || i.category ==
+    'REFRIGERACION' && search == '') {
     <div class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded shadow">
       <img
         class="h-50 w-full md:w-55 rounded-2xl object-contain"
@@ -133,10 +119,54 @@
       >
         Ver
       </button>
+      <button
+        (click)="redirectTo('/modificarRepuesto', i.id)"
+        type="button"
+        class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+      >
+        Editar
+      </button>
     </div>
     } }
   </div>
 </ng-scrollbar>
+} @if(category == 'LUBRICACION' || category == ''&& count("LUBRICACION") > 0) {
+<p class="p-2 font-bold ms-10 text-3xl">Lubricacion</p>
+<ng-scrollbar visibility="hover" track="horizontal">
+  <div class="flex gap-4 p-5">
+    @for (i of lst; track $index) { @if(i.category == 'LUBRICACION' &&
+    i.name.toLowerCase().includes(search.toLowerCase()) || i.category ==
+    'LUBRICACION' && search == '') {
+    <div class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded shadow">
+      <img
+        class="h-50 w-full md:w-55 rounded-2xl object-contain"
+        src="{{ i.image1 }}"
+        alt="image description"
+      />
+      <p class="font-bold mt-2">{{ i.name + " (" + i.brand + ")" }}</p>
+      <p class="text-gray-700">${{ i.price }}</p>
+      @if(i.discaunt != 0) {
+      <p class="text-green-500 text-xs">{{ i.discaunt }}% OFF</p>
+      }
+      <button
+        (click)="redirectTo('/repuesto', i.id)"
+        type="button"
+        class="text-white mt-5 bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      >
+        Ver
+      </button>
+      <button
+        (click)="redirectTo('/modificarRepuesto', i.id)"
+        type="button"
+        class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+      >
+        Editar
+      </button>
+    </div>
+    } }
+  </div>
+</ng-scrollbar>
+}
 
 <!--<div class="flex items-center justify-center h-24 rounded-sm bg-gray-50">
   <div
