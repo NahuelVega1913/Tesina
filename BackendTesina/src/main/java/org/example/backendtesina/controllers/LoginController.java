@@ -1,9 +1,8 @@
 package org.example.backendtesina.controllers;
 
-import io.swagger.v3.core.util.Json;
-import org.example.backendtesina.DTOs.AuthResponse;
-import org.example.backendtesina.DTOs.LoginDto;
-import org.example.backendtesina.DTOs.RegisterDto;
+import org.example.backendtesina.DTOs.Login.AuthResponse;
+import org.example.backendtesina.DTOs.Login.LoginDto;
+import org.example.backendtesina.DTOs.Login.RegisterDto;
 import org.example.backendtesina.entities.UserEntity;
 import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.repositories.UserRepository;
@@ -13,12 +12,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/auth")

@@ -1,7 +1,7 @@
 package org.example.backendtesina.services;
 
-import org.example.backendtesina.DTOs.AuthResponse;
-import org.example.backendtesina.DTOs.RegisterDto;
+import org.example.backendtesina.DTOs.Login.AuthResponse;
+import org.example.backendtesina.DTOs.Login.RegisterDto;
 import org.example.backendtesina.entities.enums.RoleEntity;
 import org.example.backendtesina.entities.UserEntity;
 import org.example.backendtesina.jwt.JwtService;

@@ -1,4 +1,4 @@
-package org.example.backendtesina.DTOs;
+package org.example.backendtesina.DTOs.Login;
 
 import lombok.Builder;
 

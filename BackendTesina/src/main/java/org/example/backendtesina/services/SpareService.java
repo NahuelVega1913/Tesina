@@ -1,8 +1,7 @@
 package org.example.backendtesina.services;
 
-import org.example.backendtesina.DTOs.GetSpareDTO;
-import org.example.backendtesina.DTOs.PostProviderDTO;
-import org.example.backendtesina.DTOs.PostSpareDTO;
+import org.example.backendtesina.DTOs.Get.GetSpareDTO;
+import org.example.backendtesina.DTOs.Post.PostSpareDTO;
 import org.example.backendtesina.entities.ProviderEntity;
 import org.example.backendtesina.entities.SpareEntity;
 import org.example.backendtesina.entities.enums.CategorySpareEntity;
@@ -13,9 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

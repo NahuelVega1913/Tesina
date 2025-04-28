@@ -1,4 +1,4 @@
-package org.example.backendtesina.DTOs;
+package org.example.backendtesina.DTOs.Login;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;

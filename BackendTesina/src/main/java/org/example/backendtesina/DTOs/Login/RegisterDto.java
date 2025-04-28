@@ -1,4 +1,4 @@
-package org.example.backendtesina.DTOs;
+package org.example.backendtesina.DTOs.Login;
 
 import jakarta.validation.constraints.Email;
 import lombok.Data;

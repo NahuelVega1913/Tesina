@@ -1,10 +1,7 @@
 package org.example.backendtesina.controllers;
 
-import org.example.backendtesina.DTOs.GetProvidersDTO;
-import org.example.backendtesina.DTOs.GetSpareDTO;
-import org.example.backendtesina.DTOs.PostProviderDTO;
-import org.example.backendtesina.DTOs.PostSpareDTO;
-import org.example.backendtesina.services.ProviderService;
+import org.example.backendtesina.DTOs.Get.GetSpareDTO;
+import org.example.backendtesina.DTOs.Post.PostSpareDTO;
 import org.example.backendtesina.services.SpareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

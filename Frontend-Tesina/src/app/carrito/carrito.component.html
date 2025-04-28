@@ -5,17 +5,25 @@
     <div class="border-b-2 border-gray-300 mb-3">
       <p class="font-semibold text-2xl">Productos</p>
     </div>
+    @for (item of this.carrito; track $index) {
     <div class="flex flex-col md:flex-row border-b-2 border-gray-300 p-3">
       <img
         class="h-30 w-30 md:w-55 rounded-2xl object-contain"
-        src="https://i5.walmartimages.com.mx/gr/images/product-images/img_large/00750111620007L.jpg"
+        src="{{ item.imagen1 }}"
         alt="image description"
       />
       <div class="flex flex-col">
-        <div class="flex flex-row font-bold text-xl">Aceite 200 ML</div>
+        <div class="flex flex-row font-bold text-xl">{{ item.name }}</div>
         <div class="flex flex-row">
-          <p class="text-blue-500 m-2 text-xs font-medium">Eliminar</p>
-          <p class="text-blue-500 m-2 text-xs font-medium">Comprar ahora</p>
+          <p class="text-blue-500 m-1 text-xs font-medium hover:text-blue-800">
+            Eliminar
+          </p>
+          <p class="text-blue-500 m-1 text-xs font-medium hover:text-blue-800">
+            Comprar
+          </p>
+          <p class="text-blue-500 m-1 text-xs font-medium hover:text-blue-800">
+            Guardar
+          </p>
         </div>
       </div>
       <form class="max-w-xs mx-auto">
@@ -84,9 +92,12 @@
         </div>
       </form>
       <div class="flex">
-        <p class="font-bold text-lg mt-5">$ 200000</p>
+        <p class="font-bold text-lg mt-5">
+          $ {{ item.price * (1 - item.discaunt / 100) }}
+        </p>
       </div>
     </div>
+    }
     <div class="flex flex-row border-b-2 border-gray-300 p-3">
       <img
         class="h-30 w-30 md:w-55 rounded-2xl object-contain"
@@ -178,7 +189,7 @@
       <p class="font-semibold text-2xl">Resumen de Compra</p>
     </div>
     <div class="flex flex-row justify-between mt-3">
-      <p class="text-gray-600">Productos(2)</p>
+      <p class="text-gray-600">Productos({{ this.carrito.length }})</p>
       <p class="text-gray-600">$ 400.000</p>
     </div>
     <div class="flex flex-row justify-between mt-3">

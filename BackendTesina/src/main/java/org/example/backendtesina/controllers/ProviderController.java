@@ -1,10 +1,8 @@
 package org.example.backendtesina.controllers;
 
-import org.apache.coyote.Response;
-import org.example.backendtesina.DTOs.GetProvidersDTO;
-import org.example.backendtesina.DTOs.PostProviderDTO;
+import org.example.backendtesina.DTOs.Get.GetProvidersDTO;
+import org.example.backendtesina.DTOs.Post.PostProviderDTO;
 import org.example.backendtesina.services.ProviderService;
-import org.example.backendtesina.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

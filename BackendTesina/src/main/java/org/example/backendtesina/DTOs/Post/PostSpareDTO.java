@@ -1,4 +1,4 @@
-package org.example.backendtesina.DTOs;
+package org.example.backendtesina.DTOs.Post;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

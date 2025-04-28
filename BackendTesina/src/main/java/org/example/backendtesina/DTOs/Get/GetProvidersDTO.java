@@ -1,4 +1,4 @@
-package org.example.backendtesina.DTOs;
+package org.example.backendtesina.DTOs.Get;
 
 import org.example.backendtesina.entities.enums.CategorySpareEntity;
 import org.example.backendtesina.entities.enums.CityEntity;

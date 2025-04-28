@@ -1,8 +1,6 @@
 package org.example.backendtesina.controllers;
 
-import org.apache.catalina.User;
-import org.example.backendtesina.DTOs.RegisterDto;
-import org.example.backendtesina.entities.UserEntity;
+import org.example.backendtesina.DTOs.Login.RegisterDto;
 import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

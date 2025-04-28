@@ -13,10 +13,6 @@ public class CartEntity {
     private int id;
 
 
-    private int idUser;
-    private int idSpare;
-    private int quantity;
-
     @OneToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
@@ -30,4 +26,27 @@ public class CartEntity {
     private List<SpareEntity> spares;
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public List<SpareEntity> getSpares() {
+        return spares;
+    }
+
+    public void setSpares(List<SpareEntity> spares) {
+        this.spares = spares;
+    }
 }
