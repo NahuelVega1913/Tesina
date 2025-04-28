@@ -60,6 +60,9 @@ export class InicioComponent {
   redirectTo(url: string) {
     this.router.navigate([`${url}`]);
   }
+  moveTo(url: string) {
+    window.location.href = url;
+  }
   salir(url: string) {
     localStorage.clear();
     this.router.navigate([`${url}`]);

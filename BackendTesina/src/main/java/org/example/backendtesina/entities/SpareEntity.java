@@ -26,6 +26,9 @@ public class SpareEntity {
     private String description;
     private Double stars;
 
+    @ManyToMany(mappedBy = "spares")
+    private List<CartEntity> carts;
+
     private String image1;
     private String image2;
     private String image3;
@@ -134,5 +137,13 @@ public class SpareEntity {
 
     public void setProvider(ProviderEntity proveedor) {
         this.provider = proveedor;
+    }
+
+    public List<CartEntity> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<CartEntity> carts) {
+        this.carts = carts;
     }
 }

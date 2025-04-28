@@ -27,6 +27,9 @@ public class UserEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private RoleEntity role;
 
+    @OneToOne(mappedBy = "user")
+    private CartEntity cart;
+
     public String getEmail() {
         return email;
     }
@@ -115,5 +118,15 @@ public class UserEntity implements UserDetails {
 
     public void setRole(RoleEntity role) {
         this.role = role;
+    }
+
+
+
+    public CartEntity getCart() {
+        return cart;
+    }
+
+    public void setCart(CartEntity cart) {
+        this.cart = cart;
     }
 }
