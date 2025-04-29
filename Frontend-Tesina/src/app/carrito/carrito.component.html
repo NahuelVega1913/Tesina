@@ -1,13 +1,13 @@
 <div
-  class="flex flex-col :flex-row bg-gray-200 min-h-[calc(100vh-64px)] w-full p-5"
+  class="flex flex-col lg:flex-row bg-gray-200 min-h-[calc(100vh-64px)] w-full p-5"
 >
-  <div class="bg-white h-full w-500 m-2 rounded-2xl p-5">
+  <div class="bg-white h-full w-full m-2 rounded-2xl p-5">
     <div class="border-b-2 border-gray-300 mb-3">
       <p class="font-semibold text-2xl">Productos</p>
     </div>
     @for (item of productos; track $index) {
     <div
-      class="flex flex-col sm:flex-row border-b-2 w-full border-gray-300 p-3 m-2"
+      class="flex flex-col lg:flex-row border-b-2 w-full border-gray-300 p-2"
     >
       <img
         class="h-30 w-30 md:w-55 rounded-2xl object-contain"
@@ -15,7 +15,9 @@
         alt="image description"
       />
       <div class="flex flex-col">
-        <div class="flex flex-row font-bold text-xl">{{ item.name }}</div>
+        <div class="flex flex-row font-bold text-xl w-full">
+          {{ item.name }}
+        </div>
         <div class="flex flex-row">
           <p
             (click)="putCarrito(item.id)"
@@ -31,19 +33,19 @@
       </div>
       <form class="max-w-xs mx-auto">
         <label
-          for="quantity-input1"
-          class="block mb-2 text-xs font-medium text-gray-900"
+          for="counter-input"
+          class="block mb-1 text-xs font-medium text-gray-400"
           >Cantidad:</label
         >
-        <div class="relative flex items-center max-w-[8rem]">
+        <div class="relative flex items-center">
           <button
             type="button"
-            id="decrement-button"
-            data-input-counter-decrement="quantity-input"
-            class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-8 focus:ring-gray-100 focus:ring-2 focus:outline-none"
+            (click)="decrementarUnidad($index)"
+            data-input-counter-decrement="counter-input "
+            class="shrink-0 bg-gray-100 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md h-5 w-5 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
           >
             <svg
-              class="w-2 h-3 text-gray-900"
+              class="w-2.5 h-2.5 text-gray-900"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -60,24 +62,19 @@
           </button>
           <input
             type="text"
-            id="quantity-input{{ $index }}"
+            id="counter-input"
             data-input-counter
-            data-input-counter-min="1"
-            data-input-counter-max="5"
-            aria-describedby="helper-text-explanation"
-            class="bg-gray-50 border-x-0 border-gray-300 h-8 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
-            placeholder="1"
-            value="1"
-            required
+            class="shrink-0 text-gray-900 border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center"
+            placeholder=""
+            value="{{ item.cantidad }}"
           />
           <button
             type="button"
-            id="increment-button"
-            data-input-counter-increment="quantity-input "
-            class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-8 focus:ring-gray-100 focus:ring-2 focus:outline-none"
+            (click)="aumentarUnidad($index)"
+            class="shrink-0 bg-gray-100 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md h-5 w-5 focus:ring-gray-100 focus:ring-2 focus:outline-none"
           >
             <svg
-              class="w-2 h-3 text-gray-900"
+              class="w-2.5 h-2.5 text-gray-900"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -107,9 +104,13 @@
     <div class="border-b-2 border-gray-300 mb-3">
       <p class="font-semibold text-2xl">Resumen de Compra</p>
     </div>
+    <div class="flex flex-row font-medium justify-between mt-3">
+      <p class="text-gray-700">Productos({{ this.productos.length }})</p>
+      <p class="text-gray-700">$ {{ calculateSubtotal() }}</p>
+    </div>
     <div class="flex flex-row justify-between mt-3">
-      <p class="text-gray-600">Productos({{ this.productos.length }})</p>
-      <p class="text-gray-600">$ 400.000</p>
+      <p class="text-gray-600">Descuento</p>
+      <p class="text-gray-600">$ {{ calculateDiscaunt() }}</p>
     </div>
     <div class="flex flex-row justify-between mt-3">
       <p class="text-gray-600">Envio</p>
@@ -117,7 +118,7 @@
     </div>
     <div class="flex flex-row justify-between mt-3">
       <p class="font-semibold text-lg">Total</p>
-      <p class="font-semibold text-lg">$ 400.000</p>
+      <p class="font-semibold text-lg">$ {{ calculateTotal() }}</p>
     </div>
     <button
       type="button"
