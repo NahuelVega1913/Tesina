@@ -41,8 +41,13 @@ public class CartController {
         return ResponseEntity.ok(cart);
     }
 
-    @PutMapping (value = "putCart")
-    public ResponseEntity<?> ModifyCart(){
-        return null;
+    @PutMapping (value = "putCart/{idSpare}")
+    public ResponseEntity<?> ModifyCart(@PathVariable int idSpare,@RequestHeader("Authorization") String authorizationHeader){
+        String token = authorizationHeader.substring(7); // Elimina "Bearer "
+        CartEntity cart = service.putCart(token, idSpare);
+        if(cart == null){
+            return ResponseEntity.badRequest().body("Error");
+        }
+        return ResponseEntity.ok(cart);
     }
 }

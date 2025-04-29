@@ -26,6 +26,18 @@ export class CartService {
     return this.http.post<any>(
       `http://localhost:8080/cart/addProduct/` + id,
       {},
+      { headers, responseType: 'text' as 'json' }
+    );
+  }
+  putProveedor(id: number) {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.put<any>(
+      `http://localhost:8080/cart/putCart/` + id,
+      {},
       { headers }
     );
   }

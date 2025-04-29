@@ -1,21 +1,26 @@
 <div
-  class="flex flex-col md:flex-row bg-gray-200 min-h-[calc(100vh-64px)] w-full p-5"
+  class="flex flex-col lg:flex-row bg-gray-200 min-h-[calc(100vh-64px)] w-full p-5"
 >
   <div class="bg-white h-full w-500 m-2 rounded-2xl p-5">
     <div class="border-b-2 border-gray-300 mb-3">
       <p class="font-semibold text-2xl">Productos</p>
     </div>
-    @for (item of this.carrito; track $index) {
-    <div class="flex flex-col md:flex-row border-b-2 border-gray-300 p-3">
+    @for (item of productos; track $index) {
+    <div
+      class="flex flex-col sm:flex-row border-b-2 w-full border-gray-300 p-3"
+    >
       <img
         class="h-30 w-30 md:w-55 rounded-2xl object-contain"
-        src="{{ item.imagen1 }}"
+        src="{{ item.image1 }}"
         alt="image description"
       />
       <div class="flex flex-col">
         <div class="flex flex-row font-bold text-xl">{{ item.name }}</div>
         <div class="flex flex-row">
-          <p class="text-blue-500 m-1 text-xs font-medium hover:text-blue-800">
+          <p
+            (click)="putCarrito(item.id)"
+            class="text-blue-500 m-1 text-xs font-medium hover:text-blue-800"
+          >
             Eliminar
           </p>
           <p class="text-blue-500 m-1 text-xs font-medium hover:text-blue-800">
@@ -36,7 +41,7 @@
           <button
             type="button"
             id="decrement-button"
-            data-input-counter-decrement="quantity-input1"
+            data-input-counter-decrement="quantity-input"
             class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-8 focus:ring-gray-100 focus:ring-2 focus:outline-none"
           >
             <svg
@@ -57,7 +62,7 @@
           </button>
           <input
             type="text"
-            id="quantity-input1"
+            id="quantity-input{{ $index }}"
             data-input-counter
             data-input-counter-min="1"
             data-input-counter-max="5"
@@ -70,7 +75,7 @@
           <button
             type="button"
             id="increment-button"
-            data-input-counter-increment="quantity-input1"
+            data-input-counter-increment="quantity-input "
             class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-8 focus:ring-gray-100 focus:ring-2 focus:outline-none"
           >
             <svg
@@ -98,90 +103,6 @@
       </div>
     </div>
     }
-    <div class="flex flex-row border-b-2 border-gray-300 p-3">
-      <img
-        class="h-30 w-30 md:w-55 rounded-2xl object-contain"
-        src="https://www.motocrosscenter.com/shop/1515352-tm_large_default/kit-piston-wiseco-medida-cilindro-kawasaki-kvf-300-prairie-1999-2003.jpg"
-        alt="image description"
-      />
-      <div class="flex flex-col">
-        <div class="flex flex-row font-bold text-xl">Aceite 200 ML</div>
-        <div class="flex flex-row">
-          <p class="text-blue-500 m-2 text-xs font-medium">Eliminar</p>
-          <p class="text-blue-500 m-2 text-xs font-medium">Comprar ahora</p>
-        </div>
-      </div>
-      <form class="max-w-xs mx-auto">
-        <label
-          for="quantity-input"
-          class="block mb-2 text-xs font-medium text-gray-900"
-          >Cantidad:</label
-        >
-        <div class="relative flex items-center max-w-[8rem]">
-          <button
-            type="button"
-            id="decrement-button"
-            data-input-counter-decrement="quantity-input"
-            class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-8 focus:ring-gray-100 focus:ring-2 focus:outline-none"
-          >
-            <svg
-              class="w-3 h-3 text-gray-900"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 18 2"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 1h16"
-              />
-            </svg>
-          </button>
-          <input
-            type="text"
-            id="quantity-input"
-            data-input-counter
-            data-input-counter-min="1"
-            data-input-counter-max="5"
-            aria-describedby="helper-text-explanation"
-            class="bg-gray-50 border-x-0 border-gray-300 h-8 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
-            placeholder="999"
-            min="1"
-            max="5"
-            value="1"
-            required
-          />
-          <button
-            type="button"
-            id="increment-button"
-            data-input-counter-increment="quantity-input"
-            class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-8 focus:ring-gray-100 focus:ring-2 focus:outline-none"
-          >
-            <svg
-              class="w-3 h-3 text-gray-900"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 18 18"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 1v16M1 9h16"
-              />
-            </svg>
-          </button>
-        </div>
-      </form>
-      <div class="flex">
-        <p class="font-bold text-lg mt-5">$ 200000</p>
-      </div>
-    </div>
   </div>
 
   <div class="bg-white flex flex-col w-full h-full m-2 p-5 rounded-2xl">
@@ -189,7 +110,7 @@
       <p class="font-semibold text-2xl">Resumen de Compra</p>
     </div>
     <div class="flex flex-row justify-between mt-3">
-      <p class="text-gray-600">Productos({{ this.carrito.length }})</p>
+      <p class="text-gray-600">Productos({{ this.productos.length }})</p>
       <p class="text-gray-600">$ 400.000</p>
     </div>
     <div class="flex flex-row justify-between mt-3">

@@ -65,6 +65,7 @@ public class CartService {
         for (SpareEntity spare : spareList) {
             GetSpareDTO spareDTO = new GetSpareDTO();
             spareDTO.setBrand(spare.getBrand());
+            spareDTO.setId(spare.getId());
             spareDTO.setName(spare.getName());
             spareDTO.setDescription(spare.getDescription());
             spareDTO.setPrice(spare.getPrice());
@@ -75,6 +76,27 @@ public class CartService {
         }
         dto.setSpareList(spareDTOList);
         return dto;
+    }
+    public CartEntity putCart(String token,int idSpare){
+        String email = jwtService.getEmailFromToken(token);
+        UserEntity user = userRepository.findByEmail(email).orElse(null);
+        CartEntity cart = user.getCart();
+        List<SpareEntity> spare = cart.getSpares();
+        List<SpareEntity> spare2 = cart.getSpares();
+        if(spare.size() == 1 && spare.get(0).getId() == idSpare){
+            spare2 = new ArrayList<>();
+        }
+        else{
+        for (SpareEntity s :spare){
+            if(idSpare == s.getId()){
+                spare2.remove(s);
+                break;
+            }
+        }
+        }
+        cart.setSpares(spare2);
+        cartRepository.save(cart);
+        return cart;
     }
 
 
