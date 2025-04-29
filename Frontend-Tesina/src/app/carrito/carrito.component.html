@@ -1,5 +1,5 @@
 <div
-  class="flex flex-col lg:flex-row bg-gray-200 min-h-[calc(100vh-64px)] w-full p-5"
+  class="flex flex-col :flex-row bg-gray-200 min-h-[calc(100vh-64px)] w-full p-5"
 >
   <div class="bg-white h-full w-500 m-2 rounded-2xl p-5">
     <div class="border-b-2 border-gray-300 mb-3">
@@ -7,7 +7,7 @@
     </div>
     @for (item of productos; track $index) {
     <div
-      class="flex flex-col sm:flex-row border-b-2 w-full border-gray-300 p-3"
+      class="flex flex-col sm:flex-row border-b-2 w-full border-gray-300 p-3 m-2"
     >
       <img
         class="h-30 w-30 md:w-55 rounded-2xl object-contain"
@@ -23,9 +23,7 @@
           >
             Eliminar
           </p>
-          <p class="text-blue-500 m-1 text-xs font-medium hover:text-blue-800">
-            Comprar
-          </p>
+
           <p class="text-blue-500 m-1 text-xs font-medium hover:text-blue-800">
             Guardar
           </p>
