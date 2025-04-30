@@ -8,6 +8,8 @@ import {
   UntypedFormControl,
   UntypedFormGroup,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MercadoPagoService } from '../services/mercado-pago.service';
 
 @Component({
   selector: 'app-carrito',
@@ -17,18 +19,56 @@ import {
 })
 export class CarritoComponent {
   private service: CartService = inject(CartService);
+  private mpService: MercadoPagoService = inject(MercadoPagoService);
+
   carrito: any[] = [];
   productos: any[] = [];
   form = new UntypedFormGroup({
     Cantidades: new UntypedFormArray([]),
   });
+  mp = {} as any;
 
+  constructor(private router: Router) {
+    this.mp = new (window as any).MercadoPago(
+      'APP_USR-367ee25d-7b5c-4b8d-a966-2cc25f227978',
+      {
+        locale: 'es-AR',
+      }
+    );
+  }
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getCarrito();
     console.log(this.productos);
+    this.mp.bricks().create('wallet', 'wallet_container', {
+      initialization: {
+        preferenceId: 'YOUR_PREFERENCE_ID', // Reemplaza con tu ID de preferencia
+      },
+      customization: {
+        texts: {
+          action: 'pay',
+          valueProp: 'security_details',
+        },
+      },
+    });
   }
+  comprarRepuesto() {
+    const body = this.productos.map((producto) => ({
+      idSpare: producto.id,
+      quantity: producto.cantidad,
+    }));
+
+    const getSubscription = this.mpService.comprarProductos(body).subscribe({
+      next: (res) => {
+        window.location.href = res.init_point;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
   getCarrito() {
     const getSubscription = this.service.getCart().subscribe({
       next: (res) => {

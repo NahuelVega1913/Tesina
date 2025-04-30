@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -32,4 +33,15 @@ public class SaleController {
 
         return ResponseEntity.ok(response);
     }
+    @PostMapping(value = "payProducts")
+    public ResponseEntity<?> payCart(@RequestBody List<PostPayDTO> lst) throws MPException,MPApiException{
+        String initPoint = service.payProductos(lst);
+        if(initPoint == null){
+            return ResponseEntity.badRequest().build();
+        }
+            Map<String, String> response = new HashMap<>();
+            response.put("init_point", initPoint);
+            return ResponseEntity.ok(response);
+    }
+
 }

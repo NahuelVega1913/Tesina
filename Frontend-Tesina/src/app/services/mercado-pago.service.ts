@@ -17,6 +17,18 @@ export class MercadoPagoService {
       },
     });
   }
+  comprarProductos(body: any) {
+    return this.http.post<any>(
+      `http://localhost:8080/sales/payProducts`,
+      body,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
 
   constructor() {}
 }
