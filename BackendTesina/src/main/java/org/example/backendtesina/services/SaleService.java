@@ -1,12 +1,16 @@
 package org.example.backendtesina.services;
 
+import com.mercadopago.client.preference.PreferenceBackUrlsRequest;
 import com.mercadopago.client.preference.PreferenceClient;
 import com.mercadopago.client.preference.PreferenceItemRequest;
 import com.mercadopago.client.preference.PreferenceRequest;
+import com.mercadopago.exceptions.MPApiException;
+import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
 import kotlin.jvm.internal.SerializedIr;
 import org.apache.velocity.runtime.directive.Parse;
 import org.example.backendtesina.DTOs.Post.PostPayDTO;
+import org.example.backendtesina.entities.SpareEntity;
 import org.example.backendtesina.repositories.CartRepository;
 import org.example.backendtesina.repositories.SaleRepository;
 import org.example.backendtesina.repositories.SpareRepository;
@@ -30,24 +34,37 @@ public class SaleService {
     CartRepository cartRepository;
 
 
-    public String payMercadoPago(PostPayDTO payDTO){
+    public String payMercadoPago(PostPayDTO payDTO) throws MPException, MPApiException {
+        SpareEntity spare = spareRepository.findById(payDTO.getIdSpare()).get();
+
         PreferenceItemRequest itemRequest =
                 PreferenceItemRequest.builder()
-                        .id("1234")
-                        .title("Games")
-                        .description("PS5")
-                        .pictureUrl("http://picture.com/PS5")
-                        .categoryId("games")
-                        .quantity(2)
-                        .currencyId("BRL")
-                        .unitPrice(new BigDecimal("4000"))
+                        .id(String.valueOf(spare.getId()))
+                        .title(spare.getName())
+                        .description(spare.getDescription())
+                        .pictureUrl(spare.getImage1())
+                        .categoryId(spare.getCategory().toString())
+                        .quantity(payDTO.getQuantity())
+                        .unitPrice(new BigDecimal((spare.getPrice() -(spare.getPrice() * spare.getDiscaunt())/100)))
                         .build();
         List<PreferenceItemRequest> items = new ArrayList<>();
+        PreferenceBackUrlsRequest backUrls =
+                PreferenceBackUrlsRequest.builder()
+                        .success("https://www.promiedos.com.ar/league/liga-profesional/hc")
+                        .pending("https://nahuel-vega.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog")
+                        .failure("https://www.vexorpay.com/dashboard/apikeys")
+                        .build();
+
+        //PreferenceRequest request = PreferenceRequest.builder().backUrls(backUrls).build();
         items.add(itemRequest);
+
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()
-                .items(items).build();
+                .items(items)
+                .backUrls(backUrls)
+                .autoReturn("approved")
+                .build();
         PreferenceClient client = new PreferenceClient();
-        //Preference preference = client.create(request);
-        return itemRequest.getId();
+        Preference preference = client.create(preferenceRequest);
+        return preference.getInitPoint();
     }
 }
