@@ -43,5 +43,9 @@ public class SaleController {
             response.put("init_point", initPoint);
             return ResponseEntity.ok(response);
     }
+    @GetMapping(value = "getAll")
+    public ResponseEntity<?> getVentas(){
+        return null;
+    }
 
 }
