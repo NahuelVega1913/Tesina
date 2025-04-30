@@ -24,7 +24,7 @@ export class RepuestoComponent {
 
   constructor(private router: Router) {
     this.mp = new (window as any).MercadoPago(
-      'APP_USR-2ee82b80-dd39-4c23-a203-8574bafc82bf',
+      'APP_USR-367ee25d-7b5c-4b8d-a966-2cc25f227978',
       {
         locale: 'es-AR',
       }

@@ -7,6 +7,7 @@ import com.mercadopago.client.preference.PreferenceRequest;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
+import jakarta.transaction.Transactional;
 import kotlin.jvm.internal.SerializedIr;
 import org.apache.velocity.runtime.directive.Parse;
 import org.example.backendtesina.DTOs.Post.PostPayDTO;
@@ -33,9 +34,14 @@ public class SaleService {
     @Autowired
     CartRepository cartRepository;
 
-
+    @Transactional
     public String payMercadoPago(PostPayDTO payDTO) throws MPException, MPApiException {
         SpareEntity spare = spareRepository.findById(payDTO.getIdSpare()).get();
+        if(payDTO.getQuantity() > spare.getStock()){
+            return null;
+        }
+        spare.setStock(spare.getStock() - payDTO.getQuantity());
+        spareRepository.save(spare);
 
         PreferenceItemRequest itemRequest =
                 PreferenceItemRequest.builder()
