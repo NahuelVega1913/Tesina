@@ -11,6 +11,8 @@ import jakarta.transaction.Transactional;
 import kotlin.jvm.internal.SerializedIr;
 import org.apache.velocity.runtime.directive.Parse;
 import org.example.backendtesina.DTOs.Post.PostPayDTO;
+import org.example.backendtesina.entities.DetailSaleEntity;
+import org.example.backendtesina.entities.SaleEntity;
 import org.example.backendtesina.entities.SpareEntity;
 import org.example.backendtesina.repositories.CartRepository;
 import org.example.backendtesina.repositories.SaleRepository;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.parser.Parser;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,13 +39,17 @@ public class SaleService {
 
     @Transactional
     public String payMercadoPago(PostPayDTO payDTO) throws MPException, MPApiException {
+        //CONTROL
         SpareEntity spare = spareRepository.findById(payDTO.getIdSpare()).get();
         if(payDTO.getQuantity() > spare.getStock()){
             return null;
         }
         spare.setStock(spare.getStock() - payDTO.getQuantity());
         spareRepository.save(spare);
-
+        //REGISTRO DE ENTIDADES
+        SaleEntity sale = new SaleEntity();
+        sale.setDate(LocalDate.now());DFFFF
+        //MERCADO PAGO
         PreferenceItemRequest itemRequest =
                 PreferenceItemRequest.builder()
                         .id(String.valueOf(spare.getId()))
@@ -72,5 +79,8 @@ public class SaleService {
         PreferenceClient client = new PreferenceClient();
         Preference preference = client.create(preferenceRequest);
         return preference.getInitPoint();
+    }
+    public String payProductos(List<PostPayDTO> lstPay)throws MPException, MPApiException{
+        return null;
     }
 }

@@ -15,6 +15,7 @@ import { ModificarProoveedorComponent } from './modificar-prooveedor/modificar-p
 import { RegistrarRepuestoComponent } from './registrar-repuesto/registrar-repuesto.component';
 import { ModificarRepuestoComponent } from './modificar-repuesto/modificar-repuesto.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { VentasComponent } from './ventas/ventas.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,7 @@ export const routes: Routes = [
       { path: 'registrarRepuesto', component: RegistrarRepuestoComponent },
       { path: 'modificarRepuesto', component: ModificarRepuestoComponent },
       { path: 'carrito', component: CarritoComponent },
+      { path: 'ventas', component: VentasComponent },
     ],
   },
 ];
