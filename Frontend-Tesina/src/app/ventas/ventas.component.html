@@ -8,7 +8,7 @@
           date-rangepicker
           class="flex items-center"
         >
-          <div class="relative">
+          <div class="relative w-35">
             <div
               class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
             >
@@ -27,16 +27,16 @@
             <input
               id="datepicker-range-start"
               name="start"
-              type="text"
+              type="date"
+              (change)="filter()"
               [(ngModel)]="dateFrom"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
-              placeholder="Select date start"
-              readonly
+              placeholder="Fecha"
             />
           </div>
 
           <span class="mx-4 text-gray-500">hasta</span>
-          <div class="relative">
+          <div class="relative w-35">
             <div
               class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
             >
@@ -55,11 +55,11 @@
             <input
               id="datepicker-range-end"
               name="end"
-              type="text"
+              type="date"
+              (change)="filter()"
               [(ngModel)]="dateTo"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
-              placeholder="Select date end"
-              readonly
+              placeholder="Fecha"
             />
           </div>
         </div>

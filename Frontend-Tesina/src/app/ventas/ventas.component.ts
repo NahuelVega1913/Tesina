@@ -32,11 +32,30 @@ export class VentasComponent {
     this.getVentas();
   }
   filter() {
+    console.log(this.dateFrom, this.dateTo);
     this.lstFiltered = this.lst.filter((item) => {
-      return (
-        item.name.toLowerCase().includes(this.search.toLowerCase()) &&
-        (this.category === '' || item.category === this.category)
+      const itemDate = new Date(item.date.split('-').join('/')).setHours(
+        0,
+        0,
+        0,
+        0
       );
+      const fromDate = this.dateFrom
+        ? new Date(this.dateFrom.split('-').join('/')).setHours(0, 0, 0, 0)
+        : null;
+      const toDate = this.dateTo
+        ? new Date(this.dateTo.split('-').join('/')).setHours(0, 0, 0, 0)
+        : null;
+
+      const matchesCategory =
+        this.category === '' || item.typePayment === this.category;
+      const matchesDate =
+        (!fromDate || itemDate >= fromDate) && (!toDate || itemDate <= toDate);
+      const matchesSearch =
+        this.search === '' ||
+        item.user.toLowerCase().includes(this.search.toLowerCase());
+
+      return matchesCategory && matchesDate && matchesSearch;
     });
   }
 
