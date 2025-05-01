@@ -20,7 +20,8 @@ export class VentasComponent {
 
   constructor(private router: Router) {}
 
-  redirectTo(url: string) {
+  redirectTo(url: string, id: number) {
+    localStorage.setItem('idVenta', id.toString());
     this.router.navigate([`${url}`]);
   }
 

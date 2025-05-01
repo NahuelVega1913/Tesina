@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class GetSaleDTO {
-
+    private int id;
     private LocalDate date;
     private String user;
     private Double total;
@@ -53,5 +53,13 @@ public class GetSaleDTO {
 
     public void setDetails(List<DetailSaleDto> details) {
         this.details = details;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -174,6 +174,7 @@ public class SaleService {
             dto.setDate(s.getDate());
             dto.setUser(s.getUser().getName() +" "+s.getUser().getLastname());
             dto.setTypePayment(s.getTypePayment());
+            dto.setId(s.getId());
             Double total = 0.00;
             for (DetailSaleEntity detail:s.getDetails()){
                 total += new BigDecimal(detail.getCuantity()).multiply(detail.getPrice()).doubleValue();
