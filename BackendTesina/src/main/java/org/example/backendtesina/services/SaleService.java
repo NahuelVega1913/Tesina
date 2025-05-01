@@ -10,14 +10,20 @@ import com.mercadopago.resources.preference.Preference;
 import jakarta.transaction.Transactional;
 import kotlin.jvm.internal.SerializedIr;
 import org.apache.velocity.runtime.directive.Parse;
+import org.example.backendtesina.DTOs.Get.DetailSaleDto;
+import org.example.backendtesina.DTOs.Get.GetCartDTO;
+import org.example.backendtesina.DTOs.Get.GetSaleDTO;
 import org.example.backendtesina.DTOs.Post.PostPayDTO;
 import org.example.backendtesina.entities.DetailSaleEntity;
 import org.example.backendtesina.entities.SaleEntity;
 import org.example.backendtesina.entities.SpareEntity;
+import org.example.backendtesina.entities.UserEntity;
 import org.example.backendtesina.entities.enums.typePaymentEntity;
+import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.repositories.CartRepository;
 import org.example.backendtesina.repositories.SaleRepository;
 import org.example.backendtesina.repositories.SpareRepository;
+import org.example.backendtesina.repositories.UserRepository;
 import org.intellij.lang.annotations.JdkConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,21 +33,28 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class SaleService {
 
     @Autowired
     SaleRepository repository;
-
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    JwtService jwtService;
     @Autowired
     SpareRepository spareRepository;
     @Autowired
     CartRepository cartRepository;
 
     @Transactional
-    public String payMercadoPago(PostPayDTO payDTO) throws MPException, MPApiException {
+    public String payMercadoPago(String token,PostPayDTO payDTO) throws MPException, MPApiException {
         //CONTROL
+        String email = jwtService.getEmailFromToken(token);
+        UserEntity user = userRepository.findByEmail(email).orElse(null);
         SpareEntity spare = spareRepository.findById(payDTO.getIdSpare()).get();
         if(payDTO.getQuantity() > spare.getStock()){
             return null;
@@ -50,6 +63,7 @@ public class SaleService {
         spareRepository.save(spare);
         //REGISTRO DE ENTIDADES
         SaleEntity sale = new SaleEntity();
+        sale.setUser(user);
         sale.setDate(LocalDate.now());
         List<DetailSaleEntity> lstDetails = new ArrayList<>();
         DetailSaleEntity detail = new DetailSaleEntity();
@@ -91,11 +105,14 @@ public class SaleService {
         return preference.getInitPoint();
     }
     @Transactional
-    public String payProductos(List<PostPayDTO> lstPay)throws MPException, MPApiException{
-
+    public String payProductos(String token,List<PostPayDTO> lstPay)throws MPException, MPApiException{
+        String email = jwtService.getEmailFromToken(token);
+        UserEntity user = userRepository.findByEmail(email).orElse(null);
      //REGISTRO DE ENTIDADES
+
         SaleEntity sale = new SaleEntity();
         sale.setDate(LocalDate.now());
+        sale.setUser(user);
         List<DetailSaleEntity> lstDetails = new ArrayList<>();
        for (PostPayDTO dto:lstPay){
            SpareEntity spare = spareRepository.findById(dto.getIdSpare()).get();
@@ -147,5 +164,44 @@ public class SaleService {
         PreferenceClient client = new PreferenceClient();
         Preference preference = client.create(preferenceRequest);
         return preference.getInitPoint();
+    }
+
+    public List<GetSaleDTO> getAllSales(){
+        List<SaleEntity> sales = repository.findAll();
+        List<GetSaleDTO> reponse = new ArrayList<>();
+        for (SaleEntity s:sales){
+            GetSaleDTO dto = new GetSaleDTO();
+            dto.setDate(s.getDate());
+            dto.setUser(s.getUser().getName() +" "+s.getUser().getLastname());
+            dto.setTypePayment(s.getTypePayment());
+            Double total = 0.00;
+            for (DetailSaleEntity detail:s.getDetails()){
+                total += new BigDecimal(detail.getCuantity()).multiply(detail.getPrice()).doubleValue();
+            }
+            dto.setTotal(total);
+            reponse.add(dto);
+        }
+        return reponse;
+    }
+    public GetSaleDTO getDetails(int id){
+        Optional<SaleEntity> sale = repository.findById(id);
+        GetSaleDTO dto = new GetSaleDTO();
+        dto.setDate(sale.get().getDate());
+        dto.setUser(sale.get().getUser().getName() +" "+sale.get().getUser().getLastname());
+        dto.setTypePayment(sale.get().getTypePayment());
+        List<DetailSaleDto> details =new ArrayList<>();
+        Double total = 0.00;
+        for (DetailSaleEntity d:sale.get().getDetails()){
+            DetailSaleDto dtoDetail = new DetailSaleDto();
+            total += new BigDecimal(d.getCuantity()).multiply(d.getPrice()).doubleValue();
+            dtoDetail.setName(d.getSpare().getName());
+            dtoDetail.setBrand(d.getSpare().getBrand());
+            dtoDetail.setPrice(d.getPrice());
+            dtoDetail.setQuantity(d.getCuantity());
+            details.add(dtoDetail);
+        }
+        dto.setTotal(total);
+        dto.setDetails(details);
+        return dto;
     }
 }

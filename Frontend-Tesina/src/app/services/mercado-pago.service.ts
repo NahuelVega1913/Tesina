@@ -29,6 +29,22 @@ export class MercadoPagoService {
       }
     );
   }
+  getVentas() {
+    return this.http.get<any>(`http://localhost:8080/sales/getAll`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
+  }
+  getProveedorById(id: number) {
+    return this.http.get<any>(`http://localhost:8080/sales/getDetails/${id}`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
+  }
 
   constructor() {}
 }

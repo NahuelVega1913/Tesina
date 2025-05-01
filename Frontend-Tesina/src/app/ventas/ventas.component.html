@@ -126,6 +126,7 @@
             </tr>
           </thead>
           <tbody>
+            @for (item of this.lst; track $index) {
             <tr
               class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
             >
@@ -133,19 +134,20 @@
                 scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                11/04/2004
+                {{ item.date | date : "dd/MM/yyyy" }}
               </th>
-              <td class="px-6 py-4">Vega Nahuel</td>
-              <td class="px-6 py-4">Mercado Pago</td>
-              <td class="px-6 py-4">$2999</td>
+              <td class="px-6 py-4">{{ item.user }}</td>
+              <td class="px-6 py-4">{{ item.typePayment }}</td>
+              <td class="px-6 py-4">$ {{ item.total }}</td>
               <td class="px-6 py-4">
                 <a
-                  (click)="redirectTo('/detalles-venta')"
+                  (click)="redirectTo('detalles-venta')"
                   class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >Ver Detalles</a
                 >
               </td>
             </tr>
+            }
           </tbody>
         </table>
       </div>

@@ -12,8 +12,11 @@ public class SaleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @Enumerated(EnumType.STRING)
     private typePaymentEntity typePayment;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     private LocalDate date;
 
@@ -50,5 +53,13 @@ public class SaleEntity {
 
     public void setTypePayment(typePaymentEntity typePayment) {
         this.typePayment = typePayment;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }

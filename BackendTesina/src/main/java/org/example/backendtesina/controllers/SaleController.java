@@ -4,7 +4,9 @@ import com.mercadopago.client.preference.PreferenceBackUrlsRequest;
 import com.mercadopago.client.preference.PreferenceRequest;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
+import org.example.backendtesina.DTOs.Get.GetSaleDTO;
 import org.example.backendtesina.DTOs.Post.PostPayDTO;
+import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.services.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,33 +21,45 @@ import java.util.Map;
 public class SaleController {
     @Autowired
     SaleService service;
+    @Autowired
+    JwtService jwtService;
 
     @GetMapping(value = "getAll")
     public ResponseEntity<?> getAll(){
-        return null;
+       List<GetSaleDTO> lst = service.getAllSales();
+       if(lst.isEmpty()){
+           return ResponseEntity.badRequest().build();
+       }
+       return ResponseEntity.ok(lst);
     }
     @PostMapping(value = "payProduct")
-    public ResponseEntity<?> pay(@RequestBody PostPayDTO entity) throws MPException, MPApiException {
+    public ResponseEntity<?> pay(@RequestBody PostPayDTO entity,@RequestHeader("Authorization") String authorizationHeader) throws MPException, MPApiException {
+        String token = authorizationHeader.substring(7);
         //int id =service.payMercadoPago(entity);
-        String initPoint = service.payMercadoPago(entity);
+        String initPoint = service.payMercadoPago(token,entity);
         Map<String, String> response = new HashMap<>();
         response.put("init_point", initPoint);
 
         return ResponseEntity.ok(response);
     }
     @PostMapping(value = "payProducts")
-    public ResponseEntity<?> payCart(@RequestBody List<PostPayDTO> lst) throws MPException,MPApiException{
-        String initPoint = service.payProductos(lst);
-        if(initPoint == null){
+    public ResponseEntity<?> payCart(@RequestBody List<PostPayDTO> lst,@RequestHeader("Authorization") String authorizationHeader) throws MPException,MPApiException {
+        String token = authorizationHeader.substring(7);
+        String initPoint = service.payProductos(token,lst);
+        if (initPoint == null) {
             return ResponseEntity.badRequest().build();
         }
-            Map<String, String> response = new HashMap<>();
-            response.put("init_point", initPoint);
-            return ResponseEntity.ok(response);
+        Map<String, String> response = new HashMap<>();
+        response.put("init_point", initPoint);
+        return ResponseEntity.ok(response);
     }
-    @GetMapping(value = "getAll")
-    public ResponseEntity<?> getVentas(){
-        return null;
+    @GetMapping(value = "getDetails/{id}")
+    public ResponseEntity<?> getVentas(@PathVariable int id){
+        GetSaleDTO lst = service.getDetails(id);
+        if(lst == null){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(lst);
     }
 
 }

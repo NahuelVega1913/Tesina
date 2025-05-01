@@ -22,6 +22,10 @@ public class UserEntity implements UserDetails {
     private String password;
     private String name;
     private String lastname;
+
+    @OneToMany(mappedBy = "user")
+    private List<SaleEntity> sales;
+
     private String phone;
     private String address;
     @Enumerated(EnumType.STRING)
@@ -128,5 +132,13 @@ public class UserEntity implements UserDetails {
 
     public void setCart(CartEntity cart) {
         this.cart = cart;
+    }
+
+    public List<SaleEntity> getSales() {
+        return sales;
+    }
+
+    public void setSales(List<SaleEntity> sales) {
+        this.sales = sales;
     }
 }
