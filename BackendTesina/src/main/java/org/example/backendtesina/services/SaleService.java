@@ -14,6 +14,7 @@ import org.example.backendtesina.DTOs.Post.PostPayDTO;
 import org.example.backendtesina.entities.DetailSaleEntity;
 import org.example.backendtesina.entities.SaleEntity;
 import org.example.backendtesina.entities.SpareEntity;
+import org.example.backendtesina.entities.enums.typePaymentEntity;
 import org.example.backendtesina.repositories.CartRepository;
 import org.example.backendtesina.repositories.SaleRepository;
 import org.example.backendtesina.repositories.SpareRepository;
@@ -58,6 +59,7 @@ public class SaleService {
         detail.setSale(sale);
         lstDetails.add(detail);
         sale.setDetails(lstDetails);
+        sale.setTypePayment(typePaymentEntity.MERCADO_PAGO);
         repository.save(sale);
         //MERCADO PAGO
         PreferenceItemRequest itemRequest =
@@ -113,6 +115,7 @@ public class SaleService {
            lstDetails.add(detail);
        }
        sale.setDetails(lstDetails);
+       sale.setTypePayment(typePaymentEntity.MERCADO_PAGO);
        repository.save(sale);
        //MERCADO PAGO
         List<PreferenceItemRequest> items = new ArrayList<>();

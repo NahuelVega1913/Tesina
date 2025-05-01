@@ -1,6 +1,7 @@
 package org.example.backendtesina.entities;
 
 import jakarta.persistence.*;
+import org.example.backendtesina.entities.enums.typePaymentEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ public class SaleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    private typePaymentEntity typePayment;
 
     private LocalDate date;
 
@@ -39,5 +42,13 @@ public class SaleEntity {
 
     public void setDetails(List<DetailSaleEntity> details) {
         this.details = details;
+    }
+
+    public typePaymentEntity getTypePayment() {
+        return typePayment;
+    }
+
+    public void setTypePayment(typePaymentEntity typePayment) {
+        this.typePayment = typePayment;
     }
 }
