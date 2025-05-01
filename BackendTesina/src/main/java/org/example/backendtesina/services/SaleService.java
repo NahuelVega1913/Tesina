@@ -89,9 +89,9 @@ public class SaleService {
         List<PreferenceItemRequest> items = new ArrayList<>();
         PreferenceBackUrlsRequest backUrls =
                 PreferenceBackUrlsRequest.builder()
-                        .success("https://www.promiedos.com.ar/league/liga-profesional/hc")
-                        .pending("https://nahuel-vega.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog")
-                        .failure("https://www.vexorpay.com/dashboard/apikeys")
+                        .success("https://localhost:4200/repuestos")
+                        .pending("https://localhost:4200/repuestos")
+                        .failure("https://localhost:4200/repuestos")
                         .build();
         //PreferenceRequest request = PreferenceRequest.builder().backUrls(backUrls).build();
         items.add(itemRequest);
@@ -152,9 +152,9 @@ public class SaleService {
         }
         PreferenceBackUrlsRequest backUrls =
                 PreferenceBackUrlsRequest.builder()
-                        .success("https://www.promiedos.com.ar/league/liga-profesional/hc")
-                        .pending("https://nahuel-vega.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog")
-                        .failure("https://www.vexorpay.com/dashboard/apikeys")
+                        .success("https://localhost:4200/repuestos")
+                        .pending("https://localhost:4200/repuestos")
+                        .failure("https://localhost:4200/repuestos")
                         .build();
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()
                 .items(items)

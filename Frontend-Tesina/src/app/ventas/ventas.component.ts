@@ -14,8 +14,9 @@ export class VentasComponent {
   category: string = '';
   search: string = '';
   lst: any[] = [];
+  dateFrom: any;
+  dateTo: any;
   lstFiltered: any[] = [];
-  filter() {}
   private service: MercadoPagoService = inject(MercadoPagoService);
 
   constructor(private router: Router) {}
@@ -29,6 +30,14 @@ export class VentasComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getVentas();
+  }
+  filter() {
+    this.lstFiltered = this.lst.filter((item) => {
+      return (
+        item.name.toLowerCase().includes(this.search.toLowerCase()) &&
+        (this.category === '' || item.category === this.category)
+      );
+    });
   }
 
   getVentas() {

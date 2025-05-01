@@ -37,7 +37,7 @@ export class MercadoPagoService {
       },
     });
   }
-  getProveedorById(id: number) {
+  getDetails(id: number) {
     return this.http.get<any>(`http://localhost:8080/sales/getDetails/${id}`, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
