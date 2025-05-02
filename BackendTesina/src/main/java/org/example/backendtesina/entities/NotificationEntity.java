@@ -1,9 +1,7 @@
 package org.example.backendtesina.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.example.backendtesina.entities.enums.StateNotification;
 import org.example.backendtesina.entities.enums.typeNotificationEntity;
 
 import java.time.LocalDateTime;
@@ -16,7 +14,10 @@ public class NotificationEntity {
     private int id;
 
     private String message;
-    private typeNotificationEntity Status;
+    @Enumerated(EnumType.STRING)
+    private typeNotificationEntity type;
+    @Enumerated(EnumType.STRING)
+    private StateNotification state;
 
     private LocalDateTime dateTime;
 

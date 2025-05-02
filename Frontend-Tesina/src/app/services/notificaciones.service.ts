@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificacionesService {
+  private readonly http: HttpClient = inject(HttpClient);
 
-  constructor() { }
+  constructor() {}
 }
