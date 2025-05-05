@@ -8,4 +8,16 @@ export class NotificacionesService {
   private readonly http: HttpClient = inject(HttpClient);
 
   constructor() {}
+
+  getAllNotifications() {
+    return this.http.get<any>(
+      `http://localhost:8080/notifications/getAllNotifications`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
 }

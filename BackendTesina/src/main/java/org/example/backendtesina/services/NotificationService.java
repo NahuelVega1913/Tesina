@@ -33,9 +33,9 @@ public class NotificationService {
         notification.setState(StateNotification.UNSEEN);
         notification.setUser(user);
 
-            List<NotificationEntity> notifications = new ArrayList<>();
-            notifications.add(notification);
-            user.setNotifications(notifications);
+        List<NotificationEntity> notifications = new ArrayList<>();
+        notifications.add(notification);
+        user.setNotifications(notifications);
 
         repository.save(notification);
         return notification;
@@ -43,15 +43,34 @@ public class NotificationService {
     public List<GetNotification> getAll(String token){
         String email = jwtService.getEmailFromToken(token);
         UserEntity user = userRepository.findByEmail(email).orElse(null);
-
-
-
-        return null;
+        List<NotificationEntity> notifications = user.getNotifications();
+        List<GetNotification> dtoNotifications = new ArrayList<>();
+        for(NotificationEntity entity:notifications) {
+            GetNotification newNoti = new GetNotification();
+            newNoti.setType(entity.getType().toString());
+            newNoti.setTitle(entity.getTitle());
+            newNoti.setMessage(entity.getMessage());
+            newNoti.setDateTime(entity.getDateTime());
+            newNoti.setId(entity.getId());
+            newNoti.setState(entity.getState().toString());
+            dtoNotifications.add(newNoti);
+        }
+        return dtoNotifications;
     }
-    public NotificationEntity purchasedProduct(String token){
-        String email = jwtService.getEmailFromToken(token);
-        UserEntity user = userRepository.findByEmail(email).orElse(null);
-        return null;
+    public NotificationEntity purchasedProduct(UserEntity user){
+
+        NotificationEntity notification = new NotificationEntity();
+        notification.setDateTime(LocalDateTime.now());
+        notification.setTitle("Felicitaciones por tu compra!!!");
+        notification.setMessage("Esperamos que disfrutes de tu producto!");
+        notification.setType(typeNotificationEntity.SUCCESS);
+        notification.setState(StateNotification.UNSEEN);
+        notification.setUser(user);
+        List<NotificationEntity> notifications = user.getNotifications();
+        notifications.add(notification);
+        user.setNotifications(notifications);
+        repository.saveAll(notifications);
+        return notification;
     }
     public NotificationEntity serviceFinalizedNotification(String token){
         String email = jwtService.getEmailFromToken(token);
@@ -63,9 +82,14 @@ public class NotificationService {
         UserEntity user = userRepository.findByEmail(email).orElse(null);
         return null;
     }
-    public NotificationEntity readNotifications(String token){
+    public List<NotificationEntity> readNotifications(String token){
         String email = jwtService.getEmailFromToken(token);
         UserEntity user = userRepository.findByEmail(email).orElse(null);
-        return null;
+        List<NotificationEntity> entities = user.getNotifications();
+        for (NotificationEntity n:entities){
+            n.setState(StateNotification.SEEN);
+        }
+        repository.saveAll(entities);
+        return entities;
     }
 }

@@ -50,8 +50,8 @@ public class LoginService {
         user.setRole(RoleEntity.USER);
         repository.save(user);
         if(repository.existsById(register.getEmail()) ){
-            return new AuthResponse(jwtService.getToken(user));// Usuario registrado con éxito
             notificationService.createUserNotification(user);
+            return new AuthResponse(jwtService.getToken(user));// Usuario registrado con éxito
         }
         return null;
     }

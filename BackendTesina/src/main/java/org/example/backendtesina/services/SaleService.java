@@ -44,6 +44,8 @@ public class SaleService {
     @Autowired
     UserRepository userRepository;
     @Autowired
+    NotificationService notificationService;
+    @Autowired
     JwtService jwtService;
     @Autowired
     SpareRepository spareRepository;
@@ -75,6 +77,7 @@ public class SaleService {
         sale.setDetails(lstDetails);
         sale.setTypePayment(typePaymentEntity.MERCADO_PAGO);
         repository.save(sale);
+        notificationService.purchasedProduct(user);
         //MERCADO PAGO
         PreferenceItemRequest itemRequest =
                 PreferenceItemRequest.builder()
@@ -109,6 +112,8 @@ public class SaleService {
         String email = jwtService.getEmailFromToken(token);
         UserEntity user = userRepository.findByEmail(email).orElse(null);
      //REGISTRO DE ENTIDADES
+        notificationService.purchasedProduct(user);
+        
 
         SaleEntity sale = new SaleEntity();
         sale.setDate(LocalDate.now());

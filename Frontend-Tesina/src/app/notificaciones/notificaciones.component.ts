@@ -20,9 +20,30 @@ export class CasillaComponent {
     //Add 'implements OnInit' to the class.
     this.getNotificaciones();
   }
+  calculateTimeDiff(date: string) {
+    const currentDate = new Date();
+    const notificationDate = new Date(date);
+    const timeDiff = currentDate.getTime() - notificationDate.getTime();
+
+    if (timeDiff < 60000) {
+      return `${Math.floor(timeDiff / 1000)} segundos`;
+    } else if (timeDiff < 3600000) {
+      return `${Math.floor(timeDiff / 60000)} minutos`;
+    } else if (timeDiff < 86400000) {
+      return `${Math.floor(timeDiff / 3600000)} horas`;
+    } else {
+      return `${Math.floor(timeDiff / 86400000)} días`;
+    }
+  }
+
   getNotificaciones() {
-    // Aquí puedes implementar la lógica para obtener las notificaciones
-    // Por ejemplo, podrías hacer una llamada a un servicio para obtener las notificaciones desde un backend
-    console.log('Obteniendo notificaciones...');
+    const getSubscription = this.service.getAllNotifications().subscribe({
+      next: (res) => {
+        this.notifications = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

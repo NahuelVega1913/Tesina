@@ -144,4 +144,12 @@ public class UserEntity implements UserDetails {
     public void setSales(List<SaleEntity> sales) {
         this.sales = sales;
     }
+
+    public List<NotificationEntity> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<NotificationEntity> notifications) {
+        this.notifications = notifications;
+    }
 }
