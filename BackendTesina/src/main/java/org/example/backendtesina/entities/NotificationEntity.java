@@ -21,5 +21,9 @@ public class NotificationEntity {
 
     private LocalDateTime dateTime;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
 
 }

@@ -26,6 +26,9 @@ public class UserEntity implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<SaleEntity> sales;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<NotificationEntity> notifications;
+
     private String phone;
     private String address;
     @Enumerated(EnumType.STRING)
