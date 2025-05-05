@@ -2,6 +2,7 @@ package org.example.backendtesina.services;
 
 import org.example.backendtesina.DTOs.Login.AuthResponse;
 import org.example.backendtesina.DTOs.Login.RegisterDto;
+import org.example.backendtesina.entities.NotificationEntity;
 import org.example.backendtesina.entities.enums.RoleEntity;
 import org.example.backendtesina.entities.UserEntity;
 import org.example.backendtesina.jwt.JwtService;
@@ -21,6 +22,8 @@ public class LoginService {
     JwtService jwtService;
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    NotificationService notificationService;
 
 //    public AuthResponse validateUser(LoginDto login) {
 //        UserEntity user = repository.findById(login.getEmail()).orElse(null);
@@ -48,6 +51,7 @@ public class LoginService {
         repository.save(user);
         if(repository.existsById(register.getEmail()) ){
             return new AuthResponse(jwtService.getToken(user));// Usuario registrado con éxito
+            notificationService.createUserNotification(user);
         }
         return null;
     }
