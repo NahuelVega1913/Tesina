@@ -17,6 +17,7 @@ import { ModificarRepuestoComponent } from './modificar-repuesto/modificar-repue
 import { CarritoComponent } from './carrito/carrito.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { DetallesVentaComponent } from './detalles-venta/detalles-venta.component';
+import { EmpleadosComponent } from './empleados/empleados.component';
 
 export const routes: Routes = [
   {
@@ -43,6 +44,7 @@ export const routes: Routes = [
       { path: 'carrito', component: CarritoComponent },
       { path: 'ventas', component: VentasComponent },
       { path: 'detalles-venta', component: DetallesVentaComponent },
+      { path: 'empleados', component: EmpleadosComponent },
     ],
   },
 ];
