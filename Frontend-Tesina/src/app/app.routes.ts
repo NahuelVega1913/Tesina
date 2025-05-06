@@ -18,6 +18,8 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { DetallesVentaComponent } from './detalles-venta/detalles-venta.component';
 import { EmpleadosComponent } from './empleados/empleados.component';
+import { RegistrarEmpleadoComponent } from './registrar-empleado/registrar-empleado.component';
+import { ModificarEmpleadoComponent } from './modificar-empleado/modificar-empleado.component';
 
 export const routes: Routes = [
   {
@@ -45,6 +47,8 @@ export const routes: Routes = [
       { path: 'ventas', component: VentasComponent },
       { path: 'detalles-venta', component: DetallesVentaComponent },
       { path: 'empleados', component: EmpleadosComponent },
+      { path: 'registrar-empleado', component: RegistrarEmpleadoComponent },
+      { path: 'modificar-empleado', component: ModificarEmpleadoComponent },
     ],
   },
 ];
