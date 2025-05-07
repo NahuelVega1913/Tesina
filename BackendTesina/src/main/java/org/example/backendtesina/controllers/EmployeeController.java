@@ -27,7 +27,7 @@ public class EmployeeController {
         }
         return ResponseEntity.ok(lst);
     }
-    @GetMapping(value = "getEmployee{id}")
+    @GetMapping(value = "getEmployee/{id}")
     public ResponseEntity<?> getEmployee(@PathVariable int id){
         PostEmployee lst = service.getEmployee(id);
         if(lst == null){

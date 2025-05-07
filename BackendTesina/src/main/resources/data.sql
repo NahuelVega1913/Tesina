@@ -57,17 +57,17 @@ VALUES
     ('Intercooler',true,4, 38000.00, 5, 10, 'Garrett', 'REFRIGERACION', 'Intercooler de alto rendimiento para motores turbo', 'https://http2.mlstatic.com/D_NQ_NP_750419-MLA70027423321_062023-O.webp', NULL, NULL, NULL, NULL);
 
 INSERT INTO EMPLOYEES (
-    birthDate, typeOfContract, workingDay, bancaryNumber, fullName,
+    birthDate,CUIT, typeOfContract, workingDay, bancaryNumber, fullName,
     salary, address, phone, email, position, dateOfEntry, remarks
 ) VALUES
-      ('1990-05-10', 'PERMANENT', 'FULLTIME', 12345678, 'Juan Pérez',
+      ('1990-05-10',200000000, 'PERMANENT', 'FULLTIME', 12345678, 'Juan Pérez',
        850000.00, 'Av. Siempre Viva 123', 1122334455, 'juan.perez@email.com',
        'Analista de Sistemas', '2022-01-15', 'Empleado con buen desempeño'),
 
-      ('1985-08-22', 'TEMPORARY', 'PART_TIME', 87654321, 'Ana Gómez',
+      ('1985-08-22',200000000, 'TEMPORARY', 'PART_TIME', 87654321, 'Ana Gómez',
        700000.00, 'Calle Falsa 456', 1199887766, 'ana.gomez@email.com',
        'Administrativa', '2023-06-01', 'Contrato temporal por 6 meses'),
 
-      ('1992-12-01', 'PERMANENT', 'REMOTE', 11223344, 'Carlos Ruiz',
+      ('1992-12-01',200000000, 'PERMANENT', 'REMOTE', 11223344, 'Carlos Ruiz',
        950000.00, 'Pasaje Luna 789', 1133445566, 'carlos.ruiz@email.com',
        'Desarrollador Backend', '2021-09-10', 'Trabaja desde el exterior');

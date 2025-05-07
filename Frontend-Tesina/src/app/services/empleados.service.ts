@@ -17,6 +17,17 @@ export class EmpleadosService {
       },
     });
   }
+  getEmployee(id: number) {
+    return this.http.get<any>(
+      `http://localhost:8080/employee/getEmployee/` + id,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
   registerEmployee(body: any) {
     return this.http.post<any>(
       `http://localhost:8080/employee/postEmployee`,

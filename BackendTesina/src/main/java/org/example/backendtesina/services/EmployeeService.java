@@ -27,6 +27,7 @@ public class EmployeeService {
         entity.setDateOfEntry(employee.getDateOfEntry());
         entity.setEmail(employee.getEmail());
         entity.setFullName(employee.getFullName());
+        entity.setCUIT(employee.getCUIT());
         entity.setSalary(employee.getSalary());
         entity.setRemarks(employee.getRemarks());
         entity.setPosition(employee.getPosition());
@@ -46,6 +47,7 @@ public class EmployeeService {
         entity.setEmail(employee.getEmail());
         entity.setFullName(employee.getFullName());
         entity.setSalary(employee.getSalary());
+        entity.setCUIT(employee.getCUIT());
         entity.setRemarks(employee.getRemarks());
         entity.setPosition(employee.getPosition());
         entity.setPhone(employee.getPhone());
@@ -80,6 +82,7 @@ public class EmployeeService {
         entity.setId(employee.getId());
         entity.setDateOfEntry(employee.getDateOfEntry());
         entity.setEmail(employee.getEmail());
+        entity.setCUIT(employee.getCUIT());
         entity.setFullName(employee.getFullName());
         entity.setSalary(employee.getSalary());
         entity.setRemarks(employee.getRemarks());

@@ -1,5 +1,6 @@
 package org.example.backendtesina.entities;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Data;
