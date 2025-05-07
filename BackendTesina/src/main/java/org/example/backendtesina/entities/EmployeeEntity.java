@@ -16,6 +16,8 @@ public class EmployeeEntity {
     private int id;
     @Column(name = "BIRTHDATE")
     private Date birthDate;
+    @Column(name = "CUIT")
+    private int CUIT;
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPEOFCONTRACT")
     private TypeOfContract typeOfContract;
@@ -144,5 +146,13 @@ public class EmployeeEntity {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public int getCUIT() {
+        return CUIT;
+    }
+
+    public void setCUIT(int CUIT) {
+        this.CUIT = CUIT;
     }
 }

@@ -63,10 +63,10 @@ public class EmployeeService {
         }
         for (EmployeeEntity e:lstEntity){
             GetEmployee employee = new GetEmployee();
-            employee.setFullName(employee.getFullName());
-            employee.setPosition(employee.getPosition());
-            employee.setPhone(employee.getPhone());
-            employee.setId(employee.getId());
+            employee.setFullName(e.getFullName());
+            employee.setPosition(e.getPosition());
+            employee.setPhone(e.getPhone());
+            employee.setId(e.getId());
             lstEmploye.add(employee);
         }
 

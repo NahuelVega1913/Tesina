@@ -12,7 +12,7 @@ public class PostEmployee {
     private Date birthDate;
 
     private String typeOfContract;
-
+    private int CUIT;
     private String workingDay;
 
     private String fullName;
@@ -127,5 +127,13 @@ public class PostEmployee {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getCUIT() {
+        return CUIT;
+    }
+
+    public void setCUIT(int CUIT) {
+        this.CUIT = CUIT;
     }
 }

@@ -19,7 +19,7 @@ export class EmpleadosService {
   }
   registerEmployee(body: any) {
     return this.http.post<any>(
-      `http://localhost:8080/employee/postProvider`,
+      `http://localhost:8080/employee/postEmployee`,
       body,
       {
         headers: {
@@ -31,7 +31,7 @@ export class EmpleadosService {
   }
   putEmployee(body: any) {
     return this.http.put<any>(
-      `http://localhost:8080/employee/putProvider`,
+      `http://localhost:8080/employee/putEmployee`,
       body,
       {
         headers: {

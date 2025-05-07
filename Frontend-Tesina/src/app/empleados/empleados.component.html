@@ -59,6 +59,7 @@
   </div>
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-5">
     <!--CARD DEL EMPLEADO-->
+    @for (item of lst; track $index) {
     <div
       class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm"
     >
@@ -118,8 +119,10 @@
           src="https://cdn-icons-png.flaticon.com/512/992/992490.png"
           alt="Bonnie image"
         />
-        <h5 class="mb-1 text-xl font-medium text-gray-900">Martin Vega</h5>
-        <span class="text-sm text-gray-500">Ingeniero Electronico</span>
+        <h5 class="mb-1 text-xl font-medium text-gray-900">
+          {{ item.fullName }}
+        </h5>
+        <span class="text-sm text-gray-500">{{ item.position }}</span>
         <div class="flex mt-4 md:mt-6">
           <a
             href="#"
@@ -134,6 +137,7 @@
         </div>
       </div>
     </div>
+    }
     <!--CARD DEL EMPLEADO-->
   </div>
 </div>
