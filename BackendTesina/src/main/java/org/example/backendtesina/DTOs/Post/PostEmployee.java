@@ -22,7 +22,7 @@ public class PostEmployee {
     private String email;
     private int bancaryNumber;
     private String position;
-    private String dateOfEntry;
+    private Date dateOfEntry;
     private String remarks;
 
     public Date getBirthDate() {
@@ -105,11 +105,11 @@ public class PostEmployee {
         this.position = position;
     }
 
-    public String getDateOfEntry() {
+    public Date getDateOfEntry() {
         return dateOfEntry;
     }
 
-    public void setDateOfEntry(String dateOfEntry) {
+    public void setDateOfEntry(Date dateOfEntry) {
         this.dateOfEntry = dateOfEntry;
     }
 

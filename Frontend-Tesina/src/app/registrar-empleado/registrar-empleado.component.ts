@@ -20,7 +20,7 @@ export class RegistrarEmpleadoComponent {
 
   form = new UntypedFormGroup({
     fullName: new UntypedFormControl('', []),
-    CUIT: new UntypedFormControl('', []),
+    cuit: new UntypedFormControl('', []),
     phone: new UntypedFormControl('', []),
     address: new UntypedFormControl('', []),
     category: new UntypedFormControl('', []),
@@ -44,17 +44,17 @@ export class RegistrarEmpleadoComponent {
           Swal.fire({
             icon: 'success',
             title: '¡Usuario creado!',
-            text: 'El proveedor fue registrado exitosamente',
+            text: 'El empleado fue registrado exitosamente',
             confirmButtonColor: '#3085d6',
           });
 
-          this.router.navigate(['/proveedores']);
+          this.router.navigate(['/empleados']);
         },
         error: (err) => {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Ocurrio un error al registrar el proveedor',
+            text: 'Ocurrio un error al registrar el empleado',
           });
         },
       });

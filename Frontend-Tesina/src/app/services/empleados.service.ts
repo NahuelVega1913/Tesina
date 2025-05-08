@@ -19,7 +19,7 @@ export class EmpleadosService {
   }
   getEmployee(id: number) {
     return this.http.get<any>(
-      `http://localhost:8080/employee/getEmployee/` + id,
+      `http://localhost:8080/employee/getEmployee/${id}`,
       {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),

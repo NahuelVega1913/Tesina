@@ -29,6 +29,10 @@ export class EmpleadosComponent {
   redirectTo(url: string) {
     this.router.navigate([`${url}`]);
   }
+  moveTo(url: string, id: number) {
+    localStorage.setItem('idEmpleado', id.toString());
+    this.router.navigate([`${url}`]);
+  }
 
   getEmployees() {
     const getSubscription = this.service.getEmployees().subscribe({

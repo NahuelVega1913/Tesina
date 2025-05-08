@@ -7,7 +7,7 @@
     <p
       class="font-bold text-2xl text-white text-6xl text-shadow-lg ps-10 pt-5 sm:mb-5 md:mt-5"
     >
-      Registrar Empleado
+      Modificar Empleado
     </p>
     <form [formGroup]="form" (submit)="save()" class="p-10">
       <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -38,8 +38,8 @@
             >CUIT</label
           >
           <input
-            type="number"
-            formControlName="CUIT"
+            type="text"
+            formControlName="cuit"
             id="last_name"
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
             placeholder="20222222224"
@@ -244,7 +244,7 @@
             type="text"
             formControlName="bancaryNumber"
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full md:w-80 p-2.5"
-            placeholder="7777777777777777"
+            placeholder="777777777777"
             required
           />
 
@@ -275,7 +275,7 @@
         type="submit"
         class="text-white bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
       >
-        Crear
+        Modificar
       </button>
     </form>
   </div>

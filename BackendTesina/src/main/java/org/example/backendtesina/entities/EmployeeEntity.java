@@ -40,7 +40,7 @@ public class EmployeeEntity {
     @Column(name = "POSITION")
     private String position;
     @Column(name = "DATEOFENTRY")
-    private String dateOfEntry;
+    private Date dateOfEntry;
     @Column(name = "REMARKS")
     private String remarks;
 
@@ -133,11 +133,11 @@ public class EmployeeEntity {
         this.position = position;
     }
 
-    public String getDateOfEntry() {
+    public Date getDateOfEntry() {
         return dateOfEntry;
     }
 
-    public void setDateOfEntry(String dateOfEntry) {
+    public void setDateOfEntry(Date dateOfEntry) {
         this.dateOfEntry = dateOfEntry;
     }
 

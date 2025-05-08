@@ -36,7 +36,7 @@ public class EmployeeController {
         return ResponseEntity.ok(lst);
     }
     @PutMapping(value = "putEmployee")
-    public ResponseEntity<?> modifyEmployee(PostEmployee dto){
+    public ResponseEntity<?> modifyEmployee(@RequestBody PostEmployee dto){
         EmployeeEntity lst = service.ModifyEmploye(dto);
         if(lst == null){
             return ResponseEntity.notFound().build();
