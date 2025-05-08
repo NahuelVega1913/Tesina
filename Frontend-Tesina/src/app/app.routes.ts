@@ -20,17 +20,18 @@ import { DetallesVentaComponent } from './detalles-venta/detalles-venta.componen
 import { EmpleadosComponent } from './empleados/empleados.component';
 import { RegistrarEmpleadoComponent } from './registrar-empleado/registrar-empleado.component';
 import { ModificarEmpleadoComponent } from './modificar-empleado/modificar-empleado.component';
+import { ServiciosComponent } from './servicios/servicios.component';
 
 export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
   },
+  { path: 'registrarse', component: RegistrarseComponent },
   {
     path: '',
     component: InicioComponent,
     children: [
-      { path: 'registrarse', component: RegistrarseComponent },
       { path: 'chatinteligente', component: ChatbotComponent },
       { path: 'repuestos', component: RepuestosComponent },
       { path: 'repuesto', component: RepuestoComponent },
@@ -49,6 +50,7 @@ export const routes: Routes = [
       { path: 'empleados', component: EmpleadosComponent },
       { path: 'registrar-empleado', component: RegistrarEmpleadoComponent },
       { path: 'modificar-empleado', component: ModificarEmpleadoComponent },
+      { path: 'servicios', component: ServiciosComponent },
     ],
   },
 ];

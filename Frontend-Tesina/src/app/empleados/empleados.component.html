@@ -1,6 +1,6 @@
 <div class="w-full p-10">
-  <div class="text-5xl font-bold">Empleados</div>
-  <div class="flex flex-row align-middle">
+  <div class="text-5xl font-bold text-center mb-4">Empleados</div>
+  <div class="flex flex-row align-middle mb-10">
     <form class="mt-5 w-full">
       <div class="flex">
         <select
@@ -61,7 +61,7 @@
     <!--CARD DEL EMPLEADO-->
     @for (item of lst; track $index) {
     <div
-      class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm"
+      class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-xl transition duration-300 ease-in-out"
     >
       <div class="flex justify-end px-4 pt-4">
         <button

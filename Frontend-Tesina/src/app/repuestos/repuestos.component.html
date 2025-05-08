@@ -56,13 +56,15 @@
 
 <!-- Contenedor principal -->
 @if(category == 'MOTOR' || category == '' && count("MOTOR") > 0) {
-<p class="p-2 font-bold ms-10 text-3xl">Motor</p>
+<p class="p-2 font-bold ms-10 text-3xl font-normal">Motor</p>
 <ng-scrollbar visibility="hover" track="horizontal">
-  <div class="flex gap-4 p-5">
+  <div class="flex gap-6 p-5">
     @for (i of listFilteres; track $index) { @if(i.category == 'MOTOR' &&
     i.name.toLowerCase().includes(search.toLowerCase()) || i.category == 'MOTOR'
     && search == '') {
-    <div class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded shadow">
+    <div
+      class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
+    >
       <img
         class="h-50 w-full md:w-55 rounded-2xl object-contain"
         src="{{ i.image1 }}"
@@ -95,13 +97,15 @@
 <!--REFRIGERACION-->
 @if(category == 'REFRIGERACION' || category == ''&& count("REFRIGERACION") > 0)
 {
-<p class="p-2 font-bold ms-10 text-3xl">Refrigeracion</p>
+<p class="p-2 font-normal ms-10 text-3xl">Refrigeracion</p>
 <ng-scrollbar visibility="hover" track="horizontal">
-  <div class="flex gap-4 p-5">
+  <div class="flex gap-6 p-5">
     @for (i of lst; track $index) { @if(i.category == 'REFRIGERACION'&&
     i.name.toLowerCase().includes(search.toLowerCase()) || i.category ==
     'REFRIGERACION' && search == '') {
-    <div class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded shadow">
+    <div
+      class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
+    >
       <img
         class="h-50 w-full md:w-55 rounded-2xl object-contain"
         src="{{ i.image1 }}"
@@ -131,13 +135,15 @@
   </div>
 </ng-scrollbar>
 } @if(category == 'LUBRICACION' || category == ''&& count("LUBRICACION") > 0) {
-<p class="p-2 font-bold ms-10 text-3xl">Lubricacion</p>
+<p class="p-2 font-normal ms-10 text-3xl">Lubricacion</p>
 <ng-scrollbar visibility="hover" track="horizontal">
-  <div class="flex gap-4 p-5">
+  <div class="flex gap-6 p-5">
     @for (i of lst; track $index) { @if(i.category == 'LUBRICACION' &&
     i.name.toLowerCase().includes(search.toLowerCase()) || i.category ==
     'LUBRICACION' && search == '') {
-    <div class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded shadow">
+    <div
+      class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
+    >
       <img
         class="h-50 w-full md:w-55 rounded-2xl object-contain"
         src="{{ i.image1 }}"
