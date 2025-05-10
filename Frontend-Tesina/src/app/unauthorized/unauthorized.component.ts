@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './unauthorized.component.css',
 })
 export class UnauthorizedComponent {
-  rol = localStorage.getItem('role');
+  volver() {
+    window.location.href = '';
+  }
 }
