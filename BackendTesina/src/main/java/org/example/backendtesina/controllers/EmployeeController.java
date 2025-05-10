@@ -8,6 +8,7 @@ import org.example.backendtesina.entities.EmployeeEntity;
 import org.example.backendtesina.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class EmployeeController {
     @Autowired
     EmployeeService service;
 
-
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
     @GetMapping(value = "getAll")
     public ResponseEntity<?> getAll(){
         List<GetEmployee> lst = service.getAll();
@@ -27,6 +28,7 @@ public class EmployeeController {
         }
         return ResponseEntity.ok(lst);
     }
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
     @GetMapping(value = "getEmployee/{id}")
     public ResponseEntity<?> getEmployee(@PathVariable int id){
         PostEmployee lst = service.getEmployee(id);
@@ -35,6 +37,7 @@ public class EmployeeController {
         }
         return ResponseEntity.ok(lst);
     }
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
     @PutMapping(value = "putEmployee")
     public ResponseEntity<?> modifyEmployee(@RequestBody PostEmployee dto){
         EmployeeEntity lst = service.ModifyEmploye(dto);
@@ -43,6 +46,7 @@ public class EmployeeController {
         }
         return ResponseEntity.ok(lst);
     }
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
     @PostMapping(value ="postEmployee")
     public ResponseEntity<?> postProviders(@RequestBody PostEmployee dto){
         EmployeeEntity lst = service.createEmploye(dto);

@@ -10,6 +10,7 @@ import org.example.backendtesina.services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -53,6 +54,7 @@ public class LoginController {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body("{\"message\": \"Usuario creado correctamente\"}");
     }
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
     @GetMapping(value = "getAllUsers")
     public ResponseEntity<List<UserEntity>> getAllUsers(){
         if(service.getAllUsers().size() == 0){

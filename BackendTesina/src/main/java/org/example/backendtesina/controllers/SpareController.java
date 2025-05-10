@@ -6,6 +6,7 @@ import org.example.backendtesina.services.SpareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +36,7 @@ public class SpareController {
         }
         return ResponseEntity.ok(lst);
     }
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
     @PostMapping(value ="postSpare")
     public ResponseEntity<?> postSpare(
             @RequestParam String name,
@@ -62,6 +64,7 @@ public class SpareController {
             return ResponseEntity.ok("Spare guardado con éxito");
 
     }
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
     @PutMapping(value ="putSpare")
     public ResponseEntity<PostSpareDTO> updateSpare(
             @RequestParam int id,

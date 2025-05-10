@@ -10,6 +10,7 @@ import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.services.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class SaleController {
     SaleService service;
     @Autowired
     JwtService jwtService;
-
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
     @GetMapping(value = "getAll")
     public ResponseEntity<?> getAll(){
        List<GetSaleDTO> lst = service.getAllSales();
@@ -53,6 +54,7 @@ public class SaleController {
         response.put("init_point", initPoint);
         return ResponseEntity.ok(response);
     }
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
     @GetMapping(value = "getDetails/{id}")
     public ResponseEntity<?> getVentas(@PathVariable int id){
         GetSaleDTO lst = service.getDetails(id);
