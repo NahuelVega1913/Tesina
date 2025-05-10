@@ -25,6 +25,8 @@ import { RegistrarInspeccionComponent } from './registrar-inspeccion/registrar-i
 import { RegistrarPersonalizacionComponent } from './registrar-personalizacion/registrar-personalizacion.component';
 import { RegistrarReparacionComponent } from './registrar-reparacion/registrar-reparacion.component';
 import { EsperaComponent } from './espera/espera.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { roleGuard } from './guards/role.guard';
 
 export const routes: Routes = [
   {
@@ -32,6 +34,7 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   { path: 'registrarse', component: RegistrarseComponent },
+  { path: 'unauthorized', component: UnauthorizedComponent },
   {
     path: '',
     component: InicioComponent,
@@ -39,21 +42,77 @@ export const routes: Routes = [
       { path: 'chatinteligente', component: ChatbotComponent },
       { path: 'repuestos', component: RepuestosComponent },
       { path: 'repuesto', component: RepuestoComponent },
-      { path: 'dashboards', component: DashboardsComponent },
+      {
+        path: 'dashboards',
+        component: DashboardsComponent,
+        data: { role: ['ADMIN', 'SUPERADMIN'] },
+        canActivate: [roleGuard],
+      },
       { path: 'actualizarPerfil', component: ActualizarPerfilComponent },
       { path: 'notificaciones', component: CasillaComponent },
       { path: 'landing', component: LandingComponent },
-      { path: 'proveedores', component: ProveedoresComponent },
-      { path: 'registrarProveedor', component: RegistrarProveedorComponent },
-      { path: 'modificarProveedor', component: ModificarProoveedorComponent },
-      { path: 'registrarRepuesto', component: RegistrarRepuestoComponent },
-      { path: 'modificarRepuesto', component: ModificarRepuestoComponent },
+      {
+        path: 'proveedores',
+        component: ProveedoresComponent,
+        data: { role: ['ADMIN', 'SUPERADMIN'] },
+        canActivate: [roleGuard],
+      },
+      {
+        path: 'registrarProveedor',
+        component: RegistrarProveedorComponent,
+        data: { role: ['ADMIN', 'SUPERADMIN'] },
+        canActivate: [roleGuard],
+      },
+      {
+        path: 'modificarProveedor',
+        component: ModificarProoveedorComponent,
+        data: { role: ['ADMIN', 'SUPERADMIN'] },
+        canActivate: [roleGuard],
+      },
+      {
+        path: 'registrarRepuesto',
+        component: RegistrarRepuestoComponent,
+        data: { role: ['ADMIN', 'SUPERADMIN'] },
+        canActivate: [roleGuard],
+      },
+      {
+        path: 'modificarRepuesto',
+        component: ModificarRepuestoComponent,
+        canActivate: [roleGuard],
+
+        data: { role: ['ADMIN', 'SUPERADMIN'] },
+      },
       { path: 'carrito', component: CarritoComponent },
-      { path: 'ventas', component: VentasComponent },
-      { path: 'detalles-venta', component: DetallesVentaComponent },
-      { path: 'empleados', component: EmpleadosComponent },
-      { path: 'registrar-empleado', component: RegistrarEmpleadoComponent },
-      { path: 'modificar-empleado', component: ModificarEmpleadoComponent },
+      {
+        path: 'ventas',
+        component: VentasComponent,
+        canActivate: [roleGuard],
+        data: { role: ['ADMIN', 'SUPERADMIN'] },
+      },
+      {
+        path: 'detalles-venta',
+        component: DetallesVentaComponent,
+        canActivate: [roleGuard],
+        data: { role: ['ADMIN', 'SUPERADMIN'] },
+      },
+      {
+        path: 'empleados',
+        component: EmpleadosComponent,
+        canActivate: [roleGuard],
+        data: { role: ['ADMIN', 'SUPERADMIN'] },
+      },
+      {
+        path: 'registrar-empleado',
+        component: RegistrarEmpleadoComponent,
+        canActivate: [roleGuard],
+        data: { role: ['ADMIN', 'SUPERADMIN'] },
+      },
+      {
+        path: 'modificar-empleado',
+        component: ModificarEmpleadoComponent,
+        canActivate: [roleGuard],
+        data: { role: ['ADMIN', 'SUPERADMIN'] },
+      },
       { path: 'servicios', component: ServiciosComponent },
       { path: 'registrar-inspeccion', component: RegistrarInspeccionComponent },
       {
@@ -61,7 +120,12 @@ export const routes: Routes = [
         component: RegistrarPersonalizacionComponent,
       },
       { path: 'registrar-reparacion', component: RegistrarReparacionComponent },
-      { path: 'espera', component: EsperaComponent },
+      {
+        path: 'espera',
+        component: EsperaComponent,
+        data: { role: ['USER'] },
+        canActivate: [roleGuard],
+      },
     ],
   },
 ];
