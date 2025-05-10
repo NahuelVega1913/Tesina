@@ -24,6 +24,7 @@ import { ServiciosComponent } from './servicios/servicios.component';
 import { RegistrarInspeccionComponent } from './registrar-inspeccion/registrar-inspeccion.component';
 import { RegistrarPersonalizacionComponent } from './registrar-personalizacion/registrar-personalizacion.component';
 import { RegistrarReparacionComponent } from './registrar-reparacion/registrar-reparacion.component';
+import { EsperaComponent } from './espera/espera.component';
 
 export const routes: Routes = [
   {
@@ -60,6 +61,7 @@ export const routes: Routes = [
         component: RegistrarPersonalizacionComponent,
       },
       { path: 'registrar-reparacion', component: RegistrarReparacionComponent },
+      { path: 'espera', component: EsperaComponent },
     ],
   },
 ];
