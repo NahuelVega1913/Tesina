@@ -1,4 +1,7 @@
-INSERT INTO USERS (email,name,lastname, password, role) VALUES ('nahuelvegavega@gmail.com', 'Nahuel','Vega','1234', 'SUPERADMIN');
+INSERT INTO USERS (email,name,lastname, password, role) VALUES ('nahuelvegavega@gmail.com', 'Nahuel','Vega','$2a$10$WhRuuQWNRMKNSzjALksRieneowHvpXjj5NXMxdZHr7Zl.cpFEp4.q', 'SUPERADMIN'),
+                                                               ('usuario@gmail.com', 'User','Test','$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'USER'),
+                                                               ('admin@gmail.com', 'Admin','Test','$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'ADMIN'),
+                                                               ('empleado@gmail.com', 'Empleado','Test','$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'EMPLOYEE') ;
 
 INSERT INTO PROVIDERS (
     name, adress, category, city, country,

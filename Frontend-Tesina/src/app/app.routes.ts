@@ -21,6 +21,9 @@ import { EmpleadosComponent } from './empleados/empleados.component';
 import { RegistrarEmpleadoComponent } from './registrar-empleado/registrar-empleado.component';
 import { ModificarEmpleadoComponent } from './modificar-empleado/modificar-empleado.component';
 import { ServiciosComponent } from './servicios/servicios.component';
+import { RegistrarInspeccionComponent } from './registrar-inspeccion/registrar-inspeccion.component';
+import { RegistrarPersonalizacionComponent } from './registrar-personalizacion/registrar-personalizacion.component';
+import { RegistrarReparacionComponent } from './registrar-reparacion/registrar-reparacion.component';
 
 export const routes: Routes = [
   {
@@ -51,6 +54,12 @@ export const routes: Routes = [
       { path: 'registrar-empleado', component: RegistrarEmpleadoComponent },
       { path: 'modificar-empleado', component: ModificarEmpleadoComponent },
       { path: 'servicios', component: ServiciosComponent },
+      { path: 'registrar-inspeccion', component: RegistrarInspeccionComponent },
+      {
+        path: 'registrar-personalizacion',
+        component: RegistrarPersonalizacionComponent,
+      },
+      { path: 'registrar-reparacion', component: RegistrarReparacionComponent },
     ],
   },
 ];

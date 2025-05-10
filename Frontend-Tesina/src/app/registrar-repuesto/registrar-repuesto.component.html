@@ -22,7 +22,7 @@
             formControlName="name"
             id="first_name"
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
-            placeholder="Proveedor A"
+            placeholder="Aceite 900 ml"
             required
           />
           @if(form.get('name')?.invalid && form.get('name')?.touched){
@@ -60,11 +60,12 @@
               </svg>
             </span>
             <input
-              type="text"
+              type="number"
               id="website-admin"
               formControlName="price"
               class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5"
               placeholder="100000"
+              required=""
             />
           </div>
           @if(form.get('price')?.invalid && form.get('price')?.touched){
@@ -78,7 +79,7 @@
             >Descuento (%)</label
           >
           <input
-            type="email"
+            type="number"
             [ngClass]="{
               'is-invalid':
                 form.get('email')?.touched && form.get('email')?.invalid
@@ -86,7 +87,8 @@
             formControlName="discaunt"
             id="company"
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="30"
+            placeholder="0"
+            required
           />
           @if(form.get('discaunt')?.invalid && form.get('discaunt')?.touched){
           <div class="text-white font-bold drop-shadow-md">
@@ -172,13 +174,13 @@
             >Estrellas (0-5)</label
           >
           <input
-            type="text"
+            type="number"
             [ngClass]="{
               'is-invalid':
                 form.get('stars')?.touched && form.get('stars')?.invalid
             }"
             formControlName="stars"
-            placeholder="Cordoba"
+            placeholder="5"
             id="phone"
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full md:w-80 p-2.5"
             required
@@ -219,8 +221,8 @@
             <option value="{{ item.id }}">{{ item.name }}</option>
             }
           </select>
-          @if(form.get('category')?.value == "" &&
-          form.get('category')?.touched){
+          @if(form.get('provider')?.value == "" &&
+          form.get('provider')?.touched){
           <div class="text-white font-bold drop-shadow-md">
             Complete el proveedor
           </div>

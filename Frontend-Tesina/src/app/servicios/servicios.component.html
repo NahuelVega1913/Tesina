@@ -1,26 +1,22 @@
 <div class="flex flex-col bg-gray-800 h-screen w-full p-10">
-  <div
-    class="text-center font-bold tracking-tight text-white text-7xl mt-7 mb-10"
-  >
+  <div class="text-center font-bold tracking-tight text-white text-7xl mb-10">
     Nuestros Servicios
   </div>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-15 mt-5">
     <div
       class="bg-white w-full flex flex-col flex-grow rounded-lg hover:shadow-xl/100 hover:shadow-2xl transition duration-300 ease-in-out hover:shadow-cyan-500/50"
     >
-      <a href="#">
-        <img
-          class="rounded-t-lg h-48 w-full"
-          src="https://emprendedores.es/wp-content/uploads/iStock-1130307955-1024x683.jpg"
-          alt=""
-        />
-      </a>
+      <img
+        class="rounded-t-lg h-48 w-full"
+        src="https://emprendedores.es/wp-content/uploads/iStock-1130307955-1024x683.jpg"
+        alt=""
+      />
+
       <div class="p-5 h-full flex flex-col">
-        <a href="#">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-            Inspección del vehículo
-          </h5>
-        </a>
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+          Inspección del vehículo
+        </h5>
+
         <p class="mb-3 font-normal text-gray-700">
           Realizamos una revisión integral de tu vehículo para garantizar su
           correcto funcionamiento y seguridad. Brindándote un diagnóstico
@@ -28,7 +24,7 @@
         </p>
         <div class="mt-auto">
           <a
-            href="#"
+            href="/registrar-inspeccion"
             class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
           >
             Reservar
@@ -54,15 +50,14 @@
     <div
       class="bg-white w-full flex flex-col flex-grow rounded-lg hover:shadow-xl/100 hover:shadow-2xl transition duration-300 ease-in-out hover:shadow-cyan-500/50"
     >
-      <a href="#">
-        <img
-          class="rounded-t-lg h-48 w-full"
-          src="https://www.infobae.com/new-resizer/Vw2G_7_ZJk1LUsa0jfz1A6BhJWA=/arc-anglerfish-arc2-prod-infobae/public/FEIKQWVFLNGMJLBSTPKPF3NPTE.jpg"
-          alt=""
-        />
-      </a>
+      <img
+        class="rounded-t-lg h-48 w-full"
+        src="https://www.infobae.com/new-resizer/Vw2G_7_ZJk1LUsa0jfz1A6BhJWA=/arc-anglerfish-arc2-prod-infobae/public/FEIKQWVFLNGMJLBSTPKPF3NPTE.jpg"
+        alt=""
+      />
+
       <div class="p-5">
-        <a href="#">
+        <a>
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
             Reparacion del vehículo
           </h5>
@@ -72,9 +67,8 @@
           cualquier problema en tu auto. Nuestro equipo técnico está capacitado
           para intervenir desde fallas menores hasta reparaciones complejas.
         </p>
-        <div class="mt-auto">
+        <div class="mt-auto" (click)="redirectTo('/registrar-reparacion')">
           <a
-            href="#"
             class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
           >
             Reservar
@@ -101,7 +95,7 @@
     <div
       class="bg-white w-full flex flex-col flex-grow rounded-lg hover:shadow-xl/100 hover:shadow-2xl transition duration-300 ease-in-out hover:shadow-cyan-500/50"
     >
-      <a href="#">
+      <a>
         <img
           class="rounded-t-lg h-48 w-full"
           src="https://siempreauto.com/wp-content/uploads/sites/9/2024/11/wrap-para-carro.jpg?w=4096"
@@ -109,7 +103,7 @@
         />
       </a>
       <div class="p-5 h-full flex flex-col">
-        <a href="#">
+        <a>
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
             Personalizacion del vehículo
           </h5>
@@ -121,7 +115,7 @@
         </p>
         <div class="mt-auto">
           <a
-            href="#"
+            (click)="redirectTo('registrar-personalizacion')"
             class="inline-flex items-center px-3 py-2 mt-auto text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
           >
             Reservar

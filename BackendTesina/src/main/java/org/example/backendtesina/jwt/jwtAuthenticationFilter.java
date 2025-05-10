@@ -1,5 +1,6 @@
 package org.example.backendtesina.jwt;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import io.micrometer.common.lang.NonNull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -30,22 +31,39 @@ public class jwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         final String token = getTokenFromRequest(request);
         final String email;
-        if(token ==null){
-            filterChain.doFilter(request,response);
-            return;
-        }
-        email = jwtService.getEmailFromToken(token);
-        if(email!= null && SecurityContextHolder.getContext().getAuthentication() ==null){
-            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-            if(jwtService.isTokenValid(token,userDetails)){
-                UsernamePasswordAuthenticationToken authToken  = new UsernamePasswordAuthenticationToken(
-                        userDetails,null,userDetails.getAuthorities());
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+
+        try {
+            if (token == null) {
+                filterChain.doFilter(request, response);
+                return;
             }
 
+            email = jwtService.getEmailFromToken(token);
+
+            if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+                if (jwtService.isTokenValid(token, userDetails)) {
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.getAuthorities());
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                } else {
+                    // Token inválido
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.getWriter().write("Token inválido");
+                    return;
+                }
+            }
+
+            filterChain.doFilter(request, response);
+
+        } catch (ExpiredJwtException e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Token expirado");
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("No autorizado");
         }
-        filterChain.doFilter(request,response);
     }
 //@Override
 //protected void doFilterInternal(

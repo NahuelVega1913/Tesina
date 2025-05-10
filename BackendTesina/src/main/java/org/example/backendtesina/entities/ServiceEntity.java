@@ -1,14 +1,14 @@
 package org.example.backendtesina.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class ServiceEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String nombre;
+    private String descripcion;
 }
