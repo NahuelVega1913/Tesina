@@ -226,6 +226,7 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Repuestos</span>
         </a>
       </li>
+      @if(rol == 'ADMIN' || rol == 'SUPERADMIN'){
       <li (click)="moveTo('/empleados')">
         <a
           class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group hover:text-gray-900"
@@ -250,6 +251,7 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Empleados</span>
         </a>
       </li>
+      } @if(rol == 'ADMIN' || rol == 'SUPERADMIN'){
       <li (click)="redirectTo('/proveedores')">
         <a
           class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
@@ -275,6 +277,7 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Proveedores</span>
         </a>
       </li>
+      }
       <!-- <li (click)="redirectTo('/login')">
         <a
           class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
@@ -297,7 +300,7 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Ingresar</span>
         </a>
       </li> -->
-
+      @if(rol == 'ADMIN' || rol == 'SUPERADMIN'){
       <li (click)="moveTo('/ventas')">
         <a
           class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group hover:text-gray-900"
@@ -322,7 +325,7 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Ventas</span>
         </a>
       </li>
-
+      } @if(rol == 'ADMIN' || rol == 'SUPERADMIN'){
       <li router>
         <a
           class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100"
@@ -344,6 +347,7 @@
           <span class="ms-3">Graficos</span>
         </a>
       </li>
+      }
     </ul>
   </div>
 </aside>

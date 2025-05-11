@@ -21,7 +21,7 @@ export class RepuestosComponent {
   search: string = '';
 
   private service: RespuestosService = inject(RespuestosService);
-
+  rol: string | null = '';
   isOpen = false;
   filter() {
     this.listFilteres = this.lst.filter((item) => {
@@ -48,6 +48,7 @@ export class RepuestosComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getProveedores();
+    this.rol = localStorage.getItem('role');
   }
 
   redirectTo(url: string, id: number) {
