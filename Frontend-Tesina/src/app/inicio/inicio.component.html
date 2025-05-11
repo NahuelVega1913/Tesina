@@ -139,7 +139,7 @@
 >
   <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
     <ul class="space-y-2 font-medium">
-      <li>
+      <li routerLinkActive="font-bold">
         <a
           class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
         >
@@ -161,10 +161,11 @@
           >
         </a>
       </li>
-      <li (click)="redirectTo('/servicios')">
-        <a
-          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
-        >
+      <li
+        [routerLink]="'/servicios'"
+        routerLinkActive="text-blue-900 font-bold bg-gray-200 rounded-2xl"
+      >
+        <a class="flex items-center p-2 rounded-lg hover:bg-gray-100 group">
           <svg
             class="w-6 h-6 text-gray-500"
             aria-hidden="true"
@@ -175,6 +176,7 @@
             viewBox="0 0 24 24"
           >
             <path
+              routerLinkActive="text-blue-900 font-bold"
               stroke="currentColor"
               stroke-linejoin="round"
               stroke-width="2"
@@ -185,10 +187,11 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Servicios</span>
         </a>
       </li>
-      <li (click)="redirectTo('/notificaciones')">
-        <a
-          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
-        >
+      <li
+        [routerLink]="'/notificaciones'"
+        routerLinkActive="text-blue-900 font-bold bg-gray-200 rounded-2xl"
+      >
+        <a class="flex items-center p-2 rounded-lg hover:bg-gray-100 group">
           <svg
             class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
             aria-hidden="true"
@@ -197,6 +200,7 @@
             viewBox="0 0 20 20"
           >
             <path
+              routerLinkActive="text-blue-900 font-bold"
               d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z"
             />
           </svg>
@@ -208,10 +212,11 @@
         </a>
       </li>
 
-      <li (click)="redirectTo('/repuestos')">
-        <a
-          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
-        >
+      <li
+        [routerLink]="'/repuestos'"
+        routerLinkActive="text-blue-900 font-bold bg-gray-200 rounded-2xl"
+      >
+        <a class="flex items-center p-2 rounded-lg hover:bg-gray-100 group">
           <svg
             class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
             aria-hidden="true"
@@ -220,6 +225,7 @@
             viewBox="0 0 18 20"
           >
             <path
+              routerLinkActive="text-blue-900 font-bold"
               d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"
             />
           </svg>
@@ -227,9 +233,12 @@
         </a>
       </li>
       @if(rol == 'ADMIN' || rol == 'SUPERADMIN'){
-      <li (click)="moveTo('/empleados')">
+      <li
+        [routerLink]="'/empleados'"
+        routerLinkActive="text-blue-900 font-bold bg-gray-200 rounded-2xl"
+      >
         <a
-          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group hover:text-gray-900"
+          class="flex items-center p-2 rounded-lg hover:bg-gray-100 group hover:text-gray-900"
         >
           <svg
             class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
@@ -241,6 +250,7 @@
             viewBox="0 0 24 24"
           >
             <path
+              routerLinkActive="text-blue-900 font-bold"
               stroke="currentColor"
               stroke-linecap="round"
               stroke-width="2"
@@ -252,10 +262,11 @@
         </a>
       </li>
       } @if(rol == 'ADMIN' || rol == 'SUPERADMIN'){
-      <li (click)="redirectTo('/proveedores')">
-        <a
-          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
-        >
+      <li
+        [routerLink]="'/proveedores'"
+        routerLinkActive="text-blue-900 font-bold bg-gray-200 rounded-2xl"
+      >
+        <a class="flex items-center p-2 rounded-lg hover:bg-gray-100 group">
           <svg
             class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
             aria-hidden="true"
@@ -266,6 +277,7 @@
             viewBox="0 0 24 24"
           >
             <path
+              routerLinkActive="text-blue-900 font-bold"
               stroke="currentColor"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -301,9 +313,12 @@
         </a>
       </li> -->
       @if(rol == 'ADMIN' || rol == 'SUPERADMIN'){
-      <li (click)="moveTo('/ventas')">
+      <li
+        [routerLink]="'/ventas'"
+        routerLinkActive="text-blue-900 font-bold bg-gray-200 rounded-2xl"
+      >
         <a
-          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group hover:text-gray-900"
+          class="flex items-center p-2 rounded-lg hover:bg-gray-100 group hover:text-gray-900"
         >
           <svg
             class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
@@ -315,6 +330,7 @@
             viewBox="0 0 24 24"
           >
             <path
+              routerLinkActive="text-blue-900 font-bold"
               stroke="currentColor"
               stroke-linecap="round"
               stroke-width="2"
@@ -326,10 +342,11 @@
         </a>
       </li>
       } @if(rol == 'ADMIN' || rol == 'SUPERADMIN'){
-      <li router>
-        <a
-          class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100"
-        >
+      <li
+        [routerLink]="'/graficos'"
+        routerLinkActive="text-blue-900 font-bold bg-gray-200 rounded-2xl"
+      >
+        <a class="flex items-center p-2 rounded-lg hover:bg-gray-100">
           <svg
             class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
             aria-hidden="true"
@@ -338,9 +355,11 @@
             viewBox="0 0 22 21"
           >
             <path
+              routerLinkActive="text-blue-900 font-bold"
               d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"
             />
             <path
+              routerLinkActive="text-blue-900 font-bold"
               d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"
             />
           </svg>

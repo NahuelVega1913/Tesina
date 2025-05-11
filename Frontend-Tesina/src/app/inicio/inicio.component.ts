@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLink, RouterModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
 })
