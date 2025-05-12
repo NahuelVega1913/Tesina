@@ -2,8 +2,8 @@ package org.example.backendtesina.services;
 
 import org.example.backendtesina.DTOs.Get.GetSpareDTO;
 import org.example.backendtesina.DTOs.Post.PostSpareDTO;
-import org.example.backendtesina.entities.ProviderEntity;
-import org.example.backendtesina.entities.SpareEntity;
+import org.example.backendtesina.entities.personal.ProviderEntity;
+import org.example.backendtesina.entities.payment.SpareEntity;
 import org.example.backendtesina.entities.enums.CategorySpareEntity;
 import org.example.backendtesina.repositories.ProviderRepository;
 import org.example.backendtesina.repositories.SpareRepository;

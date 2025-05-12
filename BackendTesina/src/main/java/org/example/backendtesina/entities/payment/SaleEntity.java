@@ -1,6 +1,7 @@
-package org.example.backendtesina.entities;
+package org.example.backendtesina.entities.payment;
 
 import jakarta.persistence.*;
+import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.entities.enums.typePaymentEntity;
 
 import java.time.LocalDate;

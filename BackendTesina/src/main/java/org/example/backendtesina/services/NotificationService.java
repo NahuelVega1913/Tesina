@@ -1,8 +1,8 @@
 package org.example.backendtesina.services;
 
 import org.example.backendtesina.DTOs.Get.GetNotification;
-import org.example.backendtesina.entities.NotificationEntity;
-import org.example.backendtesina.entities.UserEntity;
+import org.example.backendtesina.entities.personal.NotificationEntity;
+import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.entities.enums.StateNotification;
 import org.example.backendtesina.entities.enums.typeNotificationEntity;
 import org.example.backendtesina.jwt.JwtService;

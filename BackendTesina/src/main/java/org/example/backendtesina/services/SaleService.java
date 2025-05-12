@@ -8,32 +8,26 @@ import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
 import jakarta.transaction.Transactional;
-import kotlin.jvm.internal.SerializedIr;
-import org.apache.velocity.runtime.directive.Parse;
 import org.example.backendtesina.DTOs.Get.DetailSaleDto;
-import org.example.backendtesina.DTOs.Get.GetCartDTO;
 import org.example.backendtesina.DTOs.Get.GetSaleDTO;
 import org.example.backendtesina.DTOs.Post.PostPayDTO;
-import org.example.backendtesina.entities.DetailSaleEntity;
-import org.example.backendtesina.entities.SaleEntity;
-import org.example.backendtesina.entities.SpareEntity;
-import org.example.backendtesina.entities.UserEntity;
+import org.example.backendtesina.entities.payment.DetailSaleEntity;
+import org.example.backendtesina.entities.payment.SaleEntity;
+import org.example.backendtesina.entities.payment.SpareEntity;
+import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.entities.enums.typePaymentEntity;
 import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.repositories.CartRepository;
 import org.example.backendtesina.repositories.SaleRepository;
 import org.example.backendtesina.repositories.SpareRepository;
 import org.example.backendtesina.repositories.UserRepository;
-import org.intellij.lang.annotations.JdkConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.parser.Parser;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service

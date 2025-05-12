@@ -1,9 +1,7 @@
 package org.example.backendtesina.repositories;
 
-import ch.qos.logback.core.model.INamedModel;
-import org.example.backendtesina.entities.CartEntity;
+import org.example.backendtesina.entities.payment.CartEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Repository;
 
 @Repository

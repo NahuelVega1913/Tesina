@@ -2,7 +2,7 @@ package org.example.backendtesina.services;
 
 import org.example.backendtesina.DTOs.Get.GetProvidersDTO;
 import org.example.backendtesina.DTOs.Post.PostProviderDTO;
-import org.example.backendtesina.entities.ProviderEntity;
+import org.example.backendtesina.entities.personal.ProviderEntity;
 import org.example.backendtesina.entities.enums.CountryEntity;
 import org.example.backendtesina.repositories.ProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,9 +2,8 @@ package org.example.backendtesina.services;
 
 import org.example.backendtesina.DTOs.Login.AuthResponse;
 import org.example.backendtesina.DTOs.Login.RegisterDto;
-import org.example.backendtesina.entities.NotificationEntity;
 import org.example.backendtesina.entities.enums.RoleEntity;
-import org.example.backendtesina.entities.UserEntity;
+import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,6 @@
 package org.example.backendtesina.repositories;
 
-import jdk.dynalink.Operation;
-import org.apache.catalina.User;
-import org.example.backendtesina.entities.UserEntity;
+import org.example.backendtesina.entities.personal.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

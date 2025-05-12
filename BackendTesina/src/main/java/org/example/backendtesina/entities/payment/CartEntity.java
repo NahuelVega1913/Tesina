@@ -1,8 +1,8 @@
-package org.example.backendtesina.entities;
+package org.example.backendtesina.entities.payment;
 
 
 import jakarta.persistence.*;
-import org.apache.catalina.User;
+import org.example.backendtesina.entities.personal.UserEntity;
 
 import java.util.List;
 

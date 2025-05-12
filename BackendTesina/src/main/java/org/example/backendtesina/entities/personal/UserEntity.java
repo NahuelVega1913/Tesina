@@ -1,8 +1,11 @@
-package org.example.backendtesina.entities;
+package org.example.backendtesina.entities.personal;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import org.example.backendtesina.entities.enums.RoleEntity;
+import org.example.backendtesina.entities.payment.CartEntity;
+import org.example.backendtesina.entities.payment.SaleEntity;
+import org.example.backendtesina.entities.services.ServiceEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

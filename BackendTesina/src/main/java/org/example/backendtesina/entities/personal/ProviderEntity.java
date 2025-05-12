@@ -1,8 +1,8 @@
-package org.example.backendtesina.entities;
+package org.example.backendtesina.entities.personal;
 
 import jakarta.persistence.*;
+import org.example.backendtesina.entities.payment.SpareEntity;
 import org.example.backendtesina.entities.enums.CategorySpareEntity;
-import org.example.backendtesina.entities.enums.CityEntity;
 import org.example.backendtesina.entities.enums.CountryEntity;
 
 import java.math.BigInteger;

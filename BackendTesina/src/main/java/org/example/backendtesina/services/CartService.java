@@ -2,9 +2,9 @@ package org.example.backendtesina.services;
 
 import org.example.backendtesina.DTOs.Get.GetCartDTO;
 import org.example.backendtesina.DTOs.Get.GetSpareDTO;
-import org.example.backendtesina.entities.CartEntity;
-import org.example.backendtesina.entities.SpareEntity;
-import org.example.backendtesina.entities.UserEntity;
+import org.example.backendtesina.entities.payment.CartEntity;
+import org.example.backendtesina.entities.payment.SpareEntity;
+import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.repositories.CartRepository;
 import org.example.backendtesina.repositories.SpareRepository;

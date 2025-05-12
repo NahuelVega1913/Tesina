@@ -2,7 +2,7 @@ package org.example.backendtesina.services;
 
 import org.example.backendtesina.DTOs.Login.RegisterDto;
 import org.example.backendtesina.DTOs.Login.changePasswordDTO;
-import org.example.backendtesina.entities.UserEntity;
+import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

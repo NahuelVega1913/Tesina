@@ -2,17 +2,15 @@ package org.example.backendtesina.services;
 
 import org.example.backendtesina.DTOs.Get.GetEmployee;
 import org.example.backendtesina.DTOs.Post.PostEmployee;
-import org.example.backendtesina.entities.EmployeeEntity;
+import org.example.backendtesina.entities.personal.EmployeeEntity;
 import org.example.backendtesina.entities.enums.TypeOfContract;
 import org.example.backendtesina.entities.enums.WorkinDayEntity;
 import org.example.backendtesina.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.management.GarbageCollectorMXBean;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeService {

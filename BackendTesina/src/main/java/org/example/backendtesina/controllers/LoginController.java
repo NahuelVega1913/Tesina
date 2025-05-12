@@ -3,7 +3,7 @@ package org.example.backendtesina.controllers;
 import org.example.backendtesina.DTOs.Login.AuthResponse;
 import org.example.backendtesina.DTOs.Login.LoginDto;
 import org.example.backendtesina.DTOs.Login.RegisterDto;
-import org.example.backendtesina.entities.UserEntity;
+import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.repositories.UserRepository;
 import org.example.backendtesina.services.LoginService;

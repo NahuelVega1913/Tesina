@@ -1,4 +1,4 @@
-package org.example.backendtesina.entities;
+package org.example.backendtesina.entities.payment;
 
 import jakarta.persistence.*;
 

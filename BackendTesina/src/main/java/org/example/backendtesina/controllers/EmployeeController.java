@@ -1,10 +1,8 @@
 package org.example.backendtesina.controllers;
 
 import org.example.backendtesina.DTOs.Get.GetEmployee;
-import org.example.backendtesina.DTOs.Get.GetProvidersDTO;
 import org.example.backendtesina.DTOs.Post.PostEmployee;
-import org.example.backendtesina.DTOs.Post.PostProviderDTO;
-import org.example.backendtesina.entities.EmployeeEntity;
+import org.example.backendtesina.entities.personal.EmployeeEntity;
 import org.example.backendtesina.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,13 +1,10 @@
 package org.example.backendtesina.controllers;
 
-import org.apache.coyote.Response;
 import org.example.backendtesina.DTOs.Get.GetCartDTO;
-import org.example.backendtesina.entities.CartEntity;
+import org.example.backendtesina.entities.payment.CartEntity;
 import org.example.backendtesina.services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

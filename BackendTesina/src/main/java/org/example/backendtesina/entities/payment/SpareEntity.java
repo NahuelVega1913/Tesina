@@ -1,7 +1,9 @@
-package org.example.backendtesina.entities;
+package org.example.backendtesina.entities.payment;
 
 import jakarta.persistence.*;
 import org.example.backendtesina.entities.enums.CategorySpareEntity;
+import org.example.backendtesina.entities.payment.CartEntity;
+import org.example.backendtesina.entities.personal.ProviderEntity;
 
 import java.util.List;
 

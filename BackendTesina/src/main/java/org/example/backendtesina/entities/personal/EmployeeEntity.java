@@ -1,11 +1,9 @@
-package org.example.backendtesina.entities;
+package org.example.backendtesina.entities.personal;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import lombok.Data;
 import org.example.backendtesina.entities.enums.TypeOfContract;
 import org.example.backendtesina.entities.enums.WorkinDayEntity;
+import org.example.backendtesina.entities.services.ServiceEntity;
 
 import java.util.Date;
 import java.util.List;

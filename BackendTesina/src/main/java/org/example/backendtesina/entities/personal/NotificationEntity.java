@@ -1,8 +1,9 @@
-package org.example.backendtesina.entities;
+package org.example.backendtesina.entities.personal;
 
 import jakarta.persistence.*;
 import org.example.backendtesina.entities.enums.StateNotification;
 import org.example.backendtesina.entities.enums.typeNotificationEntity;
+import org.example.backendtesina.entities.personal.UserEntity;
 
 import java.time.LocalDateTime;
 

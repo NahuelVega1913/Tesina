@@ -1,15 +1,13 @@
 package org.example.backendtesina.controllers;
 
-import org.example.backendtesina.DTOs.Get.GetSaleDTO;
-import org.example.backendtesina.entities.CartEntity;
-import org.example.backendtesina.entities.ServiceEntity;
-import org.example.backendtesina.services.SaleService;
+import org.example.backendtesina.DTOs.Post.PostInspection;
+import org.example.backendtesina.entities.payment.CartEntity;
+import org.example.backendtesina.entities.services.InspectionEntity;
+import org.example.backendtesina.entities.services.ServiceEntity;
 import org.example.backendtesina.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/services")
@@ -26,12 +24,12 @@ public class ServicesController {
         return null;
     }
     @PostMapping(value = "postService")
-    public ResponseEntity<?> post(@RequestBody ServiceEntity entity){
-//        String token = authorizationHeader.substring(7); // Elimina "Bearer "
-//        CartEntity cart = service.postCart(token, idSpare);
-//        if(cart == null){
-//            return ResponseEntity.badRequest().body("Error");
-//        }
+    public ResponseEntity<?> post(@RequestBody PostInspection entity,@RequestHeader("Authorization") String authorizationHeader){
+        String token = authorizationHeader.substring(7); // Elimina "Bearer "
+        InspectionEntity cart = service.registerInspection(entity,token);
+        if(cart == null) {
+            return ResponseEntity.badRequest().body("Error");
+        }
         return ResponseEntity.ok("");
     }
 

@@ -1,9 +1,7 @@
 package org.example.backendtesina.controllers;
 
-import org.apache.coyote.Response;
-import org.example.backendtesina.DTOs.Get.GetCartDTO;
 import org.example.backendtesina.DTOs.Get.GetNotification;
-import org.example.backendtesina.entities.NotificationEntity;
+import org.example.backendtesina.entities.personal.NotificationEntity;
 import org.example.backendtesina.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
