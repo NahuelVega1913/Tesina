@@ -33,6 +33,8 @@ public class UserEntity implements UserDetails {
     private String address;
     @Enumerated(EnumType.STRING)
     private RoleEntity role;
+    @OneToMany
+    private List<ServiceEntity> servicios;
 
     @OneToOne(mappedBy = "user")
     private CartEntity cart;
@@ -151,5 +153,13 @@ public class UserEntity implements UserDetails {
 
     public void setNotifications(List<NotificationEntity> notifications) {
         this.notifications = notifications;
+    }
+
+    public List<ServiceEntity> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<ServiceEntity> servicios) {
+        this.servicios = servicios;
     }
 }

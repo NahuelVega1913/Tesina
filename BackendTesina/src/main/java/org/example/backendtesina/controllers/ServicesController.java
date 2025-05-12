@@ -2,6 +2,7 @@ package org.example.backendtesina.controllers;
 
 import org.example.backendtesina.DTOs.Get.GetSaleDTO;
 import org.example.backendtesina.entities.CartEntity;
+import org.example.backendtesina.entities.ServiceEntity;
 import org.example.backendtesina.services.SaleService;
 import org.example.backendtesina.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class ServicesController {
         return null;
     }
     @PostMapping(value = "postService")
-    public ResponseEntity<?> post(){
+    public ResponseEntity<?> post(@RequestBody ServiceEntity entity){
 //        String token = authorizationHeader.substring(7); // Elimina "Bearer "
 //        CartEntity cart = service.postCart(token, idSpare);
 //        if(cart == null){

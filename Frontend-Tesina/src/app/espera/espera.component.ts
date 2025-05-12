@@ -11,6 +11,8 @@ import 'leaflet/dist/leaflet.css';
   styleUrl: './espera.component.css',
 })
 export class EsperaComponent implements AfterViewInit {
+  status: string = 'FINISHED';
+
   ngAfterViewInit(): void {
     const map = L.map('map').setView([-31.4188, -64.2327], 15);
 

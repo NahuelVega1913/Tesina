@@ -11,4 +11,10 @@ public class ServiceService {
 
     @Autowired
     SeviceRepository repository;
+
+
+
+    public void registerInspection(){
+
+    }
 }

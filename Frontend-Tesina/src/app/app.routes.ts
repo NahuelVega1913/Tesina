@@ -27,6 +27,7 @@ import { RegistrarReparacionComponent } from './registrar-reparacion/registrar-r
 import { EsperaComponent } from './espera/espera.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { roleGuard } from './guards/role.guard';
+import { ConsultarServiciosComponent } from './consultar-servicios/consultar-servicios.component';
 
 export const routes: Routes = [
   {
@@ -125,6 +126,12 @@ export const routes: Routes = [
         component: EsperaComponent,
         data: { role: ['USER'] },
         canActivate: [roleGuard],
+      },
+      {
+        path: 'consultarServicios',
+        component: ConsultarServiciosComponent,
+        canActivate: [roleGuard],
+        data: { role: ['ADMIN', 'SUPERADMIN'] },
       },
     ],
   },

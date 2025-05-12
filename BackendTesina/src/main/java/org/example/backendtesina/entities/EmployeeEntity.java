@@ -8,6 +8,7 @@ import org.example.backendtesina.entities.enums.TypeOfContract;
 import org.example.backendtesina.entities.enums.WorkinDayEntity;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "EMPLOYEES")
@@ -43,6 +44,8 @@ public class EmployeeEntity {
     private Date dateOfEntry;
     @Column(name = "REMARKS")
     private String remarks;
+    @OneToMany
+    private List<ServiceEntity> jobs;
 
 
     public int getId() {
@@ -155,5 +158,13 @@ public class EmployeeEntity {
 
     public void setCUIT(int CUIT) {
         this.CUIT = CUIT;
+    }
+
+    public List<ServiceEntity> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<ServiceEntity> jobs) {
+        this.jobs = jobs;
     }
 }
