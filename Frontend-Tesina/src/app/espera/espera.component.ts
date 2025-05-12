@@ -14,16 +14,18 @@ export class EsperaComponent implements AfterViewInit {
   status: string = 'FINISHED';
 
   ngAfterViewInit(): void {
-    const map = L.map('map').setView([-31.4188, -64.2327], 15);
+    if (this.status === 'WAITING') {
+      const map = L.map('map').setView([-31.4188, -64.2327], 15);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors',
-    }).addTo(map);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+      }).addTo(map);
 
-    L.marker([-31.4188, -64.2327]).addTo(map).bindPopup('Ubicación central');
+      L.marker([-31.4188, -64.2327]).addTo(map).bindPopup('Ubicación central');
 
-    setTimeout(() => {
-      map.invalidateSize();
-    }, 100); // puede ajustarse si hace falta
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 100); // puede ajustarse si hace falta
+    }
   }
 }
