@@ -32,6 +32,13 @@ export class ServiciosService {
       }
     );
   }
-  getService() {}
+  getServices() {
+    return this.http.get<any>(`http://localhost:8080/services/getAll`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
+  }
   putService() {}
 }

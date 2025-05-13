@@ -1,10 +1,14 @@
 package org.example.backendtesina.services;
 
+import org.example.backendtesina.DTOs.Get.GetEmployee;
 import org.example.backendtesina.DTOs.Get.GetInspection;
 import org.example.backendtesina.DTOs.Get.GetServices;
 import org.example.backendtesina.DTOs.Get.GetStatusService;
 import org.example.backendtesina.DTOs.Post.PostInspection;
+import org.example.backendtesina.entities.enums.PaymentStatus;
 import org.example.backendtesina.entities.enums.ServiceStatus;
+import org.example.backendtesina.entities.enums.TypeOfService;
+import org.example.backendtesina.entities.personal.EmployeeEntity;
 import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.entities.services.InspectionEntity;
 import org.example.backendtesina.entities.services.ServiceEntity;
@@ -34,7 +38,10 @@ public class ServiceService {
         InspectionEntity entity = new InspectionEntity();
 
         entity.setAuto(inspection.getAuto());
+        entity.setType(TypeOfService.INSPECTION);
+        entity.setPaymentStatus(PaymentStatus.UNPAID);
         entity.setDateEntry(LocalDateTime.now());
+        entity.setModelo(inspection.getModelo());
         entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
         entity.setNombreCompleto(inspection.getNombreCompleto());
         entity.setStatus(ServiceStatus.WAITING);
@@ -67,9 +74,29 @@ public class ServiceService {
     public List<GetServices> getServices(){
         List<GetServices> lst = new ArrayList<>();
         List<ServiceEntity> lstEntity = this.repository.findAll();
-
-
-        return null;
+        for (ServiceEntity s:lstEntity){
+            GetServices get = new GetServices();
+            get.setAuto(s.getAuto());
+            get.setModelo(s.getModelo());
+            if(!s.getEmpleados().isEmpty()) {
+                List<GetEmployee> lstEmployee = new ArrayList<>();
+                for (EmployeeEntity e:s.getEmpleados()){
+                    GetEmployee employeeDto = new GetEmployee();
+                    employeeDto.setId(e.getId());
+                    employeeDto.setPhone(e.getPhone());
+                    employeeDto.setFullName(e.getFullName());
+                    employeeDto.setPosition(e.getPosition());
+                    lstEmployee.add(employeeDto);
+                }
+                get.setEmpleados(lstEmployee);
+            }
+            get.setStatus(s.getStatus());
+            get.setNombreCompleto(s.getNombreCompleto());
+            get.setObservacionesPrevias(s.getObservacionesPrevias());
+            get.setPaymentStatus(s.getPaymentStatus());
+            lst.add(get);
+        }
+        return lst;
     }
 
 }

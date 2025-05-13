@@ -1,6 +1,8 @@
 package org.example.backendtesina.entities.services;
 
 import jakarta.persistence.*;
+import org.example.backendtesina.entities.enums.PaymentStatus;
+import org.example.backendtesina.entities.enums.TypeOfService;
 import org.example.backendtesina.entities.personal.EmployeeEntity;
 import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.entities.enums.ServiceStatus;
@@ -20,6 +22,10 @@ public class ServiceEntity {
     private int modelo;
     @Enumerated(EnumType.STRING)
     private ServiceStatus status;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
+    @Enumerated(EnumType.STRING)
+    private TypeOfService type;
     private LocalDateTime dateEntry;
     private LocalDateTime dateExit;
 
@@ -115,5 +121,21 @@ public class ServiceEntity {
 
     public void setClient(UserEntity client) {
         this.client = client;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public TypeOfService getType() {
+        return type;
+    }
+
+    public void setType(TypeOfService type) {
+        this.type = type;
     }
 }

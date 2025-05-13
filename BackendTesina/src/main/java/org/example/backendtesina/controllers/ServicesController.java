@@ -1,5 +1,6 @@
 package org.example.backendtesina.controllers;
 
+import org.example.backendtesina.DTOs.Get.GetServices;
 import org.example.backendtesina.DTOs.Get.GetStatusService;
 import org.example.backendtesina.DTOs.Post.PostInspection;
 import org.example.backendtesina.entities.payment.CartEntity;
@@ -11,19 +12,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/services")
 public class ServicesController {
     @Autowired
     ServiceService service;
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @GetMapping(value = "getAll")
     public ResponseEntity<?> getAll(){
-//        List<GetSaleDTO> lst = service.getAllServices();
-//        if(lst.isEmpty()){
-//            return ResponseEntity.badRequest().build();
-//        }
-//        return ResponseEntity.ok(lst);
-        return null;
+        List<GetServices> lst = service.getServices();
+       if(lst.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(lst);
     }
     @PreAuthorize("hasAnyRole('USER')")
     @PostMapping(value = "postService")

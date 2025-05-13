@@ -3,6 +3,7 @@ import { RespuestosService } from '../services/respuestos.service';
 import { Router } from '@angular/router';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FormsModule, NgModel } from '@angular/forms';
+import { ServiciosService } from '../services/servicios.service';
 
 @Component({
   selector: 'app-consultar-servicios',
@@ -15,17 +16,17 @@ export class ConsultarServiciosComponent {
   lst: any[] = [];
   listFilteres: any[] = [];
   counter: number = 0;
-  category: string = '';
+  status: string = '';
   search: string = '';
 
-  private service: RespuestosService = inject(RespuestosService);
+  private service: ServiciosService = inject(ServiciosService);
   rol: string | null = '';
   isOpen = false;
   filter() {
     this.listFilteres = this.lst.filter((item) => {
       return (
         item.name.toLowerCase().includes(this.search.toLowerCase()) &&
-        (this.category === '' || item.category === this.category)
+        (this.status === '' || item.category === this.status)
       );
     });
   }
@@ -60,7 +61,7 @@ export class ConsultarServiciosComponent {
   }
 
   getProveedores() {
-    const getSubscription = this.service.getSpares().subscribe({
+    const getSubscription = this.service.getServices().subscribe({
       next: (res) => {
         this.lst = res;
         this.listFilteres = res;
