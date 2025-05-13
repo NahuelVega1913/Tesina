@@ -124,13 +124,10 @@ export const routes: Routes = [
       {
         path: 'espera',
         component: EsperaComponent,
-        data: { role: ['USER'] },
-        canActivate: [roleGuard],
       },
       {
         path: 'consultarServicios',
         component: ConsultarServiciosComponent,
-        canActivate: [roleGuard],
         data: { role: ['ADMIN', 'SUPERADMIN'] },
       },
     ],

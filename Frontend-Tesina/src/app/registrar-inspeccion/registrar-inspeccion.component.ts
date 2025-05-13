@@ -19,6 +19,7 @@ export class RegistrarInspeccionComponent {
   private service: ServiciosService = inject(ServiciosService);
 
   form = new UntypedFormGroup({
+    id: new UntypedFormControl('0', []),
     nombreCompleto: new UntypedFormControl('', []),
     dni: new UntypedFormControl('', []),
     auto: new UntypedFormControl('', []),

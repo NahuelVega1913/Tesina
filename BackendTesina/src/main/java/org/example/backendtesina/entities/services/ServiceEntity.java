@@ -18,6 +18,7 @@ public class ServiceEntity {
     private String observacionesPrevias;
     private String auto;
     private int modelo;
+    @Enumerated(EnumType.STRING)
     private ServiceStatus status;
     private LocalDateTime dateEntry;
     private LocalDateTime dateExit;
