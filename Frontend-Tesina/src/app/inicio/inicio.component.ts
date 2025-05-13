@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-inicio',
@@ -12,7 +13,10 @@ import { RouterModule } from '@angular/router';
 export class InicioComponent {
   SideBar = false;
   UserMenu = false;
+  notificaciones = '';
+  haveService = false;
 
+  private service = inject(UsuarioService);
   OpenUserMenu() {
     this.UserMenu = !this.UserMenu;
   }
@@ -45,6 +49,19 @@ export class InicioComponent {
     this.nombre = localStorage.getItem('name');
     this.apellido = localStorage.getItem('lastname');
     this.rol = localStorage.getItem('role');
+    this.getUserInformation();
+  }
+  getUserInformation() {
+    const getSubscription = this.service.getUsuarioInformation().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.notificaciones = res.notificaciones;
+        this.haveService = res.hasService;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   inicioSesion() {

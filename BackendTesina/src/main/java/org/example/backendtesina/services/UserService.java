@@ -1,7 +1,9 @@
 package org.example.backendtesina.services;
 
+import org.example.backendtesina.DTOs.Get.GetUserInformation;
 import org.example.backendtesina.DTOs.Login.RegisterDto;
 import org.example.backendtesina.DTOs.Login.changePasswordDTO;
+import org.example.backendtesina.entities.enums.ServiceStatus;
 import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,17 @@ public class UserService {
     }
     public void  changePassword(changePasswordDTO changePassword){
 
+    }
+    public GetUserInformation getUserInformation(String email){
+        GetUserInformation information = new GetUserInformation();
+        UserEntity entity = repository.findByEmail(email).get();
+        if(entity.getServicios().isEmpty()){
+            information.setHasService(false);
+        }
+        else if (entity.getServicios().get((entity.getServicios().size())-1).getStatus() != ServiceStatus.WITHDRAW){
+            information.setHasService(true);
+        }
+        return information;
     }
 
     public List<RegisterDto> getAllUsers(){

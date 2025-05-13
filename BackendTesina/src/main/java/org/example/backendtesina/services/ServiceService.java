@@ -1,6 +1,7 @@
 package org.example.backendtesina.services;
 
 import org.apache.catalina.User;
+import org.example.backendtesina.DTOs.Get.GetStatusService;
 import org.example.backendtesina.DTOs.Post.PostInspection;
 import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.entities.services.InspectionEntity;
@@ -51,5 +52,14 @@ public class ServiceService {
 
         repository.save(entity);
         return entity;
+    }
+    public GetStatusService getStatusService(String token){
+        String email = jwtService.getEmailFromToken(token);
+        UserEntity user = userRepository.findByEmail(email).get();
+        ServiceEntity entity = user.getServicios().get((user.getServicios().size()) - 1);
+        GetStatusService status = new GetStatusService();
+        status.setStatus(entity.getStatus());
+        status.setId(entity.getId());
+        return status;
     }
 }

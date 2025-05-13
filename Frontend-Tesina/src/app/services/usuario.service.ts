@@ -16,6 +16,17 @@ export class UsuarioService {
       },
     });
   }
+  getUsuarioInformation() {
+    return this.http.get<any>(
+      `http://localhost:8080/users/getUserInformation`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
 
   getUsuarioById(id: number) {}
   getUsuarioByEmail(email: string) {}

@@ -1,5 +1,6 @@
 package org.example.backendtesina.controllers;
 
+import org.example.backendtesina.DTOs.Get.GetUserInformation;
 import org.example.backendtesina.DTOs.Login.RegisterDto;
 import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.services.UserService;
@@ -25,6 +26,20 @@ public class UsersController {
             String email = jwtService.getEmailFromToken(token);
             // hacé lo que necesites con el token o el email
             RegisterDto response = service.getUser(email);
+            if(response == null){
+                return ResponseEntity.badRequest().build();
+            }
+            return ResponseEntity.ok(response);
+        }
+        return ResponseEntity.status(403).build();
+    }
+    @GetMapping(value = "getUserInformation")
+    public ResponseEntity<?> getUserInformation(@RequestHeader("Authorization") String authHeader){
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+            String email = jwtService.getEmailFromToken(token);
+            // hacé lo que necesites con el token o el email
+            GetUserInformation response = service.getUserInformation(email);
             if(response == null){
                 return ResponseEntity.badRequest().build();
             }

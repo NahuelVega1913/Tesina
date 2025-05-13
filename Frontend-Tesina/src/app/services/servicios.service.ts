@@ -9,7 +9,17 @@ export class ServiciosService {
 
   constructor() {}
 
-  getServiceStatus() {}
+  getServiceStatus() {
+    return this.http.get<any>(
+      `http://localhost:8080/services/getStatusService`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
   postService(body: any) {
     return this.http.post<any>(
       `http://localhost:8080/services/postService`,

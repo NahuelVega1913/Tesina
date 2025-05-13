@@ -1,5 +1,6 @@
 package org.example.backendtesina.controllers;
 
+import org.example.backendtesina.DTOs.Get.GetStatusService;
 import org.example.backendtesina.DTOs.Post.PostInspection;
 import org.example.backendtesina.entities.payment.CartEntity;
 import org.example.backendtesina.entities.services.InspectionEntity;
@@ -33,6 +34,17 @@ public class ServicesController {
             return ResponseEntity.badRequest().body("Error");
         }
         return ResponseEntity.ok("");
+    }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @GetMapping(value = "getStatusService")
+    public ResponseEntity<?> getStatus(@RequestHeader("Authorization") String authorizationHeader){
+        String token = authorizationHeader.substring(7); // Elimina "Bearer "
+
+        GetStatusService lst = service.getStatusService(token);
+        if(lst == null){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(lst);
     }
 
     @PutMapping (value = "modifyService")
