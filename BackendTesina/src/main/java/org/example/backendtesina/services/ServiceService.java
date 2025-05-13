@@ -1,6 +1,7 @@
 package org.example.backendtesina.services;
 
-import org.apache.catalina.User;
+import org.example.backendtesina.DTOs.Get.GetInspection;
+import org.example.backendtesina.DTOs.Get.GetServices;
 import org.example.backendtesina.DTOs.Get.GetStatusService;
 import org.example.backendtesina.DTOs.Post.PostInspection;
 import org.example.backendtesina.entities.enums.ServiceStatus;
@@ -11,14 +12,11 @@ import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.repositories.SeviceRepository;
 import org.example.backendtesina.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 
-import javax.imageio.spi.ServiceRegistry;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ServiceService {
@@ -63,4 +61,15 @@ public class ServiceService {
         status.setId(entity.getId());
         return status;
     }
+    public GetInspection getInspection(){
+        return null;
+    }
+    public List<GetServices> getServices(){
+        List<GetServices> lst = new ArrayList<>();
+        List<ServiceEntity> lstEntity = this.repository.findAll();
+
+
+        return null;
+    }
+
 }
