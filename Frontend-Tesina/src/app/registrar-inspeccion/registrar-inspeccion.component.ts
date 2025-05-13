@@ -37,14 +37,14 @@ export class RegistrarInspeccionComponent {
       console.log(entity);
       const addSubscription = this.service.postService(entity).subscribe({
         next: () => {
+          window.location.href = '/espera';
+
           Swal.fire({
             icon: 'success',
             title: '¡Usuario creado!',
             text: 'El proveedor fue registrado exitosamente',
             confirmButtonColor: '#3085d6',
           });
-
-          this.router.navigate(['/espera']);
         },
         error: (err) => {
           Swal.fire({

@@ -6,6 +6,7 @@ public class GetStatusService {
     private int id;
     private ServiceStatus status;
 
+
     public int getId() {
         return id;
     }

@@ -3,6 +3,7 @@ package org.example.backendtesina.services;
 import org.apache.catalina.User;
 import org.example.backendtesina.DTOs.Get.GetStatusService;
 import org.example.backendtesina.DTOs.Post.PostInspection;
+import org.example.backendtesina.entities.enums.ServiceStatus;
 import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.entities.services.InspectionEntity;
 import org.example.backendtesina.entities.services.ServiceEntity;
@@ -38,6 +39,7 @@ public class ServiceService {
         entity.setDateEntry(LocalDateTime.now());
         entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
         entity.setNombreCompleto(inspection.getNombreCompleto());
+        entity.setStatus(ServiceStatus.WAITING);
         entity.setClient(user);
         if(user.getServicios().isEmpty()){
             List<ServiceEntity> servicios = new ArrayList<>();
@@ -48,7 +50,6 @@ public class ServiceService {
             servicios.add(entity);
             user.setServicios(servicios);
         }
-
 
         repository.save(entity);
         return entity;

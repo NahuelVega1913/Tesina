@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 import { Router } from '@angular/router';
 import { AfterViewInit } from '@angular/core';
@@ -16,34 +16,46 @@ export class EsperaComponent implements AfterViewInit {
   constructor(private router: Router) {}
   private service: ServiciosService = inject(ServiciosService);
   private userService = inject(UsuarioService);
-
+  @ViewChild('mapContainer') mapContainer!: ElementRef;
   status: string = '';
+  private mapInitialized = false;
+
+  ngOnInit(): void {
+    this.getUserInformation();
+  }
 
   ngAfterViewInit(): void {
-    if (this.status === 'WAITING') {
-      const map = L.map('map').setView([-31.4188, -64.2327], 15);
+    // No hagas nada acá si hay *ngIf
+  }
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors',
-      }).addTo(map);
-
-      L.marker([-31.4188, -64.2327]).addTo(map).bindPopup('Ubicación central');
-
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 100); // puede ajustarse si hace falta
+  ngAfterViewChecked(): void {
+    if (!this.mapInitialized && this.mapContainer) {
+      this.initMap();
+      this.mapInitialized = true;
     }
   }
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+
+  initMap() {
+    const map = L.map(this.mapContainer.nativeElement).setView(
+      [-31.4188, -64.2327],
+      15
+    );
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(map);
+
+    L.marker([-31.4188, -64.2327]).addTo(map).bindPopup('Ubicación central');
+
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 100);
   }
+
   getUserInformation() {
-    const getSubscription = this.userService.getUsuarioInformation().subscribe({
+    this.service.getServiceStatus().subscribe({
       next: (res) => {
-        console.log(res);
-        //this.notificaciones = res.notificaciones;
-        //this.haveService = res.hasService;
+        this.status = res.status;
       },
       error: (err) => {
         console.log(err);
