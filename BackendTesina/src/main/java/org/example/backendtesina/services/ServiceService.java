@@ -12,6 +12,7 @@ import org.example.backendtesina.entities.enums.ServiceStatus;
 import org.example.backendtesina.entities.enums.TypeOfService;
 import org.example.backendtesina.entities.personal.EmployeeEntity;
 import org.example.backendtesina.entities.personal.UserEntity;
+import org.example.backendtesina.entities.services.CustomizationEntity;
 import org.example.backendtesina.entities.services.InspectionEntity;
 import org.example.backendtesina.entities.services.RepairEntity;
 import org.example.backendtesina.entities.services.ServiceEntity;
@@ -62,17 +63,62 @@ public class ServiceService {
         repository.save(entity);
         return entity;
     }
-    public RepairEntity registerRepair(PostRepair repair, String token){
+
+    public RepairEntity registerRepair(PostInspection inspection, String token){
         String email = jwtService.getEmailFromToken(token);
         UserEntity user = userRepository.findByEmail(email).get();
-        InspectionEntity entity = new InspectionEntity();
+        RepairEntity entity = new RepairEntity();
+        entity.setAuto(inspection.getAuto());
+        entity.setType(TypeOfService.REPAIR);
+        entity.setPaymentStatus(PaymentStatus.UNPAID);
+        entity.setDateEntry(LocalDateTime.now());
+        entity.setModelo(inspection.getModelo());
+        entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
+        entity.setNombreCompleto(inspection.getNombreCompleto());
+        entity.setStatus(ServiceStatus.WAITING);
+        entity.setClient(user);
+        if(user.getServicios().isEmpty()){
+            List<ServiceEntity> servicios = new ArrayList<>();
+            servicios.add(entity);
+            user.setServicios(servicios);
+        }else{
+            List<ServiceEntity> servicios = user.getServicios();
+            servicios.add(entity);
+            user.setServicios(servicios);
+        }
+
+        repository.save(entity);
+        return entity;
+    }
+    public CustomizationEntity registerCustomization(PostInspection inspection, String token){
+        String email = jwtService.getEmailFromToken(token);
+        UserEntity user = userRepository.findByEmail(email).get();
+        CustomizationEntity entity = new CustomizationEntity();
+        entity.setAuto(inspection.getAuto());
+        entity.setType(TypeOfService.CUSTOMIZATION);
+        entity.setPaymentStatus(PaymentStatus.UNPAID);
+        entity.setDateEntry(LocalDateTime.now());
+        entity.setModelo(inspection.getModelo());
+        entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
+        entity.setNombreCompleto(inspection.getNombreCompleto());
+        entity.setStatus(ServiceStatus.WAITING);
+        entity.setClient(user);
+        if(user.getServicios().isEmpty()){
+            List<ServiceEntity> servicios = new ArrayList<>();
+            servicios.add(entity);
+            user.setServicios(servicios);
+        }else{
+            List<ServiceEntity> servicios = user.getServicios();
+            servicios.add(entity);
+            user.setServicios(servicios);
+        }
+
+        repository.save(entity);
+        return entity;
+    }
 
 
-        return null;
-    }
-    public RepairEntity registerRepair(PostCustomization repair, String token){
-        return null;
-    }
+
     public GetStatusService getStatusService(String token){
         String email = jwtService.getEmailFromToken(token);
         UserEntity user = userRepository.findByEmail(email).get();

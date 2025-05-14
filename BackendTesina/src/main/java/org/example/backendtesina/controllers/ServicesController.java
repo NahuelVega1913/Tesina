@@ -3,7 +3,9 @@ package org.example.backendtesina.controllers;
 import org.example.backendtesina.DTOs.Get.GetServices;
 import org.example.backendtesina.DTOs.Get.GetStatusService;
 import org.example.backendtesina.DTOs.Post.PostInspection;
+import org.example.backendtesina.DTOs.Post.PostRepair;
 import org.example.backendtesina.entities.payment.CartEntity;
+import org.example.backendtesina.entities.services.CustomizationEntity;
 import org.example.backendtesina.entities.services.InspectionEntity;
 import org.example.backendtesina.entities.services.ServiceEntity;
 import org.example.backendtesina.services.ServiceService;
@@ -33,6 +35,26 @@ public class ServicesController {
     public ResponseEntity<?> post(@RequestBody PostInspection entity,@RequestHeader("Authorization") String authorizationHeader){
         String token = authorizationHeader.substring(7); // Elimina "Bearer "
         InspectionEntity cart = service.registerInspection(entity,token);
+        if(cart == null) {
+            return ResponseEntity.badRequest().body("Error");
+        }
+        return ResponseEntity.ok("");
+    }
+    @PreAuthorize("hasAnyRole('USER')")
+    @PostMapping(value = "postRepair")
+    public ResponseEntity<?> postRepair(@RequestBody PostInspection entity, @RequestHeader("Authorization") String authorizationHeader){
+        String token = authorizationHeader.substring(7); // Elimina "Bearer "
+        Object cart = service.registerRepair(entity,token);
+        if(cart == null) {
+            return ResponseEntity.badRequest().body("Error");
+        }
+        return ResponseEntity.ok("");
+    }
+    @PreAuthorize("hasAnyRole('USER')")
+    @PostMapping(value = "postCustomization")
+    public ResponseEntity<?> postCustomization(@RequestBody PostInspection entity,@RequestHeader("Authorization") String authorizationHeader){
+        String token = authorizationHeader.substring(7); // Elimina "Bearer "
+        CustomizationEntity cart = service.registerCustomization(entity,token);
         if(cart == null) {
             return ResponseEntity.badRequest().body("Error");
         }
