@@ -39,6 +39,15 @@ public class ServicesController {
         return ResponseEntity.ok("");
     }
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping(value ="registerEntry/{id}")
+    public ResponseEntity<?> registerEntry(@PathVariable int id){
+        ServiceEntity cart = service.registerEntry(id);
+        if(cart == null) {
+            return ResponseEntity.badRequest().body("Error");
+        }
+        return ResponseEntity.ok("");
+    }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @GetMapping(value = "getStatusService")
     public ResponseEntity<?> getStatus(@RequestHeader("Authorization") String authorizationHeader){
         String token = authorizationHeader.substring(7); // Elimina "Bearer "

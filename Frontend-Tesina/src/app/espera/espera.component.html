@@ -12,7 +12,10 @@
     class="w-full h-100 mt-7 rounded-2xl shadow-2xl"
   ></div>
 </div>
-} @if(status == 'IN_QUEUE'){
+}
+<!--ESPERANDO-->
+<!--EN COLA-->
+@if(status == 'IN_QUEUE'){
 <div class="p-10 bg-gray-800 h-screen">
   <div class="bg-gray-500 rounded-2xl pt-10 md:ps-30">
     <ol class="flex items-center ms-30">
@@ -22,7 +25,7 @@
             class="z-10 flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full ring-0 ring-white dark:bg-gray-700 sm:ring-8 dark:ring-gray-900 shrink-0"
           >
             <svg
-              class="w-2.5 h-2.5 text-blue-100 dark:text-blue-300"
+              class="w-2.5 h-2.5 text-green-500"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -46,10 +49,10 @@
       <li class="relative w-full mb-6">
         <div class="flex items-center">
           <div
-            class="z-10 flex items-center justify-center w-6 h-6 bg-blue-600 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0"
+            class="z-10 flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full ring-0 ring-white dark:bg-gray-700 sm:ring-8 dark:ring-gray-900 shrink-0"
           >
             <svg
-              class="w-2.5 h-2.5 text-blue-100 dark:text-blue-300"
+              class="w-2.5 h-2.5 text-gray-900 dark:text-white"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -104,7 +107,10 @@
     Su vehiculo se encuentra en espera para ser atentido
   </div>
 </div>
-} @if(status == 'PROCESS'){
+}
+<!--EN COLA-->
+<!--EN PROCESO-->
+@if(status == 'PROCESS'){
 <div class="p-10 bg-gray-800 h-screen">
   <div class="bg-gray-500 rounded-2xl pt-10 md:ps-30">
     <ol class="flex items-center md:ms-30">
@@ -196,7 +202,10 @@
     Su vehiculo se esta siendo atendido por nuestros mejores profesionales
   </div>
 </div>
-} @if(status == 'FINISHED'){
+}
+<!--EN PROCESO-->
+<!--FINALIZADO-->
+@if(status == 'FINISHED'){
 <div class="p-10 bg-gray-800 h-screen">
   <div class="bg-gray-500 rounded-2xl pt-10 md:ps-30">
     <ol class="flex items-center ms-30">
@@ -289,3 +298,4 @@
   </div>
 </div>
 }
+<!--FINALIZADO-->

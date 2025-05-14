@@ -4,13 +4,16 @@ import org.example.backendtesina.DTOs.Get.GetEmployee;
 import org.example.backendtesina.DTOs.Get.GetInspection;
 import org.example.backendtesina.DTOs.Get.GetServices;
 import org.example.backendtesina.DTOs.Get.GetStatusService;
+import org.example.backendtesina.DTOs.Post.PostCustomization;
 import org.example.backendtesina.DTOs.Post.PostInspection;
+import org.example.backendtesina.DTOs.Post.PostRepair;
 import org.example.backendtesina.entities.enums.PaymentStatus;
 import org.example.backendtesina.entities.enums.ServiceStatus;
 import org.example.backendtesina.entities.enums.TypeOfService;
 import org.example.backendtesina.entities.personal.EmployeeEntity;
 import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.entities.services.InspectionEntity;
+import org.example.backendtesina.entities.services.RepairEntity;
 import org.example.backendtesina.entities.services.ServiceEntity;
 import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.repositories.SeviceRepository;
@@ -59,6 +62,17 @@ public class ServiceService {
         repository.save(entity);
         return entity;
     }
+    public RepairEntity registerRepair(PostRepair repair, String token){
+        String email = jwtService.getEmailFromToken(token);
+        UserEntity user = userRepository.findByEmail(email).get();
+        InspectionEntity entity = new InspectionEntity();
+
+
+        return null;
+    }
+    public RepairEntity registerRepair(PostCustomization repair, String token){
+        return null;
+    }
     public GetStatusService getStatusService(String token){
         String email = jwtService.getEmailFromToken(token);
         UserEntity user = userRepository.findByEmail(email).get();
@@ -77,6 +91,7 @@ public class ServiceService {
         for (ServiceEntity s:lstEntity){
             GetServices get = new GetServices();
             get.setAuto(s.getAuto());
+            get.setId(s.getId());
             get.setType(s.getType().toString());
             get.setModelo(s.getModelo());
             if(!s.getEmpleados().isEmpty()) {
@@ -98,6 +113,17 @@ public class ServiceService {
             lst.add(get);
         }
         return lst;
+    }
+
+    public ServiceEntity registerEntry(int id){
+        ServiceEntity entity = repository.findById(id).get();
+        if(entity == null){
+            return null;
+        }
+        entity.setStatus(ServiceStatus.IN_QUEUE);
+        entity.setDateEntry(LocalDateTime.now());
+        repository.save(entity);
+        return entity;
     }
 
 }

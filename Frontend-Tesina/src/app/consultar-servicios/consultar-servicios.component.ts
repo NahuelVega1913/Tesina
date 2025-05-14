@@ -72,4 +72,15 @@ export class ConsultarServiciosComponent {
       },
     });
   }
+  registeEntry(id: number) {
+    const getSubscription = this.service.registrarIngreso(id).subscribe({
+      next: (res) => {
+        console.log(this.lst);
+        this.getProveedores();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }

@@ -11,6 +11,7 @@ public class GetServices {
     private String nombreCompleto;
     private String observacionesPrevias;
     private String auto;
+    private int id;
     private int modelo;
     private String type;
     private ServiceStatus status;
@@ -79,5 +80,13 @@ public class GetServices {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

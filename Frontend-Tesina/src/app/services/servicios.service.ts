@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
 @Injectable({
@@ -20,9 +20,45 @@ export class ServiciosService {
       }
     );
   }
+  registrarIngreso(id: number) {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.post<any>(
+      `http://localhost:8080/services/registerEntry/` + id,
+      {},
+      { headers }
+    );
+  }
   postService(body: any) {
     return this.http.post<any>(
       `http://localhost:8080/services/postService`,
+      body,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
+  postReparacion(body: any) {
+    return this.http.post<any>(
+      `http://localhost:8080/services/postRepair`,
+      body,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
+  postCustomizacion(body: any) {
+    return this.http.post<any>(
+      `http://localhost:8080/services/postCustomization`,
       body,
       {
         headers: {
