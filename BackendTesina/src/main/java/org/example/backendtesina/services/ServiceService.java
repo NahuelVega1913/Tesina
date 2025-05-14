@@ -77,6 +77,7 @@ public class ServiceService {
         for (ServiceEntity s:lstEntity){
             GetServices get = new GetServices();
             get.setAuto(s.getAuto());
+            get.setType(s.getType().toString());
             get.setModelo(s.getModelo());
             if(!s.getEmpleados().isEmpty()) {
                 List<GetEmployee> lstEmployee = new ArrayList<>();

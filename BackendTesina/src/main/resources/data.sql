@@ -74,3 +74,31 @@ INSERT INTO EMPLOYEES (
       ('1992-12-01',200000000, 'PERMANENT', 'REMOTE', 11223344, 'Carlos Ruiz',
        950000.00, 'Pasaje Luna 789', 1133445566, 'carlos.ruiz@email.com',
        'Desarrollador Backend', '2021-09-10', 'Trabaja desde el exterior');
+
+INSERT INTO service_entity (
+    nombre_completo, observaciones_previas, auto, modelo, status,
+    payment_status, type, date_entry, date_exit, cost,
+    dtype, resultado, recomendaciones, estado_general
+) VALUES (
+             'Juan Pérez', 'Ruido en motor', 'Toyota Corolla', 2020, 'FINISHED',
+             'UNPAID', 'INSPECTION', '2025-05-01 09:00:00', '2025-05-01 10:00:00', 100.0,
+             'InspectionEntity', 'Apto', 'Revisar cada 6 meses', 'Apto'
+         );
+INSERT INTO service_entity (
+    nombre_completo, observaciones_previas, auto, modelo, status,
+    payment_status, type, date_entry, date_exit, cost,
+    dtype, technicla_diagnosis, tasks_performed, spares_used
+) VALUES (
+           'María Gómez', 'No enciende', 'Ford Focus', 2018, 'PROCESS',
+             'UNPAID', 'REPAIR', '2025-05-02 08:30:00', '2025-05-03 15:00:00', 500.0,
+             'RepairEntity', 'Fallo en sistema eléctrico', 'Cambio de fusibles y revisión de cableado', 'Fusibles, batería'
+         );
+INSERT INTO service_entity (
+    nombre_completo, observaciones_previas, auto, modelo, status,
+    payment_status, type, date_entry, date_exit, cost,
+    dtype, materials_used, task_realized
+) VALUES (
+             'Luis Fernández', 'Quiere cambiar tapizado', 'Chevrolet Onix', 2021, 'WAITING',
+             'PAID', 'CUSTOMIZATION', '2025-04-28 10:00:00', '2025-05-04 18:00:00', 750.0,
+             'CustomizationEntity', 'Cuero ecológico, pegamento industrial', 'Cambio completo de tapizado interior'
+         );

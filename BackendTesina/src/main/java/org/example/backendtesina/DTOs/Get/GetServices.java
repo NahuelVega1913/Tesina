@@ -12,6 +12,7 @@ public class GetServices {
     private String observacionesPrevias;
     private String auto;
     private int modelo;
+    private String type;
     private ServiceStatus status;
     private PaymentStatus paymentStatus;
     List<GetEmployee> empleados;
@@ -70,5 +71,13 @@ public class GetServices {
 
     public void setPaymentStatus(PaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
