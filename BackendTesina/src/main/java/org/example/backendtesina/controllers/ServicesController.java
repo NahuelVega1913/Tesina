@@ -80,6 +80,17 @@ public class ServicesController {
         }
         return ResponseEntity.ok(lst);
     }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PutMapping(value = "putEmployees/{id}")
+    public ResponseEntity<?> putEmpleados(@PathVariable int id,@RequestBody List<Integer> ids){
+
+        ServiceEntity lst = service.addEmployes(id,ids);
+        if(lst == null){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(lst);
+    }
+
 
     @PutMapping (value = "modifyService")
     public ResponseEntity<?> ModifyCart(){

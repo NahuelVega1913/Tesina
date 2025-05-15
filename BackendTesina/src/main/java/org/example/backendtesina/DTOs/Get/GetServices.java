@@ -5,6 +5,7 @@ import jakarta.persistence.Enumerated;
 import org.example.backendtesina.entities.enums.PaymentStatus;
 import org.example.backendtesina.entities.enums.ServiceStatus;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class GetServices {
@@ -17,6 +18,9 @@ public class GetServices {
     private ServiceStatus status;
     private PaymentStatus paymentStatus;
     List<GetEmployee> empleados;
+    private LocalDateTime dateEntry;
+    private LocalDateTime dateExit;
+    private Double cost;
 
     public String getNombreCompleto() {
         return nombreCompleto;
@@ -88,5 +92,29 @@ public class GetServices {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public LocalDateTime getDateEntry() {
+        return dateEntry;
+    }
+
+    public void setDateEntry(LocalDateTime dateEntry) {
+        this.dateEntry = dateEntry;
+    }
+
+    public LocalDateTime getDateExit() {
+        return dateExit;
+    }
+
+    public void setDateExit(LocalDateTime dateExit) {
+        this.dateExit = dateExit;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
     }
 }

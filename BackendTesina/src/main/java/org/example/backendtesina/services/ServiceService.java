@@ -1,9 +1,6 @@
 package org.example.backendtesina.services;
 
-import org.example.backendtesina.DTOs.Get.GetEmployee;
-import org.example.backendtesina.DTOs.Get.GetInspection;
-import org.example.backendtesina.DTOs.Get.GetServices;
-import org.example.backendtesina.DTOs.Get.GetStatusService;
+import org.example.backendtesina.DTOs.Get.*;
 import org.example.backendtesina.DTOs.Post.PostCustomization;
 import org.example.backendtesina.DTOs.Post.PostInspection;
 import org.example.backendtesina.DTOs.Post.PostRepair;
@@ -17,6 +14,7 @@ import org.example.backendtesina.entities.services.InspectionEntity;
 import org.example.backendtesina.entities.services.RepairEntity;
 import org.example.backendtesina.entities.services.ServiceEntity;
 import org.example.backendtesina.jwt.JwtService;
+import org.example.backendtesina.repositories.EmployeeRepository;
 import org.example.backendtesina.repositories.SeviceRepository;
 import org.example.backendtesina.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +31,8 @@ public class ServiceService {
     SeviceRepository repository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    EmployeeRepository employeeRepository;
     @Autowired
     JwtService jwtService;
 
@@ -117,6 +117,26 @@ public class ServiceService {
         return entity;
     }
 
+    public ServiceEntity addEmployes(int id,List<Integer> ids){
+        ServiceEntity service = repository.findById(id).get();
+        List<EmployeeEntity> lstEntities = new ArrayList<>();
+        for (Integer idEmployee:ids){
+            EmployeeEntity entity = employeeRepository.findById(idEmployee).get();
+            if(entity != null){
+                if(entity.getJobs().isEmpty()){
+                    entity.setJobs(new ArrayList<>());
+                }
+                entity.getJobs().add(service);
+            }
+            if(service.getEmpleados().isEmpty()){
+                service.setEmpleados(new ArrayList<>());
+            }
+            service.getEmpleados().add(entity);
+        }
+        repository.save(service);
+        return service;
+    }
+
 
 
     public GetStatusService getStatusService(String token){
@@ -128,7 +148,103 @@ public class ServiceService {
         status.setId(entity.getId());
         return status;
     }
-    public GetInspection getInspection(){
+    public GetServices getService(int id){
+       ServiceEntity inspectionEntity = repository.findById(id).get();
+
+        if(inspectionEntity.getType().equals(TypeOfService.REPAIR)){
+            RepairEntity inspection = (RepairEntity) repository.findById(id).get();
+            GetRepair entity = new GetRepair();
+            entity.setAuto(inspection.getAuto());
+            entity.setType(inspection.getType().toString());
+            entity.setPaymentStatus(inspection.getPaymentStatus());
+            entity.setDateEntry(inspection.getDateEntry());
+            entity.setModelo(inspection.getModelo());
+            entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
+            entity.setNombreCompleto(inspection.getNombreCompleto());
+            entity.setStatus(inspection.getStatus());
+            entity.setCost(inspection.getCost());
+            entity.setId(inspection.getId());
+            entity.setDateExit(inspection.getDateExit());
+            if(!inspection.getEmpleados().isEmpty()) {
+                List<GetEmployee> lstEmployee = new ArrayList<>();
+                for (EmployeeEntity e:inspection.getEmpleados()){
+                    GetEmployee employeeDto = new GetEmployee();
+                    employeeDto.setId(e.getId());
+                    employeeDto.setPhone(e.getPhone());
+                    employeeDto.setFullName(e.getFullName());
+                    employeeDto.setPosition(e.getPosition());
+                    lstEmployee.add(employeeDto);
+                }
+                entity.setEmpleados(lstEmployee);
+            }
+
+            entity.setSparesUsed(inspection.getSparesUsed());
+            entity.setTechniclaDiagnosis(inspection.getTechniclaDiagnosis());
+            entity.setTasksPerformed(inspection.getTasksPerformed());
+            return entity;
+
+        }
+        if(inspectionEntity.getType().equals(TypeOfService.INSPECTION)){
+            InspectionEntity inspection = (InspectionEntity) repository.findById(id).get();
+            GetInspection entity = new GetInspection();
+            entity.setAuto(inspection.getAuto());
+            entity.setType(inspection.getType().toString());
+            entity.setPaymentStatus(inspection.getPaymentStatus());
+            entity.setDateEntry(inspection.getDateEntry());
+            entity.setModelo(inspection.getModelo());
+            entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
+            entity.setNombreCompleto(inspection.getNombreCompleto());
+            entity.setStatus(inspection.getStatus());
+            entity.setCost(inspection.getCost());
+            entity.setId(inspection.getId());
+            entity.setDateExit(inspection.getDateExit());
+            if(!inspection.getEmpleados().isEmpty()) {
+                List<GetEmployee> lstEmployee = new ArrayList<>();
+                for (EmployeeEntity e:inspection.getEmpleados()){
+                    GetEmployee employeeDto = new GetEmployee();
+                    employeeDto.setId(e.getId());
+                    employeeDto.setPhone(e.getPhone());
+                    employeeDto.setFullName(e.getFullName());
+                    employeeDto.setPosition(e.getPosition());
+                    lstEmployee.add(employeeDto);
+                }
+                entity.setEmpleados(lstEmployee);
+            }
+            entity.setEstadoGeneral(inspection.getEstadoGeneral());
+            entity.setRecomendaciones(inspection.getRecomendaciones());
+            entity.setResultado(inspection.getResultado());
+            return entity;
+        }
+        if(inspectionEntity.getType().equals(TypeOfService.CUSTOMIZATION)){
+            CustomizationEntity inspection = (CustomizationEntity) repository.findById(id).get();
+            GetCustomization entity = new GetCustomization();
+            entity.setAuto(inspection.getAuto());
+            entity.setType(inspection.getType().toString());
+            entity.setPaymentStatus(inspection.getPaymentStatus());
+            entity.setDateEntry(inspection.getDateEntry());
+            entity.setModelo(inspection.getModelo());
+            entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
+            entity.setNombreCompleto(inspection.getNombreCompleto());
+            entity.setStatus(inspection.getStatus());
+            entity.setCost(inspection.getCost());
+            entity.setId(inspection.getId());
+            entity.setDateExit(inspection.getDateExit());
+            if(!inspection.getEmpleados().isEmpty()) {
+                List<GetEmployee> lstEmployee = new ArrayList<>();
+                for (EmployeeEntity e:inspection.getEmpleados()){
+                    GetEmployee employeeDto = new GetEmployee();
+                    employeeDto.setId(e.getId());
+                    employeeDto.setPhone(e.getPhone());
+                    employeeDto.setFullName(e.getFullName());
+                    employeeDto.setPosition(e.getPosition());
+                    lstEmployee.add(employeeDto);
+                }
+                entity.setEmpleados(lstEmployee);
+            }
+            entity.setMaterialsUsed(inspection.getMaterialsUsed());
+            entity.setTaskRealized(inspection.getTaskRealized());
+            return entity;
+        }
         return null;
     }
     public List<GetServices> getServices(){
