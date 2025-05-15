@@ -90,10 +90,10 @@ public class ServicesController {
         return ResponseEntity.ok(lst);
     }
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
-    @PutMapping(value = "putEmployees/{id}")
-    public ResponseEntity<?> putEmpleados(@PathVariable int id,@RequestBody List<Integer> ids){
+    @PutMapping(value = "putEmployees/{id}/{idEmployee}")
+    public ResponseEntity<?> putEmpleados(@PathVariable int id,@PathVariable int idEmployee){
 
-        ServiceEntity lst = service.addEmployes(id,ids);
+        ServiceEntity lst = service.addEmployes(id,idEmployee);
         if(lst == null){
             return ResponseEntity.badRequest().build();
         }

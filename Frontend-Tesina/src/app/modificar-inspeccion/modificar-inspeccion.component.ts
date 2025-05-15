@@ -1,15 +1,17 @@
 import { Component, inject } from '@angular/core';
 import {
+  FormsModule,
   ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
 } from '@angular/forms';
 import { EmpleadosService } from '../services/empleados.service';
 import { ServiciosService } from '../services/servicios.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modificar-inspeccion',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './modificar-inspeccion.component.html',
   styleUrl: './modificar-inspeccion.component.css',
 })
@@ -18,6 +20,8 @@ export class ModificarInspeccionComponent {
   private service: ServiciosService = inject(ServiciosService);
 
   lstEmpleados: any[] = [];
+  status: string = '';
+  empleado: any = '';
 
   form = new UntypedFormGroup({
     id: new UntypedFormControl('0', []),
@@ -26,6 +30,10 @@ export class ModificarInspeccionComponent {
     auto: new UntypedFormControl('', []),
     modelo: new UntypedFormControl('', []),
     observacionesPrevias: new UntypedFormControl('', []),
+    cost: new UntypedFormControl('', []),
+    paymentStatus: new UntypedFormControl('', []),
+    status: new UntypedFormControl('', []),
+    type: new UntypedFormControl('', []),
     resultado: new UntypedFormControl('', []),
     estadoGeneral: new UntypedFormControl('', []),
     recomendaciones: new UntypedFormControl('', []),
@@ -35,6 +43,7 @@ export class ModificarInspeccionComponent {
     //Add 'implements OnInit' to the class.
     this.getEmpleados();
     this.getService();
+    this.status = localStorage.getItem('status') || '';
   }
 
   getEmpleados() {
@@ -71,5 +80,32 @@ export class ModificarInspeccionComponent {
     });
   }
 
-  save() {}
+  save() {
+    if (this.status == 'IN_QUEUE') {
+      const id = localStorage.getItem('idServicio') || 0;
+      const getSubscription = this.service
+        .pasarAProceso(Number(id), Number(this.empleado))
+        .subscribe({
+          next: (res) => {
+            console.log(this.form.value);
+
+            Swal.fire({
+              icon: 'success',
+              title: '¡Usuario creado!',
+              text: 'El proveedor fue registrado exitosamente',
+              confirmButtonColor: '#3085d6',
+            });
+          },
+          error: (err) => {
+            console.log(err);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Ocurrio un error al registrar el proveedor',
+            });
+          },
+        });
+    } else {
+    }
+  }
 }

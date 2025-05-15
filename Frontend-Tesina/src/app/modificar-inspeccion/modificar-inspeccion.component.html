@@ -15,15 +15,15 @@
           <label
             for="first_name"
             class="block mb-2 text-sm font-medium text-white text-shadow-lg"
-            >Nombre Completo</label
+            >Nombre del Cliente</label
           >
           <input
             type="text"
             formControlName="nombreCompleto"
             id="first_name"
-            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
+            class="bg-gray-300 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
             placeholder="Juan Perez"
-            [disabled]="true"
+            readonly
           />
           @if(form.get('nombreCompleto')?.invalid &&
           form.get('nombreCompleto')?.touched){
@@ -42,9 +42,9 @@
             type="text"
             formControlName="auto"
             id="first_name"
-            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
+            class="bg-gray-300 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
             placeholder="Fiat 600"
-            required
+            readonly
           />
           @if(form.get('auto')?.invalid && form.get('auto')?.touched){
           <div class="text-white font-bold drop-shadow-md">
@@ -53,6 +53,7 @@
           }
         </div>
       </div>
+
       <div class="grid gap-6 mb-6 md:grid-cols-2">
         <div>
           <label
@@ -64,9 +65,9 @@
             type="number"
             formControlName="modelo"
             id="last_name"
-            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
+            class="bg-gray-300 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
             placeholder="2004"
-            required
+            readonly
           />
           @if(form.get('modelo')?.invalid && form.get('modelo')?.touched){
           <div class="text-white font-bold drop-shadow-md">
@@ -74,6 +75,7 @@
           </div>
           }
         </div>
+        @if(status == "PROCESS"){
         <div class="w-full">
           <label for="company" class="block mb-2 text-sm font-medium text-white"
             >Estado General</label
@@ -96,6 +98,7 @@
           </div>
           }
         </div>
+        }
       </div>
       <div class="flex flex-col m w-full justify-between">
         <label
@@ -107,11 +110,35 @@
           id="message"
           rows="4"
           formControlName="observacionesPrevias"
-          class="block p-2.5 w-full text-sm mb-5 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          class="block p-2.5 h-auto w-full text-sm mb-5 text-gray-900 bg-gray-200 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Escribe tu mensaje aqui..."
-          [disabled]="true"
+          readonly
         ></textarea>
       </div>
+      <div class="grid gap-6 mb-6 md:grid-cols-2">
+        <div class="w-full">
+          <label for="company" class="block mb-2 text-sm font-medium text-white"
+            >Empleado Asignado</label
+          >
+          <select
+            id="countries"
+            [(ngModel)]="empleado"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
+          >
+            <option value="" selected>Seleccione un empleado</option>
+            @for (item of lstEmpleados; track $index) {
+            <option [value]="item.id">
+              {{ item.fullName + " (" + item.position + ")" }}
+            </option>
+            > }
+          </select>
+
+          <div class="text-white font-bold drop-shadow-md">
+            Seleccione un Empleado
+          </div>
+        </div>
+      </div>
+      @if(status == "PROCESS"){
       <div class="flex flex-col m w-full justify-between">
         <label
           for="message"
@@ -140,6 +167,7 @@
           placeholder="Escribe tu mensaje aqui..."
         ></textarea>
       </div>
+      }
       <button
         type="submit"
         class="text-white bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"

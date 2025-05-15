@@ -79,6 +79,17 @@ export class ServiciosService {
       }
     );
   }
+  pasarAProceso(id: number, idEmpleado: number) {
+    return this.http.put<any>(
+      `http://localhost:8080/services/putEmployees/${id}/${idEmpleado}`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
   getServices() {
     return this.http.get<any>(`http://localhost:8080/services/getAll`, {
       headers: {

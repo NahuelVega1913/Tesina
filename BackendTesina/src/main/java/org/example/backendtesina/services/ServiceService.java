@@ -117,10 +117,10 @@ public class ServiceService {
         return entity;
     }
 
-    public ServiceEntity addEmployes(int id,List<Integer> ids){
+    public ServiceEntity addEmployes(int id, int idEmployee){
         ServiceEntity service = repository.findById(id).get();
         List<EmployeeEntity> lstEntities = new ArrayList<>();
-        for (Integer idEmployee:ids){
+            service.setStatus(ServiceStatus.PROCESS);
             EmployeeEntity entity = employeeRepository.findById(idEmployee).get();
             if(entity != null){
                 if(entity.getJobs().isEmpty()){
@@ -132,7 +132,7 @@ public class ServiceService {
                 service.setEmpleados(new ArrayList<>());
             }
             service.getEmpleados().add(entity);
-        }
+
         repository.save(service);
         return service;
     }
