@@ -5,6 +5,7 @@ import {
   UntypedFormGroup,
 } from '@angular/forms';
 import { EmpleadosService } from '../services/empleados.service';
+import { ServiciosService } from '../services/servicios.service';
 
 @Component({
   selector: 'app-modificar-inspeccion',
@@ -14,6 +15,8 @@ import { EmpleadosService } from '../services/empleados.service';
 })
 export class ModificarInspeccionComponent {
   private serviceEmpleados: EmpleadosService = inject(EmpleadosService);
+  private service: ServiciosService = inject(ServiciosService);
+
   lstEmpleados: any[] = [];
 
   form = new UntypedFormGroup({
@@ -23,13 +26,44 @@ export class ModificarInspeccionComponent {
     auto: new UntypedFormControl('', []),
     modelo: new UntypedFormControl('', []),
     observacionesPrevias: new UntypedFormControl('', []),
+    resultado: new UntypedFormControl('', []),
+    estadoGeneral: new UntypedFormControl('', []),
+    recomendaciones: new UntypedFormControl('', []),
   });
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.getEmpleados();
+    this.getService();
+  }
 
   getEmpleados() {
     const getSubscription = this.serviceEmpleados.getEmployees().subscribe({
       next: (res) => {
         this.lstEmpleados = res;
         console.log(this.lstEmpleados);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  getService() {
+    const id = localStorage.getItem('idServicio') || 0;
+    const getSubscription = this.service.getServiceById(Number(id)).subscribe({
+      next: (res) => {
+        this.form.patchValue(res);
+        console.log(this.form.value);
+        const fecha = new Date(res.registerDate);
+        const año = fecha.getFullYear();
+        const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+        const dia = String(fecha.getDate()).padStart(2, '0');
+        const fechaFormateada = `${año}-${mes}-${dia}`;
+
+        this.form.patchValue({
+          ...res,
+          registerDate: fechaFormateada,
+        });
       },
       error: (err) => {
         console.log(err);

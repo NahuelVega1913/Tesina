@@ -28,6 +28,9 @@ import { EsperaComponent } from './espera/espera.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { roleGuard } from './guards/role.guard';
 import { ConsultarServiciosComponent } from './consultar-servicios/consultar-servicios.component';
+import { ModificarCustomizacionComponent } from './modificar-customizacion/modificar-customizacion.component';
+import { ModificarReparacionComponent } from './modificar-reparacion/modificar-reparacion.component';
+import { ModificarInspeccionComponent } from './modificar-inspeccion/modificar-inspeccion.component';
 
 export const routes: Routes = [
   {
@@ -116,6 +119,7 @@ export const routes: Routes = [
       },
       { path: 'servicios', component: ServiciosComponent },
       { path: 'registrar-inspeccion', component: RegistrarInspeccionComponent },
+
       {
         path: 'registrar-personalizacion',
         component: RegistrarPersonalizacionComponent,
@@ -130,6 +134,12 @@ export const routes: Routes = [
         component: ConsultarServiciosComponent,
         data: { role: ['ADMIN', 'SUPERADMIN'] },
       },
+      {
+        path: 'modificar-customizacion',
+        component: ModificarCustomizacionComponent,
+      },
+      { path: 'modificar-reparacion', component: ModificarReparacionComponent },
+      { path: 'modificar-inspeccion', component: ModificarInspeccionComponent },
     ],
   },
 ];

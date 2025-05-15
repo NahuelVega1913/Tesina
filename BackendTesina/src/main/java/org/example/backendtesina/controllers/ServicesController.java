@@ -30,6 +30,15 @@ public class ServicesController {
         }
         return ResponseEntity.ok(lst);
     }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @GetMapping(value = "getService/{id}")
+    public ResponseEntity<?> getSerive(@PathVariable int id){
+        GetServices lst = service.getService(id);
+        if(lst == null){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(lst);
+    }
     @PreAuthorize("hasAnyRole('USER')")
     @PostMapping(value = "postService")
     public ResponseEntity<?> post(@RequestBody PostInspection entity,@RequestHeader("Authorization") String authorizationHeader){

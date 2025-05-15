@@ -7,7 +7,7 @@
     <p
       class="font-bold text-2xl text-white text-6xl text-shadow-lg ps-10 pt-5 sm:mb-5 md:mt-5"
     >
-      Inspeccion
+      Modificar Inspeccion
     </p>
     <form [formGroup]="form" (submit)="save()" class="p-10">
       <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -23,7 +23,7 @@
             id="first_name"
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
             placeholder="Juan Perez"
-            required
+            [disabled]="true"
           />
           @if(form.get('nombreCompleto')?.invalid &&
           form.get('nombreCompleto')?.touched){
@@ -32,26 +32,6 @@
           </div>
           }
         </div>
-        <div>
-          <label
-            for="last_name"
-            class="block mb-2 text-sm font-medium text-white"
-            >DNI</label
-          >
-          <input
-            type="number"
-            formControlName="dni"
-            id="last_name"
-            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
-            placeholder="20000000"
-            required
-          />
-          @if(form.get('dni')?.invalid && form.get('dni')?.touched){
-          <div class="text-white font-bold drop-shadow-md">Complete el DNI</div>
-          }
-        </div>
-      </div>
-      <div class="grid gap-6 mb-6 md:grid-cols-2">
         <div>
           <label
             for="first_name"
@@ -72,6 +52,8 @@
           </div>
           }
         </div>
+      </div>
+      <div class="grid gap-6 mb-6 md:grid-cols-2">
         <div>
           <label
             for="last_name"
@@ -92,6 +74,28 @@
           </div>
           }
         </div>
+        <div class="w-full">
+          <label for="company" class="block mb-2 text-sm font-medium text-white"
+            >Estado General</label
+          >
+          <select
+            id="countries"
+            formControlName="estadoGeneral"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
+          >
+            <option value="" selected>Elige un Estado</option>
+            <option value="Bueno">Bueno</option>
+            <option value="Bueno">Regular</option>
+            <option value="Bueno">Malo</option>
+            >
+          </select>
+          @if(form.get('estadoGeneral')?.value == "" &&
+          form.get('estadoGeneral')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete el Estado
+          </div>
+          }
+        </div>
       </div>
       <div class="flex flex-col m w-full justify-between">
         <label
@@ -105,13 +109,42 @@
           formControlName="observacionesPrevias"
           class="block p-2.5 w-full text-sm mb-5 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Escribe tu mensaje aqui..."
+          [disabled]="true"
+        ></textarea>
+      </div>
+      <div class="flex flex-col m w-full justify-between">
+        <label
+          for="message"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Resultado</label
+        >
+        <textarea
+          id="message"
+          rows="4"
+          formControlName="recomendaciones"
+          class="block p-2.5 w-full text-sm mb-5 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Escribe tu mensaje aqui..."
+        ></textarea>
+      </div>
+      <div class="flex flex-col m w-full justify-between">
+        <label
+          for="message"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Recomendaciones</label
+        >
+        <textarea
+          id="message"
+          rows="4"
+          formControlName="recomendaciones"
+          class="block p-2.5 w-full text-sm mb-5 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Escribe tu mensaje aqui..."
         ></textarea>
       </div>
       <button
         type="submit"
         class="text-white bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
       >
-        Crear
+        Regitrar
       </button>
     </form>
   </div>

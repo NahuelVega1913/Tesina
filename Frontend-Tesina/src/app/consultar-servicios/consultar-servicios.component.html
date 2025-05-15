@@ -413,14 +413,31 @@
         >
           Ver
         </button>
-
+        @if(i.type == 'INSPECTION'){
         <button
-          (click)="redirectTo('/modificarRepuesto', i.id)"
+          (click)="redirectTo('/modificar-inspeccion', i.id)"
           type="button"
           class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
         >
           Ingresar al Taller
         </button>
+        } @else if(i.type == 'REPAIR') {
+        <button
+          (click)="redirectTo('/modificar-reparacion', i.id)"
+          type="button"
+          class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+        >
+          Ingresar al Taller
+        </button>
+        } @else if(i.type == 'CUSTOMIZATION') {
+        <button
+          (click)="redirectTo('/modificar-customizacion', i.id)"
+          type="button"
+          class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+        >
+          Ingresar al Taller
+        </button>
+        }
       </div>
       } }
     </div>

@@ -2,6 +2,7 @@ package org.example.backendtesina.DTOs.Get;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import org.example.backendtesina.DTOs.Login.RegisterDto;
 import org.example.backendtesina.entities.enums.PaymentStatus;
 import org.example.backendtesina.entities.enums.ServiceStatus;
 
@@ -21,6 +22,7 @@ public class GetServices {
     private LocalDateTime dateEntry;
     private LocalDateTime dateExit;
     private Double cost;
+    private RegisterDto client;
 
     public String getNombreCompleto() {
         return nombreCompleto;
@@ -116,5 +118,13 @@ public class GetServices {
 
     public void setCost(Double cost) {
         this.cost = cost;
+    }
+
+    public RegisterDto getClient() {
+        return client;
+    }
+
+    public void setClient(RegisterDto client) {
+        this.client = client;
     }
 }

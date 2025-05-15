@@ -162,9 +162,12 @@ public class ServiceService {
             entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
             entity.setNombreCompleto(inspection.getNombreCompleto());
             entity.setStatus(inspection.getStatus());
+            entity.setNombreCompleto(inspection.getNombreCompleto());
             entity.setCost(inspection.getCost());
             entity.setId(inspection.getId());
             entity.setDateExit(inspection.getDateExit());
+
+
             if(!inspection.getEmpleados().isEmpty()) {
                 List<GetEmployee> lstEmployee = new ArrayList<>();
                 for (EmployeeEntity e:inspection.getEmpleados()){
@@ -189,6 +192,7 @@ public class ServiceService {
             GetInspection entity = new GetInspection();
             entity.setAuto(inspection.getAuto());
             entity.setType(inspection.getType().toString());
+            entity.setNombreCompleto(inspection.getNombreCompleto());
             entity.setPaymentStatus(inspection.getPaymentStatus());
             entity.setDateEntry(inspection.getDateEntry());
             entity.setModelo(inspection.getModelo());
@@ -220,6 +224,7 @@ public class ServiceService {
             GetCustomization entity = new GetCustomization();
             entity.setAuto(inspection.getAuto());
             entity.setType(inspection.getType().toString());
+            entity.setNombreCompleto(inspection.getNombreCompleto());
             entity.setPaymentStatus(inspection.getPaymentStatus());
             entity.setDateEntry(inspection.getDateEntry());
             entity.setModelo(inspection.getModelo());

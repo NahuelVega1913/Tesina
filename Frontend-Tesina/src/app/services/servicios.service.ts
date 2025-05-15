@@ -68,6 +68,17 @@ export class ServiciosService {
       }
     );
   }
+  getServiceById(id: number) {
+    return this.http.get<any>(
+      `http://localhost:8080/services/getService/${id}`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
   getServices() {
     return this.http.get<any>(`http://localhost:8080/services/getAll`, {
       headers: {

@@ -52,7 +52,7 @@ export class ConsultarServiciosComponent {
 
   redirectTo(url: string, id: number) {
     window.location.href = url;
-    localStorage.setItem('idRepuesto', id.toString());
+    localStorage.setItem('idServicio', id.toString());
     // this.router.navigate([`${url}`]);
   }
   redirectToTo(url: string) {
