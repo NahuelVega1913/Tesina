@@ -30,7 +30,7 @@ export class ModificarInspeccionComponent {
     auto: new UntypedFormControl('', []),
     modelo: new UntypedFormControl('', []),
     observacionesPrevias: new UntypedFormControl('', []),
-    empleado: new UntypedFormControl('', []),
+    idEmpleado: new UntypedFormControl('', []),
     cost: new UntypedFormControl('', []),
     paymentStatus: new UntypedFormControl('', []),
     status: new UntypedFormControl('', []),
@@ -45,6 +45,9 @@ export class ModificarInspeccionComponent {
     this.getEmpleados();
     this.getService();
     this.status = localStorage.getItem('status') || '';
+    if (this.status == 'PROCESS') {
+      this.form.get('idEmpleado')?.disable();
+    }
   }
 
   getEmpleados() {
@@ -85,7 +88,7 @@ export class ModificarInspeccionComponent {
     if (this.status == 'IN_QUEUE') {
       const id = localStorage.getItem('idServicio') || 0;
       const getSubscription = this.service
-        .pasarAProceso(Number(id), Number(this.form.value.empleado))
+        .pasarAProceso(Number(id), Number(this.form.value.idEmpleado))
         .subscribe({
           next: (res) => {
             console.log(this.form.value);

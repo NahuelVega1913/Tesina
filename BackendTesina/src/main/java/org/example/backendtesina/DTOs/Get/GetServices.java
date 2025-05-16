@@ -19,6 +19,7 @@ public class GetServices {
     private ServiceStatus status;
     private PaymentStatus paymentStatus;
     List<GetEmployee> empleados;
+    private int idEmpleado;
     private LocalDateTime dateEntry;
     private LocalDateTime dateExit;
     private Double cost;
@@ -126,5 +127,14 @@ public class GetServices {
 
     public void setClient(RegisterDto client) {
         this.client = client;
+    }
+
+
+    public int getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
     }
 }

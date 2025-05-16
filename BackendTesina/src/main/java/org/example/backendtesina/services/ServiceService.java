@@ -184,6 +184,8 @@ public class ServiceService {
                 for (EmployeeEntity e:inspection.getEmpleados()){
                     GetEmployee employeeDto = new GetEmployee();
                     employeeDto.setId(e.getId());
+                    entity.setIdEmpleado(e.getId());
+
                     employeeDto.setPhone(e.getPhone());
                     employeeDto.setFullName(e.getFullName());
                     employeeDto.setPosition(e.getPosition());
@@ -218,6 +220,7 @@ public class ServiceService {
                 for (EmployeeEntity e:inspection.getEmpleados()){
                     GetEmployee employeeDto = new GetEmployee();
                     employeeDto.setId(e.getId());
+                    entity.setIdEmpleado(e.getId());
                     employeeDto.setPhone(e.getPhone());
                     employeeDto.setFullName(e.getFullName());
                     employeeDto.setPosition(e.getPosition());
@@ -250,6 +253,8 @@ public class ServiceService {
                 for (EmployeeEntity e:inspection.getEmpleados()){
                     GetEmployee employeeDto = new GetEmployee();
                     employeeDto.setId(e.getId());
+                    entity.setIdEmpleado(e.getId());
+
                     employeeDto.setPhone(e.getPhone());
                     employeeDto.setFullName(e.getFullName());
                     employeeDto.setPosition(e.getPosition());

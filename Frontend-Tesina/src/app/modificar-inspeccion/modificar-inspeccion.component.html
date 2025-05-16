@@ -75,7 +75,65 @@
           </div>
           }
         </div>
-        @if(status == "PROCESS"){
+      </div>
+      <div class="flex flex-col m w-full justify-between">
+        <label
+          for="message"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Observaciones Previas</label
+        >
+        <textarea
+          id="message"
+          rows="4"
+          formControlName="observacionesPrevias"
+          class="block p-2.5 h-auto w-full text-sm mb-5 text-gray-900 bg-gray-200 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Escribe tu mensaje aqui..."
+          readonly
+        ></textarea>
+      </div>
+      <div class="grid gap-6 mb-6 md:grid-cols-2">
+        @if(status == "IN_QUEUE"){
+        <div class="w-full">
+          <label for="company" class="block mb-2 text-sm font-medium text-white"
+            >Empleado Asignado</label
+          >
+          <select
+            id="countries"
+            formControlName="idEmpleado"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
+          >
+            @for (item of lstEmpleados; track $index) {
+            <option [value]="item.id">
+              {{ item.fullName + " (" + item.position + ")" }}
+            </option>
+            > }
+          </select>
+
+          @if(form.get('idEmpleado')?.value == "" &&
+          form.get('idEmpleado')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Seleccione un Empleado
+          </div>
+          }
+        </div>
+        }@else {
+        <div class="w-full">
+          <label for="company" class="block mb-2 text-sm font-medium text-white"
+            >Empleado Asignado</label
+          >
+          <select
+            id="countries"
+            formControlName="idEmpleado"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
+          >
+            @for (item of lstEmpleados; track $index) {
+            <option [value]="item.id">
+              {{ item.fullName + " (" + item.position + ")" }}
+            </option>
+            > }
+          </select>
+        </div>
+        } @if(status == "PROCESS"){
         <div class="w-full">
           <label for="company" class="block mb-2 text-sm font-medium text-white"
             >Estado General</label
@@ -100,43 +158,6 @@
         </div>
         }
       </div>
-      <div class="flex flex-col m w-full justify-between">
-        <label
-          for="message"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Observaciones Previas</label
-        >
-        <textarea
-          id="message"
-          rows="4"
-          formControlName="observacionesPrevias"
-          class="block p-2.5 h-auto w-full text-sm mb-5 text-gray-900 bg-gray-200 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-          placeholder="Escribe tu mensaje aqui..."
-          readonly
-        ></textarea>
-      </div>
-      <div class="grid gap-6 mb-6 md:grid-cols-2">
-        <div class="w-full">
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
-            >Empleado Asignado</label
-          >
-          <select
-            id="countries"
-            formControlName="empleado"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
-          >
-            @for (item of lstEmpleados; track $index) {
-            <option [value]="item.id">
-              {{ item.fullName + " (" + item.position + ")" }}
-            </option>
-            > }
-          </select>
-
-          <div class="text-white font-bold drop-shadow-md">
-            Seleccione un Empleado
-          </div>
-        </div>
-      </div>
       @if(status == "PROCESS"){
       <div class="flex flex-col m w-full justify-between">
         <label
@@ -147,12 +168,18 @@
         <textarea
           id="message"
           rows="4"
-          formControlName="recomendaciones"
-          class="block p-2.5 w-full text-sm mb-5 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          required
+          formControlName="resultado"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Escribe tu mensaje aqui..."
         ></textarea>
+        @if (form.get('resultado')?.invalid && form.get('resultado')?.touched) {
+        <div class="text-white font-bold drop-shadow-md">
+          Complete el Resultado
+        </div>
+        }
       </div>
-      <div class="flex flex-col m w-full justify-between">
+      <div class="flex flex-col mt-3 m w-full justify-between">
         <label
           for="message"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -161,15 +188,22 @@
         <textarea
           id="message"
           rows="4"
+          required
           formControlName="recomendaciones"
-          class="block p-2.5 w-full text-sm mb-5 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Escribe tu mensaje aqui..."
         ></textarea>
+        @if(form.get('recomendaciones')?.invalid &&
+        form.get('recomendaciones')?.touched){
+        <div class="text-white font-bold drop-shadow-md">
+          Complete las recomendaciones
+        </div>
+        }
       </div>
       }
       <button
         type="submit"
-        class="text-white bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+        class="text-white mt-5 bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
       >
         Regitrar
       </button>
