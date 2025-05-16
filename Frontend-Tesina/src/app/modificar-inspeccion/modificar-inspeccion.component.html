@@ -122,10 +122,9 @@
           >
           <select
             id="countries"
-            [(ngModel)]="empleado"
+            formControlName="empleado"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
           >
-            <option value="" selected>Seleccione un empleado</option>
             @for (item of lstEmpleados; track $index) {
             <option [value]="item.id">
               {{ item.fullName + " (" + item.position + ")" }}

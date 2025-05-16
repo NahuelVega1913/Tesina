@@ -1,5 +1,6 @@
 package org.example.backendtesina.controllers;
 
+import org.example.backendtesina.DTOs.Get.GetInspection;
 import org.example.backendtesina.DTOs.Get.GetServices;
 import org.example.backendtesina.DTOs.Get.GetStatusService;
 import org.example.backendtesina.DTOs.Post.PostInspection;
@@ -94,6 +95,16 @@ public class ServicesController {
     public ResponseEntity<?> putEmpleados(@PathVariable int id,@PathVariable int idEmployee){
 
         ServiceEntity lst = service.addEmployes(id,idEmployee);
+        if(lst == null){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(lst);
+    }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping(value = "finishInspection")
+    public ResponseEntity<?> finishInspection(@RequestBody GetInspection inspection){
+
+        InspectionEntity lst = service.FinishInspection(inspection);
         if(lst == null){
             return ResponseEntity.badRequest().build();
         }

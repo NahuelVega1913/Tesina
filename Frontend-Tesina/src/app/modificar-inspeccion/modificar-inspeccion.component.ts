@@ -30,6 +30,7 @@ export class ModificarInspeccionComponent {
     auto: new UntypedFormControl('', []),
     modelo: new UntypedFormControl('', []),
     observacionesPrevias: new UntypedFormControl('', []),
+    empleado: new UntypedFormControl('', []),
     cost: new UntypedFormControl('', []),
     paymentStatus: new UntypedFormControl('', []),
     status: new UntypedFormControl('', []),
@@ -84,7 +85,7 @@ export class ModificarInspeccionComponent {
     if (this.status == 'IN_QUEUE') {
       const id = localStorage.getItem('idServicio') || 0;
       const getSubscription = this.service
-        .pasarAProceso(Number(id), Number(this.empleado))
+        .pasarAProceso(Number(id), Number(this.form.value.empleado))
         .subscribe({
           next: (res) => {
             console.log(this.form.value);
@@ -106,6 +107,35 @@ export class ModificarInspeccionComponent {
           },
         });
     } else {
+      if (this.form.valid) {
+        const entity: any = this.form.value;
+        console.log(entity);
+        const addSubscription = this.service
+          .finishInspection(entity)
+          .subscribe({
+            next: () => {
+              Swal.fire({
+                icon: 'success',
+                title: '¡Usuario creado!',
+                text: 'El proveedor fue registrado exitosamente',
+                confirmButtonColor: '#3085d6',
+              });
+            },
+            error: (err) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocurrio un error al registrar el proveedor',
+              });
+            },
+          });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Complete todos los campos obligatorios',
+        });
+      }
     }
   }
 }

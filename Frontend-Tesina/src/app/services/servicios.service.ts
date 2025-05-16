@@ -68,6 +68,18 @@ export class ServiciosService {
       }
     );
   }
+  finishInspection(body: any) {
+    return this.http.post<any>(
+      `http://localhost:8080/services/finishInspection`,
+      body,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
   getServiceById(id: number) {
     return this.http.get<any>(
       `http://localhost:8080/services/getService/${id}`,
@@ -80,14 +92,15 @@ export class ServiciosService {
     );
   }
   pasarAProceso(id: number, idEmpleado: number) {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    });
+
     return this.http.put<any>(
       `http://localhost:8080/services/putEmployees/${id}/${idEmpleado}`,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json',
-        },
-      }
+      {}, // el cuerpo va vacío si no necesitas enviar datos
+      { headers } // opciones, incluyendo headers
     );
   }
   getServices() {

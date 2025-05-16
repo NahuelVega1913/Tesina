@@ -137,6 +137,17 @@ public class ServiceService {
         return service;
     }
 
+    public InspectionEntity FinishInspection(GetInspection dto){
+        InspectionEntity entity = (InspectionEntity) repository.findById(dto.getId()).get();
+        entity.setEstadoGeneral(dto.getEstadoGeneral());
+        entity.setRecomendaciones(dto.getRecomendaciones());
+        entity.setResultado(dto.getResultado());
+        entity.setCost(dto.getCost());
+        entity.setStatus(ServiceStatus.FINISHED);
+        repository.save(entity);
+        return entity;
+    }
+
 
 
     public GetStatusService getStatusService(String token){

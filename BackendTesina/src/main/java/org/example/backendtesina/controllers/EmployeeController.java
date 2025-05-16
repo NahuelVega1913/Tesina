@@ -17,7 +17,7 @@ public class EmployeeController {
     @Autowired
     EmployeeService service;
 
-    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN','USER')")
     @GetMapping(value = "getAll")
     public ResponseEntity<?> getAll(){
         List<GetEmployee> lst = service.getAll();
