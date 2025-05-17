@@ -3,7 +3,7 @@ package org.example.backendtesina.DTOs.Get;
 public class GetCustomization extends GetServices {
 
     private String materialsUsed;
-    private String TaskRealized;
+    private String taskRealized;
 
     public String getMaterialsUsed() {
         return materialsUsed;
@@ -13,11 +13,12 @@ public class GetCustomization extends GetServices {
         this.materialsUsed = materialsUsed;
     }
 
+
     public String getTaskRealized() {
-        return TaskRealized;
+        return taskRealized;
     }
 
     public void setTaskRealized(String taskRealized) {
-        TaskRealized = taskRealized;
+        this.taskRealized = taskRealized;
     }
 }

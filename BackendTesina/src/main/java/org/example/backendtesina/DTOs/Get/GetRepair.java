@@ -3,7 +3,7 @@ package org.example.backendtesina.DTOs.Get;
 public class GetRepair extends GetServices {
 
     private String techniclaDiagnosis;
-    private String TasksPerformed;
+    private String tasksPerformed;
     private String sparesUsed;
 
     public String getTechniclaDiagnosis() {
@@ -14,13 +14,7 @@ public class GetRepair extends GetServices {
         this.techniclaDiagnosis = techniclaDiagnosis;
     }
 
-    public String getTasksPerformed() {
-        return TasksPerformed;
-    }
 
-    public void setTasksPerformed(String tasksPerformed) {
-        TasksPerformed = tasksPerformed;
-    }
 
     public String getSparesUsed() {
         return sparesUsed;
@@ -28,5 +22,13 @@ public class GetRepair extends GetServices {
 
     public void setSparesUsed(String sparesUsed) {
         this.sparesUsed = sparesUsed;
+    }
+
+    public String getTasksPerformed() {
+        return tasksPerformed;
+    }
+
+    public void setTasksPerformed(String tasksPerformed) {
+        this.tasksPerformed = tasksPerformed;
     }
 }

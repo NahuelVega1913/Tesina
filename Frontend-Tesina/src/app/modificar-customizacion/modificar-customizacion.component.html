@@ -169,12 +169,12 @@
           id="message"
           rows="4"
           required
-          formControlName="TaskRealized"
+          formControlName="taskRealized"
           class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Escribe tu mensaje aqui..."
         ></textarea>
-        @if(form.get('TaskRealized')?.invalid &&
-        form.get('TaskRealized')?.touched){
+        @if(form.get('taskRealized')?.invalid &&
+        form.get('taskRealized')?.touched){
         <div class="text-white font-bold drop-shadow-md">
           Complete las Tareas
         </div>

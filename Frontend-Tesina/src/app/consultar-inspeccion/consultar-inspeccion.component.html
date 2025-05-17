@@ -7,7 +7,7 @@
     <p
       class="font-bold text-2xl text-white text-6xl text-shadow-lg ps-10 pt-5 sm:mb-5 md:mt-5"
     >
-      Consultar Reparacion
+      Modificar Inspeccion
     </p>
     <form [formGroup]="form" class="p-10">
       <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -134,47 +134,47 @@
           </select>
         </div>
         }
+        <div class="w-full">
+          <label for="company" class="block mb-2 text-sm font-medium text-white"
+            >Estado General</label
+          >
+          <select
+            id="countries"
+            formControlName="estadoGeneral"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
+          >
+            <option value="" selected>Elige un Estado</option>
+            <option value="Bueno">Bueno</option>
+            <option value="Bueno">Regular</option>
+            <option value="Bueno">Malo</option>
+            >
+          </select>
+          @if(form.get('estadoGeneral')?.value == "" &&
+          form.get('estadoGeneral')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete el Estado
+          </div>
+          }
+        </div>
       </div>
 
       <div class="flex flex-col m w-full justify-between">
         <label
           for="message"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Diagnostico Tecnico</label
+          >Resultado</label
         >
         <textarea
           id="message"
           rows="4"
           required
-          formControlName="techniclaDiagnosis"
+          formControlName="resultado"
           class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Escribe tu mensaje aqui..."
         ></textarea>
-        @if (form.get('techniclaDiagnosis')?.invalid &&
-        form.get('techniclaDiagnosis')?.touched) {
+        @if (form.get('resultado')?.invalid && form.get('resultado')?.touched) {
         <div class="text-white font-bold drop-shadow-md">
           Complete el Resultado
-        </div>
-        }
-      </div>
-      <div class="flex flex-col m w-full justify-between mt-5">
-        <label
-          for="message"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Tareas Realizadas</label
-        >
-        <textarea
-          id="message"
-          rows="4"
-          required
-          formControlName="TasksPerformed"
-          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-          placeholder="Escribe tu mensaje aqui..."
-        ></textarea>
-        @if (form.get('TasksPerformed')?.invalid &&
-        form.get('TasksPerformed')?.touched) {
-        <div class="text-white font-bold drop-shadow-md">
-          Complete las tareas realizadas
         </div>
         }
       </div>
@@ -182,18 +182,18 @@
         <label
           for="message"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Repuestos Usados</label
+          >Recomendaciones</label
         >
         <textarea
           id="message"
           rows="4"
           required
-          formControlName="sparesUsed"
+          formControlName="recomendaciones"
           class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Escribe tu mensaje aqui..."
         ></textarea>
-        @if(form.get('sparesUsed')?.invalid &&
-        form.get('TasksPerformed')?.touched){
+        @if(form.get('recomendaciones')?.invalid &&
+        form.get('recomendaciones')?.touched){
         <div class="text-white font-bold drop-shadow-md">
           Complete las recomendaciones
         </div>
@@ -217,6 +217,13 @@
         <div class="text-white font-bold drop-shadow-md">Complete el Costo</div>
         }
       </div>
+
+      <button
+        type="submit"
+        class="text-white mt-5 bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+      >
+        Regitrar
+      </button>
     </form>
   </div>
 </div>

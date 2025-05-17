@@ -36,7 +36,7 @@ export class ModificarReparacionComponent {
     status: new UntypedFormControl('', []),
     type: new UntypedFormControl('', []),
     techniclaDiagnosis: new UntypedFormControl('', []),
-    TasksPerformed: new UntypedFormControl('', []),
+    tasksPerformed: new UntypedFormControl('', []),
     sparesUsed: new UntypedFormControl('', []),
   });
   ngOnInit(): void {

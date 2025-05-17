@@ -36,7 +36,7 @@ export class ConsultarReparacionComponent {
     status: new UntypedFormControl('', []),
     type: new UntypedFormControl('', []),
     techniclaDiagnosis: new UntypedFormControl('', []),
-    TasksPerformed: new UntypedFormControl('', []),
+    tasksPerformed: new UntypedFormControl('', []),
     sparesUsed: new UntypedFormControl('', []),
   });
   ngOnInit(): void {
@@ -51,7 +51,7 @@ export class ConsultarReparacionComponent {
     this.form.get('paymentStatus')?.disable();
     this.form.get('type')?.disable();
     this.form.get('techniclaDiagnosis')?.disable();
-    this.form.get('TasksPerformed')?.disable();
+    this.form.get('tasksPerformed')?.disable();
     this.form.get('sparesUsed')?.disable();
   }
 

@@ -36,7 +36,7 @@ export class ModificarCustomizacionComponent {
     status: new UntypedFormControl('', []),
     type: new UntypedFormControl('', []),
     materialsUsed: new UntypedFormControl('', []),
-    TaskRealized: new UntypedFormControl('', []),
+    taskRealized: new UntypedFormControl('', []),
   });
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.

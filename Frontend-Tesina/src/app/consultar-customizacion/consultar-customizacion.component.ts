@@ -1,11 +1,94 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
+import { EmpleadosService } from '../services/empleados.service';
+import { ServiciosService } from '../services/servicios.service';
 
 @Component({
   selector: 'app-consultar-customizacion',
-  imports: [],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './consultar-customizacion.component.html',
-  styleUrl: './consultar-customizacion.component.css'
+  styleUrl: './consultar-customizacion.component.css',
 })
 export class ConsultarCustomizacionComponent {
+  private serviceEmpleados: EmpleadosService = inject(EmpleadosService);
+  private service: ServiciosService = inject(ServiciosService);
 
+  lstEmpleados: any[] = [];
+  status: string = '';
+  empleado: any = '';
+
+  form = new UntypedFormGroup({
+    id: new UntypedFormControl('0', []),
+    nombreCompleto: new UntypedFormControl('', []),
+    dni: new UntypedFormControl('', []),
+    auto: new UntypedFormControl('', []),
+    modelo: new UntypedFormControl('', []),
+    observacionesPrevias: new UntypedFormControl('', []),
+    idEmpleado: new UntypedFormControl('', []),
+    cost: new UntypedFormControl('', []),
+    paymentStatus: new UntypedFormControl('', []),
+    status: new UntypedFormControl('', []),
+    type: new UntypedFormControl('', []),
+    materialsUsed: new UntypedFormControl('', []),
+    taskRealized: new UntypedFormControl('', []),
+  });
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.getEmpleados();
+    this.getService();
+    this.status = localStorage.getItem('status') || '';
+
+    this.form.get('idEmpleado')?.disable();
+    this.form.get('dni')?.disable();
+    this.form.get('nombreCompleto')?.disable();
+    this.form.get('modelo')?.disable();
+    this.form.get('auto')?.disable();
+    this.form.get('observacionesPrevias')?.disable();
+    this.form.get('cost')?.disable();
+    this.form.get('paymentStatus')?.disable();
+    this.form.get('status')?.disable();
+    this.form.get('type')?.disable();
+    this.form.get('materialsUsed')?.disable();
+    this.form.get('taskRealized')?.disable();
+  }
+
+  getEmpleados() {
+    const getSubscription = this.serviceEmpleados.getEmployees().subscribe({
+      next: (res) => {
+        this.lstEmpleados = res;
+        console.log(this.lstEmpleados);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  getService() {
+    const id = localStorage.getItem('idServicio') || 0;
+    const getSubscription = this.service.getServiceById(Number(id)).subscribe({
+      next: (res) => {
+        this.form.patchValue(res);
+        console.log(this.form.value);
+        const fecha = new Date(res.registerDate);
+        const año = fecha.getFullYear();
+        const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+        const dia = String(fecha.getDate()).padStart(2, '0');
+        const fechaFormateada = `${año}-${mes}-${dia}`;
+
+        this.form.patchValue({
+          ...res,
+          registerDate: fechaFormateada,
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }
