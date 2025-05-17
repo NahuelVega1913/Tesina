@@ -1,1 +1,211 @@
-<p>modificar-reparacion works!</p>
+<div
+  class="bg-cyan-400 min-h-screen flex flex-col justify-center align-middle h-full p-5 md:p-10"
+>
+  <div
+    class="bg-gray-800 w-full flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
+  >
+    <p
+      class="font-bold text-2xl text-white text-6xl text-shadow-lg ps-10 pt-5 sm:mb-5 md:mt-5"
+    >
+      Modificar Inspeccion
+    </p>
+    <form [formGroup]="form" (submit)="save()" class="p-10">
+      <div class="grid gap-6 mb-6 md:grid-cols-2">
+        <div>
+          <label
+            for="first_name"
+            class="block mb-2 text-sm font-medium text-white text-shadow-lg"
+            >Nombre del Cliente</label
+          >
+          <input
+            type="text"
+            formControlName="nombreCompleto"
+            id="first_name"
+            class="bg-gray-300 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
+            placeholder="Juan Perez"
+            readonly
+          />
+          @if(form.get('nombreCompleto')?.invalid &&
+          form.get('nombreCompleto')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete el Nombre
+          </div>
+          }
+        </div>
+        <div>
+          <label
+            for="first_name"
+            class="block mb-2 text-sm font-medium text-white text-shadow-lg"
+            >Auto</label
+          >
+          <input
+            type="text"
+            formControlName="auto"
+            id="first_name"
+            class="bg-gray-300 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
+            placeholder="Fiat 600"
+            readonly
+          />
+          @if(form.get('auto')?.invalid && form.get('auto')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete el Auto
+          </div>
+          }
+        </div>
+      </div>
+
+      <div class="grid gap-6 mb-6 md:grid-cols-2">
+        <div>
+          <label
+            for="last_name"
+            class="block mb-2 text-sm font-medium text-white"
+            >Modelo</label
+          >
+          <input
+            type="number"
+            formControlName="modelo"
+            id="last_name"
+            class="bg-gray-300 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
+            placeholder="2004"
+            readonly
+          />
+          @if(form.get('modelo')?.invalid && form.get('modelo')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Complete el Modelo
+          </div>
+          }
+        </div>
+      </div>
+      <div class="flex flex-col m w-full justify-between">
+        <label
+          for="message"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Observaciones Previas</label
+        >
+        <textarea
+          id="message"
+          rows="4"
+          formControlName="observacionesPrevias"
+          class="block p-2.5 h-auto w-full text-sm mb-5 text-gray-900 bg-gray-200 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Escribe tu mensaje aqui..."
+          readonly
+        ></textarea>
+      </div>
+      <div class="grid gap-6 mb-6 md:grid-cols-2">
+        @if(status == "IN_QUEUE"){
+        <div class="w-full">
+          <label for="company" class="block mb-2 text-sm font-medium text-white"
+            >Empleado Asignado</label
+          >
+          <select
+            id="countries"
+            formControlName="idEmpleado"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
+          >
+            @for (item of lstEmpleados; track $index) {
+            <option [value]="item.id">
+              {{ item.fullName + " (" + item.position + ")" }}
+            </option>
+            > }
+          </select>
+
+          @if(form.get('idEmpleado')?.value == "" &&
+          form.get('idEmpleado')?.touched){
+          <div class="text-white font-bold drop-shadow-md">
+            Seleccione un Empleado
+          </div>
+          }
+        </div>
+        }@else {
+        <div class="w-full">
+          <label for="company" class="block mb-2 text-sm font-medium text-white"
+            >Empleado Asignado</label
+          >
+          <select
+            id="countries"
+            formControlName="idEmpleado"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
+          >
+            @for (item of lstEmpleados; track $index) {
+            <option [value]="item.id">
+              {{ item.fullName + " (" + item.position + ")" }}
+            </option>
+            > }
+          </select>
+        </div>
+        }
+      </div>
+      @if(status == "PROCESS"){
+      <div class="flex flex-col m w-full justify-between">
+        <label
+          for="message"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Diagnostico Tecnico</label
+        >
+        <textarea
+          id="message"
+          rows="4"
+          required
+          formControlName="techniclaDiagnosis"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Escribe tu mensaje aqui..."
+        ></textarea>
+        @if (form.get('techniclaDiagnosis')?.invalid &&
+        form.get('techniclaDiagnosis')?.touched) {
+        <div class="text-white font-bold drop-shadow-md">
+          Complete el Resultado
+        </div>
+        }
+      </div>
+      <div class="flex flex-col m w-full justify-between mt-5">
+        <label
+          for="message"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Tareas Realizadas</label
+        >
+        <textarea
+          id="message"
+          rows="4"
+          required
+          formControlName="TasksPerformed"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Escribe tu mensaje aqui..."
+        ></textarea>
+        @if (form.get('TasksPerformed')?.invalid &&
+        form.get('TasksPerformed')?.touched) {
+        <div class="text-white font-bold drop-shadow-md">
+          Complete las tareas realizadas
+        </div>
+        }
+      </div>
+      <div class="flex flex-col mt-3 m w-full justify-between">
+        <label
+          for="message"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Repuestos Usados</label
+        >
+        <textarea
+          id="message"
+          rows="4"
+          required
+          formControlName="sparesUsed"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Escribe tu mensaje aqui..."
+        ></textarea>
+        @if(form.get('sparesUsed')?.invalid &&
+        form.get('TasksPerformed')?.touched){
+        <div class="text-white font-bold drop-shadow-md">
+          Complete las recomendaciones
+        </div>
+        }
+      </div>
+      }
+      <button
+        type="submit"
+        class="text-white mt-5 bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+      >
+        Regitrar
+      </button>
+    </form>
+  </div>
+</div>

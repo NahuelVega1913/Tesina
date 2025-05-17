@@ -147,6 +147,25 @@ public class ServiceService {
         repository.save(entity);
         return entity;
     }
+    public RepairEntity FinishRepair(GetRepair dto){
+        RepairEntity entity = (RepairEntity) repository.findById(dto.getId()).get();
+        entity.setSparesUsed(dto.getSparesUsed());
+        entity.setTasksPerformed(dto.getTasksPerformed());
+        entity.setTechniclaDiagnosis(dto.getTechniclaDiagnosis());
+        entity.setCost(dto.getCost());
+        entity.setStatus(ServiceStatus.FINISHED);
+        repository.save(entity);
+        return entity;
+    }
+    public CustomizationEntity FinishCustomization(GetCustomization dto){
+        CustomizationEntity entity = (CustomizationEntity) repository.findById(dto.getId()).get();
+        entity.setMaterialsUsed(dto.getMaterialsUsed());
+        entity.setTaskRealized(dto.getTaskRealized());
+        entity.setCost(dto.getCost());
+        entity.setStatus(ServiceStatus.FINISHED);
+        repository.save(entity);
+        return entity;
+    }
 
 
 

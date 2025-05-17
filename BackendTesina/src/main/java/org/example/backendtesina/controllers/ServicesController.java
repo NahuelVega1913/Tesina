@@ -1,13 +1,12 @@
 package org.example.backendtesina.controllers;
 
-import org.example.backendtesina.DTOs.Get.GetInspection;
-import org.example.backendtesina.DTOs.Get.GetServices;
-import org.example.backendtesina.DTOs.Get.GetStatusService;
+import org.example.backendtesina.DTOs.Get.*;
 import org.example.backendtesina.DTOs.Post.PostInspection;
 import org.example.backendtesina.DTOs.Post.PostRepair;
 import org.example.backendtesina.entities.payment.CartEntity;
 import org.example.backendtesina.entities.services.CustomizationEntity;
 import org.example.backendtesina.entities.services.InspectionEntity;
+import org.example.backendtesina.entities.services.RepairEntity;
 import org.example.backendtesina.entities.services.ServiceEntity;
 import org.example.backendtesina.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,6 +104,26 @@ public class ServicesController {
     public ResponseEntity<?> finishInspection(@RequestBody GetInspection inspection){
 
         InspectionEntity lst = service.FinishInspection(inspection);
+        if(lst == null){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(lst);
+    }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping(value = "finishCustomization")
+    public ResponseEntity<?> finishCustomization(@RequestBody GetCustomization inspection){
+
+        CustomizationEntity lst = service.FinishCustomization(inspection);
+        if(lst == null){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(lst);
+    }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping(value = "finishRepair")
+    public ResponseEntity<?> finishRepair(@RequestBody GetRepair inspection){
+
+        RepairEntity lst = service.FinishRepair(inspection);
         if(lst == null){
             return ResponseEntity.badRequest().build();
         }

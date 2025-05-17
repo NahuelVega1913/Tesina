@@ -80,6 +80,30 @@ export class ServiciosService {
       }
     );
   }
+  finishRepair(body: any) {
+    return this.http.post<any>(
+      `http://localhost:8080/services/finishRepair`,
+      body,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
+  finishCustomization(body: any) {
+    return this.http.post<any>(
+      `http://localhost:8080/services/finishCustomization`,
+      body,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
   getServiceById(id: number) {
     return this.http.get<any>(
       `http://localhost:8080/services/getService/${id}`,
