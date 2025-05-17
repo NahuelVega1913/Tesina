@@ -65,6 +65,16 @@ export class ConsultarServiciosComponent {
     window.location.href = url;
     // this.router.navigate([`${url}`]);
   }
+  moveTo(id: number, type: string) {
+    localStorage.setItem('idServicio', id.toString());
+    if (type == 'CUSTOMIZATION') {
+      this.router.navigate(['/consultar-customizacion']);
+    } else if (type == 'REPAIR') {
+      this.router.navigate(['/consultar-reparacion']);
+    } else if (type == 'INSPECTION') {
+      this.router.navigate(['/consultar-inspeccion']);
+    }
+  }
 
   getProveedores() {
     const getSubscription = this.service.getServices().subscribe({

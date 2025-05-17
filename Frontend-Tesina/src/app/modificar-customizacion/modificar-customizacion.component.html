@@ -180,6 +180,24 @@
         </div>
         }
       </div>
+      <div class="mt-5">
+        <label
+          for="first_name"
+          class="block mb-2 text-sm font-medium text-white text-shadow-lg"
+          >Costo</label
+        >
+        <input
+          type="number"
+          formControlName="cost"
+          id="first_name"
+          class="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
+          placeholder="70000"
+          required=""
+        />
+        @if(form.get('cost')?.invalid && form.get('cost')?.touched){
+        <div class="text-white font-bold drop-shadow-md">Complete el Costo</div>
+        }
+      </div>
       }
       <button
         type="submit"

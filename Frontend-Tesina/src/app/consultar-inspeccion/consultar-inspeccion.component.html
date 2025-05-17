@@ -7,9 +7,9 @@
     <p
       class="font-bold text-2xl text-white text-6xl text-shadow-lg ps-10 pt-5 sm:mb-5 md:mt-5"
     >
-      Modificar Reparacion
+      Consultar Reparacion
     </p>
-    <form [formGroup]="form" (submit)="save()" class="p-10">
+    <form [formGroup]="form" class="p-10">
       <div class="grid gap-6 mb-6 md:grid-cols-2">
         <div>
           <label
@@ -135,7 +135,7 @@
         </div>
         }
       </div>
-      @if(status == "PROCESS"){
+
       <div class="flex flex-col m w-full justify-between">
         <label
           for="message"
@@ -217,13 +217,6 @@
         <div class="text-white font-bold drop-shadow-md">Complete el Costo</div>
         }
       </div>
-      }
-      <button
-        type="submit"
-        class="text-white mt-5 bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-      >
-        Regitrar
-      </button>
     </form>
   </div>
 </div>

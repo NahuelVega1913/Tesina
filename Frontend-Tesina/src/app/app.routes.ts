@@ -31,6 +31,9 @@ import { ConsultarServiciosComponent } from './consultar-servicios/consultar-ser
 import { ModificarCustomizacionComponent } from './modificar-customizacion/modificar-customizacion.component';
 import { ModificarReparacionComponent } from './modificar-reparacion/modificar-reparacion.component';
 import { ModificarInspeccionComponent } from './modificar-inspeccion/modificar-inspeccion.component';
+import { ConsultarInspeccionComponent } from './consultar-inspeccion/consultar-inspeccion.component';
+import { ConsultarCustomizacionComponent } from './consultar-customizacion/consultar-customizacion.component';
+import { ConsultarReparacionComponent } from './consultar-reparacion/consultar-reparacion.component';
 
 export const routes: Routes = [
   {
@@ -140,6 +143,12 @@ export const routes: Routes = [
       },
       { path: 'modificar-reparacion', component: ModificarReparacionComponent },
       { path: 'modificar-inspeccion', component: ModificarInspeccionComponent },
+      { path: 'consultar-inspeccion', component: ConsultarInspeccionComponent },
+      {
+        path: 'consultar-customizacion',
+        component: ConsultarCustomizacionComponent,
+      },
+      { path: 'consultar-reparacion', component: ConsultarReparacionComponent },
     ],
   },
 ];
