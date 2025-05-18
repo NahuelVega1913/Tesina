@@ -94,17 +94,18 @@ export class ModificarCustomizacionComponent {
 
             Swal.fire({
               icon: 'success',
-              title: '¡Usuario creado!',
-              text: 'El proveedor fue registrado exitosamente',
+              title: '¡Servicio modificada!',
+              text: 'El Servicio fue modificado exitosamente',
               confirmButtonColor: '#3085d6',
             });
+            window.location.href = '/consultar-servicios';
           },
           error: (err) => {
             console.log(err);
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Ocurrio un error al registrar el proveedor',
+              text: 'Ocurrio un error al modificar el servicio',
             });
           },
         });
@@ -118,16 +119,17 @@ export class ModificarCustomizacionComponent {
             next: () => {
               Swal.fire({
                 icon: 'success',
-                title: '¡Usuario creado!',
-                text: 'El proveedor fue registrado exitosamente',
+                title: '¡Servicio modificada!',
+                text: 'El Servicio fue modificado exitosamente',
                 confirmButtonColor: '#3085d6',
               });
+              window.location.href = '/consultar-servicios';
             },
             error: (err) => {
               Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Ocurrio un error al registrar el proveedor',
+                text: 'Ocurrio un error al modificar el servicio',
               });
             },
           });

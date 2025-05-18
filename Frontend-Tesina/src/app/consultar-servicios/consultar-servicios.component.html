@@ -71,7 +71,7 @@
 
   <!--ESPERANDO RETIRO-->
   @if(status == 'FINISHED' || status == '') {
-  <p class="p-2 font-normal f text-3xl">Esperando Retiro</p>
+  <p class="p-2 font-normal f text-3xl text-shadow-lg/10">Esperando Retiro</p>
   <ng-scrollbar visibility="hover" track="horizontal">
     <div class="flex gap-6 p-5">
       @for (i of lst; track $index) { @if(i.status == 'FINISHED' ) {
@@ -197,7 +197,7 @@
 
   <!--EN PROCESO-->
   @if(status == 'PROCESS' || status == '') {
-  <p class="p-2 font-normal f text-3xl">En Proceso</p>
+  <p class="p-2 font-normal f text-3xl text-shadow-lg/10">En Proceso</p>
   <ng-scrollbar visibility="hover" track="horizontal">
     <div class="flex gap-6 p-5">
       @for (i of lst; track $index) { @if(i.status == 'PROCESS') {
@@ -333,7 +333,7 @@
 
   <!--EN COLA-->
   @if(status == 'IN_QUEUE' || status == '') {
-  <p class="p-2 font-normal f text-3xl">Esperando Cola</p>
+  <p class="p-2 font-normal f text-3xl text-shadow-lg/10">Esperando Cola</p>
   <ng-scrollbar visibility="hover" track="horizontal">
     <div class="flex gap-6 p-5">
       @for (i of lst; track $index) { @if(i.status == 'IN_QUEUE' ) {
@@ -468,7 +468,9 @@
 
   <!-- ESPERANDO AUTO-->
   @if(status == 'WAITING' || status == '' ) {
-  <p class="p-2 font-bold f text-3xl font-normal">Esperando el Vehiculo</p>
+  <p class="p-2 font-bold f text-3xl font-normal text-shadow-lg/10">
+    Esperando el Vehiculo
+  </p>
   <ng-scrollbar visibility="hover" track="horizontal">
     <div class="flex gap-6 p-5">
       @for (i of listFilteres; track $index) { @if(i.status == 'WAITING' ) {
@@ -586,7 +588,7 @@
 
   <!--RETIRADO-->
   @if(status == 'WITHDRAW' || status == '') {
-  <p class="p-2 font-normal f text-3xl">Retirado</p>
+  <p class="p-2 font-normal f text-3xl text-shadow-lg/10">Retirado</p>
   <ng-scrollbar visibility="hover" track="horizontal">
     <div class="flex gap-6 p-5">
       @for (i of lst; track $index) { @if(i.status == 'WITHDRAW' ) {

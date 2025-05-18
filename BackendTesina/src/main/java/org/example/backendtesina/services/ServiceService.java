@@ -32,6 +32,8 @@ public class ServiceService {
     @Autowired
     UserRepository userRepository;
     @Autowired
+    NotificationService notificationService;
+    @Autowired
     EmployeeRepository employeeRepository;
     @Autowired
     JwtService jwtService;
@@ -144,6 +146,7 @@ public class ServiceService {
         entity.setResultado(dto.getResultado());
         entity.setCost(dto.getCost());
         entity.setStatus(ServiceStatus.FINISHED);
+        notificationService.notificationServiceFinished(entity.getClient());
         repository.save(entity);
         return entity;
     }
@@ -158,6 +161,8 @@ public class ServiceService {
         RepairEntity entity = (RepairEntity) repository.findById(dto.getId()).get();
         entity.setSparesUsed(dto.getSparesUsed());
         entity.setTasksPerformed(dto.getTasksPerformed());
+        notificationService.notificationServiceFinished(entity.getClient());
+
         entity.setTechniclaDiagnosis(dto.getTechniclaDiagnosis());
         entity.setCost(dto.getCost());
         entity.setStatus(ServiceStatus.FINISHED);
@@ -169,6 +174,7 @@ public class ServiceService {
         entity.setMaterialsUsed(dto.getMaterialsUsed());
         entity.setTaskRealized(dto.getTaskRealized());
         entity.setCost(dto.getCost());
+        notificationService.notificationServiceFinished(entity.getClient());
         entity.setStatus(ServiceStatus.FINISHED);
         repository.save(entity);
         return entity;

@@ -78,7 +78,7 @@ export class ModificarEmpleadoComponent {
         next: () => {
           Swal.fire({
             icon: 'success',
-            title: '¡Usuario creado!',
+            title: '¡Empleado Modificado!',
             text: 'El empleado fue modificado exitosamente',
             confirmButtonColor: '#3085d6',
           });

@@ -40,6 +40,22 @@ public class NotificationService {
         repository.save(notification);
         return notification;
     }
+    public NotificationEntity notificationServiceFinished(UserEntity user){
+        NotificationEntity notification = new NotificationEntity();
+        notification.setDateTime(LocalDateTime.now());
+        notification.setTitle("Servicio Finalizado!!!");
+        notification.setMessage("Te esperamos para retirar tu vehiculo!");
+        notification.setType(typeNotificationEntity.SUCCESS);
+        notification.setState(StateNotification.UNSEEN);
+        notification.setUser(user);
+
+        List<NotificationEntity> notifications = user.getNotifications();
+        notifications.add(notification);
+        user.setNotifications(notifications);
+
+        repository.save(notification);
+        return notification;
+    }
     public List<GetNotification> getAll(String token){
         String email = jwtService.getEmailFromToken(token);
         UserEntity user = userRepository.findByEmail(email).orElse(null);
