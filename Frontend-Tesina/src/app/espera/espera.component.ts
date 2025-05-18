@@ -5,10 +5,12 @@ import { AfterViewInit } from '@angular/core';
 import 'leaflet/dist/leaflet.css';
 import { ServiciosService } from '../services/servicios.service';
 import { UsuarioService } from '../services/usuario.service';
+import { FormsModule } from '@angular/forms';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-espera',
-  imports: [],
+  imports: [FormsModule, NgClass],
   templateUrl: './espera.component.html',
   styleUrl: './espera.component.css',
 })
