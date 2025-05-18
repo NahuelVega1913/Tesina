@@ -32,6 +32,18 @@ export class ServiciosService {
       { headers }
     );
   }
+  retireCar(id: number) {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.post<any>(
+      `http://localhost:8080/services/retireCar/` + id,
+      {},
+      { headers }
+    );
+  }
   postService(body: any) {
     return this.http.post<any>(
       `http://localhost:8080/services/postService`,

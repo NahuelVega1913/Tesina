@@ -147,6 +147,13 @@ public class ServiceService {
         repository.save(entity);
         return entity;
     }
+    public ServiceEntity retireCard(int id){
+        ServiceEntity entity = repository.findById(id).get();
+        entity.setDateExit(LocalDateTime.now());
+        entity.setStatus(ServiceStatus.WITHDRAW);
+        repository.save(entity);
+        return entity;
+    }
     public RepairEntity FinishRepair(GetRepair dto){
         RepairEntity entity = (RepairEntity) repository.findById(dto.getId()).get();
         entity.setSparesUsed(dto.getSparesUsed());

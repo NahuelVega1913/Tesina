@@ -39,6 +39,15 @@ public class ServicesController {
         }
         return ResponseEntity.ok(lst);
     }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping(value = "retireCar/{id}")
+    public ResponseEntity<?> retireCar(@PathVariable int id){
+        ServiceEntity lst = service.retireCard(id);
+        if(lst == null){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(lst);
+    }
     @PreAuthorize("hasAnyRole('USER')")
     @PostMapping(value = "postService")
     public ResponseEntity<?> post(@RequestBody PostInspection entity,@RequestHeader("Authorization") String authorizationHeader){
