@@ -16,6 +16,8 @@ import { NgClass } from '@angular/common';
 })
 export class EsperaComponent implements AfterViewInit {
   constructor(private router: Router) {}
+  id: number = 0;
+  Object: any = {};
   private service: ServiciosService = inject(ServiciosService);
   private userService = inject(UsuarioService);
   @ViewChild('mapContainer') mapContainer!: ElementRef;
@@ -53,11 +55,23 @@ export class EsperaComponent implements AfterViewInit {
       map.invalidateSize();
     }, 100);
   }
+  getServicio() {
+    const getSubscription = this.service.getServiceById(this.id).subscribe({
+      next: (res) => {
+        this.Object = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
   getUserInformation() {
     this.service.getServiceStatus().subscribe({
       next: (res) => {
         this.status = res.status;
+        this.id = res.id;
+        this.getServicio();
       },
       error: (err) => {
         console.log(err);
