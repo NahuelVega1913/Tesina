@@ -1,301 +1,317 @@
-@if (status == 'WAITING') {
-<div
-  class="w-full h-120 p-10 flex flex-col h-full justify-center overflow-hidden bg-gray-800"
->
-  <p class="font-bold text-4xl text-center text-white">
-    Lleva tu vehiculo a nuestra sucursal
-  </p>
-  <p class="text-gray-200 mt-1 text-center">Isaac Albeniz 3622</p>
-  <div
-    #mapContainer
-    id="map"
-    class="w-full h-100 mt-7 rounded-2xl shadow-2xl"
-  ></div>
-</div>
-}
-<!--ESPERANDO-->
-<!--EN COLA-->
-@if(status == 'IN_QUEUE'){
-<div class="p-10 bg-gray-800 h-screen">
-  <div class="bg-gray-500 rounded-2xl pt-10 md:ps-30">
-    <ol class="flex items-center ms-30">
-      <li class="relative w-full mb-6">
-        <div class="flex items-center">
-          <div
-            class="z-10 flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full ring-0 ring-white dark:bg-gray-700 sm:ring-8 dark:ring-gray-900 shrink-0"
-          >
-            <svg
-              class="w-2.5 h-2.5 text-green-500"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 16 12"
+<div class="min-h-screen overflow-hidden bg-gray-800">
+  @if (status == 'WAITING') {
+  <div class="w-full p-10 flex flex-col h-screen justify-center bg-gray-800">
+    <p class="font-bold text-4xl text-center text-white">
+      Lleva tu vehiculo a nuestra sucursal
+    </p>
+    <p class="text-gray-200 mt-1 text-center">Isaac Albeniz 3622</p>
+    <div
+      #mapContainer
+      id="map"
+      class="w-full mt-7 rounded-2xl shadow-2xl"
+    ></div>
+  </div>
+  }
+  <!--ESPERANDO-->
+  <!--EN COLA-->
+  @if(status == 'IN_QUEUE'){
+  <div class="p-10 bg-gray-800 h-screen">
+    <div class="bg-black rounded-2xl pt-10 md:ps-30">
+      <ol class="flex items-center ms-30">
+        <li class="relative w-full mb-6">
+          <div class="flex items-center">
+            <div
+              class="z-10 flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full ring-0 ring-white dark:bg-gray-700 sm:ring-8 dark:ring-gray-900 shrink-0"
             >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 5.917 5.724 10.5 15 1.5"
-              />
-            </svg>
+              <svg
+                class="w-2.5 h-2.5 text-green-500"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 16 12"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5.917 5.724 10.5 15 1.5"
+                />
+              </svg>
+            </div>
+            <div class="flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
           </div>
-          <div class="flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
-        </div>
-        <div class="mt-3">
-          <h3 class="font-medium text-gray-900 dark:text-white">En Espera</h3>
-        </div>
-      </li>
-      <li class="relative w-full mb-6">
-        <div class="flex items-center">
-          <div
-            class="z-10 flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full ring-0 ring-white dark:bg-gray-700 sm:ring-8 dark:ring-gray-900 shrink-0"
-          >
-            <svg
-              class="w-2.5 h-2.5 text-gray-900 dark:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 16 12"
+          <div class="mt-3">
+            <h3 class="font-medium text-gray-900 dark:text-white">En Espera</h3>
+          </div>
+        </li>
+        <li class="relative w-full mb-6">
+          <div class="flex items-center">
+            <div
+              class="z-10 flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full ring-0 ring-white dark:bg-gray-700 sm:ring-8 dark:ring-gray-900 shrink-0"
             >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 5.917 5.724 10.5 15 1.5"
-              />
-            </svg>
+              <svg
+                class="w-2.5 h-2.5 text-gray-900 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 16 12"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5.917 5.724 10.5 15 1.5"
+                />
+              </svg>
+            </div>
+            <div class="flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
           </div>
-          <div class="flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
-        </div>
-        <div class="mt-3">
-          <h3 class="font-medium text-gray-900 dark:text-white">En Proceso</h3>
-        </div>
-      </li>
+          <div class="mt-3">
+            <h3 class="font-medium text-gray-900 dark:text-white">
+              En Proceso
+            </h3>
+          </div>
+        </li>
 
-      <li class="relative w-full mb-6">
-        <div class="flex items-center">
-          <div
-            class="z-10 flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full ring-0 ring-white dark:bg-gray-700 sm:ring-8 dark:ring-gray-900 shrink-0"
-          >
-            <svg
-              class="w-2.5 h-2.5 text-gray-900 dark:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 16 12"
+        <li class="relative w-full mb-6">
+          <div class="flex items-center">
+            <div
+              class="z-10 flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full ring-0 ring-white dark:bg-gray-700 sm:ring-8 dark:ring-gray-900 shrink-0"
             >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 5.917 5.724 10.5 15 1.5"
-              />
-            </svg>
+              <svg
+                class="w-2.5 h-2.5 text-gray-900 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 16 12"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5.917 5.724 10.5 15 1.5"
+                />
+              </svg>
+            </div>
           </div>
-        </div>
-        <div class="mt-3">
-          <h3 class="font-medium text-gray-900 dark:text-white">Finalizado</h3>
-        </div>
-      </li>
-    </ol>
+          <div class="mt-3">
+            <h3 class="font-medium text-gray-900 dark:text-white">
+              Finalizado
+            </h3>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <div></div>
+    <div class="text-center text-green-500 font-bold text-5xl mt-22">
+      Su vehiculo se encuentra en espera para ser atendido
+    </div>
+    <div class="text-center text-gray-400 font-semibold text-2xl mt-10">
+      Pronto sera revisado por nuestros mejores profesionales
+    </div>
   </div>
-  <div></div>
-  <div class="text-center text-white font-bold text-5xl mt-10">
-    Su vehiculo se encuentra en espera para ser atentido
-  </div>
-</div>
-}
-<!--EN COLA-->
-<!--EN PROCESO-->
-@if(status == 'PROCESS'){
-<div class="p-10 bg-gray-800 h-screen">
-  <div class="bg-gray-500 rounded-2xl pt-10 md:ps-30">
-    <ol class="flex items-center md:ms-30">
-      <li class="relative w-full mb-6">
-        <div class="flex items-center">
-          <div
-            class="z-10 flex items-center justify-center w-6 h-6 bg-green-600 rounded-full ring-0 ring-gray-900 sm:ring-8"
-          >
-            <svg
-              class="w-2.5 h-2.5 text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 16 12"
+  }
+  <!--EN COLA-->
+  <!--EN PROCESO-->
+  @if(status == 'PROCESS'){
+  <div class="p-10 flex-col justify-center bg-gray-800 h-screen">
+    <div class="bg-black rounded-2xl pt-10 md:ps-30">
+      <ol class="flex items-center justify-center">
+        <li class="relative w-full mb-6">
+          <div class="flex items-center">
+            <div
+              class="z-10 flex items-center justify-center w-6 h-6 bg-green-600 rounded-full ring-0 ring-gray-900 sm:ring-8"
             >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 5.917 5.724 10.5 15 1.5"
-              />
-            </svg>
+              <svg
+                class="w-2.5 h-2.5 text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 16 12"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5.917 5.724 10.5 15 1.5"
+                />
+              </svg>
+            </div>
+            <div class="flex w-full bg-green-600 h-0.5"></div>
           </div>
-          <div class="flex w-full bg-green-600 h-0.5"></div>
-        </div>
-        <div class="mt-3">
-          <h3 class="font-medium text-gray-900 dark:text-white">En Espera</h3>
-        </div>
-      </li>
-      <li class="relative w-full mb-6">
-        <div class="flex items-center">
-          <div
-            class="z-10 flex items-center justify-center w-6 h-6 bg-blue-600 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0"
-          >
-            <svg
-              class="w-2.5 h-2.5 text-blue-100 dark:text-blue-300"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 16 12"
+          <div class="mt-3">
+            <h3 class="font-medium text-gray-900 dark:text-white">En Espera</h3>
+          </div>
+        </li>
+        <li class="relative w-full mb-6">
+          <div class="flex items-center">
+            <div
+              class="z-10 flex items-center justify-center w-6 h-6 bg-blue-600 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0"
             >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 5.917 5.724 10.5 15 1.5"
-              />
-            </svg>
+              <svg
+                class="w-2.5 h-2.5 text-blue-100 dark:text-blue-300"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 16 12"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5.917 5.724 10.5 15 1.5"
+                />
+              </svg>
+            </div>
+            <div class="flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
           </div>
-          <div class="flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
-        </div>
-        <div class="mt-3">
-          <h3 class="font-medium text-gray-900 dark:text-white">En Proceso</h3>
-        </div>
-      </li>
+          <div class="mt-3">
+            <h3 class="font-medium text-gray-900 dark:text-white">
+              En Proceso
+            </h3>
+          </div>
+        </li>
 
-      <li class="relative w-full mb-6">
-        <div class="flex items-center">
-          <div
-            class="z-10 flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full ring-0 ring-white dark:bg-gray-700 sm:ring-8 dark:ring-gray-900 shrink-0"
-          >
-            <svg
-              class="w-2.5 h-2.5 text-gray-900 dark:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 16 12"
+        <li class="relative w-full mb-6">
+          <div class="flex items-center">
+            <div
+              class="z-10 flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full ring-0 ring-white dark:bg-gray-700 sm:ring-8 dark:ring-gray-900 shrink-0"
             >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 5.917 5.724 10.5 15 1.5"
-              />
-            </svg>
+              <svg
+                class="w-2.5 h-2.5 text-gray-900 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 16 12"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5.917 5.724 10.5 15 1.5"
+                />
+              </svg>
+            </div>
           </div>
-        </div>
-        <div class="mt-3">
-          <h3 class="font-medium text-gray-900 dark:text-white">Finalizado</h3>
-        </div>
-      </li>
-    </ol>
+          <div class="mt-3">
+            <h3 class="font-medium text-gray-900 dark:text-white">
+              Finalizado
+            </h3>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <div></div>
+    <div class="text-center text-green-500 font-bold text-5xl mt-25">
+      Su vehiculo se esta siendo atendido por nuestros mejores profesionales
+    </div>
+    <div class="text-center text-gray-400 font-semibold text-2xl mt-5">
+      En cuanto terminemos con el proceso, le avisaremos
+    </div>
   </div>
-  <div></div>
-  <div class="text-center text-white font-bold text-5xl mt-10">
-    Su vehiculo se esta siendo atendido por nuestros mejores profesionales
-  </div>
-</div>
-}
-<!--EN PROCESO-->
-<!--FINALIZADO-->
-@if(status == 'FINISHED'){
-<div class="p-10 bg-gray-800 h-screen">
-  <div class="bg-gray-500 rounded-2xl pt-10 md:ps-30">
-    <ol class="flex items-center ms-30">
-      <li class="relative w-full mb-6">
-        <div class="flex items-center">
-          <div
-            class="z-10 flex items-center justify-center w-6 h-6 bg-green-600 rounded-full ring-0 ring-gray-900 sm:ring-8"
-          >
-            <svg
-              class="w-2.5 h-2.5 text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 16 12"
+  }
+  <!--EN PROCESO-->
+  <!--FINALIZADO-->
+  @if(status == 'FINISHED'){
+  <div class="p-10 bg-gray-800 h-screen">
+    <div class="bg-gray-500 rounded-2xl pt-10 md:ps-30">
+      <ol class="flex items-center ms-30">
+        <li class="relative w-full mb-6">
+          <div class="flex items-center">
+            <div
+              class="z-10 flex items-center justify-center w-6 h-6 bg-green-600 rounded-full ring-0 ring-gray-900 sm:ring-8"
             >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 5.917 5.724 10.5 15 1.5"
-              />
-            </svg>
+              <svg
+                class="w-2.5 h-2.5 text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 16 12"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5.917 5.724 10.5 15 1.5"
+                />
+              </svg>
+            </div>
+            <div class="flex w-full bg-green-600 h-0.5"></div>
           </div>
-          <div class="flex w-full bg-green-600 h-0.5"></div>
-        </div>
-        <div class="mt-3">
-          <h3 class="font-medium text-gray-900 dark:text-white">En Espera</h3>
-        </div>
-      </li>
-      <li class="relative w-full mb-6">
-        <div class="flex items-center">
-          <div
-            class="z-10 flex items-center justify-center w-6 h-6 bg-green-600 rounded-full ring-0 ring-gray-900 sm:ring-8"
-          >
-            <svg
-              class="w-2.5 h-2.5 text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 16 12"
+          <div class="mt-3">
+            <h3 class="font-medium text-gray-900 dark:text-white">En Espera</h3>
+          </div>
+        </li>
+        <li class="relative w-full mb-6">
+          <div class="flex items-center">
+            <div
+              class="z-10 flex items-center justify-center w-6 h-6 bg-green-600 rounded-full ring-0 ring-gray-900 sm:ring-8"
             >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 5.917 5.724 10.5 15 1.5"
-              />
-            </svg>
+              <svg
+                class="w-2.5 h-2.5 text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 16 12"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5.917 5.724 10.5 15 1.5"
+                />
+              </svg>
+            </div>
+            <div class="flex w-full bg-green-600 h-0.5"></div>
           </div>
-          <div class="flex w-full bg-green-600 h-0.5"></div>
-        </div>
-        <div class="mt-3">
-          <h3 class="font-medium text-gray-900 dark:text-white">Proceso</h3>
-        </div>
-      </li>
+          <div class="mt-3">
+            <h3 class="font-medium text-gray-900 dark:text-white">Proceso</h3>
+          </div>
+        </li>
 
-      <li class="relative w-full mb-6">
-        <div class="flex items-center">
-          <div
-            class="z-10 flex items-center justify-center w-6 h-6 bg-green-600 rounded-full ring-0 ring-gray-900 sm:ring-8"
-          >
-            <svg
-              class="w-2.5 h-2.5 text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 16 12"
+        <li class="relative w-full mb-6">
+          <div class="flex items-center">
+            <div
+              class="z-10 flex items-center justify-center w-6 h-6 bg-green-600 rounded-full ring-0 ring-gray-900 sm:ring-8"
             >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 5.917 5.724 10.5 15 1.5"
-              />
-            </svg>
+              <svg
+                class="w-2.5 h-2.5 text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 16 12"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5.917 5.724 10.5 15 1.5"
+                />
+              </svg>
+            </div>
           </div>
-        </div>
-        <div class="mt-3">
-          <h3 class="font-medium text-gray-900 dark:text-white">Finalizado</h3>
-        </div>
-      </li>
-    </ol>
+          <div class="mt-3">
+            <h3 class="font-medium text-gray-900 dark:text-white">
+              Finalizado
+            </h3>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <div></div>
+    <div class="text-center text-white font-bold text-5xl mt-10">
+      Su vehiculo se encuentra en espera para ser atentido
+    </div>
   </div>
-  <div></div>
-  <div class="text-center text-white font-bold text-5xl mt-10">
-    Su vehiculo se encuentra en espera para ser atentido
-  </div>
+  }
+  <!--FINALIZADO-->
 </div>
-}
-<!--FINALIZADO-->

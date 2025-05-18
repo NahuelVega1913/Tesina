@@ -75,7 +75,16 @@ export class ConsultarServiciosComponent {
       this.router.navigate(['/consultar-inspeccion']);
     }
   }
-  retireCar(id: number) {}
+  retireCar(id: number) {
+    const getSubscription = this.service.retireCar(id).subscribe({
+      next: (res) => {
+        this.getProveedores();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
   getProveedores() {
     const getSubscription = this.service.getServices().subscribe({
