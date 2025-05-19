@@ -18,17 +18,30 @@ export class ConsultarServiciosComponent {
   counter: number = 0;
   status: string = '';
   search: string = '';
+  paymentStatus: string = ''; // Se añade la variable para el estado de pago
 
   private service: ServiciosService = inject(ServiciosService);
   rol: string | null = '';
   isOpen = false;
   filter() {
     this.listFilteres = this.lst.filter((item) => {
-      return (
-        item.name.toLowerCase().includes(this.search.toLowerCase()) &&
-        (this.status === '' || item.category === this.status)
-      );
+      // Filtro por nombre del auto
+      const matchesName =
+        this.search === '' ||
+        (item.auto &&
+          item.auto.toLowerCase().includes(this.search.toLowerCase()));
+      // Filtro por estado del servicio
+      const matchesStatus = this.status === '' || item.status === this.status;
+      // Filtro por estado de pago (comparación estricta y uppercase)
+      const matchesPayment =
+        this.paymentStatus === '' ||
+        (item.paymentStatus &&
+          item.paymentStatus.toUpperCase() ===
+            this.paymentStatus.toUpperCase());
+      return matchesName && matchesStatus && matchesPayment;
     });
+    // Forzar actualización de la vista
+    this.listFilteres = [...this.listFilteres];
   }
   count(categoryGiven: string) {
     this.counter = 0;

@@ -16,10 +16,10 @@
         <option value="WITHDRAW">Retirado</option>
       </select>
       <select
-        id="countries"
-        name="category"
+        id="payment-status"
+        name="paymentStatus"
         (change)="filter()"
-        [(ngModel)]="status"
+        [(ngModel)]="paymentStatus"
         class="bg-gray-50 border me-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
       >
         <option value="" selected>Estado del Pago</option>
@@ -74,7 +74,7 @@
   <p class="p-2 font-normal f text-3xl text-shadow-lg/10">Esperando Retiro</p>
   <ng-scrollbar visibility="hover" track="horizontal">
     <div class="flex gap-6 p-5">
-      @for (i of lst; track $index) { @if(i.status == 'FINISHED' ) {
+      @for (i of listFilteres; track $index) { @if(i.status == 'FINISHED' ) {
       <div
         class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
       >
@@ -200,7 +200,7 @@
   <p class="p-2 font-normal f text-3xl text-shadow-lg/10">En Proceso</p>
   <ng-scrollbar visibility="hover" track="horizontal">
     <div class="flex gap-6 p-5">
-      @for (i of lst; track $index) { @if(i.status == 'PROCESS') {
+      @for (i of listFilteres; track $index) { @if(i.status == 'PROCESS') {
       <div
         class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
       >
@@ -336,7 +336,7 @@
   <p class="p-2 font-normal f text-3xl text-shadow-lg/10">Esperando Cola</p>
   <ng-scrollbar visibility="hover" track="horizontal">
     <div class="flex gap-6 p-5">
-      @for (i of lst; track $index) { @if(i.status == 'IN_QUEUE' ) {
+      @for (i of listFilteres; track $index) { @if(i.status == 'IN_QUEUE' ) {
       <div
         class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
       >
@@ -591,7 +591,7 @@
   <p class="p-2 font-normal f text-3xl text-shadow-lg/10">Retirado</p>
   <ng-scrollbar visibility="hover" track="horizontal">
     <div class="flex gap-6 p-5">
-      @for (i of lst; track $index) { @if(i.status == 'WITHDRAW' ) {
+      @for (i of listFilteres; track $index) { @if(i.status == 'WITHDRAW' ) {
       <div
         class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
       >

@@ -19,7 +19,16 @@ export class EmpleadosComponent {
 
   constructor(private router: Router) {}
 
-  filter() {}
+  filter() {
+    if (!this.search) {
+      this.lstFiltered = this.lst;
+      return;
+    }
+    const searchLower = this.search.toLowerCase();
+    this.lstFiltered = this.lst.filter((item) =>
+      (item.fullName || '').toLowerCase().includes(searchLower)
+    );
+  }
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.

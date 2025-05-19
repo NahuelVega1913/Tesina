@@ -98,7 +98,7 @@ export class ModificarCustomizacionComponent {
               text: 'El Servicio fue modificado exitosamente',
               confirmButtonColor: '#3085d6',
             });
-            window.location.href = '/consultar-servicios';
+            window.location.href = '/consultarServicios';
           },
           error: (err) => {
             console.log(err);
@@ -123,7 +123,7 @@ export class ModificarCustomizacionComponent {
                 text: 'El Servicio fue modificado exitosamente',
                 confirmButtonColor: '#3085d6',
               });
-              window.location.href = '/consultar-servicios';
+              window.location.href = '/consultarServicios';
             },
             error: (err) => {
               Swal.fire({

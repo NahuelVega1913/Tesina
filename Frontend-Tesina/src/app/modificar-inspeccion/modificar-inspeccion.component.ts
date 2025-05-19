@@ -99,6 +99,7 @@ export class ModificarInspeccionComponent {
               text: 'El Servicio fue modificado exitosamente',
               confirmButtonColor: '#3085d6',
             });
+            window.location.href = '/consultarServicios';
           },
           error: (err) => {
             console.log(err);
@@ -123,6 +124,7 @@ export class ModificarInspeccionComponent {
                 text: 'El Servicio fue modificado exitosamente',
                 confirmButtonColor: '#3085d6',
               });
+              window.location.href = '/consultarServicios';
             },
             error: (err) => {
               Swal.fire({

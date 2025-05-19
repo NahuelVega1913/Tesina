@@ -65,15 +65,15 @@ INSERT INTO EMPLOYEES (
 ) VALUES
       ('1990-05-10',200000000, 'PERMANENT', 'FULLTIME', 12345678, 'Juan Pérez',
        850000.00, 'Av. Siempre Viva 123', 1122334455, 'juan.perez@email.com',
-       'Analista de Sistemas', '2022-01-15', 'Empleado con buen desempeño'),
+       'Tecnico Automotor', '2022-01-15', 'Empleado con buen desempeño'),
 
       ('1985-08-22',200000000, 'TEMPORARY', 'PART_TIME', 87654321, 'Ana Gómez',
        700000.00, 'Calle Falsa 456', 1199887766, 'ana.gomez@email.com',
-       'Administrativa', '2023-06-01', 'Contrato temporal por 6 meses'),
+       'Personalizacion de Carroceria', '2023-06-01', 'Contrato temporal por 6 meses'),
 
       ('1992-12-01',200000000, 'PERMANENT', 'REMOTE', 11223344, 'Carlos Ruiz',
        950000.00, 'Pasaje Luna 789', 1133445566, 'carlos.ruiz@email.com',
-       'Desarrollador Backend', '2021-09-10', 'Trabaja desde el exterior');
+       'Tecnico Electronico', '2021-09-10', 'Trabaja desde el exterior');
 
 INSERT INTO service_entity (
     nombre_completo, observaciones_previas, auto, modelo, status,
