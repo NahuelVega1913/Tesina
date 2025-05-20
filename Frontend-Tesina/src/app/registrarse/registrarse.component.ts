@@ -8,13 +8,13 @@ import {
   UntypedFormGroup,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { min } from 'rxjs';
 
 @Component({
   selector: 'app-registrarse',
-  imports: [ReactiveFormsModule, NgClass],
+  imports: [ReactiveFormsModule, NgClass, RouterLink, RouterOutlet],
   templateUrl: './registrarse.component.html',
   styleUrl: './registrarse.component.css',
 })
@@ -32,6 +32,9 @@ export class RegistrarseComponent {
     password: new UntypedFormControl('', []),
     terms: new UntypedFormControl(false, []),
   });
+  redirectTo() {
+    this.router.navigate(['/terminos-condiciones']);
+  }
 
   save() {
     if (this.form.valid) {

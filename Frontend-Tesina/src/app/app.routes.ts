@@ -34,6 +34,7 @@ import { ModificarInspeccionComponent } from './modificar-inspeccion/modificar-i
 import { ConsultarInspeccionComponent } from './consultar-inspeccion/consultar-inspeccion.component';
 import { ConsultarCustomizacionComponent } from './consultar-customizacion/consultar-customizacion.component';
 import { ConsultarReparacionComponent } from './consultar-reparacion/consultar-reparacion.component';
+import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-condiciones.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,8 @@ export const routes: Routes = [
   },
   { path: 'registrarse', component: RegistrarseComponent },
   { path: 'unauthorized', component: UnauthorizedComponent },
+  { path: 'terminos-condiciones', component: TerminosCondicionesComponent },
+
   {
     path: '',
     component: InicioComponent,

@@ -147,7 +147,10 @@
         </div>
         <label for="remember" class="ms-2 text-sm font-medium text-white"
           >He leido y acepto los
-          <a href="#" class="text-white hover:underline"
+          <a
+            (click)="redirectTo()"
+            routerLinkActive="router-link-active"
+            class="text-blue-500 underline"
             >Terminos y Condiciones</a
           >.</label
         >
