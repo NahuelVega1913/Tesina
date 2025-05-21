@@ -154,6 +154,7 @@ export const routes: Routes = [
       },
       { path: 'consultar-reparacion', component: ConsultarReparacionComponent },
       { path: 'preguntas-frecuentes', component: PreguntasFrecuentesComponent },
+      { path: 'chatbot', component: ChatbotComponent },
     ],
   },
 ];
