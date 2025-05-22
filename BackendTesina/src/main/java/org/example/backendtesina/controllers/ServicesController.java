@@ -48,7 +48,7 @@ public class ServicesController {
         }
         return ResponseEntity.ok(lst);
     }
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @PostMapping(value = "postService")
     public ResponseEntity<?> post(@RequestBody PostInspection entity,@RequestHeader("Authorization") String authorizationHeader){
         String token = authorizationHeader.substring(7); // Elimina "Bearer "
@@ -58,7 +58,7 @@ public class ServicesController {
         }
         return ResponseEntity.ok("");
     }
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @PostMapping(value = "postRepair")
     public ResponseEntity<?> postRepair(@RequestBody PostInspection entity, @RequestHeader("Authorization") String authorizationHeader){
         String token = authorizationHeader.substring(7); // Elimina "Bearer "
@@ -68,7 +68,7 @@ public class ServicesController {
         }
         return ResponseEntity.ok("");
     }
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @PostMapping(value = "postCustomization")
     public ResponseEntity<?> postCustomization(@RequestBody PostInspection entity,@RequestHeader("Authorization") String authorizationHeader){
         String token = authorizationHeader.substring(7); // Elimina "Bearer "

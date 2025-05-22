@@ -151,11 +151,25 @@
 
               <td class="px-6 py-4">$ {{ item.cost }}</td>
               <td class="px-6 py-4">
+                @if(item.type == "REPAIR"){
                 <a
-                  (click)="redirectTo('detalles-venta', item.id)"
+                  (click)="redirectTo('consultar-reparacion', item.id)"
                   class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >Ver Detalles</a
                 >
+                } @if(item.type == "INSPECTION"){
+                <a
+                  (click)="redirectTo('consultar-inspeccion', item.id)"
+                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  >Ver Detalles</a
+                >
+                } @if(item.type == "CUSTOMIZATION"){
+                <a
+                  (click)="redirectTo('consultar-customizacion', item.id)"
+                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  >Ver Detalles</a
+                >
+                }
               </td>
             </tr>
             } }

@@ -23,7 +23,7 @@ export class HistorialServiciosComponent {
   constructor(private router: Router) {}
 
   redirectTo(url: string, id: number) {
-    localStorage.setItem('idVenta', id.toString());
+    localStorage.setItem('idServicio', id.toString());
     this.router.navigate([`${url}`]);
   }
 
