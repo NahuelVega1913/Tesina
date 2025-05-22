@@ -16,7 +16,7 @@ public class ChatService {
     //private static final String API_KEY = "252f6e2a-645b-4105-84b1-79882c1755c7";
     private static final String API_KEY = "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";
 
-    public void enviarMensaje(String mensaje) {
+    public String enviarMensaje(String mensaje) {
         RestTemplate restTemplate = new RestTemplate();
 
         // Headers requeridos
@@ -46,15 +46,17 @@ public class ChatService {
                 if (choices != null && !choices.isEmpty()) {
                     Map<String, Object> messageObj = (Map<String, Object>) choices.get(0).get("message");
                     String respuesta = (String) messageObj.get("content");
-                    System.out.println("Respuesta generada:\n" + respuesta);
+                    return respuesta;
                 } else {
-                    System.out.println("No se recibieron respuestas.");
+                    return "No se recibieron respuestas.";
                 }
             } else {
                 System.out.println("Respuesta no exitosa: " + response.getStatusCode());
+                return null;
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
+            return null;
         }
     }
 }
