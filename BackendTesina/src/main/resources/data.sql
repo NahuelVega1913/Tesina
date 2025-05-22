@@ -102,3 +102,32 @@ INSERT INTO service_entity (
              'PAID', 'CUSTOMIZATION', '2025-04-28 10:00:00', '2025-05-04 18:00:00', 750.0,
              'CustomizationEntity', 'Cuero ecológico, pegamento industrial', 'Cambio completo de tapizado interior'
          );
+INSERT INTO service_entity (
+    nombre_completo, observaciones_previas, auto, modelo, status,
+    payment_status, type, date_entry, date_exit, cost,
+    dtype, resultado, recomendaciones, estado_general
+) VALUES (
+             'Carlos Méndez', 'Verificación anual', 'Honda Civic', 2019, 'WITHDRAW',
+             'PAID', 'INSPECTION', '2025-04-15 08:00:00', '2025-04-15 09:00:00', 120.0,
+             'InspectionEntity', 'Apto', 'Próxima revisión en 12 meses', 'Apto'
+         );
+
+INSERT INTO service_entity (
+    nombre_completo, observaciones_previas, auto, modelo, status,
+    payment_status, type, date_entry, date_exit, cost,
+    dtype, technicla_diagnosis, tasks_performed, spares_used
+) VALUES (
+             'Valeria Suárez', 'Frenos fallan', 'Volkswagen Gol', 2017, 'WITHDRAW',
+             'UNPAID', 'REPAIR', '2025-05-10 09:30:00', '2025-05-11 13:45:00', 380.0,
+             'RepairEntity', 'Discos desgastados', 'Cambio de discos y pastillas', 'Discos, pastillas de freno'
+         );
+
+INSERT INTO service_entity (
+    nombre_completo, observaciones_previas, auto, modelo, status,
+    payment_status, type, date_entry, date_exit, cost,
+    dtype, materials_used, task_realized
+) VALUES (
+             'Roberto Díaz', 'Quiere personalizar volante', 'Peugeot 208', 2022, 'WITHDRAW',
+             'PAID', 'CUSTOMIZATION', '2025-05-05 14:00:00', '2025-05-06 12:00:00', 200.0,
+             'CustomizationEntity', 'Cuero negro, hilo rojo', 'Tapizado de volante personalizado'
+         );

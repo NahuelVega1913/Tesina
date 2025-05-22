@@ -307,6 +307,8 @@ public class ServiceService {
             GetServices get = new GetServices();
             get.setAuto(s.getAuto());
             get.setId(s.getId());
+            get.setDateEntry(s.getDateEntry());
+            get.setDateExit(s.getDateExit());
             get.setType(s.getType().toString());
             get.setModelo(s.getModelo());
             if(!s.getEmpleados().isEmpty()) {
@@ -325,6 +327,8 @@ public class ServiceService {
             get.setNombreCompleto(s.getNombreCompleto());
             get.setObservacionesPrevias(s.getObservacionesPrevias());
             get.setPaymentStatus(s.getPaymentStatus());
+            get.setCost(s.getCost());
+
             lst.add(get);
         }
         return lst;
