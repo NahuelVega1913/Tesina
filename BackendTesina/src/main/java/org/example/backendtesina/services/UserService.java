@@ -67,7 +67,10 @@ public class UserService {
         }
         else if (entity.getServicios().get((entity.getServicios().size())-1).getStatus() != ServiceStatus.WITHDRAW){
             information.setHasService(true);
+        }else{
+            information.setHasService(false);
         }
+
         return information;
     }
 

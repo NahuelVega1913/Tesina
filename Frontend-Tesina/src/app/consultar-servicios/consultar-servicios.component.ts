@@ -98,6 +98,16 @@ export class ConsultarServiciosComponent {
       },
     });
   }
+  pagar(id: number) {
+    const getSubscription = this.service.pagarEfectivo(id).subscribe({
+      next: (res) => {
+        this.getProveedores();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
   getProveedores() {
     const getSubscription = this.service.getServices().subscribe({

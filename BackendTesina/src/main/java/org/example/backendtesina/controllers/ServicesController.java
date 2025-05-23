@@ -1,5 +1,7 @@
 package org.example.backendtesina.controllers;
 
+import com.mercadopago.exceptions.MPApiException;
+import com.mercadopago.exceptions.MPException;
 import org.example.backendtesina.DTOs.Get.*;
 import org.example.backendtesina.DTOs.Post.PostInspection;
 import org.example.backendtesina.DTOs.Post.PostRepair;
@@ -14,7 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/services")
@@ -119,14 +123,34 @@ public class ServicesController {
         return ResponseEntity.ok(lst);
     }
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping(value = "payService/{id}")
+    public ResponseEntity<?> payService(@PathVariable int id){
+
+        ServiceEntity lst = service.payService(id);
+        if(lst == null){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(lst);
+    }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @PostMapping(value = "finishCustomization")
-    public ResponseEntity<?> finishCustomization(@RequestBody GetCustomization inspection){
+        public ResponseEntity<?> finishCustomization(@RequestBody GetCustomization inspection){
 
         CustomizationEntity lst = service.FinishCustomization(inspection);
         if(lst == null){
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(lst);
+    }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping(value = "payMPService/{id}")
+    public ResponseEntity<?> payMercadoPago(@PathVariable int id) throws MPException, MPApiException {
+
+        String initPoint = service.payMercadoPagoService(id);
+        Map<String, String> response = new HashMap<>();
+        response.put("init_point", initPoint);
+
+        return ResponseEntity.ok(response);
     }
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @PostMapping(value = "finishRepair")

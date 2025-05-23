@@ -7,6 +7,7 @@ import { ServiciosService } from '../services/servicios.service';
 import { UsuarioService } from '../services/usuario.service';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { MercadoPagoService } from '../services/mercado-pago.service';
 
 @Component({
   selector: 'app-espera',
@@ -15,17 +16,40 @@ import { NgClass } from '@angular/common';
   styleUrl: './espera.component.css',
 })
 export class EsperaComponent implements AfterViewInit {
-  constructor(private router: Router) {}
   id: number = 0;
   Object: any = {};
+  mp = {} as any;
+
   private service: ServiciosService = inject(ServiciosService);
+  private mpService: MercadoPagoService = inject(MercadoPagoService);
+
   private userService = inject(UsuarioService);
   @ViewChild('mapContainer') mapContainer!: ElementRef;
   status: string = '';
   private mapInitialized = false;
 
+  constructor(private router: Router) {
+    this.mp = new (window as any).MercadoPago(
+      'APP_USR-367ee25d-7b5c-4b8d-a966-2cc25f227978',
+      {
+        locale: 'es-AR',
+      }
+    );
+  }
+
   ngOnInit(): void {
     this.getUserInformation();
+    this.mp.bricks().create('wallet', 'wallet_container', {
+      initialization: {
+        preferenceId: 'YOUR_PREFERENCE_ID', // Reemplaza con tu ID de preferencia
+      },
+      customization: {
+        texts: {
+          action: 'pay',
+          valueProp: 'security_details',
+        },
+      },
+    });
   }
 
   ngAfterViewInit(): void {
@@ -59,6 +83,16 @@ export class EsperaComponent implements AfterViewInit {
     const getSubscription = this.service.getServiceById(this.id).subscribe({
       next: (res) => {
         this.Object = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  pagarServicio() {
+    const getSubscription = this.mpService.pagarServicio(this.id).subscribe({
+      next: (res) => {
+        window.location.href = res.init_point;
       },
       error: (err) => {
         console.log(err);

@@ -223,60 +223,75 @@
         </li>
       </ol>
     </div>
-    <div></div>
     <div
       class="text-center text-green-500 font-bold text-5xl mt-20 text-shadow-lg/30"
     >
       Finalizado
     </div>
+    <div
+      class="bg-black rounded-2xl p-10 flex flex-col justify-center shadow-lg shadow-gray-900 mt-5"
+    >
+      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+        Auto: {{ Object.auto }}
+      </div>
+      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+        Modelo: {{ Object.modelo }}
+      </div>
+      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+        Observaciones Previas: {{ Object.observacionesPrevias }}
+      </div>
+      @if(Object.type == 'INSPECTION'){
+      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+        Estado General: {{ Object.estadoGeneral }}
+      </div>
+      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+        Resultado: {{ Object.resultado }}
+      </div>
+      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+        Recomendaciones: {{ Object.recomendaciones }}
+      </div>
+      }
+      <!--INSPECTION-->
 
-    <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-      Auto: {{ Object.auto }}
-    </div>
-    <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-      Modelo: {{ Object.modelo }}
-    </div>
-    <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-      Observaciones Previas: {{ Object.observacionesPrevias }}
-    </div>
-    @if(Object.type == 'INSPECTION'){
-    <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-      Estado General: {{ Object.estadoGeneral }}
-    </div>
-    <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-      Resultado: {{ Object.resultado }}
-    </div>
-    <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-      Recomendaciones: {{ Object.recomendaciones }}
-    </div>
-    }
-    <!--INSPECTION-->
+      <!--REPAIR-->
+      @if(Object.type == 'REPAIR'){
+      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+        Diagnostico Tecnico: {{ Object.techniclaDiagnosis }}
+      </div>
+      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+        Tareas Realizadas: {{ Object.tasksPerformed }}
+      </div>
+      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+        Repuestos Usados: {{ Object.tasksPerformed }}
+      </div>
+      }
+      <!--REPAIR-->
+      <!--CUSTOMIZATION-->
+      @if(Object.type == 'CUSTOMIZATION'){
+      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+        Tareas Realizadas: {{ Object.taskRealized }}
+      </div>
+      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+        Repuestos Usados: {{ Object.materialsUsed }}
+      </div>
 
-    <!--REPAIR-->
-    @if(Object.type == 'REPAIR'){
-    <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-      Diagnostico Tecnico: {{ Object.techniclaDiagnosis }}
-    </div>
-    <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-      Tareas Realizadas: {{ Object.tasksPerformed }}
-    </div>
-    <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-      Repuestos Usados: {{ Object.tasksPerformed }}
-    </div>
-    }
-    <!--REPAIR-->
-    <!--CUSTOMIZATION-->
-    @if(Object.type == 'CUSTOMIZATION'){
-    <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-      Tareas Realizadas: {{ Object.taskRealized }}
-    </div>
-    <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-      Repuestos Usados: {{ Object.materialsUsed }}
-    </div>
-
-    }
-    <div class="text-white font-bold text-md mt-3 text-shadow-lg/30">
-      Costo Total: ${{ Object.cost }}
+      } @if(Object.paymentStatus =='UNPAID'){
+      <div class="text-white font-bold text-xl mt-3 text-shadow-lg/30">
+        Costo Total: ${{ Object.cost }}
+      </div>
+      <div (click)="pagarServicio()" id="wallet_container"></div>
+      }@else {
+      <div
+        class="text-white font-bold text-center text-xl mt-3 text-shadow-lg/30"
+      >
+        Retira tu vehiculo en Isaac Albeniz 3622
+      </div>
+      <div
+        class="text-gray-200 font-bold text-center text-sm mt-3 text-shadow-lg/30"
+      >
+        Te esperamos!!
+      </div>
+      }
     </div>
   </div>
   }

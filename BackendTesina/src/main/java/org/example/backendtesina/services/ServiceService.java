@@ -1,9 +1,14 @@
 package org.example.backendtesina.services;
 
+import com.mercadopago.client.preference.PreferenceBackUrlsRequest;
+import com.mercadopago.client.preference.PreferenceClient;
+import com.mercadopago.client.preference.PreferenceItemRequest;
+import com.mercadopago.client.preference.PreferenceRequest;
+import com.mercadopago.exceptions.MPApiException;
+import com.mercadopago.exceptions.MPException;
+import com.mercadopago.resources.preference.Preference;
 import org.example.backendtesina.DTOs.Get.*;
-import org.example.backendtesina.DTOs.Post.PostCustomization;
 import org.example.backendtesina.DTOs.Post.PostInspection;
-import org.example.backendtesina.DTOs.Post.PostRepair;
 import org.example.backendtesina.entities.enums.PaymentStatus;
 import org.example.backendtesina.entities.enums.ServiceStatus;
 import org.example.backendtesina.entities.enums.TypeOfService;
@@ -20,6 +25,7 @@ import org.example.backendtesina.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +125,37 @@ public class ServiceService {
         return entity;
     }
 
+    public String payMercadoPagoService(int id) throws MPException, MPApiException {
+        ServiceEntity entity = repository.findById(id).get();
+        entity.setPaymentStatus(PaymentStatus.PAID);
+        repository.save(entity);
+        PreferenceItemRequest itemRequest =
+                PreferenceItemRequest.builder()
+                        .id(String.valueOf(entity.getId()))
+                        .title(entity.getAuto() + entity.getModelo())
+                        .description(entity.getObservacionesPrevias())
+                        .categoryId(entity.getType().toString())
+                        .quantity(1)
+                        .unitPrice(new BigDecimal(entity.getCost()))
+                        .build();
+        List<PreferenceItemRequest> items = new ArrayList<>();
+        PreferenceBackUrlsRequest backUrls =
+                PreferenceBackUrlsRequest.builder()
+                        .success("https://localhost:4200/repuestos")
+                        .pending("https://localhost:4200/repuestos")
+                        .failure("https://localhost:4200/repuestos")
+                        .build();
+        //PreferenceRequest request = PreferenceRequest.builder().backUrls(backUrls).build();
+        items.add(itemRequest);
+        PreferenceRequest preferenceRequest = PreferenceRequest.builder()
+                .items(items)
+                .backUrls(backUrls)
+                .autoReturn("approved")
+                .build();
+        PreferenceClient client = new PreferenceClient();
+        Preference preference = client.create(preferenceRequest);
+        return preference.getInitPoint();
+    }
     public ServiceEntity addEmployes(int id, int idEmployee){
         ServiceEntity service = repository.findById(id).get();
         List<EmployeeEntity> lstEntities = new ArrayList<>();
@@ -341,6 +378,14 @@ public class ServiceService {
         }
         entity.setStatus(ServiceStatus.IN_QUEUE);
         entity.setDateEntry(LocalDateTime.now());
+        repository.save(entity);
+        return entity;
+    }
+    public ServiceEntity payService(int id){
+        ServiceEntity entity =  this.repository.findById(id).get();
+        entity.setStatus(ServiceStatus.WITHDRAW);
+        entity.setPaymentStatus(PaymentStatus.PAID);
+        entity.setDateExit(LocalDateTime.now());
         repository.save(entity);
         return entity;
     }
