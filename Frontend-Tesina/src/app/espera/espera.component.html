@@ -4,7 +4,14 @@
     <p class="font-bold text-4xl text-center text-white">
       Lleva tu vehiculo a nuestra sucursal
     </p>
+
     <p class="text-gray-200 mt-1 text-center">Isaac Albeniz 3622</p>
+    @if(Object.paymentStatus == 'UNPAID_DEPOSIT'){
+    <p class="text-white text-center text-2xl mt-5 font-normal">
+      Antes de poder revisar tu vehiculo necesitamos que haga un pago de seña
+    </p>
+    <div (click)="pagarSena()" id="wallet_container"></div>
+    }
     <div
       #mapContainer
       id="map"

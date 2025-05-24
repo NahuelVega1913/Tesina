@@ -153,6 +153,16 @@ public class ServicesController {
         return ResponseEntity.ok(response);
     }
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping(value = "payMPSeña/{id}")
+    public ResponseEntity<?> payMercadoPagoSeña(@PathVariable int id) throws MPException, MPApiException {
+
+        String initPoint = service.payMercadoPagoSeña(id);
+        Map<String, String> response = new HashMap<>();
+        response.put("init_point", initPoint);
+
+        return ResponseEntity.ok(response);
+    }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @PostMapping(value = "finishRepair")
     public ResponseEntity<?> finishRepair(@RequestBody GetRepair inspection){
 

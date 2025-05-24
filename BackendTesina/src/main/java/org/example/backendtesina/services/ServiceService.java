@@ -51,7 +51,7 @@ public class ServiceService {
 
         entity.setAuto(inspection.getAuto());
         entity.setType(TypeOfService.INSPECTION);
-        entity.setPaymentStatus(PaymentStatus.UNPAID);
+        entity.setPaymentStatus(PaymentStatus.UNPAID_DEPOSIT);
         entity.setDateEntry(LocalDateTime.now());
         entity.setModelo(inspection.getModelo());
         entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
@@ -78,7 +78,7 @@ public class ServiceService {
         RepairEntity entity = new RepairEntity();
         entity.setAuto(inspection.getAuto());
         entity.setType(TypeOfService.REPAIR);
-        entity.setPaymentStatus(PaymentStatus.UNPAID);
+        entity.setPaymentStatus(PaymentStatus.UNPAID_DEPOSIT);
         entity.setDateEntry(LocalDateTime.now());
         entity.setModelo(inspection.getModelo());
         entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
@@ -104,7 +104,7 @@ public class ServiceService {
         CustomizationEntity entity = new CustomizationEntity();
         entity.setAuto(inspection.getAuto());
         entity.setType(TypeOfService.CUSTOMIZATION);
-        entity.setPaymentStatus(PaymentStatus.UNPAID);
+        entity.setPaymentStatus(PaymentStatus.UNPAID_DEPOSIT);
         entity.setDateEntry(LocalDateTime.now());
         entity.setModelo(inspection.getModelo());
         entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
@@ -156,10 +156,43 @@ public class ServiceService {
         Preference preference = client.create(preferenceRequest);
         return preference.getInitPoint();
     }
+    public String payMercadoPagoSeña(int id) throws MPException, MPApiException {
+        ServiceEntity entity = repository.findById(id).get();
+        entity.setPaymentStatus(PaymentStatus.PAID_DEPOSIT);
+        repository.save(entity);
+        PreferenceItemRequest itemRequest =
+                PreferenceItemRequest.builder()
+                        .id(String.valueOf(entity.getId()))
+                        .title(entity.getAuto() + entity.getModelo())
+                        .description("Seña del servicio")
+                        .categoryId(entity.getType().toString())
+                        .quantity(1)
+                        .unitPrice(new BigDecimal(10000))
+                        .build();
+        List<PreferenceItemRequest> items = new ArrayList<>();
+        PreferenceBackUrlsRequest backUrls =
+                PreferenceBackUrlsRequest.builder()
+                        .success("https://localhost:4200/repuestos")
+                        .pending("https://localhost:4200/repuestos")
+                        .failure("https://localhost:4200/repuestos")
+                        .build();
+        //PreferenceRequest request = PreferenceRequest.builder().backUrls(backUrls).build();
+        items.add(itemRequest);
+        PreferenceRequest preferenceRequest = PreferenceRequest.builder()
+                .items(items)
+                .backUrls(backUrls)
+                .autoReturn("approved")
+                .build();
+        PreferenceClient client = new PreferenceClient();
+        Preference preference = client.create(preferenceRequest);
+        return preference.getInitPoint();
+    }
+
     public ServiceEntity addEmployes(int id, int idEmployee){
         ServiceEntity service = repository.findById(id).get();
         List<EmployeeEntity> lstEntities = new ArrayList<>();
             service.setStatus(ServiceStatus.PROCESS);
+            service.setPaymentStatus(PaymentStatus.UNPAID);
             EmployeeEntity entity = employeeRepository.findById(idEmployee).get();
             if(entity != null){
                 if(entity.getJobs().isEmpty()){
@@ -377,6 +410,7 @@ public class ServiceService {
             return null;
         }
         entity.setStatus(ServiceStatus.IN_QUEUE);
+        entity.setPaymentStatus(PaymentStatus.PAID_DEPOSIT);
         entity.setDateEntry(LocalDateTime.now());
         repository.save(entity);
         return entity;

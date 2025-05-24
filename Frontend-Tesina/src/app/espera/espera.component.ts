@@ -99,6 +99,16 @@ export class EsperaComponent implements AfterViewInit {
       },
     });
   }
+  pagarSena() {
+    const getSubscription = this.mpService.pagarSeña(this.id).subscribe({
+      next: (res) => {
+        window.location.href = res.init_point;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
   getUserInformation() {
     this.service.getServiceStatus().subscribe({

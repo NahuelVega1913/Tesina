@@ -23,6 +23,8 @@
         class="bg-gray-50 border me-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
       >
         <option value="" selected>Estado del Pago</option>
+        <option value="PAID_DEPOSIT">Seña Pagada</option>
+        <option value="UNPAID_DEPOSIT">Seña Sin Pagar</option>
         <option value="PAID">Pagados</option>
         <option value="UNPAID">Sin Pagar</option>
       </select>
@@ -411,11 +413,11 @@
         }
         <p class="font-bold mt-2">{{ i.auto + " (" + i.modelo + ")" }}</p>
         <p class="text-gray-700">Cliente: {{ i.nombreCompleto }}</p>
-        @if(i.paymentStatus == 'UNPAID') {
+        @if(i.paymentStatus == 'UNPAID_DEPOSIT') {
         <div class="block">
           <span
             class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300"
-            >Sin pagar</span
+            >Seña sin pagar</span
           >
         </div>
 
@@ -423,7 +425,7 @@
         <div class="block">
           <span
             class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"
-            >Pagado</span
+            >Seña Pagada</span
           >
         </div>
         }
@@ -548,11 +550,11 @@
         }
         <p class="font-bold mt-2">{{ i.auto + " (" + i.modelo + ")" }}</p>
         <p class="text-gray-700">Cliente: {{ i.nombreCompleto }}</p>
-        @if(i.paymentStatus == 'UNPAID') {
+        @if(i.paymentStatus == 'UNPAID_DEPOSIT') {
         <div class="block">
           <span
             class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300"
-            >Sin pagar</span
+            >Seña sin pagar</span
           >
         </div>
 
@@ -560,7 +562,7 @@
         <div class="block">
           <span
             class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"
-            >Pagado</span
+            >Seña Pagada</span
           >
         </div>
         }
@@ -578,7 +580,7 @@
           type="button"
           class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
         >
-          Registrar Ingreso
+          Ingresar
         </button>
       </div>
       } }
