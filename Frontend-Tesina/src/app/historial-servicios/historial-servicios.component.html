@@ -1,181 +1,186 @@
-<div class="p-4">
-  <div class="font-bold text-4xl text-center mt-4 mb-5">
-    Historial de Vehiculos
-  </div>
-  <div class="flex flex-row align-middle p-4">
-    <form class="mt-5 w-full">
-      <div class="flex">
-        <div
-          id="date-range-picker me-3"
-          date-rangepicker
-          class="flex items-center"
-        >
-          <div class="relative w-35">
-            <div
-              class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
-            >
-              <svg
-                class="w-4 h-4 text-gray-500"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
-                />
-              </svg>
-            </div>
-            <input
-              id="datepicker-range-start"
-              name="start"
-              type="date"
-              (change)="filter()"
-              [(ngModel)]="dateFrom"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
-              placeholder="Fecha"
-            />
-          </div>
-
-          <span class="mx-4 text-gray-500">hasta</span>
-          <div class="relative w-35">
-            <div
-              class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
-            >
-              <svg
-                class="w-4 h-4 text-gray-500"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
-                />
-              </svg>
-            </div>
-            <input
-              id="datepicker-range-end"
-              name="end"
-              type="date"
-              (change)="filter()"
-              [(ngModel)]="dateTo"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
-              placeholder="Fecha"
-            />
-          </div>
-        </div>
-        <div class="ms-5">
-          <select
-            id="countries"
-            name="category"
-            (change)="filter()"
-            [(ngModel)]="category"
-            class="bg-gray-50 border me-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+<div class="flex flex-col md:flex-row">
+  <div class="p-4 w-full md-w-4/5">
+    <div class="font-bold text-4xl text-center mt-4 mb-5">
+      Historial de Vehiculos
+    </div>
+    <div class="flex flex-row align-middle p-4">
+      <form class="mt-5 w-full">
+        <div class="flex">
+          <div
+            id="date-range-picker me-3"
+            date-rangepicker
+            class="flex items-center"
           >
-            <option value="" selected>Todas</option>
-            <option value="INSPECTION">Inspeccion</option>
-            <option value="REPAIR">Reparacion</option>
-            <option value="CUSTOMIZATION">Customizacion</option>
-          </select>
-        </div>
-        <div class="relative w-full ms-5">
-          <input
-            (input)="filter()"
-            type="search"
-            name="search"
-            id="search-dropdown"
-            class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Cliente"
-            [(ngModel)]="search"
-          />
-          <button
-            type="submit"
-            class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-          >
-            <svg
-              class="w-4 h-4"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+            <div class="relative w-35">
+              <div
+                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+              >
+                <svg
+                  class="w-4 h-4 text-gray-500"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                  />
+                </svg>
+              </div>
+              <input
+                id="datepicker-range-start"
+                name="start"
+                type="date"
+                (change)="filter()"
+                [(ngModel)]="dateFrom"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                placeholder="Fecha"
               />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="">
-    <div class="p-4">
-      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table
-          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-        >
-          <thead
-            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-          >
-            <tr>
-              <th scope="col" class="px-6 py-3">Fecha</th>
-              <th scope="col" class="px-6 py-3">Cliente</th>
-              <th scope="col" class="px-6 py-3">Vehiculo</th>
-              <th scope="col" class="px-6 py-3">Tipo</th>
+            </div>
 
-              <th scope="col" class="px-6 py-3">Total</th>
-              <th scope="col" class="px-6 py-3">Accion</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (item of this.lstFiltered; track $index) { @if(item.status ==
-            "WITHDRAW"){
-            <tr
-              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
-            >
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            <span class="mx-4 text-gray-500">hasta</span>
+            <div class="relative w-35">
+              <div
+                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
               >
-                {{ item.dateExit | date : "dd/MM/yyyy" }}
-              </th>
-              <td class="px-6 py-4">{{ item.nombreCompleto }}</td>
+                <svg
+                  class="w-4 h-4 text-gray-500"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+                  />
+                </svg>
+              </div>
+              <input
+                id="datepicker-range-end"
+                name="end"
+                type="date"
+                (change)="filter()"
+                [(ngModel)]="dateTo"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                placeholder="Fecha"
+              />
+            </div>
+          </div>
+          <div class="ms-5">
+            <select
+              id="countries"
+              name="category"
+              (change)="filter()"
+              [(ngModel)]="category"
+              class="bg-gray-50 border me-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+            >
+              <option value="" selected>Todas</option>
+              <option value="INSPECTION">Inspeccion</option>
+              <option value="REPAIR">Reparacion</option>
+              <option value="CUSTOMIZATION">Customizacion</option>
+            </select>
+          </div>
+          <div class="relative w-full ms-5">
+            <input
+              (input)="filter()"
+              type="search"
+              name="search"
+              id="search-dropdown"
+              class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Cliente"
+              [(ngModel)]="search"
+            />
+            <button
+              type="submit"
+              class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+            >
+              <svg
+                class="w-4 h-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="">
+      <div class="p-4">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table
+            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+          >
+            <thead
+              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+            >
+              <tr>
+                <th scope="col" class="px-6 py-3">Fecha</th>
+                <th scope="col" class="px-6 py-3">Cliente</th>
+                <th scope="col" class="px-6 py-3">Vehiculo</th>
+                <th scope="col" class="px-6 py-3">Tipo</th>
 
-              <td class="px-6 py-4">{{ item.auto + " " + item.modelo }}</td>
-              <td class="px-6 py-4">{{ tipo(item.type) }}</td>
+                <th scope="col" class="px-6 py-3">Total</th>
+                <th scope="col" class="px-6 py-3">Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of this.lstFiltered; track $index) { @if(item.status ==
+              "WITHDRAW"){
+              <tr
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+              >
+                <th
+                  scope="row"
+                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  {{ item.dateExit | date : "dd/MM/yyyy" }}
+                </th>
+                <td class="px-6 py-4">{{ item.nombreCompleto }}</td>
 
-              <td class="px-6 py-4">$ {{ item.cost }}</td>
-              <td class="px-6 py-4">
-                @if(item.type == "REPAIR"){
-                <a
-                  (click)="redirectTo('consultar-reparacion', item.id)"
-                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >Ver Detalles</a
-                >
-                } @if(item.type == "INSPECTION"){
-                <a
-                  (click)="redirectTo('consultar-inspeccion', item.id)"
-                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >Ver Detalles</a
-                >
-                } @if(item.type == "CUSTOMIZATION"){
-                <a
-                  (click)="redirectTo('consultar-customizacion', item.id)"
-                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >Ver Detalles</a
-                >
-                }
-              </td>
-            </tr>
-            } }
-          </tbody>
-        </table>
+                <td class="px-6 py-4">{{ item.auto + " " + item.modelo }}</td>
+                <td class="px-6 py-4">{{ tipo(item.type) }}</td>
+
+                <td class="px-6 py-4">$ {{ item.cost }}</td>
+                <td class="px-6 py-4">
+                  @if(item.type == "REPAIR"){
+                  <a
+                    (click)="redirectTo('consultar-reparacion', item.id)"
+                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >Ver Detalles</a
+                  >
+                  } @if(item.type == "INSPECTION"){
+                  <a
+                    (click)="redirectTo('consultar-inspeccion', item.id)"
+                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >Ver Detalles</a
+                  >
+                  } @if(item.type == "CUSTOMIZATION"){
+                  <a
+                    (click)="redirectTo('consultar-customizacion', item.id)"
+                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >Ver Detalles</a
+                  >
+                  }
+                </td>
+              </tr>
+              } }
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+  </div>
+  <div class="md:w-xl flex h-full p-4 bg-red-200">
+    <div class="font-bold text-4xl text-center mt-4 mb-5">Estadisticas</div>
   </div>
 </div>
