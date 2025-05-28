@@ -131,3 +131,24 @@ INSERT INTO service_entity (
              'PAID', 'CUSTOMIZATION', '2025-05-05 14:00:00', '2025-05-06 12:00:00', 200.0,
              'CustomizationEntity', 'Cuero negro, hilo rojo', 'Tapizado de volante personalizado'
          );
+
+
+INSERT INTO sale_entity (type_payment, user_id, date) VALUES
+                                                   ('CASH', 'usuario@gmail.com', '2024-05-10'),
+                                                   ('CASH', 'usuario@gmail.com', '2024-05-12'),
+                                                   ('CASH', 'usuario@gmail.com', '2024-05-15'),
+                                                   ('CASH', 'usuario@gmail.com', '2024-05-18'),
+                                                   ('CASH', 'usuario@gmail.com', '2024-05-20');
+
+INSERT INTO detail_sale_entity (cuantity, price, sale_id, spare_id) VALUES
+                                                                 (2, 15000.00, 1, 1),
+                                                                 (1, 500.00, 1, 3),
+
+                                                                 (3, 6000.00, 2, 2),
+
+                                                                 (1, 7500.00, 3, 5),
+
+                                                                 (2, 4900.00, 4, 6),
+
+                                                                 (1, 50000.00, 5, 4),
+                                                                 (1, 70000.00, 5, 1);
