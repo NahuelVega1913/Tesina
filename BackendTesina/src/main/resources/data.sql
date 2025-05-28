@@ -136,9 +136,14 @@ INSERT INTO service_entity (
 INSERT INTO sale_entity (type_payment, user_id, date) VALUES
                                                    ('CASH', 'usuario@gmail.com', '2024-05-10'),
                                                    ('CASH', 'usuario@gmail.com', '2024-05-12'),
-                                                   ('CASH', 'usuario@gmail.com', '2024-05-15'),
+                                                   ('CASH', 'usuario@gmail.com', '2024-08-15'),
                                                    ('CASH', 'usuario@gmail.com', '2024-05-18'),
-                                                   ('CASH', 'usuario@gmail.com', '2024-05-20');
+                                                   ('CASH', 'usuario@gmail.com', '2024-05-20'),
+('MERCADO_PAGO', 'usuario@gmail.com', '2024-05-22'),
+('MERCADO_PAGO', 'usuario@gmail.com', '2024-07-25'),
+('MERCADO_PAGO', 'usuario@gmail.com', '2024-06-28'),
+('MERCADO_PAGO', 'usuario@gmail.com', '2024-06-01'),
+('MERCADO_PAGO', 'usuario@gmail.com', '2024-06-03');
 
 INSERT INTO detail_sale_entity (cuantity, price, sale_id, spare_id) VALUES
                                                                  (2, 15000.00, 1, 1),
@@ -151,4 +156,16 @@ INSERT INTO detail_sale_entity (cuantity, price, sale_id, spare_id) VALUES
                                                                  (2, 4900.00, 4, 6),
 
                                                                  (1, 50000.00, 5, 4),
-                                                                 (1, 70000.00, 5, 1);
+                                                                 (1, 70000.00, 5, 1),
+                                                                 (1, 12000.00, 6, 2),
+                                                                 (2, 3500.00, 6, 3),
+
+                                                                 (1, 8000.00, 7, 5),
+                                                                 (3, 400.00, 7, 6),
+
+                                                                 (2, 10000.00, 8, 1),
+
+                                                                 (1, 50000.00, 9, 4),
+                                                                 (2, 15000.00, 9, 2),
+
+                                                                 (1, 70000.00, 10, 1);

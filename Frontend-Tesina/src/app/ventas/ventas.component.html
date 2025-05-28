@@ -106,7 +106,7 @@
                   {{ item.date | date : "dd/MM/yyyy" }}
                 </th>
                 <td class="px-6 py-4">{{ item.user }}</td>
-                <td class="px-6 py-4">{{ item.typePayment }}</td>
+                <td class="px-6 py-4">{{ tipoDePago(item.typePayment) }}</td>
                 <td class="px-6 py-4">$ {{ item.total }}</td>
                 <td class="px-6 py-4">
                   <a
@@ -123,13 +123,33 @@
       </div>
     </div>
   </div>
-  <div class="md:w-2xl flex flex-col justify-center h-full p-4 bg-red-200">
+  <div class="md:w-2xl flex flex-col justify-center h-full p-4">
     <div class="font-bold text-4xl text-center mt-4 mb-5">Estadisticas</div>
-    <div class="flex items-center justify-center">
+    <!-- Gráfico de cantidad de ventas por mes -->
+    <div class="flex-col items-center justify-center mb-6 mt-2">
+      <p class="text-center font-normal text-lg">Cantidad de Ventas Mensual</p>
+      <div class="flex items-center justify-center w-full">
+        <canvas
+          id="myCountChart"
+          style="max-width: 400px; max-height: 250px"
+        ></canvas>
+      </div>
+    </div>
+    <!-- Gráfico de recaudación mensual -->
+    <div class="flex-col items-center justify-center mb-2">
+      <p class="text-center font-normal text-lg">Recaudacion Mensual</p>
       <canvas id="myChart"></canvas>
     </div>
-    <div class="flex items-center justify-center">
-      <canvas id="myChart"></canvas>
+    <!-- Gráfico de torta de tipos de pago -->
+    <div class="flex-col items-center justify-center mb-2">
+      <p class="text-center font-normal text-lg">Tipos de Pago</p>
+      <div class="flex items-center justify-center w-full">
+        <canvas
+          id="myPieChart"
+          class="mb-0.5"
+          style="max-width: 200px; max-height: 200px"
+        ></canvas>
+      </div>
     </div>
   </div>
 </div>
