@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MercadoPagoService } from '../services/mercado-pago.service';
 import { DatePipe } from '@angular/common';
-import Chart, { registerables } from 'chart.js/auto';
 
 @Component({
   selector: 'app-ventas',
@@ -11,7 +10,7 @@ import Chart, { registerables } from 'chart.js/auto';
   templateUrl: './ventas.component.html',
   styleUrl: './ventas.component.css',
 })
-export class VentasComponent implements AfterViewInit {
+export class VentasComponent {
   category: string = '';
   search: string = '';
   lst: any[] = [];
@@ -69,28 +68,6 @@ export class VentasComponent implements AfterViewInit {
       },
       error: (err) => {
         console.log(err);
-      },
-    });
-  }
-  ngAfterViewInit() {
-    Chart.register(...registerables);
-
-    const ctx = document.getElementById('myChart') as HTMLCanvasElement;
-
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Enero', 'Febrero', 'Marzo'],
-        datasets: [
-          {
-            label: 'Ventas',
-            data: [12, 19, 3],
-            backgroundColor: '#3b82f6',
-          },
-        ],
-      },
-      options: {
-        responsive: true,
       },
     });
   }
