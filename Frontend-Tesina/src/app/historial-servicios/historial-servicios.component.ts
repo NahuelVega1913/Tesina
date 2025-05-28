@@ -33,35 +33,28 @@ export class HistorialServiciosComponent {
     this.getVentas();
   }
   filter() {
-    // Filtra por fecha, categoría y búsqueda de cliente
+    console.log(this.dateFrom, this.dateTo);
     this.lstFiltered = this.lst.filter((item) => {
-      // Usar dateExit para el filtro de fecha
-      const itemDate = item.dateExit
-        ? new Date(item.dateExit).setHours(0, 0, 0, 0)
-        : null;
+      const itemDate = new Date(item.date.split('-').join('/')).setHours(
+        0,
+        0,
+        0,
+        0
+      );
       const fromDate = this.dateFrom
-        ? new Date(this.dateFrom).setHours(0, 0, 0, 0)
+        ? new Date(this.dateFrom.split('-').join('/')).setHours(0, 0, 0, 0)
         : null;
       const toDate = this.dateTo
-        ? new Date(this.dateTo).setHours(0, 0, 0, 0)
+        ? new Date(this.dateTo.split('-').join('/')).setHours(0, 0, 0, 0)
         : null;
 
-      // Filtro por tipo de servicio
       const matchesCategory =
-        this.category === '' || item.type === this.category;
-
-      // Filtro por rango de fechas
+        this.category === '' || item.typePayment === this.category;
       const matchesDate =
-        (!fromDate || (itemDate && itemDate >= fromDate)) &&
-        (!toDate || (itemDate && itemDate <= toDate));
-
-      // Filtro por búsqueda de nombre de cliente
+        (!fromDate || itemDate >= fromDate) && (!toDate || itemDate <= toDate);
       const matchesSearch =
         this.search === '' ||
-        (item.nombreCompleto &&
-          item.nombreCompleto
-            .toLowerCase()
-            .includes(this.search.toLowerCase()));
+        item.user.toLowerCase().includes(this.search.toLowerCase());
 
       return matchesCategory && matchesDate && matchesSearch;
     });
