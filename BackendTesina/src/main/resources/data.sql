@@ -131,6 +131,70 @@ INSERT INTO service_entity (
              'PAID', 'CUSTOMIZATION', '2025-05-05 14:00:00', '2025-05-06 12:00:00', 200.0,
              'CustomizationEntity', 'Cuero negro, hilo rojo', 'Tapizado de volante personalizado'
          );
+-- INSPECTION
+INSERT INTO service_entity (
+    nombre_completo, observaciones_previas, auto, modelo, status,
+    payment_status, type, date_entry, date_exit, cost,
+    dtype, resultado, recomendaciones, estado_general
+) VALUES (
+             'Sofía Ramírez', 'Control general', 'Renault Logan', 2016, 'WITHDRAW',
+             'PAID', 'INSPECTION', '2025-05-07 08:15:00', '2025-05-07 09:10:00', 95.0,
+             'InspectionEntity', 'Apto con observaciones', 'Revisar frenos en 3 meses', 'Condicional'
+         );
+
+-- REPAIR
+INSERT INTO service_entity (
+    nombre_completo, observaciones_previas, auto, modelo, status,
+    payment_status, type, date_entry, date_exit, cost,
+    dtype, technicla_diagnosis, tasks_performed, spares_used
+) VALUES (
+             'Martín López', 'Luces traseras no funcionan', 'Fiat Argo', 2019, 'WITHDRAW',
+             'PAID', 'REPAIR', '2025-05-08 10:00:00', '2025-05-08 11:30:00', 150.0,
+             'RepairEntity', 'Cables sueltos en sistema de luces', 'Reparación de conexión eléctrica', 'Cableado'
+         );
+
+-- CUSTOMIZATION
+INSERT INTO service_entity (
+    nombre_completo, observaciones_previas, auto, modelo, status,
+    payment_status, type, date_entry, date_exit, cost,
+    dtype, materials_used, task_realized
+) VALUES (
+             'Andrea Núñez', 'Agregar vinilo decorativo', 'Mazda 3', 2023, 'WITHDRAW',
+             'UNPAID', 'CUSTOMIZATION', '2025-05-09 09:00:00', '2025-05-09 13:00:00', 300.0,
+             'CustomizationEntity', 'Vinilo negro mate', 'Aplicación de vinilo en capó y laterales'
+         );
+-- INSPECTION
+INSERT INTO service_entity (
+    nombre_completo, observaciones_previas, auto, modelo, status,
+    payment_status, type, date_entry, date_exit, cost,
+    dtype, resultado, recomendaciones, estado_general
+) VALUES (
+             'Pedro Alvarado', 'Chequeo post viaje largo', 'Nissan Versa', 2015, 'WITHDRAW',
+             'UNPAID', 'INSPECTION', '2025-05-12 08:00:00', '2025-05-12 08:45:00', 110.0,
+             'InspectionEntity', 'Apto', 'Revisar nivel de aceite en 2 meses', 'Apto'
+         );
+
+-- REPAIR
+INSERT INTO service_entity (
+    nombre_completo, observaciones_previas, auto, modelo, status,
+    payment_status, type, date_entry, date_exit, cost,
+    dtype, technicla_diagnosis, tasks_performed, spares_used
+) VALUES (
+             'Camila Herrera', 'Golpe en el paragolpes', 'Kia Rio', 2020, 'WITHDRAW',
+             'PAID', 'REPAIR', '2025-05-13 09:00:00', '2025-05-13 17:00:00', 450.0,
+             'RepairEntity', 'Deformación leve en paragolpes delantero', 'Reparación y pintura', 'Masilla, pintura, lija'
+         );
+
+-- CUSTOMIZATION
+INSERT INTO service_entity (
+    nombre_completo, observaciones_previas, auto, modelo, status,
+    payment_status, type, date_entry, date_exit, cost,
+    dtype, materials_used, task_realized
+) VALUES (
+             'Diego Paredes', 'Cambio de luces interiores', 'Hyundai Elantra', 2018, 'WITHDRAW',
+             'UNPAID', 'CUSTOMIZATION', '2025-05-14 11:00:00', '2025-05-14 13:30:00', 180.0,
+             'CustomizationEntity', 'Luces LED azules', 'Instalación de luces LED en cabina'
+         );
 
 
 INSERT INTO sale_entity (type_payment, user_id, date) VALUES
