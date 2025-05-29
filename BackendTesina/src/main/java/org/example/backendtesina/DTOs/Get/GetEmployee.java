@@ -6,6 +6,8 @@ public class GetEmployee {
     private String phone;
 
     private String position;
+    private String jornada;
+    private double salary;
 
 
     public int getId() {
@@ -38,5 +40,21 @@ public class GetEmployee {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public String getJornada() {
+        return jornada;
+    }
+
+    public void setJornada(String jornada) {
+        this.jornada = jornada;
     }
 }

@@ -65,7 +65,9 @@ public class EmployeeService {
             GetEmployee employee = new GetEmployee();
             employee.setFullName(e.getFullName());
             employee.setPosition(e.getPosition());
+            employee.setSalary(e.getSalary());
             employee.setPhone(e.getPhone());
+            employee.setJornada(e.getTypeOfContract().toString());
             employee.setId(e.getId());
             lstEmploye.add(employee);
         }
