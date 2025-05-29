@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmpleadosService } from '../services/empleados.service';
+import { ServiciosService } from '../services/servicios.service';
 
 @Component({
   selector: 'app-empleados',
@@ -16,6 +17,7 @@ export class EmpleadosComponent {
   lstFiltered: any[] = [];
 
   private service: EmpleadosService = inject(EmpleadosService);
+  private serviceService: ServiciosService = inject(ServiciosService);
 
   constructor(private router: Router) {}
 
@@ -49,6 +51,17 @@ export class EmpleadosComponent {
         this.lst = res;
         this.lstFiltered = res;
         console.log(this.lst);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  getVentas() {
+    this.serviceService.getServices().subscribe({
+      next: (res) => {
+        this.lst = res;
+        this.filter();
       },
       error: (err) => {
         console.log(err);

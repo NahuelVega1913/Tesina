@@ -195,6 +195,12 @@ INSERT INTO service_entity (
              'UNPAID', 'CUSTOMIZATION', '2025-05-14 11:00:00', '2025-05-14 13:30:00', 180.0,
              'CustomizationEntity', 'Luces LED azules', 'Instalación de luces LED en cabina'
          );
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (4, 1);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (5, 2);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (6, 3);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (7, 2);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (8, 3);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (9, 1);
 
 
 INSERT INTO sale_entity (type_payment, user_id, date) VALUES

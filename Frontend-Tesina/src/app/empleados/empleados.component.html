@@ -1,116 +1,147 @@
-<div class="w-full p-10">
-  <div class="text-5xl font-bold text-center mb-4">Empleados</div>
-  <div class="flex flex-row align-middle mb-10">
-    <form class="mt-5 w-full">
-      <div class="flex">
-        <div class="relative w-full">
-          <input
-            (input)="filter()"
-            type="search"
-            name="search"
-            id="search-dropdown"
-            class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Nombre.."
-            [(ngModel)]="search"
-          />
-          <button
-            type="submit"
-            class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-          >
-            <svg
-              class="w-4 h-4"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
+<div class="flex flex-col md:flex-row w-full p-10">
+  <div class="p-4 w-full md:w-4/5">
+    <div class="text-5xl font-bold text-center mb-4">Empleados</div>
+    <div class="flex flex-row align-middle mb-10">
+      <form class="mt-5 w-full">
+        <div class="flex">
+          <div class="relative w-full">
+            <input
+              (input)="filter()"
+              type="search"
+              name="search"
+              id="search-dropdown"
+              class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Nombre.."
+              [(ngModel)]="search"
+            />
+            <button
+              type="submit"
+              class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
             >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
-          </button>
+              <svg
+                class="w-4 h-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </form>
+      <button
+        (click)="redirectTo('/registrar-empleado')"
+        type="button"
+        class="focus:outline-none m-5 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+      >
+        Añadir
+      </button>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
+      <!--CARD DEL EMPLEADO-->
+      @for (item of lstFiltered; track $index) {
+      <div
+        class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-xl transition duration-300 ease-in-out"
+      >
+        <div class="flex justify-end px-4 pt-4">
+          <button
+            id="dropdownButton"
+            data-dropdown-toggle="dropdown"
+            class="inline-block text-gray-500 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg text-sm p-1.5"
+            type="button"
+          ></button>
+          <!-- Dropdown menu -->
+          <div
+            id="dropdown"
+            class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44"
+          >
+            <ul class="py-2" aria-labelledby="dropdownButton">
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Editar</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >Tareas</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                  >Delete</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="flex flex-col items-center pb-10">
+          <img
+            class="w-24 h-24 mb-3 rounded-full shadow-lg"
+            src="https://cdn-icons-png.flaticon.com/512/992/992490.png"
+            alt="Bonnie image"
+          />
+          <h5 class="mb-1 text-xl font-medium text-gray-900">
+            {{ item.fullName }}
+          </h5>
+          <span class="text-sm text-gray-500">{{ item.position }}</span>
+          <div class="flex mt-4 md:mt-6">
+            <a
+              (click)="moveTo('modificar-empleado', item.id)"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+              >Ver</a
+            >
+            <a
+              class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
+              >Mensaje</a
+            >
+          </div>
         </div>
       </div>
-    </form>
-    <button
-      (click)="redirectTo('/registrar-empleado')"
-      type="button"
-      class="focus:outline-none m-5 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-    >
-      Añadir
-    </button>
+      }
+      <!--CARD DEL EMPLEADO-->
+    </div>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-5">
-    <!--CARD DEL EMPLEADO-->
-    @for (item of lstFiltered; track $index) {
-    <div
-      class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-xl transition duration-300 ease-in-out"
-    >
-      <div class="flex justify-end px-4 pt-4">
-        <button
-          id="dropdownButton"
-          data-dropdown-toggle="dropdown"
-          class="inline-block text-gray-500 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg text-sm p-1.5"
-          type="button"
-        ></button>
-        <!-- Dropdown menu -->
-        <div
-          id="dropdown"
-          class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44"
-        >
-          <ul class="py-2" aria-labelledby="dropdownButton">
-            <li>
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >Editar</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >Tareas</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                >Delete</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="flex flex-col items-center pb-10">
-        <img
-          class="w-24 h-24 mb-3 rounded-full shadow-lg"
-          src="https://cdn-icons-png.flaticon.com/512/992/992490.png"
-          alt="Bonnie image"
-        />
-        <h5 class="mb-1 text-xl font-medium text-gray-900">
-          {{ item.fullName }}
-        </h5>
-        <span class="text-sm text-gray-500">{{ item.position }}</span>
-        <div class="flex mt-4 md:mt-6">
-          <a
-            (click)="moveTo('modificar-empleado', item.id)"
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-            >Ver</a
-          >
-          <a
-            class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
-            >Mensaje</a
-          >
-        </div>
+  <div class="md:w-2xl flex flex-col justify-center h-full p-4">
+    <div class="font-bold text-4xl text-center mt-3 mb-5">Estadisticas</div>
+    <!-- Gráfico de tiempo de permanencia -->
+    <div class="flex-col items-center justify-center mb-6 mt-2">
+      <p class="text-center font-normal text-lg">Tiempo en Taller (horas)</p>
+      <div class="flex items-center justify-center w-full">
+        <canvas
+          id="myTimeChart"
+          style="max-width: 400px; max-height: 250px"
+        ></canvas>
       </div>
     </div>
-    }
-    <!--CARD DEL EMPLEADO-->
+    <!-- Gráfico de recaudación mensual -->
+    <div class="flex-col items-center justify-center mb-2">
+      <p class="text-center font-normal text-lg">Recaudacion Mensual</p>
+      <canvas id="myChart"></canvas>
+    </div>
+    <!-- Gráfico de torta de tipos de pago -->
+    <div class="flex-col items-center justify-center mb-2">
+      <p class="text-center font-normal text-lg">Tipos de Servicio</p>
+      <div class="flex items-center justify-center w-full">
+        <canvas
+          id="myPieChart"
+          class="mb-0.5"
+          style="max-width: 200px; max-height: 200px"
+        ></canvas>
+      </div>
+    </div>
   </div>
 </div>
