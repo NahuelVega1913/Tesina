@@ -28,37 +28,46 @@ export class HistorialServiciosComponent {
   }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.getVentas();
   }
   filter() {
-    console.log(this.dateFrom, this.dateTo);
     this.lstFiltered = this.lst.filter((item) => {
-      const itemDate = new Date(item.date.split('-').join('/')).setHours(
-        0,
-        0,
-        0,
-        0
-      );
-      const fromDate = this.dateFrom
-        ? new Date(this.dateFrom.split('-').join('/')).setHours(0, 0, 0, 0)
-        : null;
-      const toDate = this.dateTo
-        ? new Date(this.dateTo.split('-').join('/')).setHours(0, 0, 0, 0)
-        : null;
+      // Solo muestra los servicios retirados
+      if (item.status !== 'WITHDRAW') return false;
 
-      const matchesCategory =
-        this.category === '' || item.typePayment === this.category;
-      const matchesDate =
-        (!fromDate || itemDate >= fromDate) && (!toDate || itemDate <= toDate);
-      const matchesSearch =
-        this.search === '' ||
-        item.user.toLowerCase().includes(this.search.toLowerCase());
+      // Filtro por categoría
+      if (this.category && item.type !== this.category) return false;
 
-      return matchesCategory && matchesDate && matchesSearch;
+      // Filtro por búsqueda de cliente
+      if (
+        this.search &&
+        (!item.nombreCompleto ||
+          !item.nombreCompleto
+            .toLowerCase()
+            .includes(this.search.toLowerCase()))
+      )
+        return false;
+
+      // Filtro por fechas
+      // dateExit viene como "2025-04-15T09:00:00"
+      const itemDate = item.dateExit ? new Date(item.dateExit) : null;
+      if (this.dateFrom) {
+        // dateFrom viene como "YYYY-MM-DD"
+        const fromDate = new Date(this.dateFrom + 'T00:00:00');
+        if (!itemDate || itemDate < fromDate) return false;
+      }
+      if (this.dateTo) {
+        // dateTo viene como "YYYY-MM-DD"
+        const toDate = new Date(this.dateTo + 'T23:59:59');
+        if (!itemDate || itemDate > toDate) return false;
+      }
+
+      return true;
     });
+    console.log('La lista filtrada es:');
+    console.log(this.lstFiltered);
   }
+
   tipo(tipo: string) {
     if (tipo == 'REPAIR') {
       return 'Reparacion';
@@ -73,10 +82,10 @@ export class HistorialServiciosComponent {
   }
 
   getVentas() {
-    const getSubscription = this.service.getServices().subscribe({
+    this.service.getServices().subscribe({
       next: (res) => {
         this.lst = res;
-        this.lstFiltered = res;
+        this.filter(); // Aplica los filtros después de cargar los datos
         console.log(this.lst);
       },
       error: (err) => {
