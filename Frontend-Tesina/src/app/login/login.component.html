@@ -1,46 +1,48 @@
 <div
-  class="bg-green-300 h-screen flex flex-col md:flex-row items-center justify-center gap-0 shadow-xl/30"
+  class="bg-gradient-to-tl from-white via-30% to-sky-900 to-70% h-screen flex flex-col md:flex-row items-center justify-center gap-0 shadow-xl/30"
 >
-  <!-- Lado izquierdo (login) -->
-  <div
-    class="bg-sky-100 rounded-l-lg w-full md:w-1/4 h-2/3 flex flex-col justify-center items-center p-8 text-center"
-  >
-    <h1 class="text-3xl font-bold text-sky-950 text-center mb-6">
-      Inicia Sesión
-    </h1>
-    <div class="flex flex-col items-center gap-4 w-3/4 md:w-2/3">
-      <div class="w-full">
-        <label class="block mb-1 text-sky-900">Email</label>
-        <input type="email" id="email" class="border rounded w-full p-1" />
+  <div class="p-10 w-full flex flex-col md:flex-row h-full items-center">
+    <!-- Lado izquierdo (login) -->
+    <div
+      class="bg-sky-100 rounded-l-lg w-full md:w-1/4 h-2/3 flex flex-col justify-center items-center p-8 text-center"
+    >
+      <h1 class="text-4xl font-bold text-sky-950 text-center mb-6">
+        Inicia Sesión
+      </h1>
+      <div class="flex flex-col items-center gap-4 w-3/4 md:w-2/3">
+        <div class="w-full">
+          <label class="block mb-1 text-sky-900">Email</label>
+          <input type="email" id="email" class="border rounded w-full p-1" />
+        </div>
+        <div class="w-full">
+          <label class="block mb-1 text-sky-900">Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            class="border rounded w-full p-1"
+          />
+        </div>
+        <button
+          (click)="login()"
+          class="rounded-full text-white font-bold bg-sky-950 w-full py-2 mt-4 hover:bg-white hover:text-sky-950 transition duration-300 ease-in-out hover:shadow-lg hover:shadow-cyan-500/50"
+        >
+          Ingresar
+        </button>
       </div>
-      <div class="w-full">
-        <label class="block mb-1 text-sky-900">Contraseña</label>
-        <input
-          type="password"
-          id="password"
-          class="border rounded w-full p-1"
-        />
-      </div>
+    </div>
+
+    <!-- Lado derecho (registro) -->
+    <div
+      class="bg-sky-950 rounded-r-lg w-full md:w-1/4 h-2/3 flex flex-col justify-center items-center p-8 text-white text-center"
+    >
+      <h1 class="text-4xl font-bold mb-4">¡Hola, amigo!</h1>
+      <p class="mb-6">Ingresa tus datos y empezá tu viaje con nosotros.</p>
       <button
-        (click)="login()"
-        class="rounded-full text-white font-bold bg-sky-950 w-full py-2 mt-4 hover:bg-white hover:text-sky-950 transition duration-300 ease-in-out hover:shadow-lg hover:shadow-cyan-500/50"
+        (click)="goToRegister()"
+        class="rounded-full font-bold w-full py-2 bg-white text-sky-950 hover:text-white hover:bg-sky-950 transform hover:scale-105 transition duration-300 ease-in-out hover:shadow-lg shadow-cyan-500/50"
       >
-        Ingresar
+        Registrarse
       </button>
     </div>
-  </div>
-
-  <!-- Lado derecho (registro) -->
-  <div
-    class="bg-sky-950 rounded-r-lg w-full md:w-1/4 h-2/3 flex flex-col justify-center items-center p-8 text-white text-center"
-  >
-    <h1 class="text-3xl font-bold mb-4">¡Hola, amigo!</h1>
-    <p class="mb-6">Ingresa tus datos y empezá tu viaje con nosotros.</p>
-    <button
-      (click)="goToRegister()"
-      class="rounded-full border-2 font-bold w-full py-2 hover:bg-white hover:text-sky-950"
-    >
-      Registrarse
-    </button>
   </div>
 </div>
