@@ -1,11 +1,11 @@
 <div
-  class="bg-green-300 min-h-screen flex flex-col justify-center align-middle h-full p-5 md:p-10"
+  class="bg-gradient-to-tl from-sky-700 to-sky-200 min-h-screen flex flex-col justify-center align-middle h-full p-5 md:p-10"
 >
   <div
-    class="bg-gray-800 w-full flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
+    class="bg-sky-100 md:w-3/4 flex flex-col justify-center mx-auto h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
   >
     <p
-      class="font-bold text-2xl text-white text-6xl text-shadow-lg ps-10 pt-5 sm:mb-5 md:mt-5"
+      class="font-bold text-sky-950 text-center text-6xl text-shadow-lg ps-10 pt-5 sm:mb-5 md:mt-5"
     >
       Crea tu cuenta
     </p>
@@ -14,19 +14,19 @@
         <div>
           <label
             for="first_name"
-            class="block mb-2 text-sm font-medium text-white text-shadow-lg"
+            class="block mb-2 text-sm font-medium text-sky-950 text-shadow-lg"
             >Nombre</label
           >
           <input
             type="text"
             formControlName="name"
             id="first_name"
-            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
+            class="bg-gray-50 border border-gray-300 text-sky-950 text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
             placeholder="John"
             required
           />
           @if(form.get('name')?.invalid && form.get('name')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el nombre
           </div>
           }
@@ -34,25 +34,27 @@
         <div>
           <label
             for="last_name"
-            class="block mb-2 text-sm font-medium text-white"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Apellido</label
           >
           <input
             type="text"
             formControlName="lastname"
             id="last_name"
-            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
+            class="bg-gray-50 border border-gray-300 text-sky-950 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
             placeholder="Doe"
             required
           />
           @if(form.get('lastname')?.invalid && form.get('lastname')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el apellido
           </div>
           }
         </div>
         <div>
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
+          <label
+            for="company"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Email</label
           >
           <input
@@ -63,19 +65,19 @@
             }"
             formControlName="email"
             id="company"
-            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            class="bg-gray-50 border border-gray-300 text-red text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="agustin@gmail.com"
             required
           />
           @if(form.get('email')?.invalid && form.get('email')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el email
           </div>
           }
         </div>
 
         <div>
-          <label for="phone" class="block mb-2 text-sm font-medium text-white j"
+          <label for="phone" class="block mb-2 text-sm font-medium text-sky-950"
             >Phone number</label
           >
           <input
@@ -86,50 +88,52 @@
             }"
             formControlName="phone"
             id="phone"
-            class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
+            class="bg-gray-50 border border-gray-300 text-sky-950 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
             placeholder="+54 351-XXXXXXX"
             required
           />
           @if(form.get('phone')?.invalid && form.get('phone')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el telefono
           </div>
           }
         </div>
       </div>
       <div class="mb-6">
-        <label for="email" class="block mb-2 text-sm font-medium text-white"
+        <label for="email" class="block mb-2 text-sm font-medium text-sky-950"
           >Direccion</label
         >
         <input
           type="text"
           formControlName="address"
-          class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
+          class="bg-gray-50 border border-gray-300 text-sky-950 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
           placeholder="Calle falsa 123"
           required
         />
         @if(form.get('address')?.invalid && form.get('address')?.touched){
-        <div class="text-white font-bold drop-shadow-md">
+        <div class="text-sky-950 font-bold drop-shadow-md">
           Complete la direccion
         </div>
         }
       </div>
 
       <div class="mb-6">
-        <label for="password" class="block mb-2 text-sm font-medium text-white"
+        <label
+          for="password"
+          class="block mb-2 text-sm font-medium text-sky-950"
           >Contraseña</label
         >
         <input
           type="password"
           formControlName="password"
           id="password"
-          class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
+          class="bg-gray-50 border border-gray-300 text-sky-950 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
           placeholder="•••••••••"
           minlength="7"
           required
         />
         @if(form.get('password')?.invalid && form.get('password')?.touched){
-        <div class="text-white font-bold drop-shadow-md">
+        <div class="text-sky-950 font-bold drop-shadow-md">
           Complete la contraseña
         </div>
         }
@@ -145,7 +149,7 @@
             class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600"
           />
         </div>
-        <label for="remember" class="ms-2 text-sm font-medium text-white"
+        <label for="remember" class="ms-2 text-sm font-medium text-sky-950"
           >He leido y acepto los
           <a
             (click)="redirectTo()"
@@ -157,7 +161,7 @@
       </div>
       <button
         type="submit"
-        class="text-white bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+        class="text-white bg-sky-800 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
       >
         Crear
       </button>
