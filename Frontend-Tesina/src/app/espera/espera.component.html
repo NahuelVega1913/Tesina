@@ -1,11 +1,11 @@
 <div class="min-h-screen overflow-hidden bg-gray-800">
   @if (status == 'WAITING') {
-  <div class="w-full p-10 flex flex-col h-screen justify-center bg-gray-800">
-    <p class="font-bold text-4xl text-center text-white">
+  <div class="w-full p-10 flex flex-col h-screen justify-center bg-sky-50">
+    <p class="font-bold text-4xl text-center text-sky-950">
       Lleva tu vehiculo a nuestra sucursal
     </p>
 
-    <p class="text-gray-200 mt-1 text-center">Isaac Albeniz 3622</p>
+    <p class="text-sky-900 mt-1 text-center">Isaac Albeniz 3622</p>
     @if(Object.paymentStatus == 'UNPAID_DEPOSIT'){
     <p class="text-white text-center text-2xl mt-5 font-normal">
       Antes de poder revisar tu vehiculo necesitamos que haga un pago de seña
@@ -22,7 +22,7 @@
   <!--ESPERANDO-->
   <!--EN COLA-->
   @if(status == 'IN_QUEUE'){
-  <div class="p-5 pt-10 bg-gray-800 h-screen">
+  <div class="p-5 pt-10 bg-sky-100 h-screen">
     <div
       class="bg-black rounded-2xl p-10 flex flex-col justify-center shadow-lg shadow-gray-900"
     >

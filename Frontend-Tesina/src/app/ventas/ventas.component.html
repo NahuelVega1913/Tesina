@@ -1,6 +1,8 @@
-<div class="flex flex-col md:flex-row">
-  <div class="p-4 w-full md-w-3/5">
-    <div class="font-bold text-4xl text-center mt-4 mb-5">Ventas</div>
+<div class="flex flex-col md:flex-row bg-sky-100">
+  <div class="p-4 w-full md-w-3/5 bg-white rounded-2xl shadow-2xl h-full m-5">
+    <div class="font-bold text-4xl text-center mt-4 mb-5 text-sky-950">
+      Ventas
+    </div>
     <div class="flex flex-row align-middle p-4">
       <form class="mt-5 w-full">
         <div class="flex">
@@ -13,7 +15,7 @@
                 type="date"
                 (change)="filter()"
                 [(ngModel)]="dateFrom"
-                class="border border-gray-300 text-gray-900 text-sm rounded p-2"
+                class="border border-gray-300 text-gray-900 text-sm rounded-xl p-2"
                 placeholder="Fecha desde"
               />
             </div>
@@ -25,7 +27,7 @@
                 type="date"
                 (change)="filter()"
                 [(ngModel)]="dateTo"
-                class="border border-gray-300 text-gray-900 text-sm rounded p-2"
+                class="border border-gray-300 text-gray-900 text-sm rounded-xl p-2"
                 placeholder="Fecha hasta"
               />
             </div>
@@ -36,7 +38,7 @@
               name="category"
               (change)="filter()"
               [(ngModel)]="category"
-              class="bg-gray-50 border me-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+              class="bg-gray-50 border me-2 border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block p-2.5"
             >
               <option value="" selected>Todas</option>
               <option value="MERCADO_PAGO">Mercado Pago</option>
@@ -49,13 +51,13 @@
               type="search"
               name="search"
               id="search-dropdown"
-              class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-s-gray-100 rounded-s-2 rounded-xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Buscar"
               [(ngModel)]="search"
             />
             <button
               type="submit"
-              class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+              class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-sky-600 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
             >
               <svg
                 class="w-4 h-4"
@@ -123,11 +125,17 @@
       </div>
     </div>
   </div>
-  <div class="md:w-2xl flex flex-col justify-center h-full p-4">
-    <div class="font-bold text-4xl text-center mt-4 mb-5">Estadisticas</div>
+  <div
+    class="md:w-2xl flex flex-col justify-center bg-white m-5 rounded-2xl shadow-2xl h-full p-4"
+  >
+    <div class="font-bold text-4xl text-center mt-4 mb-5 text-sky-950">
+      Estadisticas
+    </div>
     <!-- Gráfico de cantidad de ventas por mes -->
     <div class="flex-col items-center justify-center mb-6 mt-2">
-      <p class="text-center font-normal text-lg">Cantidad de Ventas Mensual</p>
+      <p class="text-center font-normal text-lg text-sky-950">
+        Cantidad de Ventas Mensual
+      </p>
       <div class="flex items-center justify-center w-full">
         <canvas
           id="myCountChart"
@@ -137,12 +145,14 @@
     </div>
     <!-- Gráfico de recaudación mensual -->
     <div class="flex-col items-center justify-center mb-2">
-      <p class="text-center font-normal text-lg">Recaudacion Mensual</p>
+      <p class="text-center font-normal text-lg text-sky-950">
+        Recaudacion Mensual
+      </p>
       <canvas id="myChart"></canvas>
     </div>
     <!-- Gráfico de torta de tipos de pago -->
     <div class="flex-col items-center justify-center mb-2">
-      <p class="text-center font-normal text-lg">Tipos de Pago</p>
+      <p class="text-center font-normal text-lg text-sky-950">Tipos de Pago</p>
       <div class="flex items-center justify-center w-full">
         <canvas
           id="myPieChart"
