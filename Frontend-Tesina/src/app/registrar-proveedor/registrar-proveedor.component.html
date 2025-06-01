@@ -1,11 +1,11 @@
 <div
-  class="bg-orange-400 min-h-screen flex flex-col justify-center align-middle h-full p-5 md:p-10"
+  class="bg-gradient-to-tr from-sky-700 to-sky-200 min-h-screen flex flex-col justify-center align-middle h-full p-5 md:p-10"
 >
   <div
-    class="bg-gray-800 w-full flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
+    class="bg-sky-100 md:w-4/5 w-1/1 mx-auto flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
   >
     <p
-      class="font-bold text-2xl text-white text-6xl text-shadow-lg ps-10 pt-5 sm:mb-5 md:mt-5"
+      class="font-bold text-2xl text-sky-950 text-6xl text-center pt-5 sm:mb-5 md:mt-5"
     >
       Registrar Proveedor
     </p>
@@ -14,7 +14,7 @@
         <div>
           <label
             for="first_name"
-            class="block mb-2 text-sm font-medium text-white text-shadow-lg"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Nombre</label
           >
           <input
@@ -26,7 +26,7 @@
             required
           />
           @if(form.get('name')?.invalid && form.get('name')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el nombre
           </div>
           }
@@ -34,7 +34,7 @@
         <div>
           <label
             for="last_name"
-            class="block mb-2 text-sm font-medium text-white"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >CUIT</label
           >
           <input
@@ -46,13 +46,15 @@
             required
           />
           @if(form.get('cuit')?.invalid && form.get('cuit')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el CUIT
           </div>
           }
         </div>
         <div>
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
+          <label
+            for="company"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Email</label
           >
           <input
@@ -68,14 +70,16 @@
             required
           />
           @if(form.get('email')?.invalid && form.get('email')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el email
           </div>
           }
         </div>
 
         <div>
-          <label for="phone" class="block mb-2 text-sm font-medium text-white j"
+          <label
+            for="phone"
+            class="block mb-2 text-sm font-medium text-sky-950 j"
             >Telefono</label
           >
           <input
@@ -91,7 +95,7 @@
             required
           />
           @if(form.get('phone')?.invalid && form.get('phone')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el telefono
           </div>
           }
@@ -101,7 +105,9 @@
         class="flex flex-col md:flex-row m w-full gap-10 mb-6 md:grid-cols-2 justify-between"
       >
         <div class="w-full">
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
+          <label
+            for="company"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Pais</label
           >
           <select
@@ -121,13 +127,15 @@
             <option value="CHINA">China</option>
           </select>
           @if(form.get('country')?.value == "" && form.get('country')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el pais
           </div>
           }
         </div>
         <div class="w-full">
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
+          <label
+            for="company"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Categoria</label
           >
           <select
@@ -145,14 +153,16 @@
           </select>
           @if(form.get('category')?.value == "" &&
           form.get('category')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete la categoria
           </div>
           }
         </div>
 
         <div class="w-full">
-          <label for="phone" class="block mb-2 text-sm font-medium text-white j"
+          <label
+            for="phone"
+            class="block mb-2 text-sm font-medium text-sky-950 j"
             >Provincia/Estado</label
           >
           <input
@@ -168,14 +178,14 @@
             required
           />
           @if(form.get('city')?.invalid && form.get('city')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete la Provincia
           </div>
           }
         </div>
       </div>
       <div class="mb-6">
-        <label for="email" class="block mb-2 text-sm font-medium text-white"
+        <label for="email" class="block mb-2 text-sm font-medium text-sky-950"
           >Direccion</label
         >
         <input
@@ -186,15 +196,13 @@
           required
         />
         @if(form.get('address')?.invalid && form.get('address')?.touched){
-        <div class="text-white font-bold drop-shadow-md">
+        <div class="text-sky-950 font-bold drop-shadow-md">
           Complete la direccion
         </div>
         }
       </div>
 
-      <label
-        for="message"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      <label for="message" class="block mb-2 text-sm font-medium text-sky-950"
         >Observaciones</label
       >
       <textarea
@@ -207,7 +215,7 @@
 
       <button
         type="submit"
-        class="text-white bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+        class="text-white bg-sky-800 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
       >
         Crear
       </button>
