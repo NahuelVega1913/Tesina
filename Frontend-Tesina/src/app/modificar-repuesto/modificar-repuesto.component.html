@@ -1,11 +1,11 @@
 <div
-  class="bg-orange-400 min-h-screen flex flex-col justify-center align-middle h-full p-5 md:p-10"
+  class="bg-gradient-to-tr from-sky-700 to-sky-200 min-h-screen flex flex-col justify-center align-middle h-full p-5 md:p-10"
 >
   <div
-    class="bg-gray-800 w-full flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
+    class="bg-sky-100 md:w-4/5 w-1/1 mx-auto flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
   >
     <p
-      class="font-bold text-2xl text-white text-6xl text-shadow-lg ps-10 pt-5 sm:mb-5 md:mt-5"
+      class="font-bold text-2xl text-sky-950 text-5xl text-center pt-5 sm:mb-5 md:mt-5"
     >
       Modificar Repuesto
     </p>
@@ -14,7 +14,7 @@
         <div>
           <label
             for="first_name"
-            class="block mb-2 text-sm font-medium text-white text-shadow-lg"
+            class="block mb-2 text-sm font-medium text-sky-950 text-shadow-lg"
             >Nombre</label
           >
           <input
@@ -26,7 +26,7 @@
             required
           />
           @if(form.get('name')?.invalid && form.get('name')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el nombre
           </div>
           }
@@ -34,7 +34,7 @@
         <div>
           <label
             for="website-admin"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Precio</label
           >
           <div class="flex">
@@ -68,13 +68,15 @@
             />
           </div>
           @if(form.get('price')?.invalid && form.get('price')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el Precio
           </div>
           }
         </div>
         <div>
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
+          <label
+            for="company"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Descuento (%)</label
           >
           <input
@@ -89,14 +91,16 @@
             placeholder="30"
           />
           @if(form.get('discaunt')?.invalid && form.get('discaunt')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el descuento
           </div>
           }
         </div>
 
         <div>
-          <label for="phone" class="block mb-2 text-sm font-medium text-white j"
+          <label
+            for="phone"
+            class="block mb-2 text-sm font-medium text-sky-950 j"
             >Stock</label
           >
           <input
@@ -112,7 +116,7 @@
             required
           />
           @if(form.get('stock')?.invalid && form.get('stock')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el stock
           </div>
           }
@@ -122,7 +126,9 @@
         class="flex flex-col md:flex-row m w-full gap-10 mb-6 md:grid-cols-2 justify-between"
       >
         <div class="w-full">
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
+          <label
+            for="company"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Marca</label
           >
           <input
@@ -138,13 +144,15 @@
             required
           />
           @if(form.get('brand')?.value == "" && form.get('brand')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete la Marca
           </div>
           }
         </div>
         <div class="w-full">
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
+          <label
+            for="company"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Categoria</label
           >
           <select
@@ -161,14 +169,16 @@
           </select>
           @if(form.get('category')?.value == "" &&
           form.get('category')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete la categoria
           </div>
           }
         </div>
 
         <div class="w-full">
-          <label for="phone" class="block mb-2 text-sm font-medium text-white j"
+          <label
+            for="phone"
+            class="block mb-2 text-sm font-medium text-sky-950 j"
             >Estrellas</label
           >
           <input
@@ -180,7 +190,7 @@
             required
           />
           @if(form.get('stars')?.invalid && form.get('stars')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete la Provincia
           </div>
           }
@@ -191,7 +201,9 @@
         class="flex flex-col md:flex-row m w-full gap-10 mb-6 md:grid-cols-2"
       >
         <div class="w-full">
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
+          <label
+            for="company"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Imagenes</label
           >
           <input
@@ -203,7 +215,9 @@
           />
         </div>
         <div class="w-full">
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
+          <label
+            for="company"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Proveedor</label
           >
           <select
@@ -218,7 +232,7 @@
           </select>
           @if(form.get('category')?.value == "" &&
           form.get('category')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el proveedor
           </div>
           }
@@ -227,7 +241,7 @@
 
       <label
         for="message"
-        class="block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white"
+        class="block mb-2 mt-3 text-sm font-medium text-sky-950"
         >Descripcion</label
       >
       <textarea
@@ -240,7 +254,7 @@
 
       <button
         type="submit"
-        class="text-white bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+        class="text-white bg-sky-800 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
       >
         Crear
       </button>

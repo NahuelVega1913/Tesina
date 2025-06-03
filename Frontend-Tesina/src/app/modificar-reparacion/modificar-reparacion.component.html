@@ -1,12 +1,10 @@
 <div
-  class="bg-cyan-400 min-h-screen flex flex-col justify-center align-middle h-full p-5 md:p-10"
+  class="bg-gradient-to-tr from-sky-700 to-sky-200 min-h-screen flex flex-col justify-center align-middle h-full p-5 md:p-10"
 >
   <div
-    class="bg-gray-800 w-full flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
+    class="bg-sky-100 md:w-4/5 w-1/1 mx-auto flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
   >
-    <p
-      class="font-bold text-2xl text-white text-6xl text-shadow-lg ps-10 pt-5 sm:mb-5 md:mt-5"
-    >
+    <p class="font-bold text-sky-950 text-5xl text-center pt-5 sm:mb-5 md:mt-5">
       Modificar Reparacion
     </p>
     <form [formGroup]="form" (submit)="save()" class="p-10">
@@ -14,20 +12,20 @@
         <div>
           <label
             for="first_name"
-            class="block mb-2 text-sm font-medium text-white text-shadow-lg"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Nombre del Cliente</label
           >
           <input
             type="text"
             formControlName="nombreCompleto"
             id="first_name"
-            class="bg-gray-300 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
+            class="bg-gray-200 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
             placeholder="Juan Perez"
             readonly
           />
           @if(form.get('nombreCompleto')?.invalid &&
           form.get('nombreCompleto')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el Nombre
           </div>
           }
@@ -35,19 +33,19 @@
         <div>
           <label
             for="first_name"
-            class="block mb-2 text-sm font-medium text-white text-shadow-lg"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Auto</label
           >
           <input
             type="text"
             formControlName="auto"
             id="first_name"
-            class="bg-gray-300 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
+            class="bg-gray-200 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
             placeholder="Fiat 600"
             readonly
           />
           @if(form.get('auto')?.invalid && form.get('auto')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el Auto
           </div>
           }
@@ -58,28 +56,26 @@
         <div>
           <label
             for="last_name"
-            class="block mb-2 text-sm font-medium text-white"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Modelo</label
           >
           <input
             type="number"
             formControlName="modelo"
             id="last_name"
-            class="bg-gray-300 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
+            class="bg-gray-200 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
             placeholder="2004"
             readonly
           />
           @if(form.get('modelo')?.invalid && form.get('modelo')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Complete el Modelo
           </div>
           }
         </div>
       </div>
       <div class="flex flex-col m w-full justify-between">
-        <label
-          for="message"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        <label for="message" class="block mb-2 text-sm font-medium text-sky-950"
           >Observaciones Previas</label
         >
         <textarea
@@ -94,7 +90,9 @@
       <div class="grid gap-6 mb-6 md:grid-cols-2">
         @if(status == "IN_QUEUE"){
         <div class="w-full">
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
+          <label
+            for="company"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Empleado Asignado</label
           >
           <select
@@ -111,14 +109,16 @@
 
           @if(form.get('idEmpleado')?.value == "" &&
           form.get('idEmpleado')?.touched){
-          <div class="text-white font-bold drop-shadow-md">
+          <div class="text-sky-950 font-bold drop-shadow-md">
             Seleccione un Empleado
           </div>
           }
         </div>
         }@else {
         <div class="w-full">
-          <label for="company" class="block mb-2 text-sm font-medium text-white"
+          <label
+            for="company"
+            class="block mb-2 text-sm font-medium text-sky-950"
             >Empleado Asignado</label
           >
           <select
@@ -137,9 +137,7 @@
       </div>
       @if(status == "PROCESS"){
       <div class="flex flex-col m w-full justify-between">
-        <label
-          for="message"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        <label for="message" class="block mb-2 text-sm font-medium text-sky-950"
           >Diagnostico Tecnico</label
         >
         <textarea
@@ -152,7 +150,7 @@
         ></textarea>
         @if (form.get('techniclaDiagnosis')?.invalid &&
         form.get('techniclaDiagnosis')?.touched) {
-        <div class="text-white font-bold drop-shadow-md">
+        <div class="text-sky-950 font-bold drop-shadow-md">
           Complete el Resultado
         </div>
         }
@@ -160,7 +158,7 @@
       <div class="flex flex-col m w-full justify-between mt-5">
         <label
           for="message"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          class="block mb-2 text-sm font-medium text-gray-900 :text-sky-950"
           >Tareas Realizadas</label
         >
         <textarea
@@ -173,15 +171,13 @@
         ></textarea>
         @if (form.get('tasksPerformed')?.invalid &&
         form.get('tasksPerformed')?.touched) {
-        <div class="text-white font-bold drop-shadow-md">
+        <div class="text-sky-950 font-bold drop-shadow-md">
           Complete las tareas realizadas
         </div>
         }
       </div>
       <div class="flex flex-col mt-3 m w-full justify-between">
-        <label
-          for="message"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        <label for="message" class="block mb-2 text-sm font-medium text-sky-950"
           >Repuestos Usados</label
         >
         <textarea
@@ -189,12 +185,12 @@
           rows="4"
           required
           formControlName="sparesUsed"
-          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          class="block p-2.5 w-full text-sm text-sky-950 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Escribe tu mensaje aqui..."
         ></textarea>
         @if(form.get('sparesUsed')?.invalid &&
         form.get('TasksPerformed')?.touched){
-        <div class="text-white font-bold drop-shadow-md">
+        <div class="text-sky-950 font-bold drop-shadow-md">
           Complete las recomendaciones
         </div>
         }
@@ -202,7 +198,7 @@
       <div class="mt-5">
         <label
           for="first_name"
-          class="block mb-2 text-sm font-medium text-white text-shadow-lg"
+          class="block mb-2 text-sm font-medium text-sky-950"
           >Costo</label
         >
         <input
@@ -214,13 +210,15 @@
           required=""
         />
         @if(form.get('cost')?.invalid && form.get('cost')?.touched){
-        <div class="text-white font-bold drop-shadow-md">Complete el Costo</div>
+        <div class="text-sky-950 font-bold drop-shadow-md">
+          Complete el Costo
+        </div>
         }
       </div>
       }
       <button
         type="submit"
-        class="text-white mt-5 bg-sky-500 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+        class="text-white mt-5 bg-sky-800 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
       >
         Regitrar
       </button>
