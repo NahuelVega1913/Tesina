@@ -7,7 +7,7 @@
 
     <p class="text-sky-900 mt-1 text-center">Isaac Albeniz 3622</p>
     @if(Object.paymentStatus == 'UNPAID_DEPOSIT'){
-    <p class="text-white text-center text-2xl mt-5 font-normal">
+    <p class="text-center text-2xl mt-5 font-normal text-sky-800">
       Antes de poder revisar tu vehiculo necesitamos que haga un pago de seña
     </p>
     <div (click)="pagarSena()" id="wallet_container"></div>
@@ -24,19 +24,79 @@
   @if(status == 'IN_QUEUE'){
   <div class="p-5 pt-10 bg-sky-100 h-screen">
     <div
-      class="bg-black rounded-2xl p-10 flex flex-col justify-center shadow-lg shadow-gray-900"
+      class="bg-white rounded-2xl p-10 flex flex-col justify-center shadow-lg"
     >
-      <div class="text-white text-center font-semibold text-2xl mb-3">
+      <div class="text-sky-950 text-center font-bold text-2xl mb-3">
         Estado del Servicio
       </div>
       <ol
         class="flex items-center justify-center w-full mt-4 text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base"
       >
         <li
-          class="flex md:w-full items-center text-blue-600 dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden after:bg-green-400 sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
+          class="flex md:w-full items-center text-blue-600 dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden after:bg-sky-950 sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
         >
           <span
-            class="flex text-green-400 items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+            class="flex text-sky-950 items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+          >
+            <svg
+              class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
+              />
+            </svg>
+            Espera
+          </span>
+        </li>
+        <li
+          class="flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
+        >
+          2
+          <span
+            class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500 ms-2"
+          >
+            Proceso
+          </span>
+        </li>
+        <li class="flex items-center">
+          <span class="me-2">3</span>
+          Finalizado
+        </li>
+      </ol>
+    </div>
+    <div></div>
+    <div class="text-center text-sky-950 font-bold text-5xl mt-30">
+      Su vehiculo se encuentra en espera para ser atendido
+    </div>
+    <div class="text-center text-sky-500 font-semibold text-2xl mt-10">
+      Pronto sera revisado por nuestros mejores profesionales
+    </div>
+  </div>
+  }
+  <!--EN COLA-->
+  <!--EN PROCESO-->
+  @if(status == 'PROCESS'){
+  <div
+    class="p-10 flex-col gap-3 items-center justify-center bg-sky-100 h-screen"
+  >
+    <div
+      class="bg-white rounded-2xl p-10 flex flex-col justify-center items-center"
+    >
+      <div class="text-sky-950 text-center text-3xl mb-3 font-bold">
+        Estado del Servicio
+      </div>
+      <ol
+        class="flex items-center justify-center w-full mt-4 text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base"
+      >
+        <li
+          class="flex md:w-full items-center text-blue-600 dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700 after:bg-sky-950"
+        >
+          <span
+            class="flex text-sky-950 items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-sky-950"
           >
             <svg
               class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5"
@@ -56,70 +116,7 @@
           class="flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
         >
           <span
-            class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
-          >
-            Proceso
-          </span>
-        </li>
-        <li class="flex items-center">
-          <span class="me-2">3</span>
-          Finalizado
-        </li>
-      </ol>
-    </div>
-    <div></div>
-    <div
-      class="text-center text-green-500 font-bold text-5xl mt-22 text-shadow-lg/30"
-    >
-      Su vehiculo se encuentra en espera para ser atendido
-    </div>
-    <div
-      class="text-center text-gray-400 font-semibold text-2xl mt-10 text-shadow-lg/30"
-    >
-      Pronto sera revisado por nuestros mejores profesionales
-    </div>
-  </div>
-  }
-  <!--EN COLA-->
-  <!--EN PROCESO-->
-  @if(status == 'PROCESS'){
-  <div
-    class="p-10 flex-col gap-3 items-center justify-center bg-gray-800 h-screen"
-  >
-    <div
-      class="bg-black rounded-2xl p-10 flex flex-col justify-center items-center"
-    >
-      <div class="text-white text-center font-semibold text-2xl mb-3">
-        Estado del Servicio
-      </div>
-      <ol
-        class="flex items-center justify-center w-full mt-4 text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base"
-      >
-        <li
-          class="flex md:w-full items-center text-blue-600 dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700 after:bg-green-400"
-        >
-          <span
-            class="flex text-green-400 items-center after:content-['/'] sm:after:hidden after:mx-2 after:bg-green-500 after:text-green-400"
-          >
-            <svg
-              class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
-              />
-            </svg>
-            Espera
-          </span>
-        </li>
-        <li
-          class="flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700 after:bg-green-400"
-        >
-          <span
-            class="flex items-center text-green-400 after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+            class="flex items-center text-sky-950 after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
           >
             <svg
               class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5"
@@ -143,14 +140,10 @@
       </ol>
     </div>
     <div></div>
-    <div
-      class="text-center text-green-500 font-bold text-5xl mt-25 text-shadow-lg/30"
-    >
-      Su vehiculo se esta siendo atendido por nuestros mejores profesionales
+    <div class="text-center text-sky-950 font-bold text-5xl mt-30">
+      Su vehiculo esta siendo atendido por nuestros mejores profesionales
     </div>
-    <div
-      class="text-center text-gray-400 font-semibold text-2xl mt-5 text-shadow-lg/30"
-    >
+    <div class="text-center text-sky-500 font-semibold text-2xl mt-5">
       En cuanto terminemos con el proceso, le avisaremos
     </div>
   </div>
@@ -158,21 +151,21 @@
   <!--EN PROCESO-->
   <!--FINALIZADO-->
   @if(status == 'FINISHED'){
-  <div class="p-10 bg-gray-800 h-screen">
+  <div class="p-10 bg-sky-100 h-screen">
     <div
-      class="bg-black rounded-2xl p-10 flex flex-col justify-center shadow-lg shadow-gray-900 items-center"
+      class="bg-white rounded-2xl p-10 flex flex-col justify-center shadow-lg items-center"
     >
-      <div class="text-white text-center font-semibold text-2xl mb-3">
+      <div class="text-sky-950 text-center font-bold text-3xl mb-3">
         Estado del Servicio
       </div>
       <ol
         class="flex items-center justify-center w-full mt-4 text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base"
       >
         <li
-          class="flex md:w-full items-center text-blue-600 dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700 after:bg-green-400"
+          class="flex md:w-full items-center text-blue-600 dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700 after:bg-sky-950"
         >
           <span
-            class="flex text-green-400 items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+            class="flex text-sky-950 items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
           >
             <svg
               class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5"
@@ -189,10 +182,10 @@
           </span>
         </li>
         <li
-          class="flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700 after:bg-green-400"
+          class="flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700 after:bg-sky-950"
         >
           <span
-            class="flex items-center text-green-400 after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+            class="flex items-center text-sky-950 after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
           >
             <svg
               class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5"
@@ -211,7 +204,7 @@
         </li>
         <li class="flex items-center">
           <span
-            class="flex items-center text-green-400 sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+            class="flex items-center text-sky-950 sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
           >
             <svg
               class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5"
@@ -230,31 +223,25 @@
         </li>
       </ol>
     </div>
-    <div
-      class="text-center text-green-500 font-bold text-5xl mt-20 text-shadow-lg/30"
-    >
+    <div class="text-center text-sky-950 font-bold text-5xl mt-20">
       Finalizado
     </div>
     <div
-      class="bg-black rounded-2xl p-10 flex flex-col justify-center shadow-lg shadow-gray-900 mt-5"
+      class="text-sky-950 bg-white rounded-2xl p-10 flex flex-col justify-center shadow-lg mt-5"
     >
-      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-        Auto: {{ Object.auto }}
-      </div>
-      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
-        Modelo: {{ Object.modelo }}
-      </div>
-      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+      <div class="font-normal text-md mt-1">Auto: {{ Object.auto }}</div>
+      <div class="font-normal text-md mt-1">Modelo: {{ Object.modelo }}</div>
+      <div class="font-normal text-md mt-1">
         Observaciones Previas: {{ Object.observacionesPrevias }}
       </div>
       @if(Object.type == 'INSPECTION'){
-      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+      <div class="font-normal text-md mt-1">
         Estado General: {{ Object.estadoGeneral }}
       </div>
-      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+      <div class="font-normal text-md mt-1">
         Resultado: {{ Object.resultado }}
       </div>
-      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+      <div class="font-normal text-md mt-1">
         Recomendaciones: {{ Object.recomendaciones }}
       </div>
       }
@@ -262,42 +249,34 @@
 
       <!--REPAIR-->
       @if(Object.type == 'REPAIR'){
-      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+      <div class="font-normal text-md mt-1">
         Diagnostico Tecnico: {{ Object.techniclaDiagnosis }}
       </div>
-      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+      <div class="font-normal text-md mt-1">
         Tareas Realizadas: {{ Object.tasksPerformed }}
       </div>
-      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+      <div class="font-normal text-md mt-1 text-">
         Repuestos Usados: {{ Object.tasksPerformed }}
       </div>
       }
       <!--REPAIR-->
       <!--CUSTOMIZATION-->
       @if(Object.type == 'CUSTOMIZATION'){
-      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+      <div class="text-white font-normal text-md mt-1">
         Tareas Realizadas: {{ Object.taskRealized }}
       </div>
-      <div class="text-white font-normal text-md mt-1 text-shadow-lg/30">
+      <div class="text-white font-normal text-md mt-1">
         Repuestos Usados: {{ Object.materialsUsed }}
       </div>
 
       } @if(Object.paymentStatus =='UNPAID'){
-      <div class="text-white font-bold text-xl mt-3 text-shadow-lg/30">
-        Costo Total: ${{ Object.cost }}
-      </div>
+      <div class="font-bold text-xl mt-3">Costo Total: ${{ Object.cost }}</div>
       <div (click)="pagarServicio()" id="wallet_container"></div>
       }@else {
-      <div
-        class="text-white font-bold text-center text-xl mt-3 text-shadow-lg/30"
-      >
+      <div class="font-bold text-center text-xl mt-3">
         Retira tu vehiculo en Isaac Albeniz 3622
       </div>
-      <div
-        class="text-gray-200 font-bold text-center text-sm mt-3 text-shadow-lg/30"
-      >
-        Te esperamos!!
-      </div>
+      <div class="font-bold text-center text-sm mt-3">Te esperamos!!</div>
       }
     </div>
   </div>

@@ -1,5 +1,14 @@
 <div class="h-screen w-full p-5 bg-gradient-to-tr from-sky-600 to-sky-200">
-  @for (item of notifications; track $index) {
+  @if(notifications.length === 0) {
+  <div
+    class="text-center text-white font-bold flex items-center justify-center text-2xl h-64"
+  >
+    <p class="text-center text-white font-bold">
+      Parece que no hay notificaciones aun
+    </p>
+  </div>
+
+  } @else{ @for (item of notifications; track $index) {
   <div
     id="toast-interactive"
     class="w-full p-4 m-3 text-gray-500 rounded-lg bg-white shadow-md"
@@ -42,5 +51,5 @@
       </div>
     </div>
   </div>
-  }
+  } }
 </div>
