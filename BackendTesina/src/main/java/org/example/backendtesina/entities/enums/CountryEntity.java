@@ -4,11 +4,12 @@ public enum CountryEntity {
 
     ARGENTINA,
     CHILE,
+    PERU,
     URUGUAY,
     PARAGUAY,
     BOLIVIA,
     BRASIL,
-    ESTADOS_UNIDOS,
+    EEUU,
     CHINA,
     ALEMANIA,
     FRANCIA,

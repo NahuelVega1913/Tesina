@@ -18,7 +18,7 @@
                 name="category"
                 (change)="filter()"
                 [(ngModel)]="category"
-                class="bg-gray-50 border me-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+                class="bg-gray-50 border me-3 border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block p-2.5"
               >
                 <option value="" selected>Categorias</option>
                 <option value="MOTOR">Motor</option>
@@ -32,13 +32,13 @@
                   type="search"
                   name="search"
                   id="search-dropdown"
-                  class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                  class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-2xl rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Nombre.."
                   [(ngModel)]="search"
                 />
                 <button
                   type="submit"
-                  class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                  class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-sky-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
                 >
                   <svg
                     class="w-4 h-4"
@@ -62,7 +62,7 @@
           <button
             (click)="redirectTo('/registrarProveedor')"
             type="button"
-            class="focus:outline-none m-5 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            class="focus:outline-none m-5 text-white bg-sky-700 rounded-2xl hover:bg-sky-600 focus:ring-4 focus:ring-green-300 font-medium text-sm px-5 py-2.5 me-2 mb-2"
           >
             Añadir
           </button>
@@ -75,6 +75,7 @@
           <th scope="col" class="px-6 py-3">Ubicacion</th>
           <th scope="col" class="px-6 py-3">Categoria</th>
           <th scope="col" class="px-6 py-3">Telefono</th>
+          <th scope="col" class="px-6 py-3">Estado</th>
           <th scope="col" class="px-6 py-3">
             <span class="sr-only">Edit</span>
           </th>
@@ -92,11 +93,16 @@
           <td class="px-6 py-4">{{ i.city + ", " + i.country }}</td>
           <td class="px-6 py-4">{{ i.category }}</td>
           <td class="px-6 py-4">{{ i.phone }}</td>
+          @if(i.state == true){
+          <td class="px-6 py-4 text-green-600 font-bold">Activo</td>
+          } @else {
+          <td class="px-6 py-4 text-red-600 font-bold">Inactivo</td>
+          }
           <td class="px-6 py-4 text-right">
             <button
               (click)="setProveedor(i.id)"
               type="button"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
             >
               Ver
             </button>

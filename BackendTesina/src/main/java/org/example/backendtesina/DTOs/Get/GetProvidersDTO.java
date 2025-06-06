@@ -12,6 +12,7 @@ public class GetProvidersDTO {
     private String name;
     private CountryEntity country;
     private String city;
+    private Boolean state;
     private CategorySpareEntity category;
     private BigInteger phone;
 
@@ -61,5 +62,14 @@ public class GetProvidersDTO {
 
     public void setPhone(BigInteger phone) {
         this.phone = phone;
+    }
+
+
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
     }
 }

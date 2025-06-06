@@ -25,7 +25,7 @@ export class RegistrarProveedorComponent {
     name: new UntypedFormControl('', []),
     cuit: new UntypedFormControl('', []),
     phone: new UntypedFormControl('', []),
-    address: new UntypedFormControl('', []),
+    adress: new UntypedFormControl('', []),
     category: new UntypedFormControl('', []),
     email: new UntypedFormControl('', []),
     country: new UntypedFormControl('', []),

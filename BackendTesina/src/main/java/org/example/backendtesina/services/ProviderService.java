@@ -84,6 +84,7 @@ public class ProviderService {
             GetProvidersDTO provider = new GetProvidersDTO();
             provider.setCategory(p.getCategory());
             provider.setCity(p.getCity());
+            provider.setState(p.isState());
             provider.setCountry(p.getCountry());
             provider.setId(p.getId());
             provider.setName(p.getName());
