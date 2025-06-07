@@ -30,7 +30,7 @@
     @if(mensajesUsuario.length != 0) { @for (item of mensajesUsuario; track
     $index) {
     <!--MENSAJE DEL USUARIO-->
-    <div class="flex items-start ms-10 justify-end gap-2.5 mt-10 mb-10">
+    <div class="flex items-start ms-10 justify-end gap-2.5 mt-10 mb-10 ps-3">
       <div class="flex flex-col gap-1 w-full max-w-[320px]">
         <div
           class="flex items-center justify-end space-x-2 rtl:space-x-reverse"
@@ -58,7 +58,7 @@
     <!--MENSAJE DEL USUARIO-->
     <!--MENSAJE DEL BOT-->
     @if (mensajesBot[$index] != null) {
-    <div class="flex items-start justify-baseline gap-2.5">
+    <div class="flex items-start justify-baseline gap-2.5 me-5 pe-8">
       <img
         class="w-8 h-8 rounded-full"
         src="https://cdn-icons-png.freepik.com/512/8943/8943377.png"
@@ -73,9 +73,12 @@
         <div
           class="flex flex-col leading-1.5 p-4 border-gray-200 bg-white rounded-e-xl rounded-es-xl"
         >
-          <p class="text-sm font-normal text-sky-950">
+          <!-- <p class="text-sm font-normal text-sky-950">
             {{ this.mensajesBot[$index] }}
-          </p>
+          </p>-->
+          <markdown class="text-sky-950">
+            {{ this.mensajesBot[$index] }}
+          </markdown>
         </div>
       </div>
 
@@ -85,7 +88,7 @@
       ></div>
     </div>
     }@else {
-    <div class="flex items-start justify-baseline h-95 gap-2.5">
+    <div class="flex items-start justify-baseline h-95 gap-2.5 me-5 pe-10">
       <div role="status" class="max-w-sm animate-pulse">
         <div class="flex flex-col gap-1 w-full max-w-[320px]">
           <div role="status" class="max-w-sm animate-pulse">
@@ -132,7 +135,7 @@
           [(ngModel)]="mensajeUsuario"
           name="mensajeUsuario"
           rows="1"
-          class="block mx-4 p-2.5 w-full text-sm text-white rounded-lg bg-sky-950/90 ring-blue-500 border-blue-500"
+          class="block mx-4 p-2.5 w-full text-sm text-white rounded-lg bg-sky-950/90 border-blue-500"
           placeholder="Tengo un problema en el radiador..."
         ></textarea>
 

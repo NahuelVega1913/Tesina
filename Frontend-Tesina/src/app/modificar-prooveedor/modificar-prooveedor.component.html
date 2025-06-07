@@ -26,9 +26,7 @@
             required
           />
           @if(form.get('name')?.invalid && form.get('name')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el nombre
-          </div>
+          <div class="text-red-500">Complete el nombre</div>
           }
         </div>
         <div>
@@ -45,10 +43,11 @@
             placeholder="22-22222222-2"
             required
           />
-          @if(form.get('cuit')?.invalid && form.get('cuit')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el CUIT
-          </div>
+          @if(form.get('cuit')?.invalid && form.get('cuit')?.touched &&
+          form.get('cuit')?.value == null){
+          <div class="text-red-500">Complete el CUIT</div>
+          }@if(form.get('cuit')?.invalid && form.get('cuit')?.value != null){
+          <div class="text-red-500">Numero de CUIT invalido</div>
           }
         </div>
         <div>
@@ -170,7 +169,7 @@
             <option value="PARAGUAY">Paraguay</option>
             <option value="BOLIVIA">Bolivia</option>
             <option value="BRASIL">Brasil</option>
-            <option value="ESTADOS_UNIDO">Estados Unidos</option>
+            <option value="EEUU">Estados Unidos</option>
             <option value="CHINA">China</option>
           </select>
           @if(form.get('country')?.value == "" && form.get('country')?.touched){

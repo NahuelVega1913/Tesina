@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { ChatbotService } from '../services/chatbot.service';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'app-chatbot',
-  imports: [FormsModule],
+  imports: [FormsModule, MarkdownModule],
   templateUrl: './chatbot.component.html',
   styleUrl: './chatbot.component.css',
 })

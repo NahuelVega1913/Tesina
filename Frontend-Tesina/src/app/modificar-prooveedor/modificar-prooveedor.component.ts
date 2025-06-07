@@ -1,8 +1,11 @@
 import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
+  ValidationErrors,
+  Validators,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ProveedoresService } from '../services/proveedores.service';
@@ -22,13 +25,13 @@ export class ModificarProoveedorComponent {
 
   form = new UntypedFormGroup({
     name: new UntypedFormControl('', []),
-    cuit: new UntypedFormControl('', []),
-    phone: new UntypedFormControl('', []),
+    cuit: new UntypedFormControl('', [this.digitLengthValidator(11)]),
+    phone: new UntypedFormControl('', [this.digitLengthValidator(12)]),
     adress: new UntypedFormControl('', []),
     category: new UntypedFormControl('', []),
     state: new UntypedFormControl('', []),
     registerDate: new UntypedFormControl('', []),
-    email: new UntypedFormControl('', []),
+    email: new UntypedFormControl('', [Validators.email]),
     country: new UntypedFormControl('', []),
     city: new UntypedFormControl('', []),
     remarks: new UntypedFormControl('', []),
@@ -45,6 +48,14 @@ export class ModificarProoveedorComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getProveedor();
+  }
+  digitLengthValidator(length: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (value == null) return null;
+      const digits = value.toString().length;
+      return digits === length ? null : { digitLength: true };
+    };
   }
 
   getProveedor() {
