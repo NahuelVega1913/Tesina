@@ -1,9 +1,13 @@
 import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
+  EmailValidator,
   ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
+  ValidationErrors,
+  Validators,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ProveedoresComponent } from '../proveedores/proveedores.component';
@@ -23,15 +27,23 @@ export class RegistrarProveedorComponent {
 
   form = new UntypedFormGroup({
     name: new UntypedFormControl('', []),
-    cuit: new UntypedFormControl('', []),
-    phone: new UntypedFormControl('', []),
+    cuit: new UntypedFormControl('', [this.digitLengthValidator(11)]),
+    phone: new UntypedFormControl('', [this.digitLengthValidator(12)]),
     adress: new UntypedFormControl('', []),
     category: new UntypedFormControl('', []),
-    email: new UntypedFormControl('', []),
+    email: new UntypedFormControl('', [Validators.email]),
     country: new UntypedFormControl('', []),
     city: new UntypedFormControl('', []),
     remarks: new UntypedFormControl('', []),
   });
+  digitLengthValidator(length: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (value == null) return null;
+      const digits = value.toString().length;
+      return digits === length ? null : { digitLength: true };
+    };
+  }
 
   save() {
     if (this.form.valid) {

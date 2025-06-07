@@ -49,6 +49,7 @@ export class InicioComponent {
     this.nombre = localStorage.getItem('name');
     this.apellido = localStorage.getItem('lastname');
     this.rol = localStorage.getItem('role');
+
     this.getUserInformation();
   }
   getUserInformation() {
