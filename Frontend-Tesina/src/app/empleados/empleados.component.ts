@@ -90,7 +90,10 @@ export class EmpleadosComponent {
     this.updateSalaryChart();
     this.updateJornadaChart();
   }
-
+  sendMensaje(numero: string) {
+    const url = `https://wa.me/${numero}?text=hola`;
+    window.open(url, '_blank');
+  }
   // 1. Tiempo promedio de finalización de trabajos por empleado
   initTimeChart() {
     const ctx = document.getElementById('myTimeChart') as HTMLCanvasElement;
