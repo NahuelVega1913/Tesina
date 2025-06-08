@@ -87,8 +87,10 @@
           >
             {{ i.name }}
           </th>
-          <td class="px-6 py-4">{{ i.city + ", " + i.country }}</td>
-          <td class="px-6 py-4">{{ i.category }}</td>
+          <td class="px-6 py-4">
+            {{ toLowerCase(i.city) + ", " + toLowerCase(i.country) }}
+          </td>
+          <td class="px-6 py-4">{{ toLowerCase(i.category) }}</td>
           <td class="px-6 py-4">{{ i.phone }}</td>
           @if(i.state == true){
           <td class="px-6 py-4 text-green-600 font-bold">Activo</td>

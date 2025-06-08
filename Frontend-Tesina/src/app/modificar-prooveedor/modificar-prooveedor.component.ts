@@ -108,6 +108,7 @@ export class ModificarProoveedorComponent {
         },
       });
     } else {
+      this.form.markAllAsTouched();
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

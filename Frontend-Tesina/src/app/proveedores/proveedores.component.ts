@@ -37,6 +37,10 @@ export class ProveedoresComponent {
     localStorage.setItem('idProveedor', id.toString());
     this.router.navigate(['/modificarProveedor']);
   }
+  toLowerCase(str: string): string {
+    str = str.toLowerCase();
+    return str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : '';
+  }
 
   getProveedores() {
     const getSubscription = this.service.getProveedores().subscribe({

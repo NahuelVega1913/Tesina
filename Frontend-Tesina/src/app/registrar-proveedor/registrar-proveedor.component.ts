@@ -72,6 +72,7 @@ export class RegistrarProveedorComponent {
         },
       });
     } else {
+      this.form.markAllAsTouched();
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
