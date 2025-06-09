@@ -56,7 +56,7 @@ export class InicioComponent {
     const getSubscription = this.service.getUsuarioInformation().subscribe({
       next: (res) => {
         console.log(res);
-        this.notificaciones = res.notificaciones;
+        this.notificaciones = res.notifications;
         this.haveService = res.hasService;
       },
       error: (err) => {

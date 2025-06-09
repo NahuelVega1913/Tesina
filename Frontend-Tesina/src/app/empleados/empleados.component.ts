@@ -18,6 +18,9 @@ export class EmpleadosComponent {
   lstServices: any[] = [];
   lstFiltered: any[] = [];
 
+  page: number = 1;
+  pageSize: number = 6;
+
   private service: EmpleadosService = inject(EmpleadosService);
   private serviceService: ServiciosService = inject(ServiciosService);
 
@@ -27,15 +30,39 @@ export class EmpleadosComponent {
 
   constructor(private router: Router) {}
 
+  get pagedList() {
+    const start = (this.page - 1) * this.pageSize;
+    return this.lstFiltered.slice(start, start + this.pageSize);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.lstFiltered.length / this.pageSize);
+  }
+
+  goToPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+    this.page = page;
+  }
+
+  nextPage() {
+    if (this.page < this.totalPages) this.page++;
+  }
+
+  prevPage() {
+    if (this.page > 1) this.page--;
+  }
+
   filter() {
     if (!this.search) {
       this.lstFiltered = this.lst;
+      this.page = 1;
       return;
     }
     const searchLower = this.search.toLowerCase();
     this.lstFiltered = this.lst.filter((item) =>
       (item.fullName || '').toLowerCase().includes(searchLower)
     );
+    this.page = 1;
   }
   ngOnInit(): void {
     this.getEmployees();
@@ -134,15 +161,17 @@ export class EmpleadosComponent {
     const labels: string[] = [];
     const data: number[] = [];
 
-    // Para cada empleado, busca en cada servicio si está en el array 'empleados'
+    // Solo considera servicios terminados (con dateExit) y con fechas válidas y coherentes
     this.lst.forEach((emp) => {
-      // Filtra los servicios donde el empleado aparece en el array 'empleados'
       const serviciosEmpleado = this.lstServices.filter(
         (serv) =>
           Array.isArray(serv.empleados) &&
           serv.empleados.some((e: any) => e.id === emp.id) &&
           serv.dateEntry &&
-          serv.dateExit
+          serv.dateExit &&
+          serv.dateExit !== null &&
+          serv.dateExit !== undefined &&
+          serv.dateExit !== ''
       );
 
       let totalHoras = 0;
@@ -156,11 +185,13 @@ export class EmpleadosComponent {
           typeof serv.dateExit === 'string'
             ? new Date(serv.dateExit)
             : serv.dateExit;
+        // Solo sumar si exit es posterior a entry
         if (
           entry instanceof Date &&
           exit instanceof Date &&
           !isNaN(entry.getTime()) &&
-          !isNaN(exit.getTime())
+          !isNaN(exit.getTime()) &&
+          exit.getTime() > entry.getTime()
         ) {
           totalHoras += (exit.getTime() - entry.getTime()) / (1000 * 60 * 60);
           count++;
@@ -258,16 +289,19 @@ export class EmpleadosComponent {
 
   updateJornadaChart() {
     if (!this.jornadaChart) return;
-    // Cuenta empleados por jornada laboral y traduce los labels
+    // Traducción de labels para todos los posibles valores
     const traduccion: { [key: string]: string } = {
       FULLTIME: 'Tiempo completo',
       PART_TIME: 'Medio tiempo',
       NIGHT: 'Nocturno',
+      PERMANENT: 'Permanente',
+      TEMPORARY: 'Temporal',
+      INTERNSHIP: 'Pasantía',
       'Sin especificar': 'Sin especificar',
     };
     const counts: { [key: string]: number } = {};
     this.lst.forEach((emp) => {
-      const jornada = emp.jornada || 'Sin especificar';
+      const jornada = emp.workingDay || emp.jornada || 'Sin especificar';
       counts[jornada] = (counts[jornada] || 0) + 1;
     });
     const labels = Object.keys(counts).map((j) => traduccion[j] || j);

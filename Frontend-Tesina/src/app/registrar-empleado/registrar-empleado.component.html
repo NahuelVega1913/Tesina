@@ -256,7 +256,7 @@
         </div>
         <div class="w-full">
           <label for="email" class="block mb-2 text-sm font-medium text-sky-950"
-            >Numero de Cuenta Bancario</label
+            >Numero de Cuenta Bancaria</label
           >
           <input
             type="number"
@@ -267,9 +267,15 @@
           />
 
           @if(form.get('bancaryNumber')?.invalid &&
+          form.get('bancaryNumber')?.touched && form.get('bancaryNumber')?.value
+          == null){
+          <div class="text-red-500 drop-shadow-md">
+            Complete el numero de cuenta bancaria
+          </div>
+          } @else if(form.get('bancaryNumber')?.invalid &&
           form.get('bancaryNumber')?.touched){
           <div class="text-red-500 drop-shadow-md">
-            Complete la cuenta bancaria
+            El numero de cuenta bancaria debe tener 22 digitos
           </div>
           }
         </div>

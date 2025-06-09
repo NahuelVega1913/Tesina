@@ -4,6 +4,7 @@ import org.example.backendtesina.DTOs.Get.GetUserInformation;
 import org.example.backendtesina.DTOs.Login.RegisterDto;
 import org.example.backendtesina.DTOs.Login.changePasswordDTO;
 import org.example.backendtesina.entities.enums.ServiceStatus;
+import org.example.backendtesina.entities.enums.StateNotification;
 import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,13 @@ public class UserService {
             information.setHasService(true);
         }else{
             information.setHasService(false);
+        }
+        for (int i = 0; i < entity.getNotifications().size(); i++) {
+            if(entity.getNotifications().get(i) != null){
+                if(entity.getNotifications().get(i).getState().equals(StateNotification.UNSEEN)){
+                    information.setNotifications( information.getNotifications() +1);
+                }
+            }
         }
 
         return information;

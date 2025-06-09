@@ -32,7 +32,7 @@ export class RegistrarEmpleadoComponent {
     dateOfEntry: new UntypedFormControl('', []),
     birthDate: new UntypedFormControl('', [this.ageValidator(16)]),
     email: new UntypedFormControl('', [Validators.email]),
-    salary: new UntypedFormControl('', []),
+    salary: new UntypedFormControl('', this.noNegativeValidator()),
     workingDay: new UntypedFormControl('', []),
     position: new UntypedFormControl('', []),
     remarks: new UntypedFormControl('', []),
@@ -44,6 +44,13 @@ export class RegistrarEmpleadoComponent {
       if (value < 0) return { negativeValue: true };
       const digits = value.toString().length;
       return digits === length ? null : { digitLength: true };
+    };
+  }
+  noNegativeValidator() {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (value == null) return null;
+      return value < 0 ? { negativeValue: true } : null;
     };
   }
   ageValidator(minAge: number) {

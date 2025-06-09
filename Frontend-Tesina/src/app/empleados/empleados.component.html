@@ -18,7 +18,7 @@
             />
             <button
               type="submit"
-              class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-sky-950 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+              class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-sky-800 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
             >
               <svg
                 class="w-4 h-4"
@@ -49,7 +49,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
       <!--CARD DEL EMPLEADO-->
-      @for (item of lstFiltered; track $index) {
+      @for (item of pagedList; track $index) {
       <div
         class="w-full max-w-sm bg-white border rounded-2xl border-gray-200 shadow-sm hover:shadow-xl transition duration-300 ease-in-out"
       >
@@ -88,6 +88,33 @@
       </div>
       }
       <!--CARD DEL EMPLEADO-->
+    </div>
+    <!-- Controles de paginación -->
+    <div class="flex justify-center items-center mt-4 gap-1">
+      <button
+        class="px-2 py-1 rounded border bg-gray-100 hover:bg-gray-200"
+        [disabled]="page === 1"
+        (click)="prevPage()"
+        aria-label="Anterior"
+      >
+        &lt;
+      </button>
+      <ng-container *ngFor="let p of [].constructor(totalPages); let i = index">
+        <button
+          class="px-3 py-1 rounded border mx-0.5"
+          (click)="goToPage(i + 1)"
+        >
+          {{ i + 1 }}
+        </button>
+      </ng-container>
+      <button
+        class="px-2 py-1 rounded border bg-gray-100 hover:bg-gray-200"
+        [disabled]="page === totalPages"
+        (click)="nextPage()"
+        aria-label="Siguiente"
+      >
+        &gt;
+      </button>
     </div>
   </div>
   <div
