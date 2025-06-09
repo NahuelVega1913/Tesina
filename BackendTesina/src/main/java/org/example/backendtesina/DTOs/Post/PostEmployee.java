@@ -1,10 +1,12 @@
 package org.example.backendtesina.DTOs.Post;
 
+import com.fasterxml.jackson.databind.node.BigIntegerNode;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import org.example.backendtesina.entities.enums.TypeOfContract;
 import org.example.backendtesina.entities.enums.WorkinDayEntity;
 
+import java.math.BigInteger;
 import java.util.Date;
 
 public class PostEmployee {
@@ -12,15 +14,15 @@ public class PostEmployee {
     private Date birthDate;
 
     private String typeOfContract;
-    private int CUIT;
+    private BigInteger CUIT;
     private String workingDay;
 
     private String fullName;
-    private Double salary;
+    private BigInteger salary;
     private String address;
     private String phone;
     private String email;
-    private int bancaryNumber;
+    private BigInteger bancaryNumber;
     private String position;
     private Date dateOfEntry;
     private String remarks;
@@ -57,13 +59,7 @@ public class PostEmployee {
         this.fullName = fullName;
     }
 
-    public Double getSalary() {
-        return salary;
-    }
 
-    public void setSalary(Double salary) {
-        this.salary = salary;
-    }
 
     public String getAddress() {
         return address;
@@ -89,13 +85,7 @@ public class PostEmployee {
         this.email = email;
     }
 
-    public int getBancaryNumber() {
-        return bancaryNumber;
-    }
 
-    public void setBancaryNumber(int bancaryNumber) {
-        this.bancaryNumber = bancaryNumber;
-    }
 
     public String getPosition() {
         return position;
@@ -129,11 +119,28 @@ public class PostEmployee {
         this.id = id;
     }
 
-    public int getCUIT() {
+
+    public BigInteger getCUIT() {
         return CUIT;
     }
 
-    public void setCUIT(int CUIT) {
+    public void setCUIT(BigInteger CUIT) {
         this.CUIT = CUIT;
+    }
+
+    public BigInteger getSalary() {
+        return salary;
+    }
+
+    public void setSalary(BigInteger salary) {
+        this.salary = salary;
+    }
+
+    public BigInteger getBancaryNumber() {
+        return bancaryNumber;
+    }
+
+    public void setBancaryNumber(BigInteger bancaryNumber) {
+        this.bancaryNumber = bancaryNumber;
     }
 }

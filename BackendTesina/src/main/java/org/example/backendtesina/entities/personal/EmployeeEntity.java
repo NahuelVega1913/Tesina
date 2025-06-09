@@ -1,10 +1,12 @@
 package org.example.backendtesina.entities.personal;
 
+import com.fasterxml.jackson.databind.node.BigIntegerNode;
 import jakarta.persistence.*;
 import org.example.backendtesina.entities.enums.TypeOfContract;
 import org.example.backendtesina.entities.enums.WorkinDayEntity;
 import org.example.backendtesina.entities.services.ServiceEntity;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class EmployeeEntity {
     @Column(name = "BIRTHDATE")
     private Date birthDate;
     @Column(name = "CUIT")
-    private int CUIT;
+    private BigInteger CUIT;
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPEOFCONTRACT")
     private TypeOfContract typeOfContract;
@@ -25,11 +27,11 @@ public class EmployeeEntity {
     @Column(name = "WORKINGDAY")
     private WorkinDayEntity workingDay;
     @Column(name = "BANCARYNUMBER")
-    private int bancaryNumber;
+    private BigInteger bancaryNumber;
     @Column(name = "FULLNAME")
     private String fullName;
     @Column(name = "SALARY")
-    private Double salary;
+    private BigInteger salary;
     @Column(name = "ADDRESS")
     private String address;
     @Column(name = "PHONE")
@@ -78,13 +80,7 @@ public class EmployeeEntity {
         this.workingDay = workingDay;
     }
 
-    public int getBancaryNumber() {
-        return bancaryNumber;
-    }
 
-    public void setBancaryNumber(int bancaryNumber) {
-        this.bancaryNumber = bancaryNumber;
-    }
 
     public String getFullName() {
         return fullName;
@@ -94,11 +90,11 @@ public class EmployeeEntity {
         this.fullName = fullName;
     }
 
-    public Double getSalary() {
+    public BigInteger getSalary() {
         return salary;
     }
 
-    public void setSalary(Double salary) {
+    public void setSalary(BigInteger salary) {
         this.salary = salary;
     }
 
@@ -150,13 +146,6 @@ public class EmployeeEntity {
         this.remarks = remarks;
     }
 
-    public int getCUIT() {
-        return CUIT;
-    }
-
-    public void setCUIT(int CUIT) {
-        this.CUIT = CUIT;
-    }
 
     public List<ServiceEntity> getJobs() {
         return jobs;
@@ -164,5 +153,21 @@ public class EmployeeEntity {
 
     public void setJobs(List<ServiceEntity> jobs) {
         this.jobs = jobs;
+    }
+
+    public BigInteger getCUIT() {
+        return CUIT;
+    }
+
+    public void setCUIT(BigInteger CUIT) {
+        this.CUIT = CUIT;
+    }
+
+    public BigInteger getBancaryNumber() {
+        return bancaryNumber;
+    }
+
+    public void setBancaryNumber(BigInteger bancaryNumber) {
+        this.bancaryNumber = bancaryNumber;
     }
 }

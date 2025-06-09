@@ -1,8 +1,10 @@
 import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
+  ValidationErrors,
 } from '@angular/forms';
 import { EmpleadosService } from '../services/empleados.service';
 import Swal from 'sweetalert2';
@@ -38,6 +40,16 @@ export class ModificarEmpleadoComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getEmployee();
+  }
+  digitLengthValidator(length: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (value == null) return null;
+      if (value < 0) return { negativeValue: true };
+
+      const digits = value.toString().length;
+      return digits === length ? null : { digitLength: true };
+    };
   }
 
   getEmployee() {

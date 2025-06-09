@@ -40,6 +40,7 @@ export class RegistrarProveedorComponent {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
       if (value == null) return null;
+      if (value < 0) return { negativeValue: true };
       const digits = value.toString().length;
       return digits === length ? null : { digitLength: true };
     };

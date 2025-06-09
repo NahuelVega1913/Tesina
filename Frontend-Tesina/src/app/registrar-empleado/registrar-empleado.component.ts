@@ -1,8 +1,11 @@
 import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
+  ValidationErrors,
+  Validators,
 } from '@angular/forms';
 import { EmpleadosService } from '../services/empleados.service';
 import { Router } from '@angular/router';
@@ -20,20 +23,43 @@ export class RegistrarEmpleadoComponent {
 
   form = new UntypedFormGroup({
     fullName: new UntypedFormControl('', []),
-    cuit: new UntypedFormControl('', []),
-    phone: new UntypedFormControl('', []),
+    cuit: new UntypedFormControl('', [this.digitLengthValidator(11)]),
+    phone: new UntypedFormControl('', [this.digitLengthValidator(12)]),
     address: new UntypedFormControl('', []),
     category: new UntypedFormControl('', []),
-    bancaryNumber: new UntypedFormControl('', []),
+    bancaryNumber: new UntypedFormControl('', [this.digitLengthValidator(22)]),
     typeOfContract: new UntypedFormControl('', []),
     dateOfEntry: new UntypedFormControl('', []),
-    birthDate: new UntypedFormControl('', []),
-    email: new UntypedFormControl('', []),
+    birthDate: new UntypedFormControl('', [this.ageValidator(16)]),
+    email: new UntypedFormControl('', [Validators.email]),
     salary: new UntypedFormControl('', []),
     workingDay: new UntypedFormControl('', []),
     position: new UntypedFormControl('', []),
     remarks: new UntypedFormControl('', []),
   });
+  digitLengthValidator(length: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (value == null) return null;
+      if (value < 0) return { negativeValue: true };
+      const digits = value.toString().length;
+      return digits === length ? null : { digitLength: true };
+    };
+  }
+  ageValidator(minAge: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (!value) return null;
+      const birthDate = new Date(value);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      return age >= minAge ? null : { minAge: true };
+    };
+  }
 
   save() {
     if (this.form.valid) {
@@ -59,6 +85,7 @@ export class RegistrarEmpleadoComponent {
         },
       });
     } else {
+      this.form.markAllAsTouched();
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

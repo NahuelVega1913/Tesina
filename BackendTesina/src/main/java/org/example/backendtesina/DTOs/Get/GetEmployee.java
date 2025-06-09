@@ -1,5 +1,7 @@
 package org.example.backendtesina.DTOs.Get;
 
+import java.math.BigInteger;
+
 public class GetEmployee {
     private int id;
     private String fullName;
@@ -7,7 +9,7 @@ public class GetEmployee {
 
     private String position;
     private String jornada;
-    private double salary;
+    private BigInteger salary;
 
 
     public int getId() {
@@ -42,11 +44,11 @@ public class GetEmployee {
         this.position = position;
     }
 
-    public double getSalary() {
+    public BigInteger getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(BigInteger salary) {
         this.salary = salary;
     }
 

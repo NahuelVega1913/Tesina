@@ -5,7 +5,7 @@
     class="bg-sky-100 md:w-4/5 w-1/1 mx-auto flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
   >
     <p
-      class="font-bold text-2xl text-sky-950 text-6xl ps-10 pt-5 text-center sm:mb-5 md:mt-5"
+      class="text-2xl text-sky-950 text-6xl font-bold pt-5 text-center sm:mb-5 md:mt-5"
     >
       Registrar Empleado
     </p>
@@ -26,9 +26,7 @@
             required
           />
           @if(form.get('fullName')?.invalid && form.get('fullName')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el nombre
-          </div>
+          <div class="text-red-500 drop-shadow-md">Complete el nombre</div>
           }
         </div>
         <div>
@@ -45,10 +43,12 @@
             placeholder="20222222224"
             required
           />
-          @if(form.get('cuit')?.invalid && form.get('cuit')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el CUIT
-          </div>
+          @if(form.get('cuit')?.invalid && form.get('cuit')?.touched &&
+          form.get('cuit')?.value == null){
+          <div class="text-red-500">Complete el CUIT</div>
+          }@if(form.get('cuit')?.invalid && form.get('cuit')?.value != null &&
+          form.get('cuit')?.touched){
+          <div class="text-red-500">Numero de CUIT invalido</div>
           }
         </div>
         <div>
@@ -65,10 +65,11 @@
             placeholder="agustin@gmail.com"
             required
           />
-          @if(form.get('email')?.invalid && form.get('email')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el email
-          </div>
+          @if(form.get('email')?.value == null && form.get('email')?.touched){
+          <div class="text-red-500">Complete el email</div>
+          }@if(form.get('email')?.value != null && form.get('email')?.invalid &&
+          form.get('email')?.touched){
+          <div class="text-red-500">Email Invalido</div>
           }
         </div>
 
@@ -83,13 +84,14 @@
             formControlName="phone"
             id="phone"
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full p-2.5"
-            placeholder="54 351-7777777"
+            placeholder="543517777777"
             required
           />
-          @if(form.get('phone')?.invalid && form.get('phone')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el telefono
-          </div>
+          @if(form.get('phone')?.value == null && form.get('phone')?.touched){
+          <div class="text-red-500">Complete el telefono</div>
+          }@if(form.get('phone')?.value != null && form.get('phone')?.invalid &&
+          form.get('phone')?.touched){
+          <div class="text-red-500">Numero invalido</div>
           }
         </div>
       </div>
@@ -114,7 +116,7 @@
           </select>
           @if(form.get('typeOfContract')?.value == "" &&
           form.get('typeOfContract')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
+          <div class="text-red-500 drop-shadow-md">
             Complete el tipo de contrato
           </div>
           }
@@ -136,7 +138,7 @@
           </select>
           @if(form.get('workingDay')?.value == "" &&
           form.get('workingDay')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
+          <div class="text-red-500 drop-shadow-md">
             Complete la jornada laboral
           </div>
           }
@@ -156,9 +158,15 @@
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full md:w-80 p-2.5"
             required
           />
-          @if(form.get('birthDate')?.invalid && form.get('birthDate')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
+          @if(form.get('birthDate')?.value == null &&
+          form.get('birthDate')?.touched && form.get('birthDate')?.invalid){
+          <div class="text-red-500 drop-shadow-md">
             Complete la fecha de nacimiento
+          </div>
+          }@else if(form.get('birthDate')?.value != null &&
+          form.get('birthDate')?.invalid && form.get('birthDate')?.touched){
+          <div class="text-red-500 drop-shadow-md">
+            La fecha de nacimiento debe ser mayor a 16 años
           </div>
           }
         </div>
@@ -181,9 +189,7 @@
             required
           />
           @if(form.get('salary')?.invalid && form.get('salary')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el salario
-          </div>
+          <div class="text-red-500 drop-shadow-md">Complete el salario</div>
           }
         </div>
         <div class="w-full">
@@ -202,9 +208,7 @@
           />
           @if(form.get('position')?.value == "" &&
           form.get('position')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete la posicion
-          </div>
+          <div class="text-red-500 drop-shadow-md">Complete la posicion</div>
           }
         </div>
 
@@ -224,7 +228,7 @@
           />
           @if(form.get('dateOfEntry')?.invalid &&
           form.get('dateOfEntry')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
+          <div class="text-red-500 drop-shadow-md">
             Complete la fecha de ingreso
           </div>
           }
@@ -247,9 +251,7 @@
           />
 
           @if(form.get('address')?.invalid && form.get('address')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete la direccion
-          </div>
+          <div class="text-red-500 drop-shadow-md">Complete la direccion</div>
           }
         </div>
         <div class="w-full">
@@ -266,7 +268,7 @@
 
           @if(form.get('bancaryNumber')?.invalid &&
           form.get('bancaryNumber')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
+          <div class="text-red-500 drop-shadow-md">
             Complete la cuenta bancaria
           </div>
           }
