@@ -46,4 +46,15 @@ export class CasillaComponent {
       },
     });
   }
+  marksAsRead() {
+    const markSubscription = this.service.markAllAsRead().subscribe({
+      next: (res) => {
+        console.log('Todas las notificaciones marcadas como leídas');
+        this.getNotificaciones(); // Actualiza la lista de notificaciones
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }

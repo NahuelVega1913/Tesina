@@ -46,6 +46,11 @@ public class SaleService {
     @Autowired
     CartRepository cartRepository;
 
+    public String confirmPayment(String s){
+
+        return s;
+    }
+
     @Transactional
     public String payMercadoPago(String token,PostPayDTO payDTO) throws MPException, MPApiException {
         //CONTROL

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +43,16 @@ public class SaleController {
         response.put("init_point", initPoint);
 
         return ResponseEntity.ok(response);
+    }
+    @PostMapping(value = "webhook")
+    public ResponseEntity<?> confirmPay(@RequestBody String s){
+        //String response = this.service.confirmPayment(s);
+        if(!s.equals("")){
+            return ResponseEntity.ok("");
+        }else{
+            return ResponseEntity.badRequest().build();
+        }
+
     }
     @PostMapping(value = "payProducts")
     public ResponseEntity<?> payCart(@RequestBody List<PostPayDTO> lst,@RequestHeader("Authorization") String authorizationHeader) throws MPException,MPApiException {

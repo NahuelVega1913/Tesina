@@ -29,7 +29,7 @@ public class NotificationService {
         notification.setDateTime(LocalDateTime.now());
         notification.setTitle("Bienvenido!!!");
         notification.setMessage("El equipo de MechanicTech te desea una gran bienvenida!");
-        notification.setType(typeNotificationEntity.SUCCESS);
+        notification.setType(typeNotificationEntity.OTHER);
         notification.setState(StateNotification.UNSEEN);
         notification.setUser(user);
 
@@ -45,7 +45,7 @@ public class NotificationService {
         notification.setDateTime(LocalDateTime.now());
         notification.setTitle("Servicio Finalizado!!!");
         notification.setMessage("Te esperamos para retirar tu vehiculo!");
-        notification.setType(typeNotificationEntity.SUCCESS);
+        notification.setType(typeNotificationEntity.SERVICIO);
         notification.setState(StateNotification.UNSEEN);
         notification.setUser(user);
 
@@ -79,7 +79,7 @@ public class NotificationService {
         notification.setDateTime(LocalDateTime.now());
         notification.setTitle("Felicitaciones por tu compra!!!");
         notification.setMessage("Esperamos que disfrutes de tu producto!");
-        notification.setType(typeNotificationEntity.SUCCESS);
+        notification.setType(typeNotificationEntity.COMPRA);
         notification.setState(StateNotification.UNSEEN);
         notification.setUser(user);
         List<NotificationEntity> notifications = user.getNotifications();

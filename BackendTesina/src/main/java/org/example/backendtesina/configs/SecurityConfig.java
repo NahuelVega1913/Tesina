@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers("/auth/**","/uploads/**").permitAll()
+                                .requestMatchers("/auth/**","/uploads/**","/sales/webhook").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManger -> sessionManger.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
