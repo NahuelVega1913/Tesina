@@ -24,7 +24,14 @@ import org.example.backendtesina.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +44,10 @@ public class SaleService {
     SaleRepository repository;
     @Autowired
     UserRepository userRepository;
+
+
+
+
     @Autowired
     NotificationService notificationService;
     @Autowired
@@ -45,6 +56,42 @@ public class SaleService {
     SpareRepository spareRepository;
     @Autowired
     CartRepository cartRepository;
+
+
+
+
+    public String consultarPago(String paymentId) {
+        try {
+            URL url = new URL("https://api.mercadopago.com/v1/payments/" + paymentId);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Authorization", "Bearer TU_ACCESS_TOKEN");
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            int responseCode = connection.getResponseCode();
+
+            if (responseCode == 200) {
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(connection.getInputStream())
+                );
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                return response.toString(); // JSON crudo con los datos del pago
+            } else {
+                System.out.println("Error al consultar pago. Código: " + responseCode);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     public String confirmPayment(String s){
 
