@@ -1,14 +1,17 @@
-<div class="bg-sky-100 min-h-screen w-full p-10">
-  <p class="text-center text-5xl text-sky-950 mb-5 font-semibold">
-    Preguntas Frecuentes
-  </p>
+<div class="bg-sky-200 min-h-screen w-full p-10">
+  <div class="bg-white rounded-2xl p-7">
+    <p class="text-center text-5xl text-sky-950 mx-auto font-bold">
+      Preguntas Frecuentes
+    </p>
+  </div>
+  @if(this.rol == 'USER') {
   <div class="flex flex-col justify-center mt-3 bg-white rounded-2xl p-5">
     <!--COMO ME CONTACTO-->
     <div id="accordion-open" class="m-2" data-accordion="open">
       <h2 id="accordion-open-heading text-sky-950" class="rounded-xl">
         <button
           type="button"
-          class="flex items-center rounded-2xl justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 rounded-t-xl hover:bg-gray-100 bg-white"
+          class="flex items-center rounded-2xl justify-between focus:rounded-b-none w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-gray-200 hover:bg-gray-100 bg-white gap-3"
           data-accordion-target="#accordion-open-body"
           aria-expanded="true"
           aria-controls="accordion-open-body"
@@ -69,7 +72,7 @@
       <h2 id="accordion-open-heading-1" class="rounded-xl">
         <button
           type="button"
-          class="flex items-center rounded-2xl justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-gray-200 hover:bg-gray-100 bg-white gap-3"
+          class="flex items-center rounded-2xl justify-between focus:rounded-b-none w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-gray-200 hover:bg-gray-100 bg-white gap-3"
           data-accordion-target="#accordion-open-body-1"
           aria-expanded="false"
           aria-controls="accordion-open-body-1"
@@ -117,7 +120,7 @@
             Una vez realizado tu pedido en el menu izquierdo podras consultar el
             estado en que se encuentra su servicio.
           </p>
-          <img src="servicios.png" class="rounded-2xl m-3 shadow-2xl" alt="" />
+          <img src="servicios.png" class="rounded-2xl m-3" alt="" />
 
           <p class="mb-2 text-gray-500 mt-2 f">
             Una vez finalizado el servicio te llegara una notificacion en la
@@ -125,7 +128,7 @@
           </p>
           <img
             src="serviciofinalizado.png"
-            class="rounded-2xl h-20 shadow-2xl f m-3"
+            class="rounded-2xl h-20 f m-3"
             alt=""
           />
         </div>
@@ -138,7 +141,7 @@
       <h2 id="accordion-open-heading-3" class="rounded-xl">
         <button
           type="button"
-          class="flex items-center rounded-2xl justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-gray-200 hover:bg-gray-100 bg-white gap-3"
+          class="flex items-center rounded-2xl justify-between focus:rounded-b-none w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-gray-200 hover:bg-gray-100 bg-white gap-3"
           data-accordion-target="#accordion-open-body-3"
           aria-expanded="false"
           aria-controls="accordion-open-body-3"
@@ -250,4 +253,7 @@
     </div>
     <!--ENVIO A DOMICILIO-->
   </div>
+  }@else {
+  <p>USTED ESE ADMIN</p>
+  }
 </div>

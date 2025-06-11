@@ -26,8 +26,8 @@ export class NotificacionesService {
       'Content-Type': 'application/json',
     });
 
-    return this.http.post<any>(
-      `http://localhost:8080/notifications/addProduct/`,
+    return this.http.put<any>(
+      `http://localhost:8080/notifications/putNotification`,
       {},
       { headers, responseType: 'text' as 'json' }
     );
