@@ -5,9 +5,9 @@
     </div>
     <div class="flex flex-row align-middle p-4">
       <form class="mt-5 w-full">
-        <div class="flex">
+        <div class="flex flex-col md:flex-row">
           <!-- Filtros de fecha SIN estilos de flowbite -->
-          <div class="flex items-center">
+          <div class="flex items-center ms-3 mt-2">
             <div>
               <input
                 id="datepicker-range-start"
@@ -32,49 +32,51 @@
               />
             </div>
           </div>
-          <div class="ms-5">
-            <select
-              id="countries"
-              name="category"
-              (change)="filter()"
-              [(ngModel)]="category"
-              class="bg-gray-50 border me-2 border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block p-2.5"
-            >
-              <option value="" selected>Todas</option>
-              <option value="MERCADO_PAGO">Mercado Pago</option>
-              <option value="CASH">Efectivo</option>
-            </select>
-          </div>
-          <div class="relative w-full ms-5">
-            <input
-              (input)="filter()"
-              type="search"
-              name="search"
-              id="search-dropdown"
-              class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-s-gray-100 rounded-s-2 rounded-xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Buscar"
-              [(ngModel)]="search"
-            />
-            <button
-              type="submit"
-              class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-sky-600 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-            >
-              <svg
-                class="w-4 h-4"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
+          <div class="flex flex-row items-center ms-3 mt-2 w-full">
+            <div class="">
+              <select
+                id="countries"
+                name="category"
+                (change)="filter()"
+                [(ngModel)]="category"
+                class="bg-gray-50 border me-2 border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block p-2.5"
               >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
-            </button>
+                <option value="" selected>Todas</option>
+                <option value="MERCADO_PAGO">Mercado Pago</option>
+                <option value="CASH">Efectivo</option>
+              </select>
+            </div>
+            <div class="relative w-full me-5">
+              <input
+                (input)="filter()"
+                type="search"
+                name="search"
+                id="search-dropdown"
+                class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-s-gray-100 rounded-s-2 rounded-xl border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Buscar"
+                [(ngModel)]="search"
+              />
+              <button
+                type="submit"
+                class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-sky-800 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+              >
+                <svg
+                  class="w-4 h-4"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </form>
