@@ -6,30 +6,32 @@
     <div class="flex flex-row align-middle p-4">
       <form class="mt-5 w-full" (submit)="$event.preventDefault()">
         <div class="flex">
-          <div class="flex items-center">
-            <div class="w-35">
-              <input
-                id="datepicker-range-start"
-                name="start"
-                type="date"
-                (change)="filter()"
-                [(ngModel)]="dateFrom"
-                class="border rounded-2xl h-10 px-2 py-1 text-sm"
-                placeholder="Fecha"
-              />
-            </div>
+          <div class="flex items-center flex-col md:flex-row">
+            <div>
+              <div class="w-35">
+                <input
+                  id="datepicker-range-start"
+                  name="start"
+                  type="date"
+                  (change)="filter()"
+                  [(ngModel)]="dateFrom"
+                  class="border rounded-2xl h-10 px-2 py-1 text-sm"
+                  placeholder="Fecha"
+                />
+              </div>
 
-            <span class="mx-4 text-gray-500">hasta</span>
-            <div class="w-35">
-              <input
-                id="datepicker-range-end"
-                name="end"
-                type="date"
-                (change)="filter()"
-                [(ngModel)]="dateTo"
-                class="border rounded-2xl h-10 px-2 py-1 text-sm"
-                placeholder="Fecha"
-              />
+              <span class="mx-4 text-gray-500">hasta</span>
+              <div class="w-35">
+                <input
+                  id="datepicker-range-end"
+                  name="end"
+                  type="date"
+                  (change)="filter()"
+                  [(ngModel)]="dateTo"
+                  class="border rounded-2xl h-10 px-2 py-1 text-sm"
+                  placeholder="Fecha"
+                />
+              </div>
             </div>
           </div>
           <div class="ms-5">
