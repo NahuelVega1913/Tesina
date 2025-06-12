@@ -61,7 +61,7 @@ public class SpareController {
             if(carlos == null){
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar repuesto");
             }
-            return ResponseEntity.ok("Spare guardado con éxito");
+            return ResponseEntity.ok(carlos);
 
     }
     @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")

@@ -120,6 +120,7 @@
       <p class="font-semibold text-lg">Total</p>
       <p class="font-semibold text-lg">$ {{ calculateTotal() }}</p>
     </div>
+    @if(this.rol != 'USER'){
     <button
       type="button"
       id=""
@@ -127,6 +128,7 @@
     >
       Continuar compra
     </button>
-    <div (click)="comprarRepuesto()" id="wallet_container"></div>
+    }
+    <div (click)="comprarRepuesto()" id="wallet_container" class="mt-2"></div>
   </div>
 </div>

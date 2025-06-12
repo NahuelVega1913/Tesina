@@ -40,14 +40,14 @@
           @if(repuesto.urlImages.length > 1) {
           <button
             type="button"
-            class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+            class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none text-black"
             data-carousel-prev
           >
             <span
-              class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none"
+              class="inline-flex items-center bg-gray-100 justify-center w-10 h-10 rounded-full group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none"
             >
               <svg
-                class="w-4 h-4 text-white rtl:rotate-180"
+                class="w-4 h-4 text-sky-950 rtl:rotate-180"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -70,10 +70,10 @@
             data-carousel-next
           >
             <span
-              class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none"
+              class="inline-flex items-center bg-gray-100 justify-center w-10 h-10 rounded-full group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none"
             >
               <svg
-                class="w-4 h-4 text-white text-gray-800 rtl:rotate-180"
+                class="w-4 h-4 text-sky-950 rtl:rotate-180"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -97,7 +97,9 @@
     <div
       class="md:w-3xl flex flex-col h-full bg-white border-gray-600 p-5 rounded-2xl"
     >
-      <p class="font-bold text-2xl mt-4">{{ repuesto.name }}</p>
+      <p class="font-bold text-2xl mt-4">
+        {{ repuesto.name }} ({{ repuesto.brand }})
+      </p>
       <div class="flex items-center mb-2 mt-2">
         @if(repuesto.stars >=1){
         <svg
@@ -260,12 +262,16 @@
       <div class="font-light text-gray-500">
         +({{ repuesto.stock }} Disponibles)
       </div>
+      @if(this.rol != 'USER'){
       <button
         type="button"
         class="text-white mt-5 bg-sky-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
       >
         Comprar
       </button>
+      }
+      <div (click)="comprarRepuesto()" id="wallet_container" class="mt-1"></div>
+
       <button
         (click)="agregarAlCarrito()"
         type="button"
@@ -273,7 +279,6 @@
       >
         Agregar al Carrito
       </button>
-      <div (click)="comprarRepuesto()" id="wallet_container"></div>
     </div>
   </div>
   <div class="bg-white p-5 m-2 md-5 rounded-2xl shadow-md">

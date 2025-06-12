@@ -5,7 +5,7 @@
     class="bg-sky-100 md:w-4/5 w-1/1 mx-auto flex flex-col h-full rounded-xl border-rounded-lg shadow-sky-950/50"
   >
     <p
-      class="font-bold text-sky-950 text-6xl text-center tex pt-5 sm:mb-5 md:mt-5"
+      class="text-sky-950 text-6xl text-center tex pt-5 sm:mb-5 md:mt-5 font-bold"
     >
       Registrar Repuesto
     </p>
@@ -26,9 +26,7 @@
             required
           />
           @if(form.get('name')?.invalid && form.get('name')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el nombre
-          </div>
+          <div class="text-red-500">Complete el nombre</div>
           }
         </div>
         <div>
@@ -69,9 +67,7 @@
             />
           </div>
           @if(form.get('price')?.invalid && form.get('price')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el Precio
-          </div>
+          <div class="text-red-500">Complete el Precio</div>
           }
         </div>
         <div>
@@ -92,10 +88,16 @@
             placeholder="0"
             required
           />
-          @if(form.get('discaunt')?.invalid && form.get('discaunt')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el descuento
-          </div>
+          @if(form.get('discaunt')?.invalid && form.get('discaunt')?.touched &&
+          form.get('discaunt')?.value == ""){
+          <div class="text-red-500">Complete el descuento</div>
+          } @else if(form.get('discaunt')?.value > 100){
+          <div class="text-red-500">El numero maximo es 100</div>
+          } @else if(form.get('discaunt')?.value < 0){
+          <div class="text-red-500">No se permiten valores negativos</div>
+          }@else if(form.get('discaunt')?.invalid &&
+          form.get('discaunt')?.touched){
+          <div class="text-red-500">Complete el descuento</div>
           }
         </div>
 
@@ -108,7 +110,7 @@
           <input
             type="number"
             [ngClass]="{
-              'is-invalid':
+              'is-    invalid':
                 form.get('phone')?.touched && form.get('phone')?.invalid
             }"
             formControlName="stock"
@@ -117,10 +119,14 @@
             placeholder="50"
             required
           />
-          @if(form.get('stock')?.invalid && form.get('stock')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el stock
-          </div>
+          @if(form.get('stock')?.invalid && form.get('stock')?.touched &&
+          form.get('stock')?.value == ""){
+          <div class="text-red-500">Complete el stock</div>
+          } @else if(form.get('stock')?.value < 0){
+          <div class="text-red-500">No se permiten valores negativos</div>
+          }@else if (form.get('stock')?.invalid && form.get('stock')?.touched){
+          <div class="text-red-500">Complete el stock</div>
+
           }
         </div>
       </div>
@@ -146,9 +152,7 @@
             required
           />
           @if(form.get('brand')?.value == "" && form.get('brand')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete la Marca
-          </div>
+          <div class="text-red-500">Complete la Marca</div>
           }
         </div>
         <div class="w-full">
@@ -165,15 +169,11 @@
             <option value="" selected>Elige una categoria</option>
             <option value="MOTOR">Motor</option>
             <option value="REFRIGERACION">Refrigeracion</option>
-            <option value="TRANSMICION">Transmicion</option>
             <option value="LUBRICACION">Lubricacion</option>
-            <option value="FRENOS">Frenos</option>
           </select>
           @if(form.get('category')?.value == "" &&
           form.get('category')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete la categoria
-          </div>
+          <div class="text-red-500">Seleccione la categoria</div>
           }
         </div>
 
@@ -195,10 +195,16 @@
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full md:w-80 p-2.5"
             required
           />
-          @if(form.get('stars')?.invalid && form.get('stars')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete las estrellas
-          </div>
+          @if(form.get('stars')?.invalid && form.get('stars')?.touched &&
+          form.get('stars')?.value == ""){
+          <div class="text-red-500">Complete las estrellas</div>
+          }@else if(form.get('stars')?.value > 5){
+          <div class="text-red-500">El numero maximo es 5</div>
+          }@else if(form.get('stars')?.value < 0){
+          <div class="text-red-500">No se permiten valores negativos</div>
+          }@else if(form.get('stars')?.invalid && form.get('stars')?.touched){
+          <div class="text-red-500">Complete las estrellas</div>
+
           }
         </div>
       </div>
@@ -237,9 +243,7 @@
           </select>
           @if(form.get('provider')?.value == "" &&
           form.get('provider')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el proveedor
-          </div>
+          <div class="text-red-500">Seleccione el proveedor</div>
           }
         </div>
       </div>
@@ -253,13 +257,17 @@
         id="message"
         rows="4"
         formControlName="description"
-        class="block p-2.5 w-full text-sm mb-5 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
         placeholder="Escribe tu mensaje aqui..."
+        required=""
       ></textarea>
+      @if(form.get('description')?.invalid && form.get('description')?.touched){
+      <div class="text-red-500 mb-3">Complete la descripcion</div>
+      }
 
       <button
         type="submit"
-        class="text-white bg-sky-800 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+        class="text-white bg-sky-800 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-3"
       >
         Crear
       </button>

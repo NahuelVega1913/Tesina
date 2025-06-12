@@ -21,6 +21,7 @@ import { MercadoPagoService } from '../services/mercado-pago.service';
 export class RepuestoComponent {
   mp = {} as any;
   cantidad: number = 1;
+  rol: any = '';
 
   constructor(private router: Router) {
     this.mp = new (window as any).MercadoPago(
@@ -39,6 +40,7 @@ export class RepuestoComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getRepuesto();
+    this.rol = localStorage.getItem('role');
     this.mp.bricks().create('wallet', 'wallet_container', {
       initialization: {
         preferenceId: 'YOUR_PREFERENCE_ID', // Reemplaza con tu ID de preferencia

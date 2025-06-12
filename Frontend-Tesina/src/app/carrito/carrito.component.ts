@@ -20,7 +20,7 @@ import { MercadoPagoService } from '../services/mercado-pago.service';
 export class CarritoComponent {
   private service: CartService = inject(CartService);
   private mpService: MercadoPagoService = inject(MercadoPagoService);
-
+  rol: any = '';
   carrito: any[] = [];
   productos: any[] = [];
   form = new UntypedFormGroup({
@@ -52,6 +52,7 @@ export class CarritoComponent {
         },
       },
     });
+    this.rol = localStorage.getItem('role');
   }
   comprarRepuesto() {
     const body = this.productos.map((producto) => ({

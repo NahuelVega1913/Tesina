@@ -1,9 +1,12 @@
 import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
+  ValidationErrors,
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -27,21 +30,45 @@ export class RegistrarRepuestoComponent {
 
   form = new UntypedFormGroup({
     name: new UntypedFormControl('', []),
-    price: new UntypedFormControl('', []),
-    discaunt: new UntypedFormControl('', []),
-    stock: new UntypedFormControl('', []),
+    price: new UntypedFormControl('', [
+      this.noNegativeValidator,
+      Validators.required,
+    ]),
+    discaunt: new UntypedFormControl('', [
+      this.noNegativeValidator,
+      this.maxNumberValidator(100),
+    ]),
+    stock: new UntypedFormControl('', [this.noNegativeValidator]),
     brand: new UntypedFormControl('', []),
     category: new UntypedFormControl('', []),
     urlImage: new UntypedFormControl('', []),
     provider: new UntypedFormControl('', []),
-    stars: new UntypedFormControl('', []),
+    stars: new UntypedFormControl('', [
+      this.noNegativeValidator,
+      this.maxNumberValidator(5),
+    ]),
     city: new UntypedFormControl('', []),
     description: new UntypedFormControl('', []),
   });
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Called after the constructor, initializing inpust properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getProviders();
+  }
+  noNegativeValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value == null || value === '') return null;
+    const num = Number(value);
+    return isNaN(num) || num < 0 ? { negativeValue: true } : null;
+  }
+
+  maxNumberValidator(max: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (value == null || value === '') return null;
+      const num = Number(value);
+      return isNaN(num) || num > max ? { maxNumber: true } : null;
+    };
   }
 
   onFileChange(event: Event) {
@@ -102,6 +129,13 @@ export class RegistrarRepuestoComponent {
             text: 'Ocurrió un error al registrar el repuesto',
           });
         },
+      });
+    } else {
+      this.form.markAllAsTouched();
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Completa todos los campos requeridos',
       });
     }
   }
