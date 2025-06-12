@@ -38,7 +38,10 @@ export class RegistrarRepuestoComponent {
       this.noNegativeValidator,
       this.maxNumberValidator(100),
     ]),
-    stock: new UntypedFormControl('', [this.noNegativeValidator]),
+    stock: new UntypedFormControl('', [
+      this.noNegativeValidator,
+      Validators.min(1),
+    ]),
     brand: new UntypedFormControl('', []),
     category: new UntypedFormControl('', []),
     urlImage: new UntypedFormControl('', []),

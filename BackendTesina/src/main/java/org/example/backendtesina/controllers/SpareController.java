@@ -29,7 +29,7 @@ public class SpareController {
         return ResponseEntity.ok(lst);
     }
     @GetMapping(value ="getSpare/{id}")
-    public ResponseEntity<?> getSpareById(@PathVariable int id){
+        public ResponseEntity<?> getSpareById(@PathVariable int id){
         PostSpareDTO lst = service.getSpare(id);
         if(lst == null){
             return ResponseEntity.notFound().build();

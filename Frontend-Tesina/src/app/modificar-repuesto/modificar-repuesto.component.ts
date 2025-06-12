@@ -1,8 +1,11 @@
 import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
+  ValidationErrors,
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RespuestosService } from '../services/respuestos.service';
@@ -28,14 +31,26 @@ export class ModificarRepuestoComponent {
 
   form = new UntypedFormGroup({
     name: new UntypedFormControl('', []),
-    price: new UntypedFormControl('', []),
-    discaunt: new UntypedFormControl('', []),
-    stock: new UntypedFormControl('', []),
+    price: new UntypedFormControl('', [
+      this.noNegativeValidator,
+      Validators.required,
+    ]),
+    discaunt: new UntypedFormControl('', [
+      this.noNegativeValidator,
+      this.maxNumberValidator(100),
+    ]),
+    stock: new UntypedFormControl('', [
+      this.noNegativeValidator,
+      Validators.min(1),
+    ]),
     brand: new UntypedFormControl('', []),
-    stars: new UntypedFormControl('', []),
     category: new UntypedFormControl('', []),
-    provider: new UntypedFormControl('', []),
     urlImage: new UntypedFormControl('', []),
+    provider: new UntypedFormControl('', []),
+    stars: new UntypedFormControl('', [
+      this.noNegativeValidator,
+      this.maxNumberValidator(5),
+    ]),
     city: new UntypedFormControl('', []),
     description: new UntypedFormControl('', []),
   });
@@ -45,6 +60,20 @@ export class ModificarRepuestoComponent {
     if (input.files) {
       this.selectedFiles = Array.from(input.files);
     }
+  }
+  maxNumberValidator(max: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (value == null || value === '') return null;
+      const num = Number(value);
+      return isNaN(num) || num > max ? { maxNumber: true } : null;
+    };
+  }
+  noNegativeValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value == null || value === '') return null;
+    const num = Number(value);
+    return isNaN(num) || num < 0 ? { negativeValue: true } : null;
   }
   getProviders() {
     const getSubscription = this.serviceProviders.getProveedores().subscribe({
@@ -63,6 +92,7 @@ export class ModificarRepuestoComponent {
     //Add 'implements OnInit' to the class.
     this.getRepuesto();
     this.getProviders();
+    console.log(this.repuesto.urlImages[0]);
   }
 
   getRepuesto() {
@@ -88,6 +118,13 @@ export class ModificarRepuestoComponent {
         console.log(err);
       },
     });
+  }
+
+  eliminarImagen(index: number) {
+    if (this.repuesto.urlImages && this.repuesto.urlImages[index]) {
+      this.repuesto.urlImages.splice(index, 1);
+      // Si necesitas notificar al backend la eliminación, aquí deberías hacerlo.
+    }
   }
 
   save() {
@@ -129,6 +166,13 @@ export class ModificarRepuestoComponent {
             text: 'Ocurrió un error al registrar el repuesto',
           });
         },
+      });
+    } else {
+      this.form.markAllAsTouched();
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Completa todos los campos requeridos',
       });
     }
   }
