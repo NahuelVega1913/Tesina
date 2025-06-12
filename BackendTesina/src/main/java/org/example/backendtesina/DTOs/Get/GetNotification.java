@@ -2,7 +2,7 @@ package org.example.backendtesina.DTOs.Get;
 
 import java.time.LocalDateTime;
 
-public class GetNotification {
+public class    GetNotification {
 
     private int id;
     private String title;

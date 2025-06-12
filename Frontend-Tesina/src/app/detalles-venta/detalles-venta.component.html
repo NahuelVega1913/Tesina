@@ -1,28 +1,37 @@
-<div class="bg-gray-900 font-mono">
+<div class="bg-gray-950">
   <div class="flex flex-col items-center justify-center h-screen">
     <div
-      class="flex flex-col items-baseline justify-center bg-white p-5 rounded-2xl shadow-2xl"
+      class="flex flex-col items-baseline justify-center bg-white rounded-2xl shadow-2xl w-3/4 md:w-2/5 p-10"
     >
-      <div class="border-b-2 border-gray-300 mb-3">
-        <h1 class="text-3xl font-bold mb-2">Detalles de la Venta</h1>
+      <div class="border-b-2 border-gray-300 mb-3 w-full">
+        <h1 class="text-4xl font-bold mb-2 font-sans text-center">Detalles</h1>
       </div>
       <div class="border-b-2 border-gray-300 w-full">
-        <p class="text-lg">Nombre del Cliente: {{ this.venta.user }}</p>
-        <p class="text-lg">
-          Fecha: {{ this.venta.date | date : "dd/MM/yyyy" }}
+        <p class="text-lg font-sans">
+          <strong>Nombre del Cliente: </strong>{{ this.venta.user }}
         </p>
-        <p class="text-lg">Total: ${{ venta.total }}</p>
+        <p class="text-lg font-sans">
+          <strong>Fecha:</strong> {{ this.venta.date | date : "dd/MM/yyyy" }}
+        </p>
+        <p class="text-lg font-sans">
+          <strong>Total:</strong> ${{ venta.total }}
+        </p>
+        <p class="text-lg font-sans">
+          <strong>Metodo de pago:</strong> {{ traducir(venta.typePayment) }}
+        </p>
       </div>
       <div class="w-full">
-        <p class="font-semibold text-2xl">Productos</p>
+        <p class="font-bold text-3xl mt-2 font-sans mb-2">Productos</p>
       </div>
       @for (item of venta.details; track $index) {
-      <div class="border-gray-300 border-b-2 mb-3 mt-3 w-full">
-        <p>Id: {{ $index + 1 }}</p>
-        <p>Nombre: {{ item.name }}</p>
-        <p>Marca: {{ item.brand }}</p>
-        <p>Cantidad: {{ item.quantity }}</p>
-        <p>Precio: {{ item.price }}</p>
+      <div
+        class="border-gray-300 mb-3 w-full p-3 border-1 rounded-2xl font-sans"
+      >
+        <p><strong>Id: </strong> {{ $index + 1 }}</p>
+        <p><strong>Nombre: </strong> {{ item.name }}</p>
+        <p><strong>Marca: </strong> {{ item.brand }}</p>
+        <p><strong>Cantidad: </strong> {{ item.quantity }}</p>
+        <p><strong>Precio: </strong> ${{ item.price }}</p>
       </div>
       }
     </div>

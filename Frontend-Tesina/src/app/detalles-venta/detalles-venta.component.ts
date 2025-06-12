@@ -18,6 +18,15 @@ export class DetallesVentaComponent {
     //Add 'implements OnInit' to the class.
     this.getDetails();
   }
+  traducir(str: string) {
+    if (str == 'MERCADO_PAGO') {
+      return 'Mercado Pago';
+    }
+    if (str == 'CASH') {
+      return 'Efectivo';
+    }
+    return 'Otro';
+  }
 
   getDetails() {
     const id = localStorage.getItem('idVenta');
