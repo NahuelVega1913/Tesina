@@ -4,6 +4,7 @@ import {
   ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
+  Validators,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { EmpleadosService } from '../services/empleados.service';
@@ -31,13 +32,13 @@ export class ModificarReparacionComponent {
     modelo: new UntypedFormControl('', []),
     observacionesPrevias: new UntypedFormControl('', []),
     idEmpleado: new UntypedFormControl('', []),
-    cost: new UntypedFormControl('', []),
+    cost: new UntypedFormControl('', [Validators.min(1)]),
     paymentStatus: new UntypedFormControl('', []),
     status: new UntypedFormControl('', []),
     type: new UntypedFormControl('', []),
     techniclaDiagnosis: new UntypedFormControl('', []),
     tasksPerformed: new UntypedFormControl('', []),
-    sparesUsed: new UntypedFormControl('', []),
+    sparesUsed: new UntypedFormControl('', [Validators.required]),
   });
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.

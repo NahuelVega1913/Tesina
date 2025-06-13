@@ -4,7 +4,7 @@
   <div
     class="bg-sky-100 md:w-4/5 w-1/1 mx-auto flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
   >
-    <p class="font-bold text-sky-950 text-5xl text-center pt-5 sm:mb-5 md:mt-5">
+    <p class="text-sky-950 text-5xl text-center font-bold pt-5 sm:mb-5 md:mt-5">
       Modificar Customizacion
     </p>
     <form [formGroup]="form" (submit)="save()" class="p-10">
@@ -25,9 +25,7 @@
           />
           @if(form.get('nombreCompleto')?.invalid &&
           form.get('nombreCompleto')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el Nombre
-          </div>
+          <div class="text-red-500">Complete el Nombre</div>
           }
         </div>
         <div>
@@ -45,9 +43,7 @@
             readonly
           />
           @if(form.get('auto')?.invalid && form.get('auto')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el Auto
-          </div>
+          <div class="text-red-500">Complete el Auto</div>
           }
         </div>
       </div>
@@ -68,9 +64,7 @@
             readonly
           />
           @if(form.get('modelo')?.invalid && form.get('modelo')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el Modelo
-          </div>
+          <div class="text-red-500">Complete el Modelo</div>
           }
         </div>
       </div>
@@ -109,9 +103,7 @@
 
           @if(form.get('idEmpleado')?.value == "" &&
           form.get('idEmpleado')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Seleccione un Empleado
-          </div>
+          <div class="text-red-500">Seleccione un Empleado</div>
           }
         </div>
         }@else {
@@ -151,9 +143,7 @@
         ></textarea>
         @if(form.get('materialsUsed')?.invalid &&
         form.get('materialsUsed')?.touched){
-        <div class="text-sky-950 font-bold drop-shadow-md">
-          Complete los materiales
-        </div>
+        <div class="text-red-500">Complete los materiales</div>
         }
       </div>
 
@@ -171,9 +161,7 @@
         ></textarea>
         @if(form.get('taskRealized')?.invalid &&
         form.get('taskRealized')?.touched){
-        <div class="text-sky-950 font-bold drop-shadow-md">
-          Complete las Tareas
-        </div>
+        <div class="text-red-500">Complete las Tareas</div>
         }
       </div>
       <div class="mt-5">
@@ -191,9 +179,7 @@
           required=""
         />
         @if(form.get('cost')?.invalid && form.get('cost')?.touched){
-        <div class="text-sky-950 font-bold drop-shadow-md">
-          Complete el Costo
-        </div>
+        <div class="text-red-500">Complete el Costo</div>
         }
       </div>
       }

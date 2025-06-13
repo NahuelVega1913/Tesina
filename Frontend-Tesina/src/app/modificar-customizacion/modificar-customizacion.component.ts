@@ -4,6 +4,7 @@ import {
   ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
+  Validators,
 } from '@angular/forms';
 import { EmpleadosService } from '../services/empleados.service';
 import { ServiciosService } from '../services/servicios.service';
@@ -31,7 +32,7 @@ export class ModificarCustomizacionComponent {
     modelo: new UntypedFormControl('', []),
     observacionesPrevias: new UntypedFormControl('', []),
     idEmpleado: new UntypedFormControl('', []),
-    cost: new UntypedFormControl('', []),
+    cost: new UntypedFormControl('', [Validators.min(1)]),
     paymentStatus: new UntypedFormControl('', []),
     status: new UntypedFormControl('', []),
     type: new UntypedFormControl('', []),
