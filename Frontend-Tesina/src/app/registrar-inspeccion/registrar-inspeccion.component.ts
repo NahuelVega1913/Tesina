@@ -1,8 +1,10 @@
 import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
+  ValidationErrors,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServiciosService } from '../services/servicios.service';
@@ -21,11 +23,20 @@ export class RegistrarInspeccionComponent {
   form = new UntypedFormGroup({
     id: new UntypedFormControl('0', []),
     nombreCompleto: new UntypedFormControl('', []),
-    dni: new UntypedFormControl('', []),
+    dni: new UntypedFormControl('', [this.digitLengthValidator(8)]),
     auto: new UntypedFormControl('', []),
-    modelo: new UntypedFormControl('', []),
+    modelo: new UntypedFormControl('', [this.digitLengthValidator(4)]),
     observacionesPrevias: new UntypedFormControl('', []),
   });
+  digitLengthValidator(length: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (value == null) return null;
+      if (value < 0) return { negativeValue: true };
+      const digits = value.toString().length;
+      return digits === length ? null : { digitLength: true };
+    };
+  }
 
   redirectTo(url: string) {
     console.log('Redirecting to:', url);

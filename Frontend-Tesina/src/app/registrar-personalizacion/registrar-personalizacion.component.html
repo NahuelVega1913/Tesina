@@ -5,7 +5,7 @@
     class="bg-sky-100 w-1/1 md:w-4/5 flex mx-auto flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
   >
     <p
-      class="font-bold text-4xl md:text-5xl text-center text-sky-950 pt-5 sm:mb-5 md:mt-5"
+      class="text-4xl md:text-5xl text-center text-sky-950 pt-5 sm:mb-5 md:mt-5 font-bold"
     >
       Customizacion
     </p>
@@ -27,9 +27,7 @@
           />
           @if(form.get('nombreCompleto')?.invalid &&
           form.get('nombreCompleto')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el Nombre
-          </div>
+          <div class="text-red-500">Complete el Nombre</div>
           }
         </div>
         <div>
@@ -47,9 +45,7 @@
             required
           />
           @if(form.get('dni')?.invalid && form.get('dni')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el DNI
-          </div>
+          <div class="text-red-500">Complete el DNI</div>
           }
         </div>
       </div>
@@ -69,9 +65,7 @@
             required
           />
           @if(form.get('auto')?.invalid && form.get('auto')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el Auto
-          </div>
+          <div class="text-red-500">Complete el Auto</div>
           }
         </div>
         <div>
@@ -89,9 +83,7 @@
             required
           />
           @if(form.get('modelo')?.invalid && form.get('modelo')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el Modelo
-          </div>
+          <div class="text-red-500">Complete el Modelo</div>
           }
         </div>
       </div>
@@ -103,13 +95,17 @@
           id="message"
           rows="4"
           formControlName="observacionesPrevias"
-          class="block p-2.5 w-full text-sm mb-5 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Escribe tu mensaje aqui..."
         ></textarea>
+        @if(form.get('observacionesPrevias')?.invalid &&
+        form.get('observacionesPrevias')?.touched){
+        <div class="text-red-500">Complete la descripcion</div>
+        }
       </div>
       <button
         type="submit"
-        class="bg-sky-800 hover:bg-sky-400 focus:ring-4 text-white focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+        class="bg-sky-800 hover:bg-sky-400 mt-4 focus:ring-4 text-white focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
       >
         Crear
       </button>
