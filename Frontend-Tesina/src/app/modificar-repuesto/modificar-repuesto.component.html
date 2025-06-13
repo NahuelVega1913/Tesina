@@ -225,20 +225,78 @@
             multiple
           />
           <div class="flex flex-row">
-            @for (image of repuesto.urlImages; track $index) { @if(image !=
-            null){
+            <!-- Imagen 1 -->
+            @if(selectedFiles[0]) {
             <div class="relative h-20 w-20 mt-2 ms-2">
-              <img src="{{ image }}" class="h-20 w-20 rounded-2xl" alt="" />
+              <img
+                [src]="getImageUrl(selectedFiles[0])"
+                class="h-20 w-20 rounded-2xl"
+                alt=""
+              />
               <button
                 type="button"
                 class="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center shadow hover:bg-red-800"
-                (click)="eliminarImagen($index)"
+                (click)="eliminarImagen(0)"
                 style="transform: translate(30%, -30%)"
               >
                 &times;
               </button>
             </div>
-            } }
+            }
+            <!-- Imagen 2 -->
+            @if(selectedFiles[1]) {
+            <div class="relative h-20 w-20 mt-2 ms-2">
+              <img
+                [src]="getImageUrl(selectedFiles[1])"
+                class="h-20 w-20 rounded-2xl"
+                alt=""
+              />
+              <button
+                type="button"
+                class="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center shadow hover:bg-red-800"
+                (click)="eliminarImagen(1)"
+                style="transform: translate(30%, -30%)"
+              >
+                &times;
+              </button>
+            </div>
+            }
+            <!-- Imagen 3 -->
+            @if(selectedFiles[2]) {
+            <div class="relative h-20 w-20 mt-2 ms-2">
+              <img
+                [src]="getImageUrl(selectedFiles[2])"
+                class="h-20 w-20 rounded-2xl"
+                alt=""
+              />
+              <button
+                type="button"
+                class="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center shadow hover:bg-red-800"
+                (click)="eliminarImagen(2)"
+                style="transform: translate(30%, -30%)"
+              >
+                &times;
+              </button>
+            </div>
+            }
+            <!-- Imagen 4 -->
+            @if(selectedFiles[3]) {
+            <div class="relative h-20 w-20 mt-2 ms-2">
+              <img
+                [src]="getImageUrl(selectedFiles[3])"
+                class="h-20 w-20 rounded-2xl"
+                alt=""
+              />
+              <button
+                type="button"
+                class="absolute top-0 right-0 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center shadow hover:bg-red-800"
+                (click)="eliminarImagen(3)"
+                style="transform: translate(30%, -30%)"
+              >
+                &times;
+              </button>
+            </div>
+            }
           </div>
         </div>
         <div class="w-full">

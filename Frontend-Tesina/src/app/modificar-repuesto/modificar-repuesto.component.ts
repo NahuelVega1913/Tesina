@@ -12,6 +12,14 @@ import { RespuestosService } from '../services/respuestos.service';
 import { NgClass } from '@angular/common';
 import { ProveedoresService } from '../services/proveedores.service';
 import Swal from 'sweetalert2';
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({ name: 'fileUrl', standalone: true })
+export class FileUrlPipe implements PipeTransform {
+  transform(file: File): string {
+    return URL.createObjectURL(file);
+  }
+}
 
 @Component({
   selector: 'app-modificar-repuesto',
@@ -26,7 +34,7 @@ export class ModificarRepuestoComponent {
   repuesto: any = {};
   lstProviders: any[] = [];
 
-  selectedFiles: File[] = [];
+  selectedFiles: (File | string)[] = [];
   constructor(private router: Router) {}
 
   form = new UntypedFormGroup({
@@ -55,12 +63,6 @@ export class ModificarRepuestoComponent {
     description: new UntypedFormControl('', []),
   });
 
-  onFileChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files) {
-      this.selectedFiles = Array.from(input.files);
-    }
-  }
   maxNumberValidator(max: number) {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
@@ -68,6 +70,12 @@ export class ModificarRepuestoComponent {
       const num = Number(value);
       return isNaN(num) || num > max ? { maxNumber: true } : null;
     };
+  }
+  getImageUrl(file: any): string {
+    if (file instanceof File) {
+      return URL.createObjectURL(file);
+    }
+    return file;
   }
   noNegativeValidator(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
@@ -88,8 +96,6 @@ export class ModificarRepuestoComponent {
   }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.getRepuesto();
     this.getProviders();
     console.log(this.repuesto.urlImages[0]);
@@ -98,7 +104,7 @@ export class ModificarRepuestoComponent {
   getRepuesto() {
     const id = localStorage.getItem('idRepuesto') || 0;
     const getSubscription = this.service.getSpareById(Number(id)).subscribe({
-      next: (res) => {
+      next: async (res) => {
         this.repuesto = res;
         this.form.patchValue({
           name: this.repuesto.name,
@@ -113,6 +119,30 @@ export class ModificarRepuestoComponent {
           city: this.repuesto.city,
           description: this.repuesto.description,
         });
+        // Convierte las imágenes URL en File usando fetch y Blob
+        if (Array.isArray(this.repuesto.urlImages)) {
+          this.selectedFiles = [];
+          for (let i = 0; i < this.repuesto.urlImages.length; i++) {
+            const url = this.repuesto.urlImages[i];
+            if (url) {
+              try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                // Extrae la extensión del archivo de la url o usa jpg por defecto
+                const extMatch = url.match(/\.(\w+)(\?|$)/);
+                const ext = extMatch ? extMatch[1] : 'jpg';
+                const file = new File([blob], `imagen${i + 1}.${ext}`, {
+                  type: blob.type,
+                });
+                this.selectedFiles.push(file);
+              } catch (e) {
+                // Si falla, ignora esa imagen
+              }
+            }
+          }
+        } else {
+          this.selectedFiles = [];
+        }
       },
       error: (err) => {
         console.log(err);
@@ -120,10 +150,53 @@ export class ModificarRepuestoComponent {
     });
   }
 
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      const newFiles = Array.from(input.files);
+      // Solo agrega los nuevos archivos si no están ya en selectedFiles (por nombre y tipo)
+      newFiles.forEach((file) => {
+        // Evita duplicados por nombre de archivo
+        if (
+          !this.selectedFiles.some(
+            (f) => f instanceof File && (f as File).name === file.name
+          )
+        ) {
+          this.selectedFiles.push(file);
+        }
+      });
+    }
+  }
+
   eliminarImagen(index: number) {
-    if (this.repuesto.urlImages && this.repuesto.urlImages[index]) {
-      this.repuesto.urlImages.splice(index, 1);
-      // Si necesitas notificar al backend la eliminación, aquí deberías hacerlo.
+    if (this.selectedFiles && this.selectedFiles[index]) {
+      this.selectedFiles.splice(index, 1);
+    }
+    // Si quieres que también se elimine del array original de urlImages para reflejar el cambio en el backend:
+    if (this.repuesto && Array.isArray(this.repuesto.urlImages)) {
+      // Busca si la imagen eliminada era una de las originales (comparando nombre o url)
+      // Si es un File creado desde una url, compara el nombre del archivo con la url original
+      const file = this.selectedFiles[index];
+      if (file instanceof File) {
+        // Busca el nombre generado en getRepuesto
+        const fileName = file.name;
+        // Busca la url correspondiente en urlImages
+        const urlIndex = this.repuesto.urlImages.findIndex((url: string) => {
+          // Extrae el nombre base de la url para comparar
+          const urlNameMatch = url.match(/([^\/?#]+)(?:\?|#|$)/i);
+          return urlNameMatch && fileName.includes(urlNameMatch[1]);
+        });
+        if (urlIndex !== -1) {
+          this.repuesto.urlImages.splice(urlIndex, 1);
+        }
+      }
+      // Si era un string (url) directamente
+      if (typeof file === 'string') {
+        const urlIndex = this.repuesto.urlImages.indexOf(file);
+        if (urlIndex !== -1) {
+          this.repuesto.urlImages.splice(urlIndex, 1);
+        }
+      }
     }
   }
 
@@ -143,10 +216,17 @@ export class ModificarRepuestoComponent {
       formData.append('category', this.form.value.category || '');
       formData.append('description', this.form.value.description || '');
 
-      // Adjuntar imágenes
-      this.selectedFiles.forEach((file, index) => {
-        formData.append(`image${index + 1}`, file);
-      });
+      // Siempre envía image1, image2, image3, image4 en orden, usando '' si no hay imagen
+      for (let i = 0; i < 4; i++) {
+        const file = this.selectedFiles[i];
+        if (file instanceof File) {
+          formData.append(`image${i + 1}`, file);
+        } else if (typeof file === 'string' && file) {
+          formData.append(`image${i + 1}`, file);
+        } else {
+          formData.append(`image${i + 1}`, '');
+        }
+      }
 
       const addSubscription = this.service.putSpare(formData).subscribe({
         next: () => {
