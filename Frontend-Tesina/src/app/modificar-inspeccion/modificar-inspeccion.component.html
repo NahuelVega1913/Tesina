@@ -4,7 +4,7 @@
   <div
     class="bg-sky-100 md:w-4/5 w-1/1 mx-auto flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
   >
-    <p class="font-bold text-sky-950 text-5xl text-center pt-5 sm:mb-5 md:mt-5">
+    <p class="text-sky-950 text-5xl text-center pt-5 sm:mb-5 md:mt-5 font-bold">
       Modificar Inspeccion
     </p>
     <form [formGroup]="form" (submit)="save()" class="p-10">
@@ -25,9 +25,7 @@
           />
           @if(form.get('nombreCompleto')?.invalid &&
           form.get('nombreCompleto')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el Nombre
-          </div>
+          <div class="text-red-500">Complete el Nombre</div>
           }
         </div>
         <div>
@@ -45,9 +43,7 @@
             readonly
           />
           @if(form.get('auto')?.invalid && form.get('auto')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el Auto
-          </div>
+          <div class="text-red-500">Complete el Auto</div>
           }
         </div>
       </div>
@@ -68,9 +64,7 @@
             readonly
           />
           @if(form.get('modelo')?.invalid && form.get('modelo')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el Modelo
-          </div>
+          <div class="text-red-500">Complete el Modelo</div>
           }
         </div>
       </div>
@@ -109,9 +103,7 @@
 
           @if(form.get('idEmpleado')?.value == "" &&
           form.get('idEmpleado')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Seleccione un Empleado
-          </div>
+          <div class="text-red-500">Seleccione un Empleado</div>
           }
         </div>
         }@else {
@@ -124,7 +116,7 @@
           <select
             id="countries"
             formControlName="idEmpleado"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
+            class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
           >
             @for (item of lstEmpleados; track $index) {
             <option [value]="item.id">
@@ -145,17 +137,14 @@
             formControlName="estadoGeneral"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
           >
-            <option value="" selected>Elige un Estado</option>
-            <option value="Bueno">Bueno</option>
+            <option value="Bueno" selected>Bueno</option>
             <option value="Bueno">Regular</option>
             <option value="Bueno">Malo</option>
             >
           </select>
           @if(form.get('estadoGeneral')?.value == "" &&
           form.get('estadoGeneral')?.touched){
-          <div class="text-sky-950 font-bold drop-shadow-md">
-            Complete el Estado
-          </div>
+          <div class="text-red-500">Complete el Estado</div>
           }
         </div>
         }
@@ -174,9 +163,7 @@
           placeholder="Escribe tu mensaje aqui..."
         ></textarea>
         @if (form.get('resultado')?.invalid && form.get('resultado')?.touched) {
-        <div class="text-sky-950 font-bold drop-shadow-md">
-          Complete el Resultado
-        </div>
+        <div class="text-red-500">Complete el Resultado</div>
         }
       </div>
       <div class="flex flex-col mt-3 m w-full justify-between">
@@ -193,9 +180,7 @@
         ></textarea>
         @if(form.get('recomendaciones')?.invalid &&
         form.get('recomendaciones')?.touched){
-        <div class="text-sky-950 font-bold drop-shadow-md">
-          Complete las recomendaciones
-        </div>
+        <div class="text-red-500">Complete las recomendaciones</div>
         }
       </div>
       <div class="mt-5">
@@ -213,9 +198,7 @@
           required=""
         />
         @if(form.get('cost')?.invalid && form.get('cost')?.touched){
-        <div class="text-sky-950 font-bold drop-shadow-md">
-          Complete el Costo
-        </div>
+        <div class="text-red-500">Complete el Costo</div>
         }
       </div>
       }
@@ -223,7 +206,7 @@
         type="submit"
         class="text-white mt-5 bg-sky-800 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
       >
-        Regitrar
+        Registrar
       </button>
     </form>
   </div>

@@ -1,9 +1,12 @@
 import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   FormsModule,
   ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
+  ValidationErrors,
+  Validators,
 } from '@angular/forms';
 import { EmpleadosService } from '../services/empleados.service';
 import { ServiciosService } from '../services/servicios.service';
@@ -31,12 +34,12 @@ export class ModificarInspeccionComponent {
     modelo: new UntypedFormControl('', []),
     observacionesPrevias: new UntypedFormControl('', []),
     idEmpleado: new UntypedFormControl('', []),
-    cost: new UntypedFormControl('', []),
+    cost: new UntypedFormControl('', [Validators.min(1)]),
     paymentStatus: new UntypedFormControl('', []),
     status: new UntypedFormControl('', []),
     type: new UntypedFormControl('', []),
     resultado: new UntypedFormControl('', []),
-    estadoGeneral: new UntypedFormControl('', []),
+    estadoGeneral: new UntypedFormControl('', [Validators.required]),
     recomendaciones: new UntypedFormControl('', []),
   });
   ngOnInit(): void {

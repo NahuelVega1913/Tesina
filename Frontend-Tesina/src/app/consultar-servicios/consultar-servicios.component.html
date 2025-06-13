@@ -1,4 +1,4 @@
-<div class="bg-gradient-to-bl to-sky-700 from-sky-100 min-h-screen">
+<div class="bg-sky-600 min-h-screen">
   <div class="bg-sky-100 m-5 mt-10 rounded-2xl shadow-lg">
     <form class="py-4 md:py-8 p-4">
       <div class="flex">
@@ -37,11 +37,11 @@
             (input)="filter()"
             id="search-dropdown"
             class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg rounded-s-gray-100 rounded-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Search"
+            placeholder="Vehiculo"
           />
           <button
             type="submit"
-            class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+            class="absolute top-0 end-0 p-2.5 h-full text-sm font-medium text-white bg-sky-800 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
           >
             <svg
               class="w-4 h-4"
@@ -80,7 +80,7 @@
       <div class="flex gap-6 p-5">
         @for (i of listFilteres; track $index) { @if(i.status == 'FINISHED' ) {
         <div
-          class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
+          class="min-w-[250px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
         >
           @if(i.type == 'INSPECTION') {
           <div
@@ -172,7 +172,7 @@
           <button
             (click)="moveTo(i.id, i.type)"
             type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            class="text-white bg-sky-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Ver
           </button>
@@ -180,7 +180,7 @@
           <button
             type="button"
             (click)="pagar(i.id)"
-            class="text-white mt-5 bg-green-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+            class="text-sky-800 mt-5 bg-sky-100 hover:bg-sky-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Pagar
           </button>
@@ -207,7 +207,7 @@
       <div class="flex gap-6 p-5">
         @for (i of listFilteres; track $index) { @if(i.status == 'PROCESS') {
         <div
-          class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
+          class="min-w-[250px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
         >
           @if(i.type == 'INSPECTION') {
           <div
@@ -298,7 +298,7 @@
           <button
             (click)="moveTo(i.id, i.type)"
             type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            class="text-white bg-sky-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Ver
           </button>
@@ -307,7 +307,7 @@
           <button
             (click)="redirectToProccess('/modificar-inspeccion', i.id)"
             type="button"
-            class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+            class="text-sky-800 mt-5 bg-sky-100 text-sky-900 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Finalizar
           </button>
@@ -315,7 +315,7 @@
           <button
             (click)="redirectToProccess('/modificar-reparacion', i.id)"
             type="button"
-            class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+            class="text-sky-800 mt-5 bg-sky-100 text-sky-900 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Finalizar
           </button>
@@ -323,7 +323,7 @@
           <button
             (click)="redirectToProccess('/modificar-customizacion', i.id)"
             type="button"
-            class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+            class="text-sky-800 mt-5 bg-sky-100 text-sky-900 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Finalizar
           </button>
@@ -343,7 +343,7 @@
       <div class="flex gap-6 p-5">
         @for (i of listFilteres; track $index) { @if(i.status == 'IN_QUEUE' ) {
         <div
-          class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
+          class="min-w-[250px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
         >
           @if(i.type == 'INSPECTION') {
           <div
@@ -435,7 +435,7 @@
           <button
             (click)="moveTo(i.id, i.type)"
             type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            class="text-white bg-sky-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Ver
           </button>
@@ -443,7 +443,7 @@
           <button
             (click)="redirectTo('/modificar-inspeccion', i.id)"
             type="button"
-            class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+            class="mt-5 bg-sky-100 text-sky-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Ingresar
           </button>
@@ -451,7 +451,7 @@
           <button
             (click)="redirectTo('/modificar-reparacion', i.id)"
             type="button"
-            class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+            class="text-sky-800 mt-5 bg-sky-100 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Ingresar
           </button>
@@ -459,7 +459,7 @@
           <button
             (click)="redirectTo('/modificar-customizacion', i.id)"
             type="button"
-            class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+            class="mt-5 bg-sky-100 text-sky-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Ingresar
           </button>
@@ -478,7 +478,7 @@
       <div class="flex gap-6 p-5">
         @for (i of listFilteres; track $index) { @if(i.status == 'WAITING' ) {
         <div
-          class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
+          class="min-w-[250px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
         >
           @if(i.type == 'INSPECTION') {
           <div
@@ -570,7 +570,7 @@
           <button
             (click)="moveTo(i.id, i.type)"
             type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            class="text-white bg-sky-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Ver
           </button>
@@ -578,7 +578,7 @@
           <button
             (click)="registeEntry(i.id)"
             type="button"
-            class="text-white mt-5 bg-yellow-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+            class="mt-5 bg-sky-100 text-sky-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Ingresar
           </button>
@@ -596,7 +596,7 @@
       <div class="flex gap-6 p-5">
         @for (i of listFilteres; track $index) { @if(i.status == 'WITHDRAW' ) {
         <div
-          class="min-w-[350px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
+          class="min-w-[250px] sm:min-w-[220px] bg-white p-4 rounded-2xl shadow hover:shadow-2xl transition duration-300 ease-in-out"
         >
           @if(i.type == 'INSPECTION') {
           <div
@@ -688,7 +688,7 @@
           <button
             (click)="moveTo(i.id, i.type)"
             type="button"
-            class="text-white mt-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            class="text-white mt-4 bg-sky-800 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
           >
             Ver
           </button>
