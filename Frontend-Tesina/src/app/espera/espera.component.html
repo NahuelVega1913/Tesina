@@ -1,4 +1,4 @@
-<div class="min-h-screen overflow-hidden bg-gray-800">
+<div class="min-h-screen overflow-hidden bg-sky-100">
   @if (status == 'WAITING') {
   <div class="w-full p-10 flex flex-col h-screen justify-center bg-sky-50">
     <p class="font-bold text-4xl text-center text-sky-950">
@@ -75,6 +75,9 @@
     <div class="text-center text-sky-500 font-semibold text-2xl mt-10">
       Pronto sera revisado por nuestros mejores profesionales
     </div>
+    <p class="text-center bg-sky-100 text-sky-950 font-bold text-lg mb-10">
+      Tenes alguna duda o incoveniente? Comunicate al +53 351 7466695
+    </p>
   </div>
   }
   <!--EN COLA-->
@@ -146,6 +149,9 @@
     <div class="text-center text-sky-500 font-semibold text-2xl mt-5">
       En cuanto terminemos con el proceso, le avisaremos
     </div>
+    <p class="text-center bg-sky-100 text-sky-950 font-bold text-lg mb-10">
+      Tenes alguna duda o incoveniente? Comunicate al +53 351 7466695
+    </p>
   </div>
   }
   <!--EN PROCESO-->
@@ -229,20 +235,25 @@
     <div
       class="text-sky-950 bg-white rounded-2xl p-10 flex flex-col justify-center shadow-lg mt-5"
     >
-      <div class="font-normal text-md mt-1">Auto: {{ Object.auto }}</div>
-      <div class="font-normal text-md mt-1">Modelo: {{ Object.modelo }}</div>
       <div class="font-normal text-md mt-1">
-        Observaciones Previas: {{ Object.observacionesPrevias }}
+        <strong>Auto:</strong> {{ Object.auto }}
+      </div>
+      <div class="font-normal text-md mt-1">
+        <strong>Modelo:</strong> {{ Object.modelo }}
+      </div>
+      <div class="font-normal text-md mt-1">
+        <strong> Observaciones Previas:</strong>
+        {{ Object.observacionesPrevias }}
       </div>
       @if(Object.type == 'INSPECTION'){
       <div class="font-normal text-md mt-1">
-        Estado General: {{ Object.estadoGeneral }}
+        <strong>Estado General:</strong> {{ Object.estadoGeneral }}
       </div>
       <div class="font-normal text-md mt-1">
-        Resultado: {{ Object.resultado }}
+        <strong> Resultado:</strong> {{ Object.resultado }}
       </div>
       <div class="font-normal text-md mt-1">
-        Recomendaciones: {{ Object.recomendaciones }}
+        <strong> Recomendaciones:</strong> {{ Object.recomendaciones }}
       </div>
       }
       <!--INSPECTION-->
@@ -250,27 +261,30 @@
       <!--REPAIR-->
       @if(Object.type == 'REPAIR'){
       <div class="font-normal text-md mt-1">
-        Diagnostico Tecnico: {{ Object.techniclaDiagnosis }}
+        <strong> Diagnostico Tecnico:</strong> {{ Object.techniclaDiagnosis }}
       </div>
       <div class="font-normal text-md mt-1">
-        Tareas Realizadas: {{ Object.tasksPerformed }}
+        <strong>Tareas Realizadas: </strong>{{ Object.tasksPerformed }}
       </div>
       <div class="font-normal text-md mt-1 text-">
-        Repuestos Usados: {{ Object.tasksPerformed }}
+        <strong>Repuestos Usados: </strong> {{ Object.tasksPerformed }}
       </div>
       }
       <!--REPAIR-->
       <!--CUSTOMIZATION-->
       @if(Object.type == 'CUSTOMIZATION'){
-      <div class="text-white font-normal text-md mt-1">
-        Tareas Realizadas: {{ Object.taskRealized }}
+      <div class="font-normal text-md mt-1">
+        <strong>Tareas Realizadas:</strong> {{ Object.taskRealized }}
       </div>
-      <div class="text-white font-normal text-md mt-1">
-        Repuestos Usados: {{ Object.materialsUsed }}
+      <div class="font-normal text-md mt-1">
+        <strong>Repuestos Usados:</strong> {{ Object.materialsUsed }}
       </div>
 
       } @if(Object.paymentStatus =='UNPAID'){
-      <div class="font-bold text-xl mt-3">Costo Total: ${{ Object.cost }}</div>
+      <div class="flex flex-row w-full justify-between">
+        <p class="font-bold text-xl mt-3">Costo Total:</p>
+        <p class="font-bold text-xl mt-3">${{ Object.cost }}</p>
+      </div>
       <div (click)="pagarServicio()" id="wallet_container"></div>
       }@else {
       <div class="font-bold text-center text-xl mt-3">
@@ -279,6 +293,9 @@
       <div class="font-bold text-center text-sm mt-3">Te esperamos!!</div>
       }
     </div>
+    <p class="text-center bg-sky-100 text-sky-950 font-bold text-lg mb-10">
+      Tenes alguna duda o incoveniente? Comunicate al +53 351 7466695
+    </p>
   </div>
   }
   <!--FINALIZADO-->

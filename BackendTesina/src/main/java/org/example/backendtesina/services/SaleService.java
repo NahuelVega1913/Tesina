@@ -1,5 +1,7 @@
 package org.example.backendtesina.services;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mercadopago.client.preference.PreferenceBackUrlsRequest;
 import com.mercadopago.client.preference.PreferenceClient;
 import com.mercadopago.client.preference.PreferenceItemRequest;
@@ -93,9 +95,24 @@ public class SaleService {
         return null;
     }
 
-    public String confirmPayment(String s){
+    public String confirmPayment(String webhookPayload){
+        try {
+            // Convertir el string recibido a un objeto JSON
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = objectMapper.readTree(webhookPayload);
 
-        return s;
+            // Extraer el paymentId del JSON (ajusta el campo según la estructura del webhook)
+            String paymentId = jsonNode.get("data").get("id").asText();
+
+            // Consultar el estado del pago en la API de Mercado Pago
+            String paymentStatus = consultarPago(paymentId);
+
+            // Retornar el estado del pago o cualquier información relevante
+            return paymentStatus;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error al procesar el webhook";
+        }
     }
 
     @Transactional
