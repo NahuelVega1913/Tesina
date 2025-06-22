@@ -43,6 +43,15 @@ public class ServiceService {
     EmployeeRepository employeeRepository;
     @Autowired
     JwtService jwtService;
+    public void aceptBudget(){
+
+    }
+    public void declineBudget(){
+
+    }
+    public void registerBudget(){
+
+    }
 
     public InspectionEntity registerInspection(PostInspection inspection,String token){
         String email = jwtService.getEmailFromToken(token);
