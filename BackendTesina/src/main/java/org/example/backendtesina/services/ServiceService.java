@@ -59,7 +59,7 @@ public class ServiceService {
         }
         service.setStatus(ServiceStatus.CANCELED); // Cambia el estado a "DECLINED"
         repository.save(service); // Guarda los cambios
-        return null;
+        return service;
     }
     public ServiceEntity registerBudget(int id, Double budget){
         ServiceEntity service = repository.findById(id).orElse(null);

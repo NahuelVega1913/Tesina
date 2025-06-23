@@ -117,9 +117,9 @@ public class ServicesController {
     public ResponseEntity<?> postBudget(@PathVariable int id, @RequestBody Double budget) {
         ServiceEntity response = service.registerBudget(id, budget);
         if (response == null) {
-            return ResponseEntity.badRequest().body("Error: Servicio no encontrado");
+            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok().build();
     }
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @PostMapping(value = "acceptBudget/{id}")
