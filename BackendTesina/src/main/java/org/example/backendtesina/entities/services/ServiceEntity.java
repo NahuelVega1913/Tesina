@@ -33,7 +33,8 @@ public class ServiceEntity {
     private Double cost;
     @ManyToMany
     List<EmployeeEntity> empleados;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "user_id") // o el nombre de tu columna en la base
     private UserEntity client;
 
     public Double getBudget() {

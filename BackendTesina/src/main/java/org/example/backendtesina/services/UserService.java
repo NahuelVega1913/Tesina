@@ -66,7 +66,7 @@ public class UserService {
         if(entity.getServicios().isEmpty()){
             information.setHasService(false);
         }
-        else if (entity.getServicios().get((entity.getServicios().size())-1).getStatus() != ServiceStatus.CANCELED){
+        else if (entity.getServicios().get((entity.getServicios().size())-1).getStatus() != ServiceStatus.CANCELED && entity.getServicios().get((entity.getServicios().size())-1).getStatus() != ServiceStatus.WITHDRAW ){
             information.setHasService(true);
         }else{
             information.setHasService(false);

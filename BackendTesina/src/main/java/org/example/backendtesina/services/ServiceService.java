@@ -82,9 +82,9 @@ public class ServiceService {
 
     public InspectionEntity registerInspection(PostInspection inspection,String token){
         String email = jwtService.getEmailFromToken(token);
-        UserEntity user = userRepository.findByEmail(email).get();
-        InspectionEntity entity = new InspectionEntity();
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(); // siempre mejor evitar get()
 
+        InspectionEntity entity = new InspectionEntity();
         entity.setAuto(inspection.getAuto());
         entity.setType(TypeOfService.INSPECTION);
         entity.setPaymentStatus(PaymentStatus.UNPAID_DEPOSIT);
@@ -93,22 +93,18 @@ public class ServiceService {
         entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
         entity.setNombreCompleto(inspection.getNombreCompleto());
         entity.setStatus(ServiceStatus.BUDGET);
-        entity.setClient(user);
-        if(user.getServicios().isEmpty()){
-            List<ServiceEntity> servicios = new ArrayList<>();
-            servicios.add(entity);
-            user.setServicios(servicios);
-        }else{
-            user.getServicios().add(entity);
-        }
+        entity.setClient(user); // RELACIÓN CORRECTA
 
-        repository.save(entity);
+        // Ya no hace falta tocar la lista de servicios manualmente
+        repository.save(entity); // Hibernate se encarga de todo gracias al @ManyToOne
+
         return entity;
     }
 
     public RepairEntity registerRepair(PostInspection inspection, String token){
         String email = jwtService.getEmailFromToken(token);
-        UserEntity user = userRepository.findByEmail(email).get();
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(); // siempre mejor evitar get()
+
         RepairEntity entity = new RepairEntity();
         entity.setAuto(inspection.getAuto());
         entity.setType(TypeOfService.REPAIR);
@@ -119,20 +115,16 @@ public class ServiceService {
         entity.setNombreCompleto(inspection.getNombreCompleto());
         entity.setStatus(ServiceStatus.BUDGET);
         entity.setClient(user);
-        if(user.getServicios().isEmpty()){
-            List<ServiceEntity> servicios = new ArrayList<>();
-            servicios.add(entity);
-            user.setServicios(servicios);
-        }else{
-            user.getServicios().add(entity);
-        }
 
-        repository.save(entity);
+
+        repository.save(entity); // Hibernate se encarga de todo gracias al @ManyToOne
+
         return entity;
     }
     public CustomizationEntity registerCustomization(PostInspection inspection, String token){
         String email = jwtService.getEmailFromToken(token);
-        UserEntity user = userRepository.findByEmail(email).get();
+        UserEntity user = userRepository.findByEmail(email).orElseThrow();
+
         CustomizationEntity entity = new CustomizationEntity();
         entity.setAuto(inspection.getAuto());
         entity.setType(TypeOfService.CUSTOMIZATION);
@@ -143,15 +135,9 @@ public class ServiceService {
         entity.setNombreCompleto(inspection.getNombreCompleto());
         entity.setStatus(ServiceStatus.BUDGET);
         entity.setClient(user);
-        if(user.getServicios().isEmpty()){
-            List<ServiceEntity> servicios = new ArrayList<>();
-            servicios.add(entity);
-            user.setServicios(servicios);
-        }else{
-            user.getServicios().add(entity);
-        }
 
-        repository.save(entity);
+        repository.save(entity); // Hibernate se encarga de todo gracias al @ManyToOne
+
         return entity;
     }
 

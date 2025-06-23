@@ -36,7 +36,7 @@ public class UserEntity implements UserDetails {
     private String address;
     @Enumerated(EnumType.STRING)
     private RoleEntity role;
-    @OneToMany
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ServiceEntity> servicios;
 
     @OneToOne(mappedBy = "user")
