@@ -88,6 +88,10 @@ export class ConsultarServiciosComponent {
       this.router.navigate(['/consultar-inspeccion']);
     }
   }
+  moveToBudget(id: number) {
+    localStorage.setItem('idServicio', id.toString());
+    this.router.navigate(['/generar-presupuesto']);
+  }
   retireCar(id: number) {
     const getSubscription = this.service.retireCar(id).subscribe({
       next: (res) => {

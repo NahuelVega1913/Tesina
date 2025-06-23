@@ -1,0 +1,114 @@
+<div
+  class="bg-gradient-to-tr from-sky-700 to-sky-200 min-h-screen flex flex-col justify-center align-middle h-full p-5 md:p-10"
+>
+  <div
+    class="bg-sky-100 md:w-4/5 w-1/1 mx-auto flex flex-col h-full rounded-xl border-rounded-lg shadow-lg shadow-sky-950/50"
+  >
+    <p class="font-bold text-sky-950 text-5xl text-center pt-5 sm:mb-5 md:mt-5">
+      Servicio
+    </p>
+    <form [formGroup]="form" class="p-10">
+      <div class="grid gap-6 mb-6 md:grid-cols-2">
+        <div>
+          <label
+            for="first_name"
+            class="block mb-2 text-sm font-medium text-sky-950"
+            >Nombre del Cliente</label
+          >
+          <input
+            type="text"
+            formControlName="nombreCompleto"
+            id="first_name"
+            class="bg-gray-200 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
+            placeholder="Juan Perez"
+            readonly
+          />
+          @if(form.get('nombreCompleto')?.invalid &&
+          form.get('nombreCompleto')?.touched){
+          <div class="text-sky-950 font-bold drop-shadow-md">
+            Complete el Nombre
+          </div>
+          }
+        </div>
+        <div>
+          <label
+            for="first_name"
+            class="block mb-2 text-sm font-medium text-sky-950"
+            >Auto</label
+          >
+          <input
+            type="text"
+            formControlName="auto"
+            id="first_name"
+            class="bg-gray-200 border border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
+            placeholder="Fiat 600"
+            readonly
+          />
+          @if(form.get('auto')?.invalid && form.get('auto')?.touched){
+          <div class="text-sky-950 font-bold drop-shadow-md">
+            Complete el Auto
+          </div>
+          }
+        </div>
+      </div>
+
+      <div class="grid gap-6 mb-6 md:grid-cols-2">
+        <div>
+          <label
+            for="last_name"
+            class="block mb-2 text-sm font-medium text-sky-950"
+            >Modelo</label
+          >
+          <input
+            type="number"
+            formControlName="modelo"
+            id="last_name"
+            class="bg-gray-200 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 j"
+            placeholder="2004"
+            readonly
+          />
+          @if(form.get('modelo')?.invalid && form.get('modelo')?.touched){
+          <div class="text-sky-950 font-bold drop-shadow-md">
+            Complete el Modelo
+          </div>
+          }
+        </div>
+      </div>
+      <div class="flex flex-col m w-full justify-between">
+        <label for="message" class="block mb-2 text-sm font-medium text-sky-950"
+          >Observaciones Previas</label
+        >
+        <textarea
+          id="message"
+          rows="4"
+          formControlName="observacionesPrevias"
+          class="block p-2.5 h-auto w-full text-sm mb-5 text-gray-900 bg-gray-200 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Escribe tu mensaje aqui..."
+          readonly
+        ></textarea>
+      </div>
+      <div>
+        <label for="budget" class="block mb-2 text-sm font-medium text-sky-950"
+          >Presupuesto</label
+        >
+        <input
+          type="number"
+          formControlName="budget"
+          id="budget"
+          class="border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          placeholder=""
+        />
+        @if(form.get('budget')?.invalid && form.get('budget')?.touched){
+        <div class="text-sky-950">Complete el presupuesto</div>
+        }
+      </div>
+      <button
+        type="submit"
+        (click)="registerBudget()"
+        class="text-white mt-5 bg-sky-800 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+      >
+        Registrar
+      </button>
+    </form>
+  </div>
+</div>

@@ -18,6 +18,7 @@ public class ServiceEntity {
     private int id;
     private String nombreCompleto;
     private String observacionesPrevias;
+    private Double budget;
     private String auto;
     private int modelo;
     @Enumerated(EnumType.STRING)
@@ -34,6 +35,14 @@ public class ServiceEntity {
     List<EmployeeEntity> empleados;
     @OneToOne
     private UserEntity client;
+
+    public Double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(Double budget) {
+        this.budget = budget;
+    }
 
     public int getId() {
         return id;

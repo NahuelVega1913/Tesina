@@ -8,6 +8,24 @@ export class ServiciosService {
   private readonly http: HttpClient = inject(HttpClient);
 
   constructor() {}
+  registerBudget(id: number, budget: number) {
+    console.log(
+      'Registering budget for service ID:',
+      id,
+      'with budget:',
+      budget
+    );
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.post<any>(
+      `http://localhost:8080/services/postbudget/${id}`,
+      budget,
+      { headers }
+    );
+  }
 
   getServiceStatus() {
     return this.http.get<any>(

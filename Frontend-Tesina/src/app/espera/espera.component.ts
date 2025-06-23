@@ -109,6 +109,8 @@ export class EsperaComponent implements AfterViewInit {
       },
     });
   }
+  aceptarPresupuesto() {}
+  rechazarPresupuesto() {}
 
   getUserInformation() {
     this.service.getServiceStatus().subscribe({

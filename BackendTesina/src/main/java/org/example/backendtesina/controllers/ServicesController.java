@@ -113,6 +113,35 @@ public class ServicesController {
         return ResponseEntity.ok(lst);
     }
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping("postbudget/{id}")
+    public ResponseEntity<?> postBudget(@PathVariable int id, @RequestBody Double budget) {
+        ServiceEntity response = service.registerBudget(id, budget);
+        if (response == null) {
+            return ResponseEntity.badRequest().body("Error: Servicio no encontrado");
+        }
+        return ResponseEntity.ok(response);
+    }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping(value = "acceptBudget/{id}")
+    public ResponseEntity<?> acceptBudget(@PathVariable int id) {
+        ServiceEntity response = service.aceptBudget(id);
+        if (response == null) {
+            return ResponseEntity.badRequest().body("Error: Servicio no encontrado");
+        }
+        return ResponseEntity.ok(response);
+    }
+
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping(value = "declineBudget/{id}")
+    public ResponseEntity<?> declineBudget(@PathVariable int id) {
+        ServiceEntity response = service.declineBudget(id);
+        if (response == null) {
+            return ResponseEntity.badRequest().body("Error: Servicio no encontrado");
+        }
+        return ResponseEntity.ok(response);
+    }
+
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @PostMapping(value = "finishInspection")
     public ResponseEntity<?> finishInspection(@RequestBody GetInspection inspection){
 

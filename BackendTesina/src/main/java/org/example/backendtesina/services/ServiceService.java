@@ -43,14 +43,33 @@ public class ServiceService {
     EmployeeRepository employeeRepository;
     @Autowired
     JwtService jwtService;
-    public void aceptBudget(){
-        //TODO
+    public ServiceEntity aceptBudget(int id){
+        ServiceEntity service = repository.findById(id).orElse(null);
+        if (service == null) {
+            return null; // Si no se encuentra el servicio, retorna null
+        }
+        service.setStatus(ServiceStatus.WAITING); // Cambia el estado a "APPROVED"
+        repository.save(service); // Guarda los cambios
+        return service;
     }
-    public void declineBudget(){
-        //TODO
+    public ServiceEntity declineBudget(int id){
+        ServiceEntity service = repository.findById(id).orElse(null);
+        if (service == null) {
+            return null; // Si no se encuentra el servicio, retorna null
+        }
+        service.setStatus(ServiceStatus.CANCELED); // Cambia el estado a "DECLINED"
+        repository.save(service); // Guarda los cambios
+        return null;
     }
-    public void registerBudget(){
-        //TODO
+    public ServiceEntity registerBudget(int id, Double budget){
+        ServiceEntity service = repository.findById(id).orElse(null);
+        if (service == null) {
+            return null; // Si no se encuentra el servicio, retorna null
+        }
+        service.setBudget(budget); // Asigna el presupuesto al servicio
+        service.setStatus(ServiceStatus.DECIDING); // Cambia el estado a "BUDGET"
+        repository.save(service); // Guarda los cambios en la base de datos
+        return service;
     }
 
     public InspectionEntity registerInspection(PostInspection inspection,String token){
