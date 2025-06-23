@@ -128,7 +128,7 @@ public class ServicesController {
         if (response == null) {
             return ResponseEntity.badRequest().body("Error: Servicio no encontrado");
         }
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
@@ -138,7 +138,7 @@ public class ServicesController {
         if (response == null) {
             return ResponseEntity.badRequest().body("Error: Servicio no encontrado");
         }
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")

@@ -57,8 +57,16 @@ public class ServiceService {
         if (service == null) {
             return null; // Si no se encuentra el servicio, retorna null
         }
+
         service.setStatus(ServiceStatus.CANCELED); // Cambia el estado a "DECLINED"
-        repository.save(service); // Guarda los cambios
+        UserEntity user = service.getClient();
+        List<ServiceEntity> lst = user.getServicios();
+        for (ServiceEntity s :lst){
+            if(s.getId() == service.getId()){
+                s = null;
+            }
+        }
+        userRepository.save(user);
         return service;
     }
     public ServiceEntity registerBudget(int id, Double budget){
@@ -91,9 +99,7 @@ public class ServiceService {
             servicios.add(entity);
             user.setServicios(servicios);
         }else{
-            List<ServiceEntity> servicios = user.getServicios();
-            servicios.add(entity);
-            user.setServicios(servicios);
+            user.getServicios().add(entity);
         }
 
         repository.save(entity);
@@ -118,9 +124,7 @@ public class ServiceService {
             servicios.add(entity);
             user.setServicios(servicios);
         }else{
-            List<ServiceEntity> servicios = user.getServicios();
-            servicios.add(entity);
-            user.setServicios(servicios);
+            user.getServicios().add(entity);
         }
 
         repository.save(entity);
@@ -144,9 +148,7 @@ public class ServiceService {
             servicios.add(entity);
             user.setServicios(servicios);
         }else{
-            List<ServiceEntity> servicios = user.getServicios();
-            servicios.add(entity);
-            user.setServicios(servicios);
+            user.getServicios().add(entity);
         }
 
         repository.save(entity);

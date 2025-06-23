@@ -134,7 +134,12 @@ export class EsperaComponent implements AfterViewInit {
         });
       },
       error: (err) => {
-        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al registrar la respuesta',
+          text: 'Ocurrió un error al registrar la respuesta.',
+          confirmButtonColor: '#3085d6',
+        });
       },
     });
   }
@@ -149,7 +154,12 @@ export class EsperaComponent implements AfterViewInit {
         });
       },
       error: (err) => {
-        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al registrar la respuesta',
+          text: 'Ocurrió un error al registrar la respuesta.',
+          confirmButtonColor: '#3085d6',
+        });
       },
     });
   }
