@@ -44,13 +44,13 @@ public class ServiceService {
     @Autowired
     JwtService jwtService;
     public void aceptBudget(){
-
+        //TODO
     }
     public void declineBudget(){
-
+        //TODO
     }
     public void registerBudget(){
-
+        //TODO
     }
 
     public InspectionEntity registerInspection(PostInspection inspection,String token){
@@ -65,7 +65,7 @@ public class ServiceService {
         entity.setModelo(inspection.getModelo());
         entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
         entity.setNombreCompleto(inspection.getNombreCompleto());
-        entity.setStatus(ServiceStatus.WAITING);
+        entity.setStatus(ServiceStatus.BUDGET);
         entity.setClient(user);
         if(user.getServicios().isEmpty()){
             List<ServiceEntity> servicios = new ArrayList<>();
@@ -92,7 +92,7 @@ public class ServiceService {
         entity.setModelo(inspection.getModelo());
         entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
         entity.setNombreCompleto(inspection.getNombreCompleto());
-        entity.setStatus(ServiceStatus.WAITING);
+        entity.setStatus(ServiceStatus.BUDGET);
         entity.setClient(user);
         if(user.getServicios().isEmpty()){
             List<ServiceEntity> servicios = new ArrayList<>();
@@ -118,7 +118,7 @@ public class ServiceService {
         entity.setModelo(inspection.getModelo());
         entity.setObservacionesPrevias(inspection.getObservacionesPrevias());
         entity.setNombreCompleto(inspection.getNombreCompleto());
-        entity.setStatus(ServiceStatus.WAITING);
+        entity.setStatus(ServiceStatus.BUDGET);
         entity.setClient(user);
         if(user.getServicios().isEmpty()){
             List<ServiceEntity> servicios = new ArrayList<>();
