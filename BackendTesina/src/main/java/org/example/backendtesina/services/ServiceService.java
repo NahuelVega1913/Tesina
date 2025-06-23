@@ -307,6 +307,7 @@ public class ServiceService {
             entity.setCost(inspection.getCost());
             entity.setId(inspection.getId());
             entity.setDateExit(inspection.getDateExit());
+            entity.setBudget(inspection.getBudget());
 
 
             if(!inspection.getEmpleados().isEmpty()) {
@@ -344,6 +345,7 @@ public class ServiceService {
             entity.setStatus(inspection.getStatus());
             entity.setCost(inspection.getCost());
             entity.setId(inspection.getId());
+            entity.setBudget(inspection.getBudget());
             entity.setDateExit(inspection.getDateExit());
             if(!inspection.getEmpleados().isEmpty()) {
                 List<GetEmployee> lstEmployee = new ArrayList<>();
@@ -376,6 +378,7 @@ public class ServiceService {
             entity.setNombreCompleto(inspection.getNombreCompleto());
             entity.setStatus(inspection.getStatus());
             entity.setCost(inspection.getCost());
+            entity.setBudget(inspection.getBudget());
             entity.setId(inspection.getId());
             entity.setDateExit(inspection.getDateExit());
             if(!inspection.getEmpleados().isEmpty()) {
@@ -409,6 +412,7 @@ public class ServiceService {
             get.setDateExit(s.getDateExit());
             get.setType(s.getType().toString());
             get.setModelo(s.getModelo());
+            get.setBudget(s.getBudget());
             if(!s.getEmpleados().isEmpty()) {
                 List<GetEmployee> lstEmployee = new ArrayList<>();
                 for (EmployeeEntity e:s.getEmpleados()){

@@ -15,6 +15,7 @@ public class GetServices {
     private String auto;
     private int id;
     private int modelo;
+    private double budget;
     private String type;
     private ServiceStatus status;
     private PaymentStatus paymentStatus;
@@ -136,5 +137,13 @@ public class GetServices {
 
     public void setIdEmpleado(int idEmpleado) {
         this.idEmpleado = idEmpleado;
+    }
+
+    public double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(double budget) {
+        this.budget = budget;
     }
 }
