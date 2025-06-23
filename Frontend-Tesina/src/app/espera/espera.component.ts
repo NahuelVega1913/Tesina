@@ -8,6 +8,7 @@ import { UsuarioService } from '../services/usuario.service';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { MercadoPagoService } from '../services/mercado-pago.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-espera',
@@ -109,8 +110,6 @@ export class EsperaComponent implements AfterViewInit {
       },
     });
   }
-  aceptarPresupuesto() {}
-  rechazarPresupuesto() {}
 
   getUserInformation() {
     this.service.getServiceStatus().subscribe({
@@ -118,6 +117,36 @@ export class EsperaComponent implements AfterViewInit {
         this.status = res.status;
         this.id = res.id;
         this.getServicio();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  aceptBudget() {
+    const getSubscription = this.service.aceptBudget(this.id).subscribe({
+      next: (res) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Respuesta registrada',
+          text: 'La respuesta se registro correctamente.',
+          confirmButtonColor: '#3085d6',
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  declineBudget() {
+    const getSubscription = this.service.declineBudget(this.id).subscribe({
+      next: (res) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Respuesta registrada',
+          text: 'La respuesta se registro correctamente.',
+          confirmButtonColor: '#3085d6',
+        });
       },
       error: (err) => {
         console.log(err);

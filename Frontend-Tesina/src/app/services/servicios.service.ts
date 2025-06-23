@@ -27,6 +27,31 @@ export class ServiciosService {
     );
   }
 
+  aceptBudget(id: number) {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.post<any>(
+      `http://localhost:8080/services/acceptBudget/` + id,
+      {},
+      { headers }
+    );
+  }
+  declineBudget(id: number) {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.post<any>(
+      `http://localhost:8080/services/declineBudget/` + id,
+      {},
+      { headers }
+    );
+  }
+
   getServiceStatus() {
     return this.http.get<any>(
       `http://localhost:8080/services/getStatusService`,
