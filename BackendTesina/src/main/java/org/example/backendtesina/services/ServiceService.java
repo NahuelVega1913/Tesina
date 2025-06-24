@@ -26,9 +26,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ServiceService {
@@ -43,6 +47,15 @@ public class ServiceService {
     EmployeeRepository employeeRepository;
     @Autowired
     JwtService jwtService;
+    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+
+
+    public void programarTareaDesdeAhora(ServiceEntity service) {
+      if(service.getStatus().equals(ServiceStatus.DECIDING)) {
+          long delay = Duration.ofDays(5).toSeconds(); // 5 días en segundos
+          declineBudget(service.getId());
+      }
+    }
     public ServiceEntity aceptBudget(int id){
         ServiceEntity service = repository.findById(id).orElse(null);
         if (service == null) {

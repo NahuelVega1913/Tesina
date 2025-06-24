@@ -132,6 +132,7 @@
 >
   <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
     <ul class="space-y-2 font-medium">
+      @if(rol == 'ADMIN' || rol == 'SUPERADMIN'){
       <li
         [routerLink]="'/consultarServicios'"
         routerLinkActive="text-blue-900 font-bold bg-gray-200 rounded-2xl"
@@ -158,7 +159,7 @@
           <span class="flex-1 ms-3 whitespace-nowrap">Servicios</span>
         </a>
       </li>
-      @if(rol == 'USER' && haveService == false){
+      } @if(rol == 'USER' && haveService == false){
       <li
         [routerLink]="'/servicios'"
         routerLinkActive="text-blue-900 font-bold bg-gray-200 rounded-2xl"

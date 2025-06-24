@@ -32,6 +32,7 @@ export class LoginComponent {
         localStorage.setItem('name', response.name);
         localStorage.setItem('lastname', response.lastname);
         localStorage.setItem('role', response.role);
+        localStorage.setItem('firstTime', 'true');
 
         this.router.navigate(['']).then(() => {
           location.reload(); // Fuerza que todo se reinicialice

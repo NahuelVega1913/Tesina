@@ -58,6 +58,17 @@ export class InicioComponent {
         console.log(res);
         this.notificaciones = res.notifications;
         this.haveService = res.hasService;
+        if (localStorage.getItem('firstTime') == 'true') {
+          if (this.rol == 'USER' && !this.haveService) {
+            this.router.navigate(['servicios']);
+          } else if (this.rol == 'USER' && this.haveService) {
+            this.router.navigate(['espera']);
+          }
+          if (this.rol == 'ADMIN') {
+            this.router.navigate(['consultarServicios']);
+          }
+          localStorage.setItem('firstTime', 'false');
+        }
       },
       error: (err) => {
         console.log(err);
