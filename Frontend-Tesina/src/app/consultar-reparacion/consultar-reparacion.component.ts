@@ -8,6 +8,7 @@ import {
 import Swal from 'sweetalert2';
 import { ServiciosService } from '../services/servicios.service';
 import { EmpleadosService } from '../services/empleados.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-consultar-reparacion',
@@ -18,6 +19,7 @@ import { EmpleadosService } from '../services/empleados.service';
 export class ConsultarReparacionComponent {
   private serviceEmpleados: EmpleadosService = inject(EmpleadosService);
   private service: ServiciosService = inject(ServiciosService);
+  constructor(private router: Router) {}
 
   lstEmpleados: any[] = [];
   status: string = '';
@@ -86,6 +88,42 @@ export class ConsultarReparacionComponent {
       error: (err) => {
         console.log(err);
       },
+    });
+  }
+  cancelService() {
+    const id = localStorage.getItem('idServicio') || 0;
+    Swal.fire({
+      title: 'Esta seguro de esta accion?',
+      showDenyButton: true,
+      confirmButtonText: 'Si',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        const addSubscription = this.service
+          .cancelService(Number(id))
+          .subscribe({
+            next: () => {
+              Swal.fire({
+                icon: 'success',
+                title: '¡Servicio Modificado!',
+                text: 'El servicio fue modificado exitosamente',
+                confirmButtonColor: '#3085d6',
+              });
+
+              this.router.navigate(['/consultarServicios']);
+            },
+            error: (err) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocurrio un error al modificar el servicio',
+              });
+            },
+          });
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info');
+      }
     });
   }
 }

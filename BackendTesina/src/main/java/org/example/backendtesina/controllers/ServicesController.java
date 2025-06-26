@@ -83,6 +83,15 @@ public class ServicesController {
         return ResponseEntity.ok("");
     }
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping(value = "cancelService/{id}")
+    public ResponseEntity<?> cancelService(@PathVariable int id) {
+        ServiceEntity response = service.cancelService(id);
+        if (response == null) {
+            return ResponseEntity.badRequest().body("Error: Servicio no encontrado");
+        }
+        return ResponseEntity.ok().build();
+    }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @PostMapping(value ="registerEntry/{id}")
     public ResponseEntity<?> registerEntry(@PathVariable int id){
         ServiceEntity cart = service.registerEntry(id);

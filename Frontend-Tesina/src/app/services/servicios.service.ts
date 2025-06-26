@@ -39,6 +39,19 @@ export class ServiciosService {
       { headers }
     );
   }
+  cancelService(id: number) {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.post<any>(
+      `http://localhost:8080/services/cancelService/` + id,
+      {},
+      { headers }
+    );
+  }
+
   declineBudget(id: number) {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + localStorage.getItem('token'),

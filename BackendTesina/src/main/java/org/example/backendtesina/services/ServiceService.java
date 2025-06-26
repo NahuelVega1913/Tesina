@@ -411,39 +411,46 @@ public class ServiceService {
         List<GetServices> lst = new ArrayList<>();
         List<ServiceEntity> lstEntity = this.repository.findAll();
         for (ServiceEntity s:lstEntity){
-            GetServices get = new GetServices();
-            get.setAuto(s.getAuto());
-            get.setId(s.getId());
-            get.setDateEntry(s.getDateEntry());
-            get.setDateExit(s.getDateExit());
-            get.setType(s.getType().toString());
-            get.setModelo(s.getModelo());
-            if(s.getBudget() != null){
-            get.setBudget(s.getBudget());
-            }
-            if(!s.getEmpleados().isEmpty()) {
-                List<GetEmployee> lstEmployee = new ArrayList<>();
-                for (EmployeeEntity e:s.getEmpleados()){
-                    GetEmployee employeeDto = new GetEmployee();
-                    employeeDto.setId(e.getId());
-                    employeeDto.setPhone(e.getPhone());
-                    employeeDto.setFullName(e.getFullName());
-                    employeeDto.setPosition(e.getPosition());
-                    lstEmployee.add(employeeDto);
+            if(s.getStatus() != ServiceStatus.CANCELED) {
+                GetServices get = new GetServices();
+                get.setAuto(s.getAuto());
+                get.setId(s.getId());
+                get.setDateEntry(s.getDateEntry());
+                get.setDateExit(s.getDateExit());
+                get.setType(s.getType().toString());
+                get.setModelo(s.getModelo());
+                if (s.getBudget() != null) {
+                    get.setBudget(s.getBudget());
                 }
-                get.setEmpleados(lstEmployee);
-            }
-            get.setStatus(s.getStatus());
-            get.setNombreCompleto(s.getNombreCompleto());
-            get.setObservacionesPrevias(s.getObservacionesPrevias());
-            get.setPaymentStatus(s.getPaymentStatus());
-            get.setCost(s.getCost());
+                if (!s.getEmpleados().isEmpty()) {
+                    List<GetEmployee> lstEmployee = new ArrayList<>();
+                    for (EmployeeEntity e : s.getEmpleados()) {
+                        GetEmployee employeeDto = new GetEmployee();
+                        employeeDto.setId(e.getId());
+                        employeeDto.setPhone(e.getPhone());
+                        employeeDto.setFullName(e.getFullName());
+                        employeeDto.setPosition(e.getPosition());
+                        lstEmployee.add(employeeDto);
+                    }
+                    get.setEmpleados(lstEmployee);
+                }
+                get.setStatus(s.getStatus());
+                get.setNombreCompleto(s.getNombreCompleto());
+                get.setObservacionesPrevias(s.getObservacionesPrevias());
+                get.setPaymentStatus(s.getPaymentStatus());
+                get.setCost(s.getCost());
 
-            lst.add(get);
+                lst.add(get);
+            }
         }
         return lst;
     }
-
+    public ServiceEntity cancelService(int id){
+        ServiceEntity entity = repository.findById(id).get();
+        entity.setStatus(ServiceStatus.CANCELED);
+        repository.save(entity);
+        return entity;
+    }
     public ServiceEntity registerEntry(int id){
         ServiceEntity entity = repository.findById(id).get();
         if(entity == null){
