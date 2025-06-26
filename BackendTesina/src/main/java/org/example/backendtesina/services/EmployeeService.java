@@ -38,6 +38,13 @@ public class EmployeeService {
         return entity;
 
     }
+    public EmployeeEntity deleteEmployee(int id){
+        EmployeeEntity entity = repository.findById(id).get();
+        entity.setState(Boolean.FALSE);
+        repository.save(entity);
+        return entity;
+    }
+
     public EmployeeEntity ModifyEmploye(PostEmployee employee){
         EmployeeEntity entity = repository.findById(employee.getId()).get();
         entity.setBancaryNumber(employee.getBancaryNumber());
@@ -63,15 +70,17 @@ public class EmployeeService {
             return null;
         }
         for (EmployeeEntity e:lstEntity){
-            GetEmployee employee = new GetEmployee();
-            employee.setFullName(e.getFullName());
-            employee.setPosition(e.getPosition());
-            employee.setSalary(e.getSalary());
-            employee.setPhone(e.getPhone());
-            employee.setState(e.getState());
-            employee.setJornada(e.getTypeOfContract().toString());
-            employee.setId(e.getId());
-            lstEmploye.add(employee);
+            if(e.getState() == null || e.getState().equals(Boolean.TRUE)) {
+                GetEmployee employee = new GetEmployee();
+                employee.setFullName(e.getFullName());
+                employee.setPosition(e.getPosition());
+                employee.setSalary(e.getSalary());
+                employee.setPhone(e.getPhone());
+                employee.setState(e.getState());
+                employee.setJornada(e.getTypeOfContract().toString());
+                employee.setId(e.getId());
+                lstEmploye.add(employee);
+            }
         }
 
         return lstEmploye;

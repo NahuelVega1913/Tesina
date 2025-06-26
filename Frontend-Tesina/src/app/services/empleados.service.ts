@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
 @Injectable({
@@ -28,6 +28,19 @@ export class EmpleadosService {
       }
     );
   }
+  deleteEmployee(id: number) {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.post<any>(
+      `http://localhost:8080/employee/deleteEmployee/` + id,
+      {},
+      { headers }
+    );
+  }
+
   registerEmployee(body: any) {
     return this.http.post<any>(
       `http://localhost:8080/employee/postEmployee`,

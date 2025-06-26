@@ -36,6 +36,15 @@ public class EmployeeController {
         return ResponseEntity.ok(lst);
     }
     @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
+    @PostMapping(value = "deleteEmployee/{id}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable int id){
+        EmployeeEntity lst = service.deleteEmployee(id);
+        if(lst == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(lst);
+    }
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
     @PutMapping(value = "putEmployee")
     public ResponseEntity<?> modifyEmployee(@RequestBody PostEmployee dto){
         EmployeeEntity lst = service.ModifyEmploye(dto);

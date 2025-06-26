@@ -135,5 +135,41 @@ export class ModificarEmpleadoComponent {
       });
     }
   }
-  deleteEmployee() {}
+  deleteEmployee() {
+    const id = localStorage.getItem('idEmpleado') || 0;
+
+    Swal.fire({
+      title: 'Esta seguro de esta accion?',
+      showDenyButton: true,
+      confirmButtonText: 'Si',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        const addSubscription = this.service
+          .deleteEmployee(Number(id))
+          .subscribe({
+            next: () => {
+              Swal.fire({
+                icon: 'success',
+                title: '¡Empleado Modificado!',
+                text: 'El empleado fue modificado exitosamente',
+                confirmButtonColor: '#3085d6',
+              });
+
+              this.router.navigate(['/empleados']);
+            },
+            error: (err) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocurrio un error al modificar el empleado',
+              });
+            },
+          });
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info');
+      }
+    });
+  }
 }
