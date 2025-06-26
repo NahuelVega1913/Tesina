@@ -28,6 +28,7 @@ public class EmployeeEntity {
     private WorkinDayEntity workingDay;
     @Column(name = "BANCARYNUMBER")
     private BigInteger bancaryNumber;
+    private Boolean state;
     @Column(name = "FULLNAME")
     private String fullName;
     @Column(name = "SALARY")
@@ -169,5 +170,13 @@ public class EmployeeEntity {
 
     public void setBancaryNumber(BigInteger bancaryNumber) {
         this.bancaryNumber = bancaryNumber;
+    }
+
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
     }
 }

@@ -1,5 +1,6 @@
 package org.example.backendtesina.DTOs.Get;
 
+import javax.swing.text.StyledEditorKit;
 import java.math.BigInteger;
 
 public class GetEmployee {
@@ -10,6 +11,7 @@ public class GetEmployee {
     private String position;
     private String jornada;
     private BigInteger salary;
+    private Boolean state;
 
 
     public int getId() {
@@ -58,5 +60,13 @@ public class GetEmployee {
 
     public void setJornada(String jornada) {
         this.jornada = jornada;
+    }
+
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
     }
 }

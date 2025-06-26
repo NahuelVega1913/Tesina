@@ -12,6 +12,7 @@ import java.util.Date;
 public class PostEmployee {
     private int id;
     private Date birthDate;
+    private Boolean state;
 
     private String typeOfContract;
     private BigInteger CUIT;
@@ -142,5 +143,13 @@ public class PostEmployee {
 
     public void setBancaryNumber(BigInteger bancaryNumber) {
         this.bancaryNumber = bancaryNumber;
+    }
+
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
     }
 }

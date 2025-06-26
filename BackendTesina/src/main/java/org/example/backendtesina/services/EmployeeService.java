@@ -26,6 +26,7 @@ public class EmployeeService {
         entity.setEmail(employee.getEmail());
         entity.setFullName(employee.getFullName());
         entity.setCUIT(employee.getCUIT());
+        entity.setState(Boolean.TRUE);
         entity.setSalary(employee.getSalary());
         entity.setRemarks(employee.getRemarks());
         entity.setPosition(employee.getPosition());
@@ -67,6 +68,7 @@ public class EmployeeService {
             employee.setPosition(e.getPosition());
             employee.setSalary(e.getSalary());
             employee.setPhone(e.getPhone());
+            employee.setState(e.getState());
             employee.setJornada(e.getTypeOfContract().toString());
             employee.setId(e.getId());
             lstEmploye.add(employee);
