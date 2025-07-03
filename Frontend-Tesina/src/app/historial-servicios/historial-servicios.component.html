@@ -6,32 +6,33 @@
     <div class="flex flex-row align-middle p-4">
       <form class="mt-5 w-full" (submit)="$event.preventDefault()">
         <div class="flex flex-col md:flex-row">
-          <div class="flex items-center mt-2 ms-1">
-            <div class="w-35">
+          <div class="flex items-center justify-center mt-2 ms-1">
+            <div>
               <input
                 id="datepicker-range-start"
                 name="start"
                 type="date"
                 (change)="filter()"
                 [(ngModel)]="dateFrom"
-                class="rborder border-gray-300 text-gray-900 text-sm rounded-xl p-2"
+                class="rborder border-gray-300 text-gray-900 text-sm rounded-xl p-2 w-30 h-10"
                 placeholder="Fecha"
               />
             </div>
 
             <span class="mx-4 text-gray-500">hasta</span>
-            <div class="w-35">
+            <div>
               <input
                 id="datepicker-range-end"
                 name="end"
                 type="date"
                 (change)="filter()"
                 [(ngModel)]="dateTo"
-                class="border border-gray-300 text-gray-900 text-sm rounded-xl p-2"
+                class="border border-gray-300 text-gray-900 text-sm rounded-xl p-2 w-30 h-10"
                 placeholder="Fecha"
               />
             </div>
           </div>
+
           <div class="flex items-center mt-2 ms-1 w-full">
             <div class="">
               <select
@@ -79,6 +80,69 @@
               </button>
             </div>
           </div>
+          <div class="flex flex-row justify-center">
+            <button
+              type="button"
+              (click)="exportarPDF()"
+              class="focus:outline-none m-5 text-white bg-red-600 rounded-2xl hover:bg-red-800 focus:ring-4 focus:ring-green-300 font-medium text-sm px-5 py-2.5 me-2 mb-2"
+            >
+              <svg
+                class="w-6 h-6 text-gray-800 dark:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 17v-5h1.5a1.5 1.5 0 1 1 0 3H5m12 2v-5h2m-2 3h2M5 10V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1v6M5 19v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1M10 3v4a1 1 0 0 1-1 1H5m6 4v5h1.375A1.627 1.627 0 0 0 14 15.375v-1.75A1.627 1.627 0 0 0 12.375 12H11Z"
+                />
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              click="exportarExcel()"
+              class="focus:outline-none m-5 text-white bg-green-600 rounded-2xl hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium text-sm px-5 py-2.5 me-2 mb-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/20 00/svg"
+                x="0px"
+                y="0px"
+                width="24"
+                height="24"
+                viewBox="0,0,256,256"
+              >
+                <g
+                  fill="#ffffff"
+                  fill-rule="nonzero"
+                  stroke="none"
+                  stroke-width="1"
+                  stroke-linecap="butt"
+                  stroke-linejoin="miter"
+                  stroke-miterlimit="10"
+                  stroke-dasharray=""
+                  stroke-dashoffset="0"
+                  font-family="none"
+                  font-weight="none"
+                  font-size="none"
+                  text-anchor="none"
+                  style="mix-blend-mode: normal"
+                >
+                  <g transform="scale(8.53333,8.53333)">
+                    <path
+                      d="M15,3c-0.13457,0.00082 -0.26871,0.01521 -0.40039,0.04297l-0.00195,-0.00195l-9.96875,1.99414l-0.00195,0.00195c-0.94311,0.17905 -1.62599,1.00293 -1.62695,1.96289v16c0.00021,0.9613 0.68429,1.78648 1.62891,1.96484l9.96875,1.99414c0.13238,0.02723 0.26719,0.04097 0.40234,0.04102c1.10457,0 2,-0.89543 2,-2v-20c0,-1.10457 -0.89543,-2 -2,-2zM19,5v3h2v2h-2v2h2v2h-2v2h2v2h-2v2h2v2h-2v3h6c1.105,0 2,-0.895 2,-2v-16c0,-1.105 -0.895,-2 -2,-2zM23,8h1c0.552,0 1,0.448 1,1c0,0.552 -0.448,1 -1,1h-1zM6.18555,10h2.40234l1.24414,2.99023c0.101,0.244 0.18177,0.52666 0.25977,0.84766h0.0332c0.045,-0.193 0.13353,-0.48609 0.26953,-0.87109l1.39063,-2.9668h2.1875l-2.61328,4.95508l2.69141,5.04297h-2.33398l-1.50391,-3.25781c-0.057,-0.115 -0.12369,-0.34697 -0.17969,-0.66797h-0.02148c-0.034,0.154 -0.10113,0.38631 -0.20313,0.69531l-1.51367,3.23242h-2.3457l2.7832,-5.00586zM23,12h1c0.552,0 1,0.448 1,1c0,0.552 -0.448,1 -1,1h-1zM23,16h1c0.552,0 1,0.448 1,1c0,0.552 -0.448,1 -1,1h-1zM23,20h1c0.552,0 1,0.448 1,1c0,0.552 -0.448,1 -1,1h-1z"
+                    ></path>
+                  </g>
+                </g>
+              </svg>
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -86,6 +150,7 @@
       <div class="p-4">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table
+            id="tabla"
             class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
           >
             <thead

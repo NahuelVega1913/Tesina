@@ -5,6 +5,9 @@ import { DatePipe, NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ServiciosService } from '../services/servicios.service';
 import Chart from 'chart.js/auto';
+import * as XLSX from 'xlsx';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-historial-servicios',
@@ -37,6 +40,29 @@ export class HistorialServiciosComponent {
 
   ngOnInit(): void {
     this.getVentas();
+  }
+  getFechaActual(): string {
+    const ahora = new Date();
+    const yyyy = ahora.getFullYear();
+    const mm = String(ahora.getMonth() + 1).padStart(2, '0'); // meses van de 0-11
+    const dd = String(ahora.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  exportarExcel() {
+    const tabla = document.getElementById('tabla');
+    const wb = XLSX.utils.table_to_book(tabla, { sheet: 'Datos' });
+    const fecha = this.getFechaActual();
+    XLSX.writeFile(wb, `servicios_${fecha}.xlsx`);
+  }
+
+  exportarPDF() {
+    const doc = new jsPDF();
+    const fecha = this.getFechaActual();
+
+    autoTable(doc, { html: '#tabla' }); // usa el id de tu tabla
+    doc.save(`servicios_${fecha}.pdf`);
+    return;
   }
 
   ngAfterViewInit(): void {

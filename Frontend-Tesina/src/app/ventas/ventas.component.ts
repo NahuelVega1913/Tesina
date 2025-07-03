@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { MercadoPagoService } from '../services/mercado-pago.service';
 import { DatePipe } from '@angular/common';
 import Chart, { registerables } from 'chart.js/auto';
+import * as XLSX from 'xlsx';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-ventas',
@@ -65,6 +68,29 @@ export class VentasComponent implements AfterViewInit {
 
   ngOnInit(): void {
     this.getVentas();
+  }
+  getFechaActual(): string {
+    const ahora = new Date();
+    const yyyy = ahora.getFullYear();
+    const mm = String(ahora.getMonth() + 1).padStart(2, '0'); // meses van de 0-11
+    const dd = String(ahora.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  exportarExcel() {
+    const tabla = document.getElementById('tabla');
+    const wb = XLSX.utils.table_to_book(tabla, { sheet: 'Datos' });
+    const fecha = this.getFechaActual();
+    XLSX.writeFile(wb, `ventas_${fecha}.xlsx`);
+  }
+
+  exportarPDF() {
+    const doc = new jsPDF();
+    const fecha = this.getFechaActual();
+
+    autoTable(doc, { html: '#tabla' }); // usa el id de tu tabla
+    doc.save(`ventas_${fecha}.pdf`);
+    return;
   }
 
   filter() {
