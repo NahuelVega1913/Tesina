@@ -7,18 +7,38 @@
         <h1 class="text-4xl font-bold mb-2 font-sans text-center">Detalles</h1>
       </div>
       <div class="border-b-2 border-gray-300 w-full">
-        <p class="text-lg font-sans">
-          <strong>Nombre del Cliente: </strong>{{ this.venta.user }}
-        </p>
-        <p class="text-lg font-sans">
-          <strong>Fecha:</strong> {{ this.venta.date | date : "dd/MM/yyyy" }}
-        </p>
-        <p class="text-lg font-sans">
-          <strong>Total:</strong> ${{ venta.total }}
-        </p>
-        <p class="text-lg font-sans">
-          <strong>Metodo de pago:</strong> {{ traducir(venta.typePayment) }}
-        </p>
+        <div class="flex flex-row justify-between mb-2">
+          <strong>
+            <p class="inline font-bold text-lg font-sans">
+              Nombre del Cliente:
+            </p></strong
+          >
+
+          <p class="inline">{{ this.venta.user }}</p>
+        </div>
+        <div class="flex flex-row justify-between mb-2">
+          <strong>
+            <p class="inline font-bold text-lg font-sans">Fecha:</p></strong
+          >
+
+          <p class="inline">{{ this.venta.date | date : "dd/MM/yyyy" }}</p>
+        </div>
+        <div class="flex flex-row justify-between mb-2">
+          <strong>
+            <p class="inline font-bold text-lg font-sans">Total:</p></strong
+          >
+
+          <p class="inline">${{ this.venta.total }}</p>
+        </div>
+        <div class="flex flex-row justify-between mb-2">
+          <strong>
+            <p class="inline font-bold text-lg font-sans">
+              Metodo de pago:
+            </p></strong
+          >
+
+          <p class="inline">${{ traducir(venta.typePayment) }}</p>
+        </div>
       </div>
       <div class="w-full">
         <p class="font-bold text-3xl mt-2 font-sans mb-2">Productos</p>
@@ -27,11 +47,36 @@
       <div
         class="border-gray-300 mb-3 w-full p-3 border-1 rounded-2xl font-sans"
       >
-        <p><strong>Id: </strong> {{ $index + 1 }}</p>
-        <p><strong>Nombre: </strong> {{ item.name }}</p>
-        <p><strong>Marca: </strong> {{ item.brand }}</p>
-        <p><strong>Cantidad: </strong> {{ item.quantity }}</p>
-        <p><strong>Precio: </strong> ${{ item.price }}</p>
+        <div class="flex flex-row justify-between mb-2">
+          <p class="inline font-medium">Id:</p>
+          <strong>
+            <p class="inline">{{ $index + 1 }}</p></strong
+          >
+        </div>
+        <div class="flex flex-row justify-between mb-2">
+          <p class="inline font-medium">Nombre:</p>
+          <strong>
+            <p class="inline">{{ item.name }}</p></strong
+          >
+        </div>
+        <div class="flex flex-row justify-between mb-2">
+          <p class="inline font-medium">Marca:</p>
+          <strong>
+            <p class="inline">{{ item.brand }}</p></strong
+          >
+        </div>
+        <div class="flex flex-row justify-between mb-2">
+          <p class="inline font-medium">Cantidad:</p>
+          <strong>
+            <p class="inline">{{ item.quantity }}</p></strong
+          >
+        </div>
+        <div class="flex flex-row justify-between mb-2">
+          <p class="inline font-medium">Precio:</p>
+          <strong>
+            <p class="inline">${{ item.price }}</p></strong
+          >
+        </div>
       </div>
       }
     </div>
