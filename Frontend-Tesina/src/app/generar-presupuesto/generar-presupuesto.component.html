@@ -95,20 +95,22 @@
           type="number"
           formControlName="budget"
           id="budget"
-          class="border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          class="border border-gray-300 text-end text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder=""
         />
         @if(form.get('budget')?.invalid && form.get('budget')?.touched){
         <div class="text-sky-950">Complete el presupuesto</div>
         }
       </div>
-      <button
-        type="submit"
-        (click)="registerBudget()"
-        class="text-white mt-5 bg-sky-800 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-      >
-        Registrar
-      </button>
+      <div class="w-full flex justify-end">
+        <button
+          type="submit"
+          (click)="registerBudget()"
+          class="text-white mt-5 bg-sky-800 hover:bg-sky-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+        >
+          Registrar
+        </button>
+      </div>
     </form>
   </div>
 </div>

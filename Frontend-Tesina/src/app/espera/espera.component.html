@@ -287,49 +287,59 @@
     <div
       class="text-sky-950 bg-white rounded-2xl p-10 flex flex-col justify-center shadow-lg mt-5"
     >
-      <div class="font-normal text-md mt-1">
-        <strong>Auto:</strong> {{ Object.auto }}
+      <div class="font-normal flex flex-row justify-between text-md mt-1">
+        <p><strong>Auto:</strong></p>
+        <p>{{ Object.auto }}</p>
       </div>
-      <div class="font-normal text-md mt-1">
-        <strong>Modelo:</strong> {{ Object.modelo }}
+      <div class="font-normal flex flex-row justify-between text-md mt-1">
+        <p><strong>Modelo:</strong></p>
+        <p>{{ Object.modelo }}</p>
       </div>
-      <div class="font-normal text-md mt-1">
-        <strong> Observaciones Previas:</strong>
-        {{ Object.observacionesPrevias }}
+      <div class="font-normal flex flex-row justify-between text-md mt-1">
+        <p><strong>Observaciones Previas:</strong></p>
+        <p>{{ Object.observacionesPrevias }}</p>
       </div>
       @if(Object.type == 'INSPECTION'){
-      <div class="font-normal text-md mt-1">
-        <strong>Estado General:</strong> {{ Object.estadoGeneral }}
+      <div class="font-normal flex flex-row justify-betwee text-md mt-1">
+        <p><strong>Estado General:</strong></p>
+        <p>{{ Object.estadoGeneral }}</p>
       </div>
-      <div class="font-normal text-md mt-1">
-        <strong> Resultado:</strong> {{ Object.resultado }}
+      <div class="font-normal flex flex-row justify-betwee text-md mt-1">
+        <p><strong>Resultado:</strong></p>
+        <p>{{ Object.resultado }}</p>
       </div>
-      <div class="font-normal text-md mt-1">
-        <strong> Recomendaciones:</strong> {{ Object.recomendaciones }}
+      <div class="font-normal flex flex-row justify-betwee text-md mt-1">
+        <p><strong>Recomendaciones:</strong></p>
+        <p>{{ Object.recomendaciones }}</p>
       </div>
       }
       <!--INSPECTION-->
 
       <!--REPAIR-->
       @if(Object.type == 'REPAIR'){
-      <div class="font-normal text-md mt-1">
-        <strong> Diagnostico Tecnico:</strong> {{ Object.techniclaDiagnosis }}
+      <div class="font-normal flex flex-row justify-between text-md mt-1">
+        <p><strong>Diagnostico Tecnico:</strong></p>
+        <p>{{ Object.techniclaDiagnosis }}</p>
       </div>
-      <div class="font-normal text-md mt-1">
-        <strong>Tareas Realizadas: </strong>{{ Object.tasksPerformed }}
+      <div class="font-normal flex flex-row justify-between text-md mt-1">
+        <p><strong>Tareas Realizadas:</strong></p>
+        <p>{{ Object.tasksPerformed }}</p>
       </div>
-      <div class="font-normal text-md mt-1 text-">
-        <strong>Repuestos Usados: </strong> {{ Object.tasksPerformed }}
+      <div class="font-normal flex flex-row justify-between text-md mt-1 text-">
+        <p><strong>Repuestos Usados:</strong></p>
+        <p>{{ Object.materialsUsed }}</p>
       </div>
       }
       <!--REPAIR-->
       <!--CUSTOMIZATION-->
       @if(Object.type == 'CUSTOMIZATION'){
-      <div class="font-normal text-md mt-1">
-        <strong>Tareas Realizadas:</strong> {{ Object.taskRealized }}
+      <div class="font-normal flex flex-row justify-between text-md mt-1">
+        <p><strong>Tareas Realizadas:</strong></p>
+        <p>{{ Object.tasksPerformed }}</p>
       </div>
-      <div class="font-normal text-md mt-1">
-        <strong>Repuestos Usados:</strong> {{ Object.materialsUsed }}
+      <div class="font-normal flex flex-row justify-between text-md mt-1">
+        <p><strong>Repuestos Usados:</strong></p>
+        <p>{{ Object.materialsUsed }}</p>
       </div>
 
       } @if(Object.paymentStatus =='UNPAID'){
