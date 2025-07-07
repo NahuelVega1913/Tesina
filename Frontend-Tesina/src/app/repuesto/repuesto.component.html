@@ -309,7 +309,7 @@
     </div>
     } @for (item of comments; track $index) {
     <div class="ms-3">
-      <p class="text-xl font-medium">{{ item.text }}</p>
+      <p class="text-md font-medium">{{ item.text }}</p>
 
       @if(item.response == null && this.rol == 'ADMIN') {
       <div class="flex flex-row p-5 align-middle">
@@ -367,7 +367,7 @@
             d="m9 5 7 7-7 7 "
           />
         </svg>
-        <p class="text-xl">{{ item.response }}</p>
+        <p class="text-md">{{ item.response }}</p>
       </div>
       }
     </div>
