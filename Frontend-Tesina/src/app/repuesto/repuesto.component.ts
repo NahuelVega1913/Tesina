@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MercadoPagoService } from '../services/mercado-pago.service';
+import { CommentsService } from '../services/comments.service';
 
 @Component({
   selector: 'app-repuesto',
@@ -21,6 +22,7 @@ import { MercadoPagoService } from '../services/mercado-pago.service';
 export class RepuestoComponent {
   mp = {} as any;
   cantidad: number = 1;
+  text: string = '';
   rol: any = '';
 
   constructor(private router: Router) {
@@ -32,15 +34,18 @@ export class RepuestoComponent {
     );
   }
   repuesto: any = {};
+  comments: any[] = [];
   private service: RespuestosService = inject(RespuestosService);
   private cartService: CartService = inject(CartService);
   private mpService: MercadoPagoService = inject(MercadoPagoService);
+  private commentService: CommentsService = inject(CommentsService);
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getRepuesto();
     this.rol = localStorage.getItem('role');
+    this.getAllComments();
     this.mp.bricks().create('wallet', 'wallet_container', {
       initialization: {
         preferenceId: 'YOUR_PREFERENCE_ID', // Reemplaza con tu ID de preferencia
@@ -53,8 +58,64 @@ export class RepuestoComponent {
       },
     });
   }
-  sendComment() {}
-  getAllComments() {}
+  sendResponse(idComment: number) {
+    const id = localStorage.getItem('idRepuesto') || 0;
+    const body = {
+      id: idComment,
+      idSpare: Number(id),
+      response: this.text,
+      type: 'RESPONSE',
+    };
+    this.commentService.postComment(body).subscribe({
+      next: (res) => {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Comentario Enviado!',
+          text: 'Gracias por tu opinión',
+          confirmButtonColor: '#3085d6',
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this.getAllComments();
+    this.text = '';
+  }
+  sendComment() {
+    const id = localStorage.getItem('idRepuesto') || 0;
+    const body = {
+      idSpare: Number(id),
+      text: this.text,
+      type: 'COMMENT',
+    };
+    this.commentService.postComment(body).subscribe({
+      next: (res) => {
+        Swal.fire({
+          icon: 'success',
+          title: '¡Comentario Enviado!',
+          text: 'Responderemos lo antes posible',
+          confirmButtonColor: '#3085d6',
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this.getAllComments();
+    this.text = '';
+  }
+  getAllComments() {
+    const id = localStorage.getItem('idRepuesto') || 0;
+    this.commentService.getAllComments(Number(id)).subscribe({
+      next: (res) => {
+        this.comments = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
   comprarRepuesto() {
     const id = localStorage.getItem('idRepuesto') || 0;
     const body = {

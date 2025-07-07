@@ -1,4 +1,4 @@
-<div class="bg-sky-100 h-screen">
+<div class="bg-sky-100 min-h-screen">
   <div class="flex flex-col md:flex-row h- w-full p-4 gap-4">
     <div class="w-full md:w-3/5 p-1">
       <div
@@ -287,10 +287,13 @@
       {{ repuesto.description }}
     </p>
 
-    <p class="text-3xl font-semibold mt-5">Preguntas y respuestas</p>
+    <p class="text-3xl font-semibold mt-5 mb-5">Preguntas y respuestas</p>
+    @if(this.rol == 'USER') {
     <div class="flex flex-row p-5">
       <input
         type="text"
+        [(ngModel)]="text"
+        name="text"
         id="default-input"
         placeholder="Escribe tu pregunta..."
         class="bg-gray-50 m-1 h-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
@@ -304,5 +307,70 @@
         Comentar
       </button>
     </div>
+    } @for (item of comments; track $index) {
+    <div class="ms-3">
+      <p class="text-xl font-medium">{{ item.text }}</p>
+
+      @if(item.response == null && this.rol == 'ADMIN') {
+      <div class="flex flex-row p-5 align-middle">
+        <svg
+          class="w-6 h-6 mt-3 text-gray-800"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m9 5 7 7-7 7"
+          />
+        </svg>
+        <input
+          type="text"
+          [(ngModel)]="text"
+          name="text"
+          id="default-input"
+          placeholder="Escribe tu pregunta..."
+          class="bg-gray-50 m-1 h-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+        />
+
+        <button
+          type="button"
+          (click)="sendResponse(item.id)"
+          class="focus:outline-none m-1 h-10 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+        >
+          Responder
+        </button>
+      </div>
+      } @if(item.response != null ) {
+      <div class="flex flex-row ps-5">
+        <div class="flex flex-row"></div>
+        <svg
+          class="w-6 h-6 mt-1 text-gray-800"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m9 5 7 7-7 7 "
+          />
+        </svg>
+        <p class="text-xl">{{ item.response }}</p>
+      </div>
+      }
+    </div>
+    }
   </div>
 </div>
