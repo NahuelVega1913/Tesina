@@ -53,6 +53,8 @@ export class RepuestoComponent {
       },
     });
   }
+  sendComment() {}
+  getAllComments() {}
   comprarRepuesto() {
     const id = localStorage.getItem('idRepuesto') || 0;
     const body = {

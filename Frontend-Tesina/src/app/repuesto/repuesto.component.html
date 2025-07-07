@@ -282,9 +282,27 @@
     </div>
   </div>
   <div class="bg-white p-5 m-2 md-5 rounded-2xl shadow-md">
-    <p class="text-2xl font-semibold">Descripcion</p>
+    <p class="text-3xl font-semibold">Descripcion</p>
     <p>
       {{ repuesto.description }}
     </p>
+
+    <p class="text-3xl font-semibold mt-5">Preguntas y respuestas</p>
+    <div class="flex flex-row p-5">
+      <input
+        type="text"
+        id="default-input"
+        placeholder="Escribe tu pregunta..."
+        class="bg-gray-50 m-1 h-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+      />
+
+      <button
+        type="button"
+        (click)="sendComment()"
+        class="focus:outline-none m-1 h-10 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+      >
+        Comentar
+      </button>
+    </div>
   </div>
 </div>

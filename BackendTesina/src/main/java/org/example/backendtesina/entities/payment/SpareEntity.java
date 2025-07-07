@@ -37,6 +37,9 @@ public class SpareEntity {
     private String image4;
     private String image5;
 
+    @OneToMany(mappedBy = "spare")
+    private List<CommentEntity> comments;
+
 
     public int getId() {
         return id;
@@ -147,5 +150,13 @@ public class SpareEntity {
 
     public void setCarts(List<CartEntity> carts) {
         this.carts = carts;
+    }
+
+    public List<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentEntity> comments) {
+        this.comments = comments;
     }
 }
