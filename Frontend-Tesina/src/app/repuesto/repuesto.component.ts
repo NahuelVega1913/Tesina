@@ -71,7 +71,6 @@ export class RepuestoComponent {
         Swal.fire({
           icon: 'success',
           title: '¡Comentario Enviado!',
-          text: 'Gracias por tu opinión',
           confirmButtonColor: '#3085d6',
         });
       },

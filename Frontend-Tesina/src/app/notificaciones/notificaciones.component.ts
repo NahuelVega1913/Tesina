@@ -19,7 +19,6 @@ export class CasillaComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.getNotificaciones();
-    this.marksAsRead();
   }
   calculateTimeDiff(date: string) {
     const currentDate = new Date();
@@ -41,17 +40,6 @@ export class CasillaComponent {
     const getSubscription = this.service.getAllNotifications().subscribe({
       next: (res) => {
         this.notifications = res;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-  marksAsRead() {
-    const markSubscription = this.service.markAllAsRead().subscribe({
-      next: (res) => {
-        console.log('Todas las notificaciones marcadas como leídas');
-        this.getNotificaciones(); // Actualiza la lista de notificaciones
       },
       error: (err) => {
         console.log(err);

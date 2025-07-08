@@ -4,6 +4,7 @@ public enum typeNotificationEntity {
 
     COMPRA,
     SERVICIO,
+    COMMENT,
     OTHER
 
 

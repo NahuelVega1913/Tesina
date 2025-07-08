@@ -1,9 +1,12 @@
 package org.example.backendtesina.services;
 
+import org.apache.catalina.User;
 import org.example.backendtesina.DTOs.Post.postComment;
 import org.example.backendtesina.entities.enums.TypeComment;
 import org.example.backendtesina.entities.payment.CommentEntity;
 import org.example.backendtesina.entities.payment.SpareEntity;
+import org.example.backendtesina.entities.personal.NotificationEntity;
+import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.repositories.CommentRepository;
 import org.example.backendtesina.repositories.SpareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,10 @@ public class CommnetService {
     CommentRepository repository;
     @Autowired
     SpareRepository spareRepository;
+    @Autowired
+    UserService userService;
+    @Autowired
+    NotificationService notificationService;
 
     public List<postComment> getAllComents(int id){
         SpareEntity spare = spareRepository.findById(id).get();
@@ -44,6 +51,8 @@ public class CommnetService {
             spare.setComments( new ArrayList<>());
         }
         if(comment.getType().equals(TypeComment.COMMENT)){
+            UserEntity user = userService.getEntity("admin@gmail.com");
+            notificationService.createAdminComment(user,spare.getName());
             CommentEntity entity = new CommentEntity();
             entity.setFecha(comment.getFecha());
             entity.setResponse(null);

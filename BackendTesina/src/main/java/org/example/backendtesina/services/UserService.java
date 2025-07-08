@@ -38,6 +38,14 @@ public class UserService {
 
         return null;
     }
+    public UserEntity getEntity (String mail){
+        if(repository.findByEmail(mail).isPresent()){
+            RegisterDto response = new RegisterDto();
+            UserEntity entity = repository.findByEmail(mail).get();
+            return entity;
+        }
+        return null;
+    }
     public RegisterDto UpdateUser(RegisterDto dto){
         if(repository.findByEmail(dto.getEmail()).isPresent()){
             RegisterDto response = new RegisterDto();
