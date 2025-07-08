@@ -23,6 +23,7 @@ public class CommentEntity {
     private TypeComment type;
 
     private Date fecha;
+    private String emailUser;
 
     public Integer getId() {
         return id;
@@ -70,5 +71,13 @@ public class CommentEntity {
 
     public void setType(TypeComment type) {
         this.type = type;
+    }
+
+    public String getEmailUser() {
+        return emailUser;
+    }
+
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
     }
 }
