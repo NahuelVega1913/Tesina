@@ -20,14 +20,8 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-                "src/favicon.ico",
-                "src/assets",
-              {
-                "glob": "**/*",
-                "input": "node_modules/leaflet/dist/images",
-                  "output": "/assets/leaflet/"
-              }
+            "assets": [  
+               "src/assets"            
             ],
             "styles": [
               "src/styles.css",
