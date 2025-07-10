@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 
+
 .leaflet-container .leaflet-marker-icon {
   background-image: url('assets/leaflet/marker-icon.png');
 }

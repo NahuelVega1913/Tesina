@@ -10,6 +10,14 @@ import { NgClass } from '@angular/common';
 import { MercadoPagoService } from '../services/mercado-pago.service';
 import Swal from 'sweetalert2';
 
+// Configuración de los íconos de Leaflet (fuera de la clase)
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'assets/leaflet/marker-icon-2x.png',
+  iconUrl: 'assets/leaflet/marker-icon.png',
+  shadowUrl: 'assets/leaflet/marker-shadow.png',
+});
+
 @Component({
   selector: 'app-espera',
   imports: [FormsModule, NgClass],
