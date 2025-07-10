@@ -11,13 +11,14 @@ import { MercadoPagoService } from '../services/mercado-pago.service';
 import Swal from 'sweetalert2';
 
 // Configuración de los íconos de Leaflet (fuera de la clase)
-
-const iconDefault = L.Icon.Default.prototype as any;
-
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'assets/leaflet/marker-icon-2x.png',
+const customIcon = L.icon({
   iconUrl: 'assets/leaflet/marker-icon.png',
+  iconRetinaUrl: 'assets/leaflet/marker-icon-2x.png',
   shadowUrl: 'assets/leaflet/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
 });
 
 @Component({
@@ -84,7 +85,10 @@ export class EsperaComponent implements AfterViewInit {
       attribution: '&copy; OpenStreetMap contributors',
     }).addTo(map);
 
-    L.marker([-31.4188, -64.2327]).addTo(map).bindPopup('Ubicación central');
+    // Usa el customIcon aquí
+    L.marker([-31.4188, -64.2327], { icon: customIcon })
+      .addTo(map)
+      .bindPopup('Ubicación central');
 
     setTimeout(() => {
       map.invalidateSize();
