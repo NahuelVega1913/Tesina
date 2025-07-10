@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 
 // Configuración de los íconos de Leaflet (fuera de la clase)
 
+const iconDefault = L.Icon.Default.prototype as any;
+
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'assets/leaflet/marker-icon-2x.png',
   iconUrl: 'assets/leaflet/marker-icon.png',
