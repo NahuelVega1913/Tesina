@@ -83,6 +83,7 @@ export class RepuestoComponent {
   }
   sendComment() {
     const id = localStorage.getItem('idRepuesto') || 0;
+
     const body = {
       idSpare: Number(id),
       text: this.text,

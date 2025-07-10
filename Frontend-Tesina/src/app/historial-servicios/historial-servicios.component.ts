@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MercadoPagoService } from '../services/mercado-pago.service';
 import { Router } from '@angular/router';
-import { DatePipe, NgClass } from '@angular/common';
+import { CommonModule, DatePipe, NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ServiciosService } from '../services/servicios.service';
 import Chart from 'chart.js/auto';
@@ -11,7 +11,7 @@ import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-historial-servicios',
-  imports: [DatePipe, FormsModule, NgClass],
+  imports: [DatePipe, FormsModule, NgClass, CommonModule],
   templateUrl: './historial-servicios.component.html',
   styleUrl: './historial-servicios.component.css',
 })
