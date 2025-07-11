@@ -1,19 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
-.leaflet-container {
-  height: 100%;
-  width: 100%;
-}
 
-.leaflet-pane,
-.leaflet-tile,
-.leaflet-marker-icon,
-.leaflet-shadow-pane img,
-.leaflet-overlay-pane svg,
-.leaflet-control {
-  position: absolute;
-  top: 0;
-  left: 0;
+
+.custom-div-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 

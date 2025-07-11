@@ -72,14 +72,11 @@ export class EsperaComponent implements AfterViewInit {
       attribution: '© OpenStreetMap contributors',
     }).addTo(map);
 
-    const icon = L.icon({
-      iconUrl: 'assets/leaflet/marker-icon.png',
-      iconRetinaUrl: 'assets/leaflet/marker-icon-2x.png',
-      shadowUrl: 'assets/leaflet/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41],
+    const icon = L.divIcon({
+      className: 'custom-div-icon',
+      html: `<div style="background-color:#2A93D5;border-radius:50%;width:24px;height:24px;border:2px solid white;"></div>`,
+      iconSize: [24, 24],
+      iconAnchor: [12, 12],
     });
 
     L.marker([-34.6, -58.4], { icon }).addTo(map);
