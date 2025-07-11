@@ -2,7 +2,6 @@ import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 import { Router } from '@angular/router';
 import { AfterViewInit } from '@angular/core';
-import 'leaflet/dist/leaflet.css';
 import { ServiciosService } from '../services/servicios.service';
 import { UsuarioService } from '../services/usuario.service';
 import { FormsModule } from '@angular/forms';
