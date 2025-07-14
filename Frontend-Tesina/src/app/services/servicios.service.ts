@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '../../enviroment';
 
 @Injectable({
   providedIn: 'root',
@@ -20,12 +21,11 @@ export class ServiciosService {
       'Content-Type': 'application/json',
     });
 
-    return this.http.post<any>(
-      `http://localhost:8080/services/postbudget/${id}`,
-      budget,
-      { headers }
-    );
+    return this.http.post<any>(this.url + `services/postbudget/${id}`, budget, {
+      headers,
+    });
   }
+  url = environment.apiUrl;
 
   aceptBudget(id: number) {
     const headers = new HttpHeaders({
@@ -34,7 +34,7 @@ export class ServiciosService {
     });
 
     return this.http.post<any>(
-      `http://localhost:8080/services/acceptBudget/` + id,
+      this.url + `services/acceptBudget/` + id,
       {},
       { headers }
     );
@@ -46,7 +46,7 @@ export class ServiciosService {
     });
 
     return this.http.post<any>(
-      `http://localhost:8080/services/cancelService/` + id,
+      this.url + `services/cancelService/` + id,
       {},
       { headers }
     );

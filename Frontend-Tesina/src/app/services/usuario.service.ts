@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '../../enviroment';
 
 @Injectable({
   providedIn: 'root',
@@ -7,9 +8,10 @@ import { inject, Injectable } from '@angular/core';
 export class UsuarioService {
   private readonly http: HttpClient = inject(HttpClient);
   constructor() {}
+  url = environment.apiUrl;
 
   getUsuario() {
-    return this.http.get<any>(`http://localhost:8080/users/getUser`, {
+    return this.http.get<any>(this.url + `users/getUser`, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         'Content-Type': 'application/json',
@@ -17,22 +19,19 @@ export class UsuarioService {
     });
   }
   getUsuarioInformation() {
-    return this.http.get<any>(
-      `http://localhost:8080/users/getUserInformation`,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    return this.http.get<any>(this.url + `users/getUserInformation`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   getUsuarioById(id: number) {}
   getUsuarioByEmail(email: string) {}
 
   putUsuario(body: any) {
-    return this.http.put<any>(`http://localhost:8080/users/putUser`, body, {
+    return this.http.put<any>(this.url + `users/putUser`, body, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         'Content-Type': 'application/json',

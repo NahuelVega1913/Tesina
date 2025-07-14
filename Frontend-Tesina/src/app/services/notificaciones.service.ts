@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '../../enviroment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,17 +9,15 @@ export class NotificacionesService {
   private readonly http: HttpClient = inject(HttpClient);
 
   constructor() {}
+  url = environment.apiUrl;
 
   getAllNotifications() {
-    return this.http.get<any>(
-      `http://localhost:8080/notifications/getAllNotifications`,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    return this.http.get<any>(this.url + `notifications/getAllNotifications`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
   }
   markAllAsRead() {
     const headers = new HttpHeaders({
@@ -27,7 +26,7 @@ export class NotificacionesService {
     });
 
     return this.http.put<any>(
-      `http://localhost:8080/notifications/putNotification`,
+      this.url + `notifications/putNotification`,
       {},
       { headers, responseType: 'text' as 'json' }
     );

@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '../../enviroment';
+
 
 @Injectable({
   providedIn: 'root',
@@ -8,10 +10,12 @@ export class ChatbotService {
   private readonly http: HttpClient = inject(HttpClient);
 
   constructor() {}
+  url = environment.apiUrl;
+
 
   registerProveedor(message: string) {
     return this.http.post(
-      `http://localhost:8080/chatinteligence/postmessage`,
+      this.url +`chatinteligence/postmessage`,
       message,
       {
         headers: {

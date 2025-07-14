@@ -1,16 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '../../enviroment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommentsService {
-  urlBase: string = 'http://localhost:8080/';
+  url = environment.apiUrl;
 
   private readonly http: HttpClient = inject(HttpClient);
 
   getAllComments(id: number) {
-    return this.http.get<any>(this.urlBase + `commnent/getcommentsbyId/` + id, {
+    return this.http.get<any>(this.url + `commnent/getcommentsbyId/` + id, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         'Content-Type': 'application/json',
@@ -18,7 +19,7 @@ export class CommentsService {
     });
   }
   postComment(body: any) {
-    return this.http.post<any>(this.urlBase + `commnent/postcomment`, body, {
+    return this.http.post<any>(this.url + `commnent/postcomment`, body, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '../../enviroment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,9 +9,10 @@ export class CartService {
   private readonly http: HttpClient = inject(HttpClient);
 
   constructor() {}
+  url = environment.apiUrl;
 
   getCart() {
-    return this.http.get<any>(`http://localhost:8080/cart/get`, {
+    return this.http.get<any>(this.url + `cart/get`, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         'Content-Type': 'application/json',
@@ -24,7 +26,7 @@ export class CartService {
     });
 
     return this.http.post<any>(
-      `http://localhost:8080/cart/addProduct/` + id,
+      this.url + `cart/addProduct/` + id,
       {},
       { headers, responseType: 'text' as 'json' }
     );
@@ -35,10 +37,6 @@ export class CartService {
       'Content-Type': 'application/json',
     });
 
-    return this.http.put<any>(
-      `http://localhost:8080/cart/putCart/` + id,
-      {},
-      { headers }
-    );
+    return this.http.put<any>(this.url + `cart/putCart/` + id, {}, { headers });
   }
 }
