@@ -38,6 +38,7 @@ import { TerminosCondicionesComponent } from './terminos-condiciones/terminos-co
 import { PreguntasFrecuentesComponent } from './preguntas-frecuentes/preguntas-frecuentes.component';
 import { HistorialServiciosComponent } from './historial-servicios/historial-servicios.component';
 import { GenerarPresupuestoComponent } from './generar-presupuesto/generar-presupuesto.component';
+import { TurnosComponent } from './turnos/turnos.component';
 
 export const routes: Routes = [
   {
@@ -159,6 +160,7 @@ export const routes: Routes = [
       { path: 'chatbot', component: ChatbotComponent },
       { path: 'historial-servicios', component: HistorialServiciosComponent },
       { path: 'generar-presupuesto', component: GenerarPresupuestoComponent },
+      { path: 'turnos', component: TurnosComponent },
     ],
   },
 ];
