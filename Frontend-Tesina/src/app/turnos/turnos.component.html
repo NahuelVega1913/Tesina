@@ -3,27 +3,33 @@
     <p class="font-bold text-5xl text-center p-10">Turnos</p>
   </div>
   <!--TURNOS-->
-  <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4 p-10">
-    <div
-      class="bg-blue-500 rounded-2xl h-10 w-60 text-white font-bold justify-center items-center align-middle mx-auto mb-5"
-    >
-      <p class="text-center mx-auto">Lunes</p>
+  <div class="flex flex-wrap justify-center gap-4 p-10">
+    @for (item of obtenerProximosDias(); track $index) { @if($index != 0){
+    <div class="flex flex-col">
+      <div
+        class="bg-blue-500 rounded-2xl h-10 w-60 text-white font-bold justify-center items-center align-middle mx-auto mb-5"
+      >
+        <p class="text-center mx-auto">{{ item.valueOf() }}</p>
+      </div>
+      @if(item.valueOf() == "sábado" || item.valueOf() == "domingo") {
+      <div
+        class="h-100 w-60 bg-red-500 text-center text-white rounded-2xl font-bold"
+      >
+        Cerrado
+      </div>
+
+      }
     </div>
-    <div
-      class="bg-blue-500 rounded-2xl h-10 w-60 text-white font-bold justify-center items-center align-middle mx-auto mb-5"
-    >
-      <p class="text-center mx-auto">Lunes</p>
+    }@else {
+    <div class="flex flex-col">
+      <div
+        class="bg-blue-500 rounded-2xl h-10 w-60 text-white font-bold justify-center items-center align-middle mx-auto mb-5"
+      >
+        <p class="text-center mx-auto">Hoy</p>
+      </div>
     </div>
-    <div
-      class="bg-blue-500 rounded-2xl h-10 w-60 text-white font-bold justify-center items-center align-middle mx-auto mb-5"
-    >
-      <p class="text-center mx-auto">Lunes</p>
-    </div>
-    <div
-      class="bg-blue-500 rounded-2xl h-10 w-60 text-white font-bold justify-center items-center align-middle mx-auto mb-5"
-    >
-      <p class="text-center mx-auto">Lunes</p>
-    </div>
+    } }
   </div>
+
   <!--TURNOS-->
 </div>
