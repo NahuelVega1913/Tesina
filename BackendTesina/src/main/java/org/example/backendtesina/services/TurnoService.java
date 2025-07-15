@@ -30,6 +30,7 @@ public class TurnoService {
                 p.setHoraFin(x.getHoraFin());
             }
             p.setUserid(x.getUser().getEmail());
+            p.set
         }
         return null;
 
