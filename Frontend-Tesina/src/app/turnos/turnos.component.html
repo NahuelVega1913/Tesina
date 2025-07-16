@@ -39,11 +39,20 @@
       >
         9:00 - 11:00
         <div
+          *ngIf="getEstadoTurno(item, '9:00 - 11:00') === 'lleno'; else libre1"
           class="text-xs text-red-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-red-200"
         >
           <div class="rounded-full bg-red-500 h-3 w-3 m-1"></div>
           <p class="text-xs font-semibolds text-red-600">Lleno</p>
         </div>
+        <ng-template #libre1>
+          <div
+            class="text-xs text-green-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-green-200"
+          >
+            <div class="rounded-full bg-green-500 h-3 w-3 m-1"></div>
+            <p class="text-xs font-semibolds text-green-600">Libre</p>
+          </div>
+        </ng-template>
       </div>
 
       <div
@@ -58,11 +67,20 @@
       >
         11:00 - 13:00
         <div
-          class="text-xs text-red-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-green-200 hover:bg-blue-300"
+          *ngIf="getEstadoTurno(item, '11:00 - 13:00') === 'lleno'; else libre2"
+          class="text-xs text-red-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-red-200"
         >
-          <div class="rounded-full bg-green-500 h-3 w-3 m-1"></div>
-          <p class="text-xs font-semibolds text-green-600">Libre</p>
+          <div class="rounded-full bg-red-500 h-3 w-3 m-1"></div>
+          <p class="text-xs font-semibolds text-red-600">Lleno</p>
         </div>
+        <ng-template #libre2>
+          <div
+            class="text-xs text-green-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-green-200"
+          >
+            <div class="rounded-full bg-green-500 h-3 w-3 m-1"></div>
+            <p class="text-xs font-semibolds text-green-600">Libre</p>
+          </div>
+        </ng-template>
       </div>
       <div
         class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-blue-200 p-3 m-2"
@@ -75,6 +93,21 @@
         style="cursor: pointer"
       >
         14:00 - 16:00
+        <div
+          *ngIf="getEstadoTurno(item, '14:00 - 16:00') === 'lleno'; else libre3"
+          class="text-xs text-red-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-red-200"
+        >
+          <div class="rounded-full bg-red-500 h-3 w-3 m-1"></div>
+          <p class="text-xs font-semibolds text-red-600">Lleno</p>
+        </div>
+        <ng-template #libre3>
+          <div
+            class="text-xs text-green-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-green-200"
+          >
+            <div class="rounded-full bg-green-500 h-3 w-3 m-1"></div>
+            <p class="text-xs font-semibolds text-green-600">Libre</p>
+          </div>
+        </ng-template>
       </div>
       <div
         class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-blue-200 p-3 m-2"
@@ -87,6 +120,21 @@
         style="cursor: pointer"
       >
         16:00 - 18:00
+        <div
+          *ngIf="getEstadoTurno(item, '16:00 - 18:00') === 'lleno'; else libre4"
+          class="text-xs text-red-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-red-200"
+        >
+          <div class="rounded-full bg-red-500 h-3 w-3 m-1"></div>
+          <p class="text-xs font-semibolds text-red-600">Lleno</p>
+        </div>
+        <ng-template #libre4>
+          <div
+            class="text-xs text-green-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-green-200"
+          >
+            <div class="rounded-full bg-green-500 h-3 w-3 m-1"></div>
+            <p class="text-xs font-semibolds text-green-600">Libre</p>
+          </div>
+        </ng-template>
       </div>
       }
     </div>

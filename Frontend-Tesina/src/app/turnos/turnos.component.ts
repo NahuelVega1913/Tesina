@@ -98,11 +98,55 @@ export class TurnosComponent {
             'Su turno ha sido seleccionado.',
             'success'
           );
+          // Actualizar la lista de turnos después de reservar
+          this.service.getAllTurnos().subscribe((turnos) => {
+            this.turnos = turnos;
+          });
         },
         error: () => {
           Swal.fire('Error', 'No se pudo reservar el turno.', 'error');
         },
       });
     }
+  }
+
+  // Devuelve el estado del turno para un día y horario específico
+  getEstadoTurno(dia: string, hora: string): 'lleno' | 'libre' {
+    // Buscar si existe un turno reservado para ese día y horario
+    const diasSemana = [
+      'domingo',
+      'lunes',
+      'martes',
+      'miércoles',
+      'jueves',
+      'viernes',
+      'sábado',
+    ];
+    // Buscar la fecha correspondiente al día
+    const hoy = new Date();
+    let diaIndex = diasSemana.indexOf(dia.toLowerCase());
+    if (diaIndex === -1) diaIndex = hoy.getDay();
+    let diasHasta = (diaIndex - hoy.getDay() + 7) % 7;
+    const fechaTurno = new Date(hoy);
+    fechaTurno.setDate(hoy.getDate() + diasHasta);
+
+    // Parsear hora inicio y fin
+    const [horaInicioStr, horaFinStr] = hora.split(' - ');
+    function parseHora(hora: string) {
+      const [h, m] = hora.split(':').map(Number);
+      const d = new Date(fechaTurno);
+      d.setHours(h, m, 0, 0);
+      return d.toISOString();
+    }
+    const horaInicio = parseHora(horaInicioStr);
+
+    // Buscar si hay un turno reservado para ese horario
+    const ocupado = this.turnos.some(
+      (t) =>
+        t.horaInicio &&
+        t.horaInicio.substring(0, 16) === horaInicio.substring(0, 16) &&
+        t.estado !== 'cancelado'
+    );
+    return ocupado ? 'lleno' : 'libre';
   }
 }

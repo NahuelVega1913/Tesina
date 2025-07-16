@@ -28,9 +28,11 @@ public class TurnoController {
         return ResponseEntity.ok(turnos);
     }
 
+
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @PostMapping( "/postturno")
     public ResponseEntity<?> postTurno(@RequestBody PostTurno turno){
-        TurnoEntity createdTurno = turnoService.postTurno(turno);
+        PostTurno createdTurno = turnoService.postTurno(turno);
         if (createdTurno == null) {
             return ResponseEntity.badRequest().body("Error al crear el turno");
         }
@@ -39,7 +41,7 @@ public class TurnoController {
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @PutMapping( "/putturno")
     public ResponseEntity<?> putTurno(@RequestBody PostTurno turno){
-        TurnoEntity createdTurno = turnoService.putTurno(turno);
+        PostTurno createdTurno = turnoService.putTurno(turno);
         if (createdTurno == null) {
             return ResponseEntity.badRequest().body("Error al crear el turno");
         }

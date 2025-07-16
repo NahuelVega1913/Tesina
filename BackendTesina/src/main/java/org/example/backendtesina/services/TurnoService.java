@@ -37,6 +37,7 @@ public class TurnoService {
             p.setEstado(x.getEstado());
             p.setServiceId(x.getService().getId());
             p.setHoraInicio(x.getHoraInicio());
+            p.setId(x.getId());
             if(x.getHoraFin() != null){
                 p.setHoraFin(x.getHoraFin());
             }
@@ -46,7 +47,7 @@ public class TurnoService {
         return dtos;
 
     }
-    public TurnoEntity postTurno(PostTurno turno){
+    public PostTurno postTurno(PostTurno turno){
         try {
             TurnoEntity entity = new TurnoEntity();
             entity.setEstado(turno.getEstado());
@@ -65,14 +66,25 @@ public class TurnoService {
             }
             entity.setService(service);
 
-            return repository.save(entity);
+             repository.save(entity);
+            PostTurno p = new PostTurno();
+            p.setId(entity.getId());
+            p.setEstado(entity.getEstado());
+            p.setServiceId(entity.getService().getId());
+            p.setHoraInicio(entity.getHoraInicio());
+            if(entity.getHoraFin() != null){
+                p.setHoraFin(entity.getHoraFin());
+            }
+            p.setEmailUser(entity.getUser().getEmail());
+            return p;
+
 
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al guardar turno: " + ex.getMessage());
         }
     }
-    public TurnoEntity putTurno(PostTurno turno){
+    public PostTurno putTurno(PostTurno turno){
         TurnoEntity existingTurno = repository.findById(turno.getId()).orElse(null);
         if (existingTurno == null) {
             return null; // Si el turno no existe, retorna null
@@ -99,6 +111,17 @@ public class TurnoService {
             }
         }
 
-        return repository.save(existingTurno);
+        repository.save(existingTurno);
+        PostTurno p = new PostTurno();
+        p.setId(existingTurno.getId());
+        p.setEstado(existingTurno.getEstado());
+        p.setServiceId(existingTurno.getService().getId());
+        p.setHoraInicio(existingTurno.getHoraInicio());
+        if(existingTurno.getHoraFin() != null){
+            p.setHoraFin(existingTurno.getHoraFin());
+        }
+        p.setEmailUser(existingTurno.getUser().getEmail());
+        return p;
+
     }
 }
