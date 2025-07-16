@@ -7,7 +7,9 @@ import org.example.backendtesina.entities.services.TurnoEntity;
 import org.example.backendtesina.repositories.SeviceRepository;
 import org.example.backendtesina.repositories.TurnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,25 +47,30 @@ public class TurnoService {
 
     }
     public TurnoEntity postTurno(PostTurno turno){
-        TurnoEntity entity = new TurnoEntity();
-        entity.setEstado(turno.getEstado());
-        entity.setHoraInicio(turno.getHoraInicio());
-        entity.setHoraFin(turno.getHoraFin());
+        try {
+            TurnoEntity entity = new TurnoEntity();
+            entity.setEstado(turno.getEstado());
+            entity.setHoraInicio(turno.getHoraInicio());
+            entity.setHoraFin(turno.getHoraFin());
 
-        // Asignar relaciones con usuario y servicio
-        UserEntity user = userService.getEntity(turno.getEmailUser());
-        if (user == null) {
-            return null; // Si el usuario no existe, retorna null
+            UserEntity user = userService.getEntity(turno.getEmailUser());
+            if (user == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
+            }
+            entity.setUser(user);
+
+            ServiceEntity service = serviceRepository.findById(turno.getServiceId()).orElse(null);
+            if (service == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Servicio no encontrado");
+            }
+            entity.setService(service);
+
+            return repository.save(entity);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al guardar turno: " + ex.getMessage());
         }
-        entity.setUser(user);
-
-        ServiceEntity service = serviceRepository.findById(turno.getServiceId()).orElse(null);
-        if (service == null) {
-            return null; // Si el servicio no existe, retorna null
-        }
-        entity.setService(service);
-
-        return repository.save(entity); // Guarda el turno en la base de datos
     }
     public TurnoEntity putTurno(PostTurno turno){
         TurnoEntity existingTurno = repository.findById(turno.getId()).orElse(null);

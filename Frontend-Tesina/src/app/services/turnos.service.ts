@@ -11,15 +11,15 @@ export class TurnosService {
   url = environment.apiUrl;
 
   getAllTurnos() {
-    return this.http.get<any>(this.url + `turnos/getAll`, {
+    return this.http.get<any>(this.url + `turnos/getall`, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         'Content-Type': 'application/json',
       },
     });
   }
-  postUsuario(body: any) {
-    return this.http.post<any>(this.url + `turnos/postTurno`, body, {
+  postTurno(body: any) {
+    return this.http.post<any>(this.url + `turnos/postturno`, body, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         'Content-Type': 'application/json',

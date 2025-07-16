@@ -1,9 +1,6 @@
 package org.example.backendtesina.entities.services;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import org.example.backendtesina.entities.personal.UserEntity;
 
 import java.time.LocalDateTime;
@@ -13,6 +10,8 @@ import java.util.Date;
 public class TurnoEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
     private LocalDateTime horaInicio;
 

@@ -29,6 +29,7 @@ export class LoginComponent {
     const addSubscription = this.service.login(body).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.token);
+        localStorage.setItem('email', body.email);
         localStorage.setItem('name', response.name);
         localStorage.setItem('lastname', response.lastname);
         localStorage.setItem('role', response.role);

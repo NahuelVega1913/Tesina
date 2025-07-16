@@ -29,6 +29,13 @@
       }@else{
       <div
         class="h-30 w-60 rounded-2xl font-bold text-gray-500 border-gray-100 bg-blue-200 p-3 m-2 hover:bg-blue-300"
+        (click)="seleccionarTurno({ dia: item, hora: '9:00 - 11:00' })"
+        [ngClass]="{
+          'ring-4 ring-blue-600':
+            turnoSeleccionado?.dia === item &&
+            turnoSeleccionado?.hora === '9:00 - 11:00'
+        }"
+        style="cursor: pointer"
       >
         9:00 - 11:00
         <div
@@ -41,6 +48,13 @@
 
       <div
         class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-blue-200 p-3 m-2"
+        (click)="seleccionarTurno({ dia: item, hora: '11:00 - 13:00' })"
+        [ngClass]="{
+          'ring-4 ring-blue-600':
+            turnoSeleccionado?.dia === item &&
+            turnoSeleccionado?.hora === '11:00 - 13:00'
+        }"
+        style="cursor: pointer"
       >
         11:00 - 13:00
         <div
@@ -52,11 +66,25 @@
       </div>
       <div
         class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-blue-200 p-3 m-2"
+        (click)="seleccionarTurno({ dia: item, hora: '14:00 - 16:00' })"
+        [ngClass]="{
+          'ring-4 ring-blue-600':
+            turnoSeleccionado?.dia === item &&
+            turnoSeleccionado?.hora === '14:00 - 16:00'
+        }"
+        style="cursor: pointer"
       >
         14:00 - 16:00
       </div>
       <div
         class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-blue-200 p-3 m-2"
+        (click)="seleccionarTurno({ dia: item, hora: '16:00 - 18:00' })"
+        [ngClass]="{
+          'ring-4 ring-blue-600':
+            turnoSeleccionado?.dia === item &&
+            turnoSeleccionado?.hora === '16:00 - 18:00'
+        }"
+        style="cursor: pointer"
       >
         16:00 - 18:00
       </div>

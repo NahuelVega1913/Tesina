@@ -11,15 +11,15 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
-@RestController("/turnos")
+@RestController
+@RequestMapping("/turnos")
 public class TurnoController {
 
     @Autowired
     private TurnoService turnoService;
 
-
-    @GetMapping(value = "getAll")
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @GetMapping( "/getall")
     public ResponseEntity<?> getAll(){
         List<PostTurno> turnos = turnoService.getAllTurnos();
         if (turnos.isEmpty()) {
@@ -28,10 +28,7 @@ public class TurnoController {
         return ResponseEntity.ok(turnos);
     }
 
-
-
-    @PostMapping(value = "postTurno")
-    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PostMapping( "/postturno")
     public ResponseEntity<?> postTurno(@RequestBody PostTurno turno){
         TurnoEntity createdTurno = turnoService.postTurno(turno);
         if (createdTurno == null) {
@@ -39,8 +36,8 @@ public class TurnoController {
         }
         return ResponseEntity.ok(createdTurno);
     }
-    @PutMapping(value = "putTurno")
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @PutMapping( "/putturno")
     public ResponseEntity<?> putTurno(@RequestBody PostTurno turno){
         TurnoEntity createdTurno = turnoService.putTurno(turno);
         if (createdTurno == null) {
