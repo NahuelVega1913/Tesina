@@ -7,46 +7,56 @@
     @for (item of obtenerProximosDias(); track $index) {
     <div class="flex flex-col">
       <div
+        [ngClass]="{
+          'bg-red-500':
+            item.valueOf() == 'sábado' || item.valueOf() == 'domingo'
+        }"
         class="bg-blue-500 rounded-2xl h-10 w-60 text-white font-bold justify-center items-center align-middle mx-auto mb-5"
       >
         @if($index != 0){
-        <p class="text-center mx-auto">{{ item.valueOf() }}</p>
+        <p class="text-center mx-auto font-sans">{{ item.valueOf() }}</p>
         } @else {
         <p class="text-center mx-auto">Hoy</p>
         }
       </div>
       @if(item.valueOf() == "sábado" || item.valueOf() == "domingo") {
       <div
-        class="h-100 w-60 bg-red-500 text-center text-white rounded-2xl font-bold"
+        class="h-full m-2 w-60 bg-red-500 text-center text-white rounded-2xl font-bold"
       >
         Cerrado
       </div>
 
       }@else{
       <div
-        class="h-30 w-60 rounded-2xl font-bold text-gray-500 border-gray-100 bg-gray-200 p-3 m-2"
+        class="h-30 w-60 rounded-2xl font-bold text-gray-500 border-gray-100 bg-blue-200 p-3 m-2 hover:bg-blue-300"
       >
         9:00 - 11:00
         <div
-          class="text-xs text-red-50 flex flex-row h-5 w-15 border rounded-4xl bg-red-200"
+          class="text-xs text-red-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-red-200"
         >
-          <div class="rounded-full bg-red-500 h-3 w-3 mx-autos"></div>
-          <p class="text-xs font-semibolds">Lleno</p>
+          <div class="rounded-full bg-red-500 h-3 w-3 m-1"></div>
+          <p class="text-xs font-semibolds text-red-600">Lleno</p>
         </div>
       </div>
 
       <div
-        class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-gray-200 p-3 m-2"
+        class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-blue-200 p-3 m-2"
       >
         11:00 - 13:00
+        <div
+          class="text-xs text-red-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-green-200 hover:bg-blue-300"
+        >
+          <div class="rounded-full bg-green-500 h-3 w-3 m-1"></div>
+          <p class="text-xs font-semibolds text-green-600">Libre</p>
+        </div>
       </div>
       <div
-        class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-gray-200 p-3 m-2"
+        class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-blue-200 p-3 m-2"
       >
         14:00 - 16:00
       </div>
       <div
-        class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-gray-200 p-3 m-2"
+        class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-blue-200 p-3 m-2"
       >
         16:00 - 18:00
       </div>

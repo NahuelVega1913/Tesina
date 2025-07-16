@@ -13,7 +13,7 @@ public class PostTurno {
     private  LocalDateTime horaFin;
     private String estado;
 
-    private String Userid;
+    private String EmailUser;
 
     private Integer ServiceId;
 
@@ -50,13 +50,7 @@ public class PostTurno {
         this.estado = estado;
     }
 
-    public String getUserid() {
-        return Userid;
-    }
 
-    public void setUserid(String userid) {
-        Userid = userid;
-    }
 
     public Integer getServiceId() {
         return ServiceId;
@@ -64,5 +58,13 @@ public class PostTurno {
 
     public void setServiceId(Integer serviceId) {
         ServiceId = serviceId;
+    }
+
+    public String getEmailUser() {
+        return EmailUser;
+    }
+
+    public void setEmailUser(String emailUser) {
+        EmailUser = emailUser;
     }
 }

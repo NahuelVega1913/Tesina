@@ -1,30 +1,51 @@
 package org.example.backendtesina.controllers;
 
+import org.example.backendtesina.DTOs.Post.PostTurno;
+import org.example.backendtesina.entities.services.TurnoEntity;
+import org.example.backendtesina.services.TurnoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
+
+import java.util.List;
 
 @RestController("/turnos")
 public class TurnoController {
 
+    @Autowired
+    private TurnoService turnoService;
 
 
     @GetMapping(value = "getAll")
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     public ResponseEntity<?> getAll(){
-        return ResponseEntity.badRequest().build();
+        List<PostTurno> turnos = turnoService.getAllTurnos();
+        if (turnos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(turnos);
     }
 
 
 
     @PostMapping(value = "postTurno")
-    public ResponseEntity<?> postTurno(){
-        return ResponseEntity.badRequest().build();
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    public ResponseEntity<?> postTurno(@RequestBody PostTurno turno){
+        TurnoEntity createdTurno = turnoService.postTurno(turno);
+        if (createdTurno == null) {
+            return ResponseEntity.badRequest().body("Error al crear el turno");
+        }
+        return ResponseEntity.ok(createdTurno);
     }
     @PutMapping(value = "putTurno")
-    public ResponseEntity<?> putTurno(){
-        return ResponseEntity.badRequest().build();
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    public ResponseEntity<?> putTurno(@RequestBody PostTurno turno){
+        TurnoEntity createdTurno = turnoService.putTurno(turno);
+        if (createdTurno == null) {
+            return ResponseEntity.badRequest().body("Error al crear el turno");
+        }
+        return ResponseEntity.ok(createdTurno);
     }
 }
