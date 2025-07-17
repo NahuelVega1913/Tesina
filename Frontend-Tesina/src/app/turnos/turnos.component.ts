@@ -129,6 +129,18 @@ export class TurnosComponent {
     return 'libre';
   }
 
+  isTurnoLleno(fecha: string, horaInicio: string): boolean {
+    // Normaliza la hora a formato HH:mm
+    const [h, m] = horaInicio.split(':').map(Number);
+    const horaNorm = `${h.toString().padStart(2, '0')}:${(m || 0)
+      .toString()
+      .padStart(2, '0')}`;
+    const turno = this.turnos.find(
+      (t) => t.fecha === fecha && t.horaInicio === horaNorm
+    );
+    return !!turno && turno.lugaresLibres <= 0;
+  }
+
   getFechaByIndex(index: number): string {
     const hoy = new Date();
     hoy.setDate(hoy.getDate() + index);
