@@ -186,13 +186,39 @@ export class TurnosComponent {
     return turno ? turno.lugaresLibres : 5;
   }
 
-  // Acción extra para el botón (puedes cambiar el nombre y lógica)
+  // Acción extra para el botón: cancelar turno
   accionExtraUsuario() {
-    // Aquí va la acción que desees para el usuario
-    Swal.fire(
-      'Acción de usuario',
-      'Botón solo visible para USER con turno seleccionado.',
-      'info'
-    );
+    if (!this.turnoSeleccionado) return;
+    // Construir el objeto con los campos requeridos por el backend
+    const turnoCancel = {
+      id: this.turnoSeleccionado.id ?? null,
+      horaInicio: this.turnoSeleccionado.horaInicio ?? null,
+      horaFin: this.turnoSeleccionado.horaFin ?? null,
+      estado: this.turnoSeleccionado.estado ?? null,
+      EmailUser:
+        this.turnoSeleccionado.emailUser ??
+        this.turnoSeleccionado.EmailUser ??
+        null,
+      ServiceId:
+        this.turnoSeleccionado.serviceId ??
+        this.turnoSeleccionado.ServiceId ??
+        null,
+    };
+    this.service.cancelarTurno(turnoCancel).subscribe({
+      next: () => {
+        this.turnoSeleccionado = null;
+        Swal.fire(
+          'Turno cancelado',
+          'El turno fue cancelado correctamente.',
+          'success'
+        );
+        this.service.getAllTurnos().subscribe((turnos) => {
+          this.turnos = turnos;
+        });
+      },
+      error: () => {
+        Swal.fire('Error', 'No se pudo cancelar el turno.', 'error');
+      },
+    });
   }
 }
