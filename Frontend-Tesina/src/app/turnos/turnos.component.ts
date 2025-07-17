@@ -15,18 +15,15 @@ export class TurnosComponent {
   turnos: any[] = [];
   turnoSeleccionado: any = null;
 
-  obtenerProximosDias(cantidad: number = 5): string[] {
+  obtenerProximosDias(cantidad: number = 6): string[] {
     const dias: string[] = [];
     const hoy = new Date();
     for (let i = 0; i < cantidad; i++) {
       const dia = new Date(hoy);
       dia.setDate(hoy.getDate() + i);
-
-      // Formato legible: Lunes 15/07
       const formato = dia.toLocaleDateString('es-AR', {
         weekday: 'long',
       });
-
       dias.push(formato);
     }
     return dias;

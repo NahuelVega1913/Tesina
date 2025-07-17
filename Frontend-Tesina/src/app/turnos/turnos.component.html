@@ -3,13 +3,13 @@
     <p class="font-bold text-5xl text-center p-10">Turnos</p>
   </div>
   <div class="flex flex-wrap justify-center gap-4 p-10">
-    @for (item of obtenerProximosDias(); track $index) {
+    @for (item of obtenerProximosDias(); track $index) { @if(item.valueOf() !=
+    "domingo") {
     <div class="flex flex-col">
       <!-- Header del día -->
       <div
         [ngClass]="{
-          'bg-red-500':
-            item.valueOf() == 'sábado' || item.valueOf() == 'domingo'
+          'bg-red-500': item.valueOf() == 'sábado'
         }"
         class="bg-blue-500 rounded-2xl h-10 w-60 text-white font-bold flex justify-center items-center mx-auto mb-5"
       >
@@ -19,8 +19,8 @@
         <p class="text-center mx-auto">Hoy</p>
         }
       </div>
-      <!-- Si es sábado o domingo, mostrar cerrado -->
-      @if(item.valueOf() == "sábado" || item.valueOf() == "domingo") {
+      <!-- Si es sábado, mostrar cerrado -->
+      @if(item.valueOf() == "sábado") {
       <div
         class="h-full m-2 w-60 bg-red-500 text-center text-white rounded-2xl font-bold"
       >
@@ -159,7 +159,7 @@
       </div>
       }
     </div>
-    }
+    } }
   </div>
 </div>
 <!--TURNOS-->
