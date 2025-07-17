@@ -74,7 +74,13 @@ export class TurnosComponent {
         const [h, m] = hora.split(':').map(Number);
         const d = new Date(fechaTurno);
         d.setHours(h, m, 0, 0);
-        return d.toISOString();
+        // Retorna fecha y hora en formato local: YYYY-MM-DDTHH:mm:00
+        const yyyy = d.getFullYear();
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const dd = String(d.getDate()).padStart(2, '0');
+        const hh = String(d.getHours()).padStart(2, '0');
+        const min = String(d.getMinutes()).padStart(2, '0');
+        return `${yyyy}-${mm}-${dd}T${hh}:${min}:00`;
       }
 
       const emailUser = localStorage.getItem('email') || '';
@@ -116,7 +122,9 @@ export class TurnosComponent {
       (t) => t.fecha === fecha && t.horaInicio === horaInicio
     );
     if (turno) {
-      return turno.lugaresLibres === 0 ? 'lleno' : 'libre';
+      return turno.lugaresLibres === 0 || turno.lugaresLibres < 0
+        ? 'lleno'
+        : 'libre';
     }
     return 'libre';
   }
