@@ -39,7 +39,10 @@ public class TurnoService {
         LocalDateTime sixDaysLater = now.plusDays(6);
 
         for (TurnoEntity turno : entities) {
-            if (turno.getHoraInicio().isAfter(now) && turno.getHoraInicio().isBefore(sixDaysLater)) {
+            if (!"CANCELADO".equals(turno.getEstado()) &&
+                    turno.getHoraInicio().isAfter(now) &&
+                    turno.getHoraInicio().isBefore(sixDaysLater)) {
+
                 GetTurno dto = new GetTurno();
                 dto.setFecha(java.sql.Date.valueOf(turno.getHoraInicio().toLocalDate()));
                 dto.setHoraInicio(turno.getHoraInicio().toLocalTime().toString());
@@ -135,5 +138,20 @@ public class TurnoService {
         p.setEmailUser(existingTurno.getUser().getEmail());
         return p;
 
+    }
+    public PostTurno cancelarTurno(PostTurno turnoDto) {
+
+        // Buscar el turno por ID
+        Integer turnoId = turnoDto.getId();
+        TurnoEntity turno = repository.findById(turnoId).orElse(null);
+
+        if (turno == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Turno no encontrado");
+        }
+
+        // Actualizar el estado del turno a "CANCELADO"
+        turno.setEstado("CANCELADO");
+        repository.save(turno);
+        return turnoDto;
     }
 }
