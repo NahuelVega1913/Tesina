@@ -134,8 +134,9 @@ export class TurnosComponent {
     // Si el string es un rango, toma la hora de inicio
     const horaInicio = hora.includes('-') ? hora.split('-')[0].trim() : hora;
     const [h, m] = horaInicio.split(':').map(Number);
-    const fechaHora = new Date(fecha);
-    fechaHora.setHours(h, m, 0, 0);
+    // Crear fecha local con la hora deseada
+    const [anio, mes, dia] = fecha.split('-').map(Number);
+    const fechaHora = new Date(anio, mes - 1, dia, h, m, 0, 0);
     return hoy >= fechaHora;
   }
 }
