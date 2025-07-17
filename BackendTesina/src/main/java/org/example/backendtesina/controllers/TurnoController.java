@@ -49,7 +49,7 @@ public class TurnoController {
         return ResponseEntity.ok(createdTurno);
     }
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
-    @PutMapping("/cancelar/{id}")
+    @PutMapping("/cancelar")
     public ResponseEntity<?> cancelarTurno(@RequestBody PostTurno turno) {
 
            PostTurno response = turnoService.cancelarTurno(turno);

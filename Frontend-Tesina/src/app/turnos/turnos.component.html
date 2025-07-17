@@ -136,6 +136,12 @@
         >
           Lleno
         </span>
+        <span
+          *ngIf="isAdmin"
+          class="absolute bottom-2 right-2 bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+        >
+          Libres: {{ getLugaresLibres(getFechaByIndex($index), "14:00") }}
+        </span>
       </div>
       <div
         class="h-30 w-60 rounded-2xl font-bold border-gray-100 p-3 m-2 hover:bg-blue-300 relative"
@@ -168,10 +174,28 @@
         >
           Lleno
         </span>
+        <span
+          *ngIf="isAdmin"
+          class="absolute bottom-2 right-2 bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+        >
+          Libres: {{ getLugaresLibres(getFechaByIndex($index), "16:00") }}
+        </span>
       </div>
       }
     </div>
     } }
+  </div>
+  <!-- Botón cancelar turno (ya existente) -->
+  <!-- ...tu botón de cancelar turno aquí... -->
+
+  <!-- Botón adicional solo para USER y si hay turno seleccionado -->
+  <div class="flex justify-center mt-4" *ngIf="isUser">
+    <button
+      class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      (click)="accionExtraUsuario()"
+    >
+      Cancelar turno
+    </button>
   </div>
 </div>
 <!--TURNOS-->

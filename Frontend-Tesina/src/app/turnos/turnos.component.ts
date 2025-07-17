@@ -15,6 +15,20 @@ export class TurnosComponent {
   turnos: any[] = [];
   turnoSeleccionado: any = null;
   isAdmin: boolean = false;
+  isUser: boolean = false;
+
+  ngOnInit(): void {
+    this.service.getAllTurnos().subscribe((turnos) => {
+      this.turnos = turnos;
+    });
+    const rol = (localStorage.getItem('role') || '').toUpperCase();
+    this.isAdmin = rol === 'ADMIN' || rol === 'SUPERADMIN';
+    this.isUser = rol === 'USER';
+    // Si el usuario es USER y no hay turnoSeleccionado, inicializa con un objeto vacío para mostrar el botón
+    if (this.isUser && !this.turnoSeleccionado) {
+      this.turnoSeleccionado = {};
+    }
+  }
 
   obtenerProximosDias(cantidad: number = 6): string[] {
     const dias: string[] = [];
@@ -28,14 +42,6 @@ export class TurnosComponent {
       dias.push(formato);
     }
     return dias;
-  }
-
-  ngOnInit(): void {
-    this.service.getAllTurnos().subscribe((turnos) => {
-      this.turnos = turnos;
-    });
-    const rol = localStorage.getItem('role');
-    this.isAdmin = rol === 'ADMIN' || rol === 'SUPERADMIN';
   }
 
   async seleccionarTurno(turno: any) {
@@ -178,5 +184,15 @@ export class TurnosComponent {
         (t.horaInicio === horaNorm || t.horaInicio === horaInicio)
     );
     return turno ? turno.lugaresLibres : 5;
+  }
+
+  // Acción extra para el botón (puedes cambiar el nombre y lógica)
+  accionExtraUsuario() {
+    // Aquí va la acción que desees para el usuario
+    Swal.fire(
+      'Acción de usuario',
+      'Botón solo visible para USER con turno seleccionado.',
+      'info'
+    );
   }
 }

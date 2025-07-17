@@ -26,4 +26,12 @@ export class TurnosService {
       },
     });
   }
+  cancelarTurno(body: any) {
+    return this.http.put<any>(this.url + `turnos/cancelar`, body, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
+  }
 }
