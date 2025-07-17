@@ -110,43 +110,32 @@ export class TurnosComponent {
     }
   }
 
-  // Devuelve el estado del turno para un día y horario específico
-  getEstadoTurno(dia: string, hora: string): 'lleno' | 'libre' {
-    // Buscar si existe un turno reservado para ese día y horario
-    const diasSemana = [
-      'domingo',
-      'lunes',
-      'martes',
-      'miércoles',
-      'jueves',
-      'viernes',
-      'sábado',
-    ];
-    // Buscar la fecha correspondiente al día
-    const hoy = new Date();
-    let diaIndex = diasSemana.indexOf(dia.toLowerCase());
-    if (diaIndex === -1) diaIndex = hoy.getDay();
-    let diasHasta = (diaIndex - hoy.getDay() + 7) % 7;
-    const fechaTurno = new Date(hoy);
-    fechaTurno.setDate(hoy.getDate() + diasHasta);
-
-    // Parsear hora inicio y fin
-    const [horaInicioStr, horaFinStr] = hora.split(' - ');
-    function parseHora(hora: string) {
-      const [h, m] = hora.split(':').map(Number);
-      const d = new Date(fechaTurno);
-      d.setHours(h, m, 0, 0);
-      return d.toISOString();
-    }
-    const horaInicio = parseHora(horaInicioStr);
-
-    // Buscar si hay un turno reservado para ese horario
-    const ocupado = this.turnos.some(
-      (t) =>
-        t.horaInicio &&
-        t.horaInicio.substring(0, 16) === horaInicio.substring(0, 16) &&
-        t.estado !== 'cancelado'
+  // Cambia la firma para recibir fecha y horaInicio
+  getEstadoTurno(fecha: string, horaInicio: string): 'lleno' | 'libre' {
+    const turno = this.turnos.find(
+      (t) => t.fecha === fecha && t.horaInicio === horaInicio
     );
-    return ocupado ? 'lleno' : 'libre';
+    if (turno) {
+      return turno.lugaresLibres === 0 ? 'lleno' : 'libre';
+    }
+    return 'libre';
+  }
+
+  getFechaByIndex(index: number): string {
+    const hoy = new Date();
+    hoy.setDate(hoy.getDate() + index);
+    return hoy.toISOString().substring(0, 10);
+  }
+
+  isHorarioPasado(fecha: string, hora: string): boolean {
+    const hoy = new Date();
+    const fechaActualStr = hoy.toISOString().substring(0, 10);
+    if (fecha !== fechaActualStr) return false;
+    // Si el string es un rango, toma la hora de inicio
+    const horaInicio = hora.includes('-') ? hora.split('-')[0].trim() : hora;
+    const [h, m] = horaInicio.split(':').map(Number);
+    const fechaHora = new Date(fecha);
+    fechaHora.setHours(h, m, 0, 0);
+    return hoy >= fechaHora;
   }
 }

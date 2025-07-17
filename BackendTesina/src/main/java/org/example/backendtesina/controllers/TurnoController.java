@@ -1,6 +1,7 @@
 package org.example.backendtesina.controllers;
 
 import org.example.backendtesina.DTOs.Post.PostTurno;
+import org.example.backendtesina.DTOs.Get.GetTurno;
 import org.example.backendtesina.entities.services.TurnoEntity;
 import org.example.backendtesina.services.TurnoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class TurnoController {
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @GetMapping( "/getall")
     public ResponseEntity<?> getAll(){
-        List<PostTurno> turnos = turnoService.getAllTurnos();
+        List<GetTurno> turnos = turnoService.getAllTurnos();
         if (turnos.isEmpty()) {
             return ResponseEntity.noContent().build();
         }

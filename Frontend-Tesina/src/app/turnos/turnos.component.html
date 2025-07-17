@@ -28,18 +28,29 @@
 
       }@else{
       <div
-        class="h-30 w-60 rounded-2xl font-bold text-gray-500 border-gray-100 bg-blue-200 p-3 m-2 hover:bg-blue-300"
+        class="h-30 w-60 rounded-2xl font-bold border-gray-100 p-3 m-2 hover:bg-blue-300"
         (click)="seleccionarTurno({ dia: item, hora: '9:00 - 11:00' })"
         [ngClass]="{
+          'bg-red-500':
+            getEstadoTurno(getFechaByIndex($index), '9:00') === 'lleno',
+          'bg-blue-200':
+            getEstadoTurno(getFechaByIndex($index), '9:00') !== 'lleno',
           'ring-4 ring-blue-600':
             turnoSeleccionado?.dia === item &&
             turnoSeleccionado?.hora === '9:00 - 11:00'
         }"
+        [class.opacity-50]="isHorarioPasado(getFechaByIndex($index), '9:00')"
+        [class.pointer-events-none]="
+          isHorarioPasado(getFechaByIndex($index), '9:00')
+        "
         style="cursor: pointer"
       >
         9:00 - 11:00
         <div
-          *ngIf="getEstadoTurno(item, '9:00 - 11:00') === 'lleno'; else libre1"
+          *ngIf="
+            getEstadoTurno(getFechaByIndex($index), '9:00') === 'lleno';
+            else libre1
+          "
           class="text-xs text-red-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-red-200"
         >
           <div class="rounded-full bg-red-500 h-3 w-3 m-1"></div>
@@ -56,18 +67,29 @@
       </div>
 
       <div
-        class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-blue-200 p-3 m-2"
+        class="h-30 w-60 rounded-2xl font-bold border-gray-100 p-3 m-2 hover:bg-blue-300"
         (click)="seleccionarTurno({ dia: item, hora: '11:00 - 13:00' })"
         [ngClass]="{
+          'bg-red-500':
+            getEstadoTurno(getFechaByIndex($index), '11:00') === 'lleno',
+          'bg-blue-200':
+            getEstadoTurno(getFechaByIndex($index), '11:00') !== 'lleno',
           'ring-4 ring-blue-600':
             turnoSeleccionado?.dia === item &&
             turnoSeleccionado?.hora === '11:00 - 13:00'
         }"
+        [class.opacity-50]="isHorarioPasado(getFechaByIndex($index), '11:00')"
+        [class.pointer-events-none]="
+          isHorarioPasado(getFechaByIndex($index), '11:00')
+        "
         style="cursor: pointer"
       >
         11:00 - 13:00
         <div
-          *ngIf="getEstadoTurno(item, '11:00 - 13:00') === 'lleno'; else libre2"
+          *ngIf="
+            getEstadoTurno(getFechaByIndex($index), '11:00') === 'lleno';
+            else libre2
+          "
           class="text-xs text-red-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-red-200"
         >
           <div class="rounded-full bg-red-500 h-3 w-3 m-1"></div>
@@ -83,18 +105,29 @@
         </ng-template>
       </div>
       <div
-        class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-blue-200 p-3 m-2"
+        class="h-30 w-60 rounded-2xl font-bold border-gray-100 p-3 m-2 hover:bg-blue-300"
         (click)="seleccionarTurno({ dia: item, hora: '14:00 - 16:00' })"
         [ngClass]="{
+          'bg-red-500':
+            getEstadoTurno(getFechaByIndex($index), '14:00') === 'lleno',
+          'bg-blue-200':
+            getEstadoTurno(getFechaByIndex($index), '14:00') !== 'lleno',
           'ring-4 ring-blue-600':
             turnoSeleccionado?.dia === item &&
             turnoSeleccionado?.hora === '14:00 - 16:00'
         }"
+        [class.opacity-50]="isHorarioPasado(getFechaByIndex($index), '14:00')"
+        [class.pointer-events-none]="
+          isHorarioPasado(getFechaByIndex($index), '14:00')
+        "
         style="cursor: pointer"
       >
         14:00 - 16:00
         <div
-          *ngIf="getEstadoTurno(item, '14:00 - 16:00') === 'lleno'; else libre3"
+          *ngIf="
+            getEstadoTurno(getFechaByIndex($index), '14:00') === 'lleno';
+            else libre3
+          "
           class="text-xs text-red-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-red-200"
         >
           <div class="rounded-full bg-red-500 h-3 w-3 m-1"></div>
@@ -110,18 +143,29 @@
         </ng-template>
       </div>
       <div
-        class="h-30 w-60 rounded-2xl font-bold border-gray-100 bg-blue-200 p-3 m-2"
+        class="h-30 w-60 rounded-2xl font-bold border-gray-100 p-3 m-2 hover:bg-blue-300"
         (click)="seleccionarTurno({ dia: item, hora: '16:00 - 18:00' })"
         [ngClass]="{
+          'bg-red-500':
+            getEstadoTurno(getFechaByIndex($index), '16:00') === 'lleno',
+          'bg-blue-200':
+            getEstadoTurno(getFechaByIndex($index), '16:00') !== 'lleno',
           'ring-4 ring-blue-600':
             turnoSeleccionado?.dia === item &&
             turnoSeleccionado?.hora === '16:00 - 18:00'
         }"
+        [class.opacity-50]="isHorarioPasado(getFechaByIndex($index), '16:00')"
+        [class.pointer-events-none]="
+          isHorarioPasado(getFechaByIndex($index), '16:00')
+        "
         style="cursor: pointer"
       >
         16:00 - 18:00
         <div
-          *ngIf="getEstadoTurno(item, '16:00 - 18:00') === 'lleno'; else libre4"
+          *ngIf="
+            getEstadoTurno(getFechaByIndex($index), '16:00') === 'lleno';
+            else libre4
+          "
           class="text-xs text-red-50 flex flex-row h-6 w-15 align-middle justify-center rounded-4xl bg-red-200"
         >
           <div class="rounded-full bg-red-500 h-3 w-3 m-1"></div>

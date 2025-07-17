@@ -8,11 +8,14 @@ import org.example.backendtesina.repositories.SeviceRepository;
 import org.example.backendtesina.repositories.TurnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.example.backendtesina.DTOs.Get.GetTurno;
 
 @Service
 public class TurnoService {
@@ -29,21 +32,29 @@ public class TurnoService {
 
 
 
-    public List<PostTurno> getAllTurnos(){
+    public List<GetTurno> getAllTurnos(){
         List<TurnoEntity> entities = repository.findAll();
-        List<PostTurno> dtos = new ArrayList<>();
-        for (TurnoEntity x:entities){
-            PostTurno p = new PostTurno();
-            p.setEstado(x.getEstado());
-            p.setServiceId(x.getService().getId());
-            p.setHoraInicio(x.getHoraInicio());
-            p.setId(x.getId());
-            if(x.getHoraFin() != null){
-                p.setHoraFin(x.getHoraFin());
+        List<GetTurno> dtos = new ArrayList<>();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime sixDaysLater = now.plusDays(6);
+
+        for (TurnoEntity turno : entities) {
+            if (turno.getHoraInicio().isAfter(now) && turno.getHoraInicio().isBefore(sixDaysLater)) {
+                GetTurno dto = new GetTurno();
+                dto.setFecha(java.sql.Date.valueOf(turno.getHoraInicio().toLocalDate()));
+                dto.setHoraInicio(turno.getHoraInicio().toLocalTime().toString());
+                dto.setHoraFin(turno.getHoraFin() != null ? turno.getHoraFin().toLocalTime().toString() : null);
+
+                // Calcular lugares libres
+                long turnosEnElDia = entities.stream()
+                        .filter(t -> t.getHoraInicio().toLocalDate().equals(turno.getHoraInicio().toLocalDate()))
+                        .count();
+                dto.setLugaresLibres(1 - (int) turnosEnElDia);
+
+                dtos.add(dto);
             }
-             p.setEmailUser(x.getUser().getEmail());
-            dtos.add(p);
         }
+
         return dtos;
 
     }
@@ -53,6 +64,7 @@ public class TurnoService {
             entity.setEstado(turno.getEstado());
             entity.setHoraInicio(turno.getHoraInicio());
             entity.setHoraFin(turno.getHoraFin());
+
 
             UserEntity user = userService.getEntity(turno.getEmailUser());
             if (user == null) {
