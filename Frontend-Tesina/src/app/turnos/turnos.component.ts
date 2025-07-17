@@ -1,11 +1,11 @@
-import { NgClass } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { TurnosService } from '../services/turnos.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-turnos',
-  imports: [NgClass],
+  imports: [NgClass, CommonModule],
   templateUrl: './turnos.component.html',
   styleUrl: './turnos.component.css',
 })
@@ -14,6 +14,7 @@ export class TurnosComponent {
 
   turnos: any[] = [];
   turnoSeleccionado: any = null;
+  isAdmin: boolean = false;
 
   obtenerProximosDias(cantidad: number = 6): string[] {
     const dias: string[] = [];
@@ -33,6 +34,8 @@ export class TurnosComponent {
     this.service.getAllTurnos().subscribe((turnos) => {
       this.turnos = turnos;
     });
+    const rol = localStorage.getItem('role');
+    this.isAdmin = rol === 'ADMIN' || rol === 'SUPERADMIN';
   }
 
   async seleccionarTurno(turno: any) {
@@ -127,13 +130,17 @@ export class TurnosComponent {
   }
 
   isTurnoLleno(fecha: string, horaInicio: string): boolean {
-    // Normaliza la hora a formato HH:mm
-    const [h, m] = horaInicio.split(':').map(Number);
-    const horaNorm = `${h.toString().padStart(2, '0')}:${(m || 0)
+    // Normaliza la hora a formato HH:mm (soporta '9:00', '09:00', etc)
+    let [h, m] = horaInicio.split(':').map(Number);
+    if (isNaN(h)) return false;
+    if (isNaN(m)) m = 0;
+    const horaNorm = `${h.toString().padStart(2, '0')}:${m
       .toString()
       .padStart(2, '0')}`;
     const turno = this.turnos.find(
-      (t) => t.fecha === fecha && t.horaInicio === horaNorm
+      (t) =>
+        t.fecha === fecha &&
+        (t.horaInicio === horaNorm || t.horaInicio === horaInicio) // por si el backend ya lo manda igual
     );
     return !!turno && turno.lugaresLibres <= 0;
   }
@@ -155,5 +162,21 @@ export class TurnosComponent {
     const [anio, mes, dia] = fecha.split('-').map(Number);
     const fechaHora = new Date(anio, mes - 1, dia, h, m, 0, 0);
     return hoy >= fechaHora;
+  }
+
+  getLugaresLibres(fecha: string, horaInicio: string): number | string {
+    // Normaliza la hora a formato HH:mm
+    let [h, m] = horaInicio.split(':').map(Number);
+    if (isNaN(h)) return '';
+    if (isNaN(m)) m = 0;
+    const horaNorm = `${h.toString().padStart(2, '0')}:${m
+      .toString()
+      .padStart(2, '0')}`;
+    const turno = this.turnos.find(
+      (t) =>
+        t.fecha === fecha &&
+        (t.horaInicio === horaNorm || t.horaInicio === horaInicio)
+    );
+    return turno ? turno.lugaresLibres : '';
   }
 }

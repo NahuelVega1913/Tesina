@@ -55,9 +55,15 @@
         9:00 - 11:00
         <span
           *ngIf="isTurnoLleno(getFechaByIndex($index), '9:00')"
-          class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded"
+          class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full absolute top-2 right-2 dark:bg-red-900 dark:text-red-300"
         >
           Lleno
+        </span>
+        <span
+          *ngIf="isAdmin"
+          class="absolute bottom-2 right-2 bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+        >
+          Libres: {{ getLugaresLibres(getFechaByIndex($index), "9:00") }}
         </span>
       </div>
 
@@ -88,9 +94,15 @@
         11:00 - 13:00
         <span
           *ngIf="isTurnoLleno(getFechaByIndex($index), '11:00')"
-          class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded"
+          class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full absolute top-2 right-2 dark:bg-red-900 dark:text-red-300"
         >
           Lleno
+        </span>
+        <span
+          *ngIf="isAdmin"
+          class="absolute bottom-2 right-2 bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+        >
+          Libres: {{ getLugaresLibres(getFechaByIndex($index), "11:00") }}
         </span>
       </div>
       <div
@@ -120,7 +132,7 @@
         14:00 - 16:00
         <span
           *ngIf="isTurnoLleno(getFechaByIndex($index), '14:00')"
-          class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded"
+          class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full absolute top-2 right-2 dark:bg-red-900 dark:text-red-300"
         >
           Lleno
         </span>
@@ -152,7 +164,7 @@
         16:00 - 18:00
         <span
           *ngIf="isTurnoLleno(getFechaByIndex($index), '16:00')"
-          class="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded"
+          class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full absolute top-2 right-2 dark:bg-red-900 dark:text-red-300"
         >
           Lleno
         </span>
