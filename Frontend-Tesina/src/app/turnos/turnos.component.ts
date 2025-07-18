@@ -18,7 +18,7 @@ export class TurnosComponent {
   isUser: boolean = false;
 
   ngOnInit(): void {
-    this.service.getAllTurnos().subscribe((turnos) => {
+    this.service?.getAllTurnos().subscribe((turnos) => {
       this.turnos = turnos;
     });
     const rol = (localStorage.getItem('role') || '').toUpperCase();
@@ -121,20 +121,53 @@ export class TurnosComponent {
     return 'libre';
   }
 
+  // Devuelve true si algún horario del día está lleno o si el día anterior hábil tuvo algún horario lleno
   isTurnoLleno(fecha: string, horaInicio: string): boolean {
-    // Normaliza la hora a formato HH:mm (soporta '9:00', '09:00', etc)
+    // Normaliza la hora a formato HH:mm
     let [h, m] = horaInicio.split(':').map(Number);
     if (isNaN(h)) return false;
     if (isNaN(m)) m = 0;
     const horaNorm = `${h.toString().padStart(2, '0')}:${m
       .toString()
       .padStart(2, '0')}`;
-    const turno = this.turnos.find(
-      (t) =>
-        t.fecha === fecha &&
-        (t.horaInicio === horaNorm || t.horaInicio === horaInicio) // por si el backend ya lo manda igual
+
+    // Lista de horarios ordenados
+    const horarios = ['09:00', '11:00', '14:00', '16:00'];
+
+    // --- 1. Para el día actual: si hay un horario lleno, todos los horarios desde ese (inclusive) hacia adelante están llenos ---
+    // Busca el índice del horario actual
+    const indexHorario = horarios.indexOf(horaNorm);
+    if (indexHorario === -1) return false;
+
+    // Busca si algún horario desde el actual (inclusive) hacia atrás está lleno
+    for (let i = 0; i <= indexHorario; i++) {
+      const turno = this.turnos.find(
+        (t) =>
+          t.fecha === fecha &&
+          (t.horaInicio === horarios[i] ||
+            t.horaInicio === horarios[i] + ':00') &&
+          t.lugaresLibres <= 0
+      );
+      if (turno) return true;
+    }
+
+    // --- 2. Para el siguiente día hábil: si algún horario del día anterior está lleno, todos los horarios están llenos ---
+    // Calcula el día anterior hábil
+    const [anio, mes, dia] = fecha.split('-').map(Number);
+    let d = new Date(anio, mes - 1, dia);
+    d.setDate(d.getDate() - 1);
+    while (d.getDay() === 0 || d.getDay() === 6) {
+      d.setDate(d.getDate() - 1);
+    }
+    const fechaAnterior = d.toISOString().substring(0, 10);
+
+    // Si algún horario del día anterior está lleno, todos los horarios de este día están llenos
+    const algunLlenoAyer = this.turnos.some(
+      (t) => t.fecha === fechaAnterior && t.lugaresLibres <= 0
     );
-    return !!turno && turno.lugaresLibres <= 0;
+    if (algunLlenoAyer) return true;
+
+    return false;
   }
 
   getFechaByIndex(index: number): string {
@@ -163,6 +196,7 @@ export class TurnosComponent {
   }
 
   getLugaresLibres(fecha: string, horaInicio: string): number | string {
+    if (this.isTurnoLleno(fecha, horaInicio)) return 0;
     // Normaliza la hora a formato HH:mm
     let [h, m] = horaInicio.split(':').map(Number);
     if (isNaN(h)) return 5;
