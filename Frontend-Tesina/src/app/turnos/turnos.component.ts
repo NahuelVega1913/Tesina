@@ -16,14 +16,25 @@ export class TurnosComponent {
   turnoSeleccionado: any = null;
   isAdmin: boolean = false;
   isUser: boolean = false;
+  hasService: boolean = false; // Nuevo: indica si el usuario tiene servicio
 
   ngOnInit(): void {
-    this.service?.getAllTurnos().subscribe((turnos) => {
-      this.turnos = turnos;
-    });
     const rol = (localStorage.getItem('role') || '').toUpperCase();
     this.isAdmin = rol === 'ADMIN' || rol === 'SUPERADMIN';
     this.isUser = rol === 'USER';
+    // Nuevo: obtener hasService de localStorage (guardado como string 'true'/'false')
+    this.hasService = localStorage.getItem('hasService') === 'true';
+
+    // Si es usuario y no tiene servicio, no cargar turnos
+    if (this.isUser && !this.hasService) {
+      // Mostrar cartel en el HTML, no cargar turnos
+      return;
+    }
+
+    this.service?.getAllTurnos().subscribe((turnos) => {
+      this.turnos = turnos;
+    });
+
     // Si el usuario es USER y no hay turnoSeleccionado, inicializa con un objeto vacío para mostrar el botón
     if (this.isUser && !this.turnoSeleccionado) {
       this.turnoSeleccionado = {};

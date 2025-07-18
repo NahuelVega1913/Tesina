@@ -58,6 +58,7 @@ export class InicioComponent {
         console.log(res);
         this.notificaciones = res.notifications;
         this.haveService = res.hasService;
+        localStorage.setItem('hasService', String(this.haveService));
         if (localStorage.getItem('firstTime') == 'true') {
           if (this.rol == 'USER' && !this.haveService) {
             this.router.navigate(['servicios']);
