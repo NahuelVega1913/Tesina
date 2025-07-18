@@ -45,6 +45,20 @@ export class TurnosComponent {
   }
 
   async seleccionarTurno(turno: any) {
+    // Si es USER y ya tiene un turno seleccionado, no permite seleccionar otro
+    if (
+      this.isUser &&
+      this.turnoSeleccionado &&
+      Object.keys(this.turnoSeleccionado).length > 0
+    ) {
+      Swal.fire(
+        'Ya tienes un turno',
+        'No puedes seleccionar otro turno hasta cancelar el actual.',
+        'info'
+      );
+      return;
+    }
+
     const result = await Swal.fire({
       title: '¿Confirmar turno?',
       text: `¿Desea reservar el turno para el día ${turno.dia} en el horario ${turno.hora}?`,

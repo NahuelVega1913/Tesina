@@ -68,6 +68,7 @@ public class TurnoService {
         // Procesar los turnos existentes
         for (TurnoEntity turno : entities) {
             if (!"CANCELADO".equals(turno.getEstado()) &&
+                    !"FINALIZADO".equals(turno.getEstado()) &&
                     turno.getHoraInicio().isAfter(now) &&
                     turno.getHoraInicio().isBefore(sixDaysLater)) {
 
@@ -215,5 +216,35 @@ public class TurnoService {
         // Guardar los cambios
         repository.save(turno);
         return  dto;
+    }
+    public PostTurno finalizarTurno(int turnoId) {
+        // Buscar el turno por ID
+        TurnoEntity turno = repository.findById(turnoId).orElse(null);
+
+        if (turno == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Turno no encontrado");
+        }
+
+        // Verificar si el turno ya está finalizado
+        if ("FINALIZADO".equals(turno.getEstado())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El turno ya está finalizado");
+        }
+
+        // Actualizar el estado del turno a "FINALIZADO"
+        turno.setEstado("FINALIZADO");
+
+        // Guardar los cambios
+        repository.save(turno);
+
+        // Crear y devolver el DTO de respuesta
+        PostTurno dto = new PostTurno();
+        dto.setId(turno.getId());
+        dto.setEstado(turno.getEstado());
+        dto.setServiceId(turno.getService().getId());
+        dto.setEmailUser(turno.getUser() != null ? turno.getUser().getEmail() : null);
+        dto.setHoraInicio(turno.getHoraInicio());
+        dto.setHoraFin(turno.getHoraFin());
+
+        return dto;
     }
 }

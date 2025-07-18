@@ -2,6 +2,23 @@
   <div>
     <p class="font-bold text-5xl text-center p-10">Turnos</p>
   </div>
+
+  <!-- Mensaje para USER con turno seleccionado -->
+  <div
+    class="flex justify-center mt-4"
+    *ngIf="
+      isUser &&
+      turnoSeleccionado &&
+      turnoSeleccionado.fecha &&
+      turnoSeleccionado.hora
+    "
+  >
+    <div class="bg-green-100 text-green-800 px-4 py-2 rounded font-bold">
+      Tienes un turno reservado para el día {{ turnoSeleccionado.fecha }} en el
+      horario {{ turnoSeleccionado.hora }}.
+    </div>
+  </div>
+
   <div class="flex flex-wrap justify-center gap-4 p-10">
     @for (item of obtenerProximosDias(); track $index) { @if(item.valueOf() !=
     "domingo") {
@@ -46,15 +63,27 @@
         }"
         [class.opacity-60]="
           isTurnoLleno(getFechaByIndex($index), '9:00') ||
-          isHorarioPasado(getFechaByIndex($index), '9:00')
+          isHorarioPasado(getFechaByIndex($index), '9:00') ||
+          (isUser &&
+            turnoSeleccionado &&
+            turnoSeleccionado.fecha &&
+            turnoSeleccionado.hora)
         "
         [class.pointer-events-none]="
           isTurnoLleno(getFechaByIndex($index), '9:00') ||
-          isHorarioPasado(getFechaByIndex($index), '9:00')
+          isHorarioPasado(getFechaByIndex($index), '9:00') ||
+          (isUser &&
+            turnoSeleccionado &&
+            turnoSeleccionado.fecha &&
+            turnoSeleccionado.hora)
         "
         [class.cursor-not-allowed]="
           isTurnoLleno(getFechaByIndex($index), '9:00') ||
-          isHorarioPasado(getFechaByIndex($index), '9:00')
+          isHorarioPasado(getFechaByIndex($index), '9:00') ||
+          (isUser &&
+            turnoSeleccionado &&
+            turnoSeleccionado.fecha &&
+            turnoSeleccionado.hora)
         "
         style="cursor: pointer"
       >
@@ -91,15 +120,27 @@
         }"
         [class.opacity-60]="
           isTurnoLleno(getFechaByIndex($index), '11:00') ||
-          isHorarioPasado(getFechaByIndex($index), '11:00')
+          isHorarioPasado(getFechaByIndex($index), '11:00') ||
+          (isUser &&
+            turnoSeleccionado &&
+            turnoSeleccionado.fecha &&
+            turnoSeleccionado.hora)
         "
         [class.pointer-events-none]="
           isTurnoLleno(getFechaByIndex($index), '11:00') ||
-          isHorarioPasado(getFechaByIndex($index), '11:00')
+          isHorarioPasado(getFechaByIndex($index), '11:00') ||
+          (isUser &&
+            turnoSeleccionado &&
+            turnoSeleccionado.fecha &&
+            turnoSeleccionado.hora)
         "
         [class.cursor-not-allowed]="
           isTurnoLleno(getFechaByIndex($index), '11:00') ||
-          isHorarioPasado(getFechaByIndex($index), '11:00')
+          isHorarioPasado(getFechaByIndex($index), '11:00') ||
+          (isUser &&
+            turnoSeleccionado &&
+            turnoSeleccionado.fecha &&
+            turnoSeleccionado.hora)
         "
         style="cursor: pointer"
       >
@@ -135,15 +176,27 @@
         }"
         [class.opacity-60]="
           isTurnoLleno(getFechaByIndex($index), '14:00') ||
-          isHorarioPasado(getFechaByIndex($index), '14:00')
+          isHorarioPasado(getFechaByIndex($index), '14:00') ||
+          (isUser &&
+            turnoSeleccionado &&
+            turnoSeleccionado.fecha &&
+            turnoSeleccionado.hora)
         "
         [class.pointer-events-none]="
           isTurnoLleno(getFechaByIndex($index), '14:00') ||
-          isHorarioPasado(getFechaByIndex($index), '14:00')
+          isHorarioPasado(getFechaByIndex($index), '14:00') ||
+          (isUser &&
+            turnoSeleccionado &&
+            turnoSeleccionado.fecha &&
+            turnoSeleccionado.hora)
         "
         [class.cursor-not-allowed]="
           isTurnoLleno(getFechaByIndex($index), '14:00') ||
-          isHorarioPasado(getFechaByIndex($index), '14:00')
+          isHorarioPasado(getFechaByIndex($index), '14:00') ||
+          (isUser &&
+            turnoSeleccionado &&
+            turnoSeleccionado.fecha &&
+            turnoSeleccionado.hora)
         "
         style="cursor: pointer"
       >
@@ -179,15 +232,27 @@
         }"
         [class.opacity-60]="
           isTurnoLleno(getFechaByIndex($index), '16:00') ||
-          isHorarioPasado(getFechaByIndex($index), '16:00')
+          isHorarioPasado(getFechaByIndex($index), '16:00') ||
+          (isUser &&
+            turnoSeleccionado &&
+            turnoSeleccionado.fecha &&
+            turnoSeleccionado.hora)
         "
         [class.pointer-events-none]="
           isTurnoLleno(getFechaByIndex($index), '16:00') ||
-          isHorarioPasado(getFechaByIndex($index), '16:00')
+          isHorarioPasado(getFechaByIndex($index), '16:00') ||
+          (isUser &&
+            turnoSeleccionado &&
+            turnoSeleccionado.fecha &&
+            turnoSeleccionado.hora)
         "
         [class.cursor-not-allowed]="
           isTurnoLleno(getFechaByIndex($index), '16:00') ||
-          isHorarioPasado(getFechaByIndex($index), '16:00')
+          isHorarioPasado(getFechaByIndex($index), '16:00') ||
+          (isUser &&
+            turnoSeleccionado &&
+            turnoSeleccionado.fecha &&
+            turnoSeleccionado.hora)
         "
         style="cursor: pointer"
       >
