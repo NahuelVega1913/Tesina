@@ -55,32 +55,13 @@ export class TurnosComponent {
     });
 
     if (result.isConfirmed) {
-      // Setear los valores requeridos antes de enviar
       const [horaInicioStr, horaFinStr] = turno.hora.split(' - ');
-      const fecha = new Date();
-      // Suponiendo que turno.dia es el nombre del día (ej: "lunes")
-      // y queremos la fecha correspondiente al próximo día con ese nombre
-      const diasSemana = [
-        'domingo',
-        'lunes',
-        'martes',
-        'miércoles',
-        'jueves',
-        'viernes',
-        'sábado',
-      ];
-      const hoy = new Date();
-      let diaIndex = diasSemana.indexOf(turno.dia.toLowerCase());
-      if (diaIndex === -1) diaIndex = hoy.getDay();
-      let diasHasta = (diaIndex - hoy.getDay() + 7) % 7;
-      const fechaTurno = new Date(hoy);
-      fechaTurno.setDate(hoy.getDate() + diasHasta);
+      const fechaTurnoStr = turno.fecha; // formato YYYY-MM-DD
 
       function parseHora(hora: string) {
         const [h, m] = hora.split(':').map(Number);
-        const d = new Date(fechaTurno);
-        d.setHours(h, m, 0, 0);
-        // Retorna fecha y hora en formato local: YYYY-MM-DDTHH:mm:00
+        const [anio, mes, dia] = fechaTurnoStr.split('-').map(Number);
+        const d = new Date(anio, mes - 1, dia, h, m, 0, 0);
         const yyyy = d.getFullYear();
         const mm = String(d.getMonth() + 1).padStart(2, '0');
         const dd = String(d.getDate()).padStart(2, '0');
@@ -100,17 +81,22 @@ export class TurnosComponent {
         estado: 'pendiente',
         emailUser: emailUser,
         serviceId: serviceId,
+        fecha: fechaTurnoStr, // Guarda la fecha exacta
       };
 
       this.service.postTurno(turnoAEnviar).subscribe({
         next: () => {
-          this.turnoSeleccionado = turnoAEnviar;
+          this.turnoSeleccionado = {
+            ...turnoAEnviar,
+            dia: turno.dia,
+            hora: turno.hora,
+            fecha: fechaTurnoStr, // Guarda la fecha exacta para comparar en el HTML
+          };
           Swal.fire(
             'Turno reservado',
             'Su turno ha sido seleccionado.',
             'success'
           );
-          // Actualizar la lista de turnos después de reservar
           this.service.getAllTurnos().subscribe((turnos) => {
             this.turnos = turnos;
           });
@@ -204,6 +190,8 @@ export class TurnosComponent {
         this.turnoSeleccionado.ServiceId ??
         null,
     };
+    if (this.service) {
+    }
     this.service.cancelarTurno(turnoCancel).subscribe({
       next: () => {
         this.turnoSeleccionado = null;
