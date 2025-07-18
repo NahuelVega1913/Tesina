@@ -196,7 +196,6 @@ export class TurnosComponent {
   }
 
   getLugaresLibres(fecha: string, horaInicio: string): number | string {
-    if (this.isTurnoLleno(fecha, horaInicio)) return 0;
     // Normaliza la hora a formato HH:mm
     let [h, m] = horaInicio.split(':').map(Number);
     if (isNaN(h)) return 5;

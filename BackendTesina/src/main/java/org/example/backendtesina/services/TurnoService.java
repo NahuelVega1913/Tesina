@@ -11,12 +11,16 @@ import org.example.backendtesina.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import java.time.LocalDateTime;
-
+import java.util.Map;
+import java.util.HashMap;
+import java.time.LocalTime;
+import java.time.LocalDate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.example.backendtesina.DTOs.Get.GetTurno;
 
 @Service
@@ -37,34 +41,72 @@ public class TurnoService {
 
 
 
-    public List<GetTurno> getAllTurnos(){
+    public List<GetTurno> getAllTurnos() {
         List<TurnoEntity> entities = repository.findAll();
         List<GetTurno> dtos = new ArrayList<>();
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime sixDaysLater = now.plusDays(6);
 
+        // Intervalos fijos
+        LocalTime[] intervalosInicio = {LocalTime.of(9, 0), LocalTime.of(11, 0), LocalTime.of(14, 0), LocalTime.of(16, 0)};
+        LocalTime[] intervalosFin = {LocalTime.of(11, 0), LocalTime.of(13, 0), LocalTime.of(16, 0), LocalTime.of(18, 0)};
+
+        // Mapa para rastrear la disponibilidad por horario
+        Map<LocalDateTime, Integer> disponibilidadPorHorario = new HashMap<>();
+
+        // Inicializar disponibilidad para los próximos 6 días
+        for (int i = 0; i <= 6; i++) {
+            LocalDate fecha = now.toLocalDate().plusDays(i);
+            if (fecha.getDayOfWeek() != java.time.DayOfWeek.SATURDAY && fecha.getDayOfWeek() != java.time.DayOfWeek.SUNDAY) {
+                for (int j = 0; j < intervalosInicio.length; j++) {
+                    LocalDateTime inicioIntervalo = fecha.atTime(intervalosInicio[j]);
+                    disponibilidadPorHorario.put(inicioIntervalo, 5); // Inicialmente 5 lugares disponibles
+                }
+            }
+        }
+
+        // Procesar los turnos existentes
         for (TurnoEntity turno : entities) {
             if (!"CANCELADO".equals(turno.getEstado()) &&
                     turno.getHoraInicio().isAfter(now) &&
                     turno.getHoraInicio().isBefore(sixDaysLater)) {
 
+                LocalDateTime inicioTurno = turno.getHoraInicio();
+                LocalDateTime finTurno = turno.getHoraInicio().plusDays(1).withHour(18).withMinute(0);
+
+                // Reducir lugares disponibles desde el horario reservado hasta el final del día siguiente
+                while (!inicioTurno.isAfter(finTurno)) {
+                    if (inicioTurno.getDayOfWeek() != java.time.DayOfWeek.SATURDAY &&
+                            inicioTurno.getDayOfWeek() != java.time.DayOfWeek.SUNDAY) {
+
+                        for (int i = 0; i < intervalosInicio.length; i++) {
+                            LocalDateTime inicioIntervalo = inicioTurno.toLocalDate().atTime(intervalosInicio[i]);
+                            if (!inicioIntervalo.isBefore(turno.getHoraInicio())) {
+                                disponibilidadPorHorario.put(inicioIntervalo,
+                                        disponibilidadPorHorario.getOrDefault(inicioIntervalo, 5) - 1);
+                            }
+                        }
+                    }
+                    inicioTurno = inicioTurno.plusDays(1).withHour(9).withMinute(0);
+                }
+            }
+        }
+
+        // Crear los GetTurno para los horarios disponibles
+        for (Map.Entry<LocalDateTime, Integer> entry : disponibilidadPorHorario.entrySet()) {
+            LocalDateTime inicioIntervalo = entry.getKey();
+            int lugaresLibres = entry.getValue();
+            if (lugaresLibres > 0) {
                 GetTurno dto = new GetTurno();
-                dto.setFecha(java.sql.Date.valueOf(turno.getHoraInicio().toLocalDate()));
-                dto.setHoraInicio(turno.getHoraInicio().toLocalTime().toString());
-                dto.setHoraFin(turno.getHoraFin() != null ? turno.getHoraFin().toLocalTime().toString() : null);
-
-                // Calcular lugares libres
-                long turnosEnElDia = entities.stream()
-                        .filter(t -> t.getHoraInicio().toLocalDate().equals(turno.getHoraInicio().toLocalDate()))
-                        .count();
-                dto.setLugaresLibres(1 - (int) turnosEnElDia);
-
+                dto.setFecha(java.sql.Date.valueOf(inicioIntervalo.toLocalDate()));
+                dto.setHoraInicio(inicioIntervalo.toLocalTime().toString());
+                dto.setHoraFin(inicioIntervalo.plusHours(2).toLocalTime().toString());
+                dto.setLugaresLibres(lugaresLibres);
                 dtos.add(dto);
             }
         }
 
         return dtos;
-
     }
     public PostTurno postTurno(PostTurno turno){
         try {
