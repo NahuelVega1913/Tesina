@@ -144,16 +144,22 @@ export class TurnosComponent {
   }
 
   isHorarioPasado(fecha: string, hora: string): boolean {
-    const hoy = new Date();
-    const fechaActualStr = hoy.toISOString().substring(0, 10);
-    if (fecha !== fechaActualStr) return false;
     // Si el string es un rango, toma la hora de inicio
     const horaInicio = hora.includes('-') ? hora.split('-')[0].trim() : hora;
     const [h, m] = horaInicio.split(':').map(Number);
-    // Crear fecha local con la hora deseada
     const [anio, mes, dia] = fecha.split('-').map(Number);
-    const fechaHora = new Date(anio, mes - 1, dia, h, m, 0, 0);
-    return hoy >= fechaHora;
+    if (isNaN(h) || isNaN(m) || isNaN(anio) || isNaN(mes) || isNaN(dia))
+      return false;
+    // Construir string con zona horaria de Argentina (-03:00)
+    const fechaHoraStr = `${anio}-${String(mes).padStart(2, '0')}-${String(
+      dia
+    ).padStart(2, '0')}T${String(h).padStart(2, '0')}:${String(m).padStart(
+      2,
+      '0'
+    )}:00-03:00`;
+    const fechaHoraTurno = Date.parse(fechaHoraStr);
+    const ahora = Date.now();
+    return fechaHoraTurno <= ahora;
   }
 
   getLugaresLibres(fecha: string, horaInicio: string): number | string {

@@ -4,8 +4,10 @@ import org.example.backendtesina.DTOs.Post.PostTurno;
 import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.entities.services.ServiceEntity;
 import org.example.backendtesina.entities.services.TurnoEntity;
+import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.repositories.SeviceRepository;
 import org.example.backendtesina.repositories.TurnoRepository;
+import org.example.backendtesina.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import java.time.LocalDateTime;
@@ -23,12 +25,15 @@ public class TurnoService {
 
     @Autowired
     TurnoRepository repository;
-    @Autowired
-    TurnoRepository userRepository;
+
     @Autowired
     UserService userService;
     @Autowired
     SeviceRepository serviceRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    JwtService jwtService;
 
 
 
@@ -139,19 +144,34 @@ public class TurnoService {
         return p;
 
     }
-    public PostTurno cancelarTurno(PostTurno turnoDto) {
+    public PostTurno cancelarTurno(String token) {
+        String email = jwtService.getEmailFromToken(token);
+        UserEntity user = userRepository.findByEmail(email).orElse(null);
 
-        // Buscar el turno por ID
-        Integer turnoId = turnoDto.getId();
-        TurnoEntity turno = repository.findById(turnoId).orElse(null);
-
-        if (turno == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Turno no encontrado");
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
         }
 
-        // Actualizar el estado del turno a "CANCELADO"
+        // Buscar el turno asociado al usuario
+        TurnoEntity turno = repository.findByUser(user).orElse(null);
+        PostTurno dto = new PostTurno();
+        dto.setId(turno.getId());
+        dto.setServiceId(turno.getService().getId());
+        dto.setEmailUser(turno.getUser().getEmail());
+        dto.setHoraInicio(turno.getHoraInicio());
+        dto.setHoraFin(turno.getHoraFin());
+
+        if (turno == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No tienes turnos activos para cancelar");
+        }
+
+        // Actualizar el estado del turno a "CANCELADO" y eliminar la relación con el usuario
         turno.setEstado("CANCELADO");
+        turno.setUser(null);
+
+
+        // Guardar los cambios
         repository.save(turno);
-        return turnoDto;
+        return  dto;
     }
 }

@@ -50,9 +50,10 @@ public class TurnoController {
     }
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @PutMapping("/cancelar")
-    public ResponseEntity<?> cancelarTurno(@RequestBody PostTurno turno) {
+    public ResponseEntity<?> cancelarTurno(@RequestHeader("Authorization") String authorizationHeader,@RequestBody PostTurno turno) {
+        String token = authorizationHeader.substring(7); // Elimina "Bearer "
 
-           PostTurno response = turnoService.cancelarTurno(turno);
+           PostTurno response = turnoService.cancelarTurno(token);
            if(response == null){
                return ResponseEntity.badRequest().body("Error al cancelar el turno");
 
