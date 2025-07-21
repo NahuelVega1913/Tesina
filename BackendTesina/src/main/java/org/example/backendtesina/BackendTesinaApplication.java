@@ -1,7 +1,6 @@
 package org.example.backendtesina;
 import com.mercadopago.MercadoPagoConfig;
 
-import org.example.backendtesina.services.ChatService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
