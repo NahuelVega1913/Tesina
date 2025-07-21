@@ -1,7 +1,17 @@
 INSERT INTO USERS (email,name,lastname, password, role) VALUES ('nahuelvegavega@gmail.com', 'Nahuel','Vega','$2a$10$WhRuuQWNRMKNSzjALksRieneowHvpXjj5NXMxdZHr7Zl.cpFEp4.q', 'SUPERADMIN'),
                                                                ('usuario@gmail.com', 'User','Test','$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'USER'),
                                                                ('admin@gmail.com', 'Admin','Test','$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'ADMIN'),
-                                                               ('empleado@gmail.com', 'Empleado','Test','$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'EMPLOYEE') ;
+                                                               ('empleado@gmail.com', 'Empleado','Test','$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'EMPLOYEE'),
+                                                                ('maria.lopez@gmail.com', 'María', 'López', '$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'USER'),
+                                                                 ('carlos.garcia@gmail.com', 'Carlos', 'García', '$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'USER'),
+                                                                 ('ana.martinez@gmail.com', 'Ana', 'Martínez', '$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'USER'),
+                                                                 ('juan.gomez@gmail.com', 'Juan', 'Gómez', '$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'USER'),
+                                                                 ('sofia.fernandez@gmail.com', 'Sofía', 'Fernández', '$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'USER'),
+                                                                 ('lucas.perez@gmail.com', 'Lucas', 'Pérez', '$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'USER'),
+                                                                 ('valeria.suarez@gmail.com', 'Valeria', 'Suárez', '$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'USER'),
+                                                                 ('diego.mendez@gmail.com', 'Diego', 'Méndez', '$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'USER'),
+                                                                ('andrea.nunez@gmail.com', 'Andrea', 'Núñez', '$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'USER'),
+                                                                ('pedro.alvarado@gmail.com', 'Pedro', 'Alvarado', '$2a$10$DyDlgM58UpT4W2B2yj5Pqe0cW1tGCUR3K1MellY1dyVvti4fGSXTy', 'USER');
 
 INSERT INTO PROVIDERS (
     name, adress, category, city, country,
