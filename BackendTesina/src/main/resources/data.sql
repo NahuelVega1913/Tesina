@@ -7,14 +7,35 @@ INSERT INTO PROVIDERS (
     name, adress, category, city, country,
     CUIT, email, phone, state, register_date, remarks
 ) VALUES
-      ('Proveedor A', 'Av. Siempre Viva 123','MOTOR', 'CORDOBA', 'ARGENTINA',
-       '20-12345678-9', 'contacto@proveedora.com', 3511234567, true, '2024-01-10', 'Proveedor confiable con entrega en 48hs'),
+      ('Autopartes Córdoba', 'Av. Colón 1500', 'MOTOR', 'CÓRDOBA', 'ARGENTINA',
+       20334455667, 'ventas@autopartescordoba.com', 543514567890, true, '2024-03-01', 'Entrega rápida y precios competitivos'),
 
-      ('Proveedor B', 'Calle Falsa 456', 'LUBRICACION', 'CORDOBA', 'ARGENTINA',
-       '30-87654321-0', 'ventas@proveedorb.com', 3419876543, true, '2024-02-15', 'Requiere seguimiento mensual'),
+      ('Lubricantes del Centro', 'Calle Mitre 234', 'LUBRICACION', 'ROSARIO', 'ARGENTINA',
+       30445566778, 'contacto@lubricantescentro.com', 543416543210, true, '2024-04-10', 'Especialistas en aceites y lubricantes'),
 
-      ('Proveedor C', 'Ruta 9 km 25', 'REFRIGERACION', 'CORDOBA', 'ARGENTINA',
-       '27-11223344-5', 'info@proveedorc.com', 2991122334, false, '2023-11-01', 'Actualmente inactivo por falta de stock');
+      ('Refrigeración Total', 'Ruta 20 km 12', 'REFRIGERACION', 'MENDOZA', 'ARGENTINA',
+       27556677889, 'info@refrigeraciontotal.com', 542619876543, false, '2024-05-15', 'Amplia variedad de productos de refrigeración'),
+
+      ('Motores y Más', 'Av. Rivadavia 890', 'MOTOR', 'BUENOS AIRES', 'ARGENTINA',
+       20667788990, 'soporte@motoresymas.com', 541145678901, true, '2024-06-20', 'Proveedor confiable con soporte técnico'),
+
+      ('LubriExpress', 'Calle San Martín 456', 'LUBRICACION', 'SALTA', 'ARGENTINA',
+       30778899001, 'ventas@lubriexpress.com', 543871234567, true, '2024-07-05', 'Entrega en 24 horas en todo el país'),
+
+      ('Clima Auto', 'Av. Belgrano 1234', 'REFRIGERACION', 'TUCUMÁN', 'ARGENTINA',
+       27889900112, 'contacto@climaauto.com', 543819876543, false, '2023-12-01', 'Actualmente en reestructuración'),
+
+      ('Partes del Sur', 'Ruta 3 km 45', 'MOTOR', 'NEUQUÉN', 'ARGENTINA',
+       20990011223, 'info@partesdelsur.com', 542991234567, true, '2024-08-10', 'Especialistas en repuestos para motores diésel'),
+
+      ('Aceites Premium', 'Calle Independencia 789', 'LUBRICACION', 'SAN JUAN', 'ARGENTINA',
+       30001122334, 'ventas@aceitespremium.com', 542644567890, true, '2024-09-25', 'Productos de alta calidad y certificación internacional'),
+
+      ('Frío Motor', 'Av. Libertador 567', 'REFRIGERACION', 'SAN LUIS', 'ARGENTINA',
+       27112233445, 'soporte@friomotor.com', 542669876543, false, '2024-10-12', 'Proveedor con experiencia en sistemas de enfriamiento'),
+
+      ('Repuestos del Norte', 'Calle Güemes 321', 'MOTOR', 'RESISTENCIA', 'ARGENTINA',
+       20223344556, 'contacto@repuestosnorte.com', 543621234567, true, '2024-11-18', 'Amplio stock de repuestos para vehículos livianos');
 
 INSERT INTO SPARES
 (name,active,stars, price, discaunt, stock, brand, category, description, image1, image2, image3, image4, image5)
@@ -59,6 +80,46 @@ VALUES
 
     ('Intercooler',true,4, 38000.00, 5, 10, 'Garrett', 'REFRIGERACION', 'Intercooler de alto rendimiento para motores turbo', 'https://http2.mlstatic.com/D_NQ_NP_750419-MLA70027423321_062023-O.webp', NULL, NULL, NULL, NULL);
 
+UPDATE SPARES SET description = 'Aceite sintético de alta calidad diseñado específicamente para motores modernos. Proporciona una excelente protección contra el desgaste, mejora la eficiencia del combustible y garantiza un rendimiento óptimo incluso en condiciones extremas.' WHERE name = 'Aceite 10W40';
+
+UPDATE SPARES SET description = 'Filtro de aire de alto rendimiento fabricado con materiales de primera calidad. Garantiza una filtración eficiente de partículas y mejora el flujo de aire hacia el motor, optimizando su rendimiento y prolongando su vida útil.' WHERE name = 'Filtro de Aire';
+
+UPDATE SPARES SET description = 'Radiador compacto de aluminio diseñado para sistemas de enfriamiento de vehículos. Ofrece una excelente disipación de calor, resistencia a la corrosión y un diseño compacto que facilita su instalación en espacios reducidos.' WHERE name = 'Radiador Compacto';
+
+UPDATE SPARES SET description = 'Juego de 4 bujías de iridio de alta durabilidad. Estas bujías proporcionan una chispa más fuerte y consistente, mejorando la combustión del motor y reduciendo el consumo de combustible.' WHERE name = 'Bujías Iridium';
+
+UPDATE SPARES SET description = 'Batería de 12V y 65Ah diseñada para vehículos medianos. Ofrece una larga duración, alta capacidad de arranque en frío y resistencia a las vibraciones, ideal para condiciones exigentes.' WHERE name = 'Batería 12V 65Ah';
+
+UPDATE SPARES SET description = 'Filtro de aceite compatible con motores diésel y nafteros. Fabricado con materiales de alta calidad para garantizar una filtración eficiente y proteger el motor de impurezas y contaminantes.' WHERE name = 'Filtro de Aceite';
+
+UPDATE SPARES SET description = 'Ventilador eléctrico para sistemas de enfriamiento del motor. Diseñado para proporcionar un flujo de aire constante y eficiente, ayudando a mantener la temperatura óptima del motor en todo momento.' WHERE name = 'Ventilador Electrico';
+
+UPDATE SPARES SET description = 'Correa dentada de 120 dientes fabricada con materiales de alta resistencia. Ideal para motores 1.6, garantiza un funcionamiento preciso y duradero del sistema de distribución del motor.' WHERE name = 'Correa Dentada';
+
+UPDATE SPARES SET description = 'Termostato calibrado a 90°C para la regulación de la temperatura del motor. Fabricado con materiales de alta calidad para garantizar un rendimiento confiable y una larga vida útil.' WHERE name = 'Termostato 90°C';
+
+UPDATE SPARES SET description = 'Aceite de transmisión de alta viscosidad diseñado para cajas de cambios. Proporciona una lubricación superior, reduce el desgaste y mejora el rendimiento de la transmisión en condiciones extremas.' WHERE name = 'Lubricante Transmisión';
+
+UPDATE SPARES SET description = 'Radiador de agua de aluminio con núcleo reforzado. Diseñado para ofrecer una excelente disipación de calor y resistencia a la corrosión, ideal para vehículos que operan en condiciones exigentes.' WHERE name = 'Radiador de Agua';
+
+UPDATE SPARES SET description = 'Amortiguador delantero hidráulico diseñado para autos compactos. Proporciona una conducción suave y estable, absorbiendo eficazmente los impactos y mejorando la seguridad del vehículo.' WHERE name = 'Amortiguador Delantero';
+
+UPDATE SPARES SET description = 'Aceite sintético de alto rendimiento 5W30 para motores modernos. Ofrece una protección superior contra el desgaste, mejora la eficiencia del combustible y garantiza un arranque fácil en climas fríos.' WHERE name = 'Aceite Sintético 5W30';
+
+UPDATE SPARES SET description = 'Kit completo de distribución que incluye correa, tensores y bomba de agua. Diseñado para garantizar un funcionamiento preciso y confiable del sistema de distribución del motor.' WHERE name = 'Kit Distribución';
+
+UPDATE SPARES SET description = 'Ventilador de radiador con doble hélice para un enfriamiento eficiente. Fabricado con materiales de alta calidad, garantiza un flujo de aire constante y una larga vida útil.' WHERE name = 'Ventilador Radiador Doble';
+
+UPDATE SPARES SET description = 'Filtro de combustible diseñado para sistemas de inyección modernos. Proporciona una filtración eficiente de impurezas, protegiendo el sistema de inyección y mejorando el rendimiento del motor.' WHERE name = 'Filtro de Combustible';
+
+UPDATE SPARES SET description = 'Refrigerante premezclado al 50% diseñado para sistemas de enfriamiento. Ofrece una excelente protección contra la corrosión, evita el sobrecalentamiento y prolonga la vida útil del motor.' WHERE name = 'Refrigerante 50%';
+
+UPDATE SPARES SET description = 'Juego de pastillas de freno de alto rendimiento para ejes delanteros. Fabricadas con materiales de alta calidad, garantizan una frenada segura y eficiente en todo tipo de condiciones.' WHERE name = 'Juego de Pastillas de Freno';
+
+UPDATE SPARES SET description = 'Fluido ATF para cajas automáticas de última generación. Proporciona una lubricación superior, reduce el desgaste y mejora el rendimiento de la transmisión, incluso en condiciones extremas.' WHERE name = 'Aceite de Caja Automática';
+
+UPDATE SPARES SET description = 'Intercooler de alto rendimiento diseñado para motores turbo. Mejora la eficiencia del motor al reducir la temperatura del aire comprimido, aumentando la potencia y el rendimiento general.' WHERE name = 'Intercooler';
+
 INSERT INTO EMPLOYEES (
     birthDate,CUIT, typeOfContract, workingDay, bancaryNumber, fullName,
     salary, address, phone, email, position, dateOfEntry, remarks
@@ -71,9 +132,27 @@ INSERT INTO EMPLOYEES (
        700000.00, 'Calle Falsa 456', 1199887766, 'ana.gomez@email.com',
        'Personalizacion de Carroceria', '2023-06-01', 'Contrato temporal por 6 meses'),
 
-      ('1992-12-01',200000000, 'PERMANENT', 'REMOTE', 11223344, 'Carlos Ruiz',
+      ('1992-12-01',200000000, 'PERMANENT', 'FULLTIME', 11223344, 'Carlos Ruiz',
        950000.00, 'Pasaje Luna 789', 1133445566, 'carlos.ruiz@email.com',
-       'Tecnico Electronico', '2021-09-10', 'Trabaja desde el exterior');
+       'Tecnico Electromecanico', '2021-09-10', 'Trabaja desde el exterior');
+
+
+INSERT INTO EMPLOYEES (
+    birthDate, CUIT, typeOfContract, workingDay, bancaryNumber, fullName,
+    salary, address, phone, email, position, dateOfEntry, remarks
+) VALUES
+      ('1991-07-15', 20345678901, 'PERMANENT', 'FULLTIME', 98765432, 'Lucía Fernández',
+       880000.00, 'Calle Principal 123', 1145678901, 'lucia.fernandez@email.com',
+       'Administradora', '2020-03-01', 'Excelente desempeño en liderazgo'),
+
+      ('1988-11-20', 20456789012, 'TEMPORARY', 'PART_TIME', 87654321, 'Martín López',
+       720000.00, 'Av. Libertad 456', 1156789012, 'martin.lopez@email.com',
+       'Mecanico', '2023-07-15', 'Contrato temporal por 1 año'),
+
+      ('1993-02-10', 20567890123, 'PERMANENT', 'REMOTE', 11223344, 'Sofía Martínez',
+       940000.00, 'Pasaje Estrella 789', 1167890123, 'sofia.martinez@email.com',
+       'Tecnino Automotor', '2021-10-01', 'Especialista en análisis de grandes volúmenes de datos');
+
 
 INSERT INTO service_entity (
     nombre_completo, observaciones_previas, auto, modelo, status,
