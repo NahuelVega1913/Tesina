@@ -163,95 +163,42 @@ INSERT INTO EMPLOYEES (
        940000.00, 'Pasaje Estrella 789', 1167890123, 'sofia.martinez@email.com',
        'Tecnino Automotor', '2021-10-01', 'Especialista en análisis de grandes volúmenes de datos');
 
-
-INSERT INTO service_entity (
-    nombre_completo, observaciones_previas, auto, modelo, status,
-    payment_status, type, date_entry, date_exit, cost,
-    dtype, resultado, recomendaciones, estado_general
-) VALUES (
-             'Juan Pérez', 'Ruido en motor', 'Toyota Corolla', 2020, 'FINISHED',
-             'UNPAID', 'INSPECTION', '2025-05-01 09:00:00', '2025-05-01 10:00:00', 100.0,
-             'InspectionEntity', 'Apto', 'Revisar cada 6 meses', 'Apto'
-         );
-INSERT INTO service_entity (
-    nombre_completo, observaciones_previas, auto, modelo, status,
-    payment_status, type, date_entry, date_exit, cost,
-    dtype, technicla_diagnosis, tasks_performed, spares_used
-) VALUES (
-           'María Gómez', 'No enciende', 'Ford Focus', 2018, 'PROCESS',
-             'UNPAID', 'REPAIR', '2025-05-02 08:30:00', '2025-05-03 15:00:00', 500.0,
-             'RepairEntity', 'Fallo en sistema eléctrico', 'Cambio de fusibles y revisión de cableado', 'Fusibles, batería'
-         );
-INSERT INTO service_entity (
-    nombre_completo, observaciones_previas, auto, modelo, status,
-    payment_status, type, date_entry, date_exit, cost,
-    dtype, materials_used, task_realized
-) VALUES (
-             'Luis Fernández', 'Quiere cambiar tapizado', 'Chevrolet Onix', 2021, 'WAITING',
-             'PAID', 'CUSTOMIZATION', '2025-04-28 10:00:00', '2025-05-04 18:00:00', 750.0,
-             'CustomizationEntity', 'Cuero ecológico, pegamento industrial', 'Cambio completo de tapizado interior'
-         );
-INSERT INTO service_entity (
-    nombre_completo, observaciones_previas, auto, modelo, status,
-    payment_status, type, date_entry, date_exit, cost,
-    dtype, resultado, recomendaciones, estado_general
-) VALUES (
-             'Carlos Méndez', 'Verificación anual', 'Honda Civic', 2019, 'WITHDRAW',
-             'PAID', 'INSPECTION', '2025-04-15 08:00:00', '2025-04-15 09:00:00', 120.0,
-             'InspectionEntity', 'Apto', 'Próxima revisión en 12 meses', 'Apto'
-         );
-
-INSERT INTO service_entity (
-    nombre_completo, observaciones_previas, auto, modelo, status,
-    payment_status, type, date_entry, date_exit, cost,
-    dtype, technicla_diagnosis, tasks_performed, spares_used
-) VALUES (
-             'Valeria Suárez', 'Frenos fallan', 'Volkswagen Gol', 2017, 'WITHDRAW',
-             'UNPAID', 'REPAIR', '2025-05-10 09:30:00', '2025-05-11 13:45:00', 380.0,
-             'RepairEntity', 'Discos desgastados', 'Cambio de discos y pastillas', 'Discos, pastillas de freno'
-         );
-
-INSERT INTO service_entity (
-    nombre_completo, observaciones_previas, auto, modelo, status,
-    payment_status, type, date_entry, date_exit, cost,
-    dtype, materials_used, task_realized
-) VALUES (
-             'Roberto Díaz', 'Quiere personalizar volante', 'Peugeot 208', 2022, 'WITHDRAW',
-             'PAID', 'CUSTOMIZATION', '2025-05-05 14:00:00', '2025-05-06 12:00:00', 200.0,
-             'CustomizationEntity', 'Cuero negro, hilo rojo', 'Tapizado de volante personalizado'
-         );
--- INSPECTION
-INSERT INTO service_entity (
-    nombre_completo, observaciones_previas, auto, modelo, status,
-    payment_status, type, date_entry, date_exit, cost,
-    dtype, resultado, recomendaciones, estado_general
-) VALUES (
-             'Sofía Ramírez', 'Control general', 'Renault Logan', 2016, 'WITHDRAW',
-             'PAID', 'INSPECTION', '2025-05-07 08:15:00', '2025-05-07 09:10:00', 95.0,
-             'InspectionEntity', 'Apto con observaciones', 'Revisar frenos en 3 meses', 'Condicional'
-         );
-
--- REPAIR
-INSERT INTO service_entity (
-    nombre_completo, observaciones_previas, auto, modelo, status,
-    payment_status, type, date_entry, date_exit, cost,
-    dtype, technicla_diagnosis, tasks_performed, spares_used
-) VALUES (
-             'Martín López', 'Luces traseras no funcionan', 'Fiat Argo', 2019, 'WITHDRAW',
-             'PAID', 'REPAIR', '2025-05-08 10:00:00', '2025-05-08 11:30:00', 150.0,
-             'RepairEntity', 'Cables sueltos en sistema de luces', 'Reparación de conexión eléctrica', 'Cableado'
-         );
-
 -- CUSTOMIZATION
 INSERT INTO service_entity (
     nombre_completo, observaciones_previas, auto, modelo, status,
     payment_status, type, date_entry, date_exit, cost,
     dtype, materials_used, task_realized
-) VALUES (
-             'Andrea Núñez', 'Agregar vinilo decorativo', 'Mazda 3', 2023, 'WITHDRAW',
-             'UNPAID', 'CUSTOMIZATION', '2025-05-09 09:00:00', '2025-05-09 13:00:00', 300.0,
-             'CustomizationEntity', 'Vinilo negro mate', 'Aplicación de vinilo en capó y laterales'
-         );
+) VALUES
+      ('Laura Torres', 'Cambio de color interior', 'Volkswagen Polo', 2022, 'WITHDRAW',
+       'PAID', 'CUSTOMIZATION', '2025-05-15 10:00:00', '2025-05-16 16:00:00', 60000.0,
+       'CustomizationEntity', 'Vinilo beige, pegamento industrial', 'Cambio de color interior completo'),
+
+      ('Fernando Díaz', 'Agregar luces LED', 'Chevrolet Cruze', 2020, 'WITHDRAW',
+       'UNPAID', 'CUSTOMIZATION', '2025-05-17 09:00:00', '2025-05-17 12:00:00', 25000.0,
+       'CustomizationEntity', 'Luces LED blancas', 'Instalación de luces LED en cabina y baúl'),
+      (
+          'Luis Fernández', 'Quiere cambiar tapizado', 'Chevrolet Onix', 2021, 'WAITING',
+          'PAID', 'CUSTOMIZATION', '2025-04-28 10:00:00', '2025-05-04 18:00:00', 75000.0,
+          'CustomizationEntity', 'Cuero ecológico, pegamento industrial', 'Cambio completo de tapizado interior'
+      ),
+      (
+          'Andrea Núñez', 'Agregar vinilo decorativo', 'Mazda 3', 2023, 'WITHDRAW',
+          'UNPAID', 'CUSTOMIZATION', '2025-05-09 09:00:00', '2025-05-09 13:00:00', 300.0,
+          'CustomizationEntity', 'Vinilo negro mate', 'Aplicación de vinilo en capó y laterales'
+      ),
+      (
+          'Diego Paredes', 'Cambio de luces interiores', 'Hyundai Elantra', 2018, 'WITHDRAW',
+          'UNPAID', 'CUSTOMIZATION', '2025-05-14 11:00:00', '2025-05-14 13:30:00', 18000.0,
+          'CustomizationEntity', 'Luces LED azules', 'Instalación de luces LED en cabina'
+      ),
+      (
+          'Roberto Díaz', 'Quiere personalizar volante', 'Peugeot 208', 2022, 'WITHDRAW',
+          'PAID', 'CUSTOMIZATION', '2025-05-05 14:00:00', '2025-05-06 12:00:00', 20000.0,
+          'CustomizationEntity', 'Cuero negro, hilo rojo', 'Tapizado de volante personalizado'
+      );
+
+
+-- INSPECTION
 -- INSPECTION
 INSERT INTO service_entity (
     nombre_completo, observaciones_previas, auto, modelo, status,
@@ -259,9 +206,53 @@ INSERT INTO service_entity (
     dtype, resultado, recomendaciones, estado_general
 ) VALUES (
              'Pedro Alvarado', 'Chequeo post viaje largo', 'Nissan Versa', 2015, 'WITHDRAW',
-             'UNPAID', 'INSPECTION', '2025-05-12 08:00:00', '2025-05-12 08:45:00', 110.0,
+             'UNPAID', 'INSPECTION', '2025-05-12 08:00:00', '2025-05-12 08:45:00', 110000.0,
              'InspectionEntity', 'Apto', 'Revisar nivel de aceite en 2 meses', 'Apto'
+         ),
+         ('Gabriel López', 'Chequeo general', 'Toyota Hilux', 2019, 'WITHDRAW',
+          'PAID', 'INSPECTION', '2025-05-18 08:00:00', '2025-05-18 09:30:00', 120000.0,
+          'InspectionEntity', 'Apto', 'Revisar frenos en 6 meses', 'Apto'),
+
+         ('Carla Méndez', 'Revisión de motor', 'Ford Ranger', 2021, 'WITHDRAW',
+          'UNPAID', 'INSPECTION', '2025-05-19 10:00:00', '2025-05-19 11:00:00', 150000.0,
+          'InspectionEntity', 'Apto con observaciones', 'Cambio de aceite recomendado', 'Condicional'),
+         ('María Torres', 'Chequeo de frenos', 'Renault Sandero', 2017, 'WITHDRAW',
+          'PAID', 'INSPECTION', '2025-05-29 08:00:00', '2025-05-29 09:00:00', 100000.0,
+          'InspectionEntity', 'Apto', 'Revisar frenos en 6 meses', 'Apto'),
+
+         ('Carlos Díaz', 'Revisión de motor', 'Honda CR-V', 2019, 'WITHDRAW',
+          'UNPAID', 'INSPECTION', '2025-05-30 10:00:00', '2025-05-30 11:30:00', 15000.0,
+          'InspectionEntity', 'Apto con observaciones', 'Cambio de aceite recomendado', 'Condicional'),
+
+         ('Ana Méndez', 'Chequeo general', 'Hyundai Tucson', 2020, 'WITHDRAW',
+          'PAID', 'INSPECTION', '2025-06-01 09:00:00', '2025-06-01 10:00:00', 12000.0,
+          'InspectionEntity', 'Apto', 'Próxima revisión en 12 meses', 'Apto'),
+
+         ('Jorge Ramírez', 'Control de luces', 'Chevrolet Tracker', 2018, 'WITHDRAW',
+          'PAID', 'INSPECTION', '2025-06-02 08:30:00', '2025-06-02 09:15:00', 90000.0,
+          'InspectionEntity', 'Apto', 'Revisar luces en 6 meses', 'Apto'),
+
+         ('Lucía Fernández', 'Chequeo post viaje', 'Toyota Corolla', 2016, 'WITHDRAW',
+          'UNPAID', 'INSPECTION', '2025-06-03 08:00:00', '2025-06-03 08:45:00', 11000.0,
+          'InspectionEntity', 'Apto', 'Revisar nivel de aceite en 2 meses', 'Apto'),
+         (
+             'Juan Pérez', 'Ruido en motor', 'Toyota Corolla', 2020, 'FINISHED',
+             'UNPAID', 'INSPECTION', '2025-05-01 09:00:00', '2025-05-01 10:00:00', 100000.0,
+             'InspectionEntity', 'Apto', 'Revisar cada 6 meses', 'Apto'
+         ),
+         (
+             'Carlos Ménendez', 'Verificación anual', 'Honda Civic', 2019, 'WITHDRAW',
+             'PAID', 'INSPECTION', '2025-04-15 08:00:00', '2025-04-15 09:00:00', 12000.0,
+             'InspectionEntity', 'Apto', 'Próxima revisión en 12 meses', 'Apto'
+         ),
+         (
+             'Sofía Ramírez', 'Control general', 'Renault Logan', 2016, 'WITHDRAW',
+             'PAID', 'INSPECTION', '2025-05-07 08:15:00', '2025-05-07 09:10:00', 95000.0,
+             'InspectionEntity', 'Apto con observaciones', 'Revisar frenos en 3 meses', 'Condicional'
          );
+
+
+-- REPAIR
 
 -- REPAIR
 INSERT INTO service_entity (
@@ -270,61 +261,125 @@ INSERT INTO service_entity (
     dtype, technicla_diagnosis, tasks_performed, spares_used
 ) VALUES (
              'Camila Herrera', 'Golpe en el paragolpes', 'Kia Rio', 2020, 'WITHDRAW',
-             'PAID', 'REPAIR', '2025-05-13 09:00:00', '2025-05-13 17:00:00', 450.0,
+             'PAID', 'REPAIR', '2025-05-13 09:00:00', '2025-05-13 17:00:00', 45000.0,
              'RepairEntity', 'Deformación leve en paragolpes delantero', 'Reparación y pintura', 'Masilla, pintura, lija'
+         ),
+         ('Pedro López', 'Problema en frenos', 'Ford Ranger', 2017, 'WITHDRAW',
+          'PAID', 'REPAIR', '2025-06-04 09:00:00', '2025-06-04 14:00:00', 40000.0,
+          'RepairEntity', 'Desgaste en pastillas de freno', 'Cambio de pastillas y ajuste de frenos', 'Pastillas de freno'),
+
+         ('Clara Gómez', 'Fallo en sistema eléctrico', 'Nissan Sentra', 2019, 'WITHDRAW',
+          'UNPAID', 'REPAIR', '2025-06-05 08:30:00', '2025-06-05 12:00:00', 35000.0,
+          'RepairEntity', 'Fusibles quemados', 'Reemplazo de fusibles y revisión de cableado', 'Fusibles, cableado'),
+
+         ('Luis Herrera', 'Golpe en puerta trasera', 'Toyota Hilux', 2020, 'WITHDRAW',
+          'PAID', 'REPAIR', '2025-06-06 10:00:00', '2025-06-06 16:00:00', 50000.0,
+          'RepairEntity', 'Deformación en puerta', 'Reparación y pintura', 'Masilla, pintura'),
+
+         ('Sofía Méndez', 'Problema en suspensión', 'Mazda CX-5', 2021, 'WITHDRAW',
+          'PAID', 'REPAIR', '2025-06-07 09:00:00', '2025-06-07 15:00:00', 60000.0,
+          'RepairEntity', 'Amortiguadores desgastados', 'Cambio de amortiguadores', 'Amortiguadores'),
+
+         ('Fernando Pérez', 'Fallo en sistema de encendido', 'Volkswagen Jetta', 2018, 'WITHDRAW',
+          'UNPAID', 'REPAIR', '2025-06-08 08:00:00', '2025-06-08 12:00:00', 30000.0,
+          'RepairEntity', 'Bujías dañadas', 'Reemplazo de bujías', 'Bujías'),
+         ('Jorge Ramírez', 'Falla en sistema de frenos', 'Renault Duster', 2018, 'WITHDRAW',
+          'PAID', 'REPAIR', '2025-05-20 09:00:00', '2025-05-20 14:00:00', 40000.0,
+          'RepairEntity', 'Desgaste en pastillas de freno', 'Cambio de pastillas y ajuste de frenos', 'Pastillas de freno'),
+
+         ('Lucía Fernández', 'Problema en sistema eléctrico', 'Hyundai Tucson', 2020, 'WITHDRAW',
+          'UNPAID', 'REPAIR', '2025-05-21 08:30:00', '2025-05-21 12:00:00', 35000.0,
+          'RepairEntity', 'Fusibles quemados', 'Reemplazo de fusibles y revisión de cableado', 'Fusibles, cableado'),
+         (
+             'María Gómez', 'No enciende', 'Ford Focus', 2018, 'PROCESS',
+             'UNPAID', 'REPAIR', '2025-05-02 08:30:00', '2025-05-03 15:00:00', 50000.0,
+             'RepairEntity', 'Fallo en sistema eléctrico', 'Cambio de fusibles y revisión de cableado', 'Fusibles, batería'
+         ),
+         (
+             'Valeria Suárez', 'Frenos fallan', 'Volkswagen Gol', 2017, 'WITHDRAW',
+             'UNPAID', 'REPAIR', '2025-05-10 09:30:00', '2025-05-11 13:45:00', 380.0,
+             'RepairEntity', 'Discos desgastados', 'Cambio de discos y pastillas', 'Discos, pastillas de freno'
+         ),
+         (
+             'Martín López', 'Luces traseras no funcionan', 'Fiat Argo', 2019, 'WITHDRAW',
+             'PAID', 'REPAIR', '2025-05-08 10:00:00', '2025-05-08 11:30:00', 150.0,
+             'RepairEntity', 'Cables sueltos en sistema de luces', 'Reparación de conexión eléctrica', 'Cableado'
          );
 
--- CUSTOMIZATION
-INSERT INTO service_entity (
-    nombre_completo, observaciones_previas, auto, modelo, status,
-    payment_status, type, date_entry, date_exit, cost,
-    dtype, materials_used, task_realized
-) VALUES (
-             'Diego Paredes', 'Cambio de luces interiores', 'Hyundai Elantra', 2018, 'WITHDRAW',
-             'UNPAID', 'CUSTOMIZATION', '2025-05-14 11:00:00', '2025-05-14 13:30:00', 180.0,
-             'CustomizationEntity', 'Luces LED azules', 'Instalación de luces LED en cabina'
-         );
+
+
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (1, 4);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (2, 4);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (3, 4);
 INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (4, 1);
 INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (5, 2);
 INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (6, 3);
 INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (7, 2);
 INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (8, 3);
 INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (9, 1);
+-- Más registros para service_entity_empleados
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (10, 2);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (11, 3);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (12, 1);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (13, 2);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (14, 3);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (15, 4);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (16, 5);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (17, 6);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (18, 4);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (19, 5);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (20, 6);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (21, 4);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (22, 5);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (23, 6);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (24, 4);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (25, 5);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (26, 6);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (27, 4);
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES(28,5);
+
 
 
 INSERT INTO sale_entity (type_payment, user_id, date) VALUES
-                                                   ('CASH', 'usuario@gmail.com', '2024-05-10'),
-                                                   ('CASH', 'usuario@gmail.com', '2024-05-12'),
-                                                   ('CASH', 'usuario@gmail.com', '2024-08-15'),
-                                                   ('CASH', 'usuario@gmail.com', '2024-05-18'),
-                                                   ('CASH', 'usuario@gmail.com', '2024-05-20'),
-('MERCADO_PAGO', 'usuario@gmail.com', '2024-05-22'),
-('MERCADO_PAGO', 'usuario@gmail.com', '2024-07-25'),
-('MERCADO_PAGO', 'usuario@gmail.com', '2024-06-28'),
-('MERCADO_PAGO', 'usuario@gmail.com', '2024-06-01'),
-('MERCADO_PAGO', 'usuario@gmail.com', '2024-06-03');
+                                                          ('CASH', 'maria.lopez@gmail.com', '2024-05-10'),
+                                                          ('CASH', 'carlos.garcia@gmail.com', '2024-05-12'),
+                                                          ('CASH', 'ana.martinez@gmail.com', '2024-08-15'),
+                                                          ('CASH', 'juan.gomez@gmail.com', '2024-05-18'),
+                                                          ('CASH', 'sofia.fernandez@gmail.com', '2024-05-20'),
+                                                          ('CASH', 'lucas.perez@gmail.com', '2024-06-10'),
+                                                          ('CASH', 'valeria.suarez@gmail.com', '2024-06-15'),
+                                                          ('CASH', 'diego.mendez@gmail.com', '2024-07-01'),
+                                                          ('MERCADO_PAGO', 'andrea.nunez@gmail.com', '2024-07-10'),
+                                                          ('MERCADO_PAGO', 'pedro.alvarado@gmail.com', '2024-07-20'),
+                                                          ('MERCADO_PAGO', 'maria.lopez@gmail.com', '2024-05-22'),
+                                                          ('MERCADO_PAGO', 'carlos.garcia@gmail.com', '2024-07-25'),
+                                                          ('MERCADO_PAGO', 'ana.martinez@gmail.com', '2024-06-28'),
+                                                          ('MERCADO_PAGO', 'juan.gomez@gmail.com', '2024-06-01'),
+                                                          ('MERCADO_PAGO', 'sofia.fernandez@gmail.com', '2024-06-03');
 
 INSERT INTO detail_sale_entity (cuantity, price, sale_id, spare_id) VALUES
                                                                  (2, 15000.00, 1, 1),
                                                                  (1, 500.00, 1, 3),
-
                                                                  (3, 6000.00, 2, 2),
-
                                                                  (1, 7500.00, 3, 5),
-
                                                                  (2, 4900.00, 4, 6),
-
                                                                  (1, 50000.00, 5, 4),
                                                                  (1, 70000.00, 5, 1),
                                                                  (1, 12000.00, 6, 2),
                                                                  (2, 3500.00, 6, 3),
-
                                                                  (1, 8000.00, 7, 5),
                                                                  (3, 400.00, 7, 6),
-
                                                                  (2, 10000.00, 8, 1),
-
                                                                  (1, 50000.00, 9, 4),
                                                                  (2, 15000.00, 9, 2),
-
-                                                                 (1, 70000.00, 10, 1);
+                                                                 (1, 70000.00, 10, 1),
+                                                                 (1, 12000.00, 11, 2),
+                                                                 (2, 8000.00, 11, 5),
+                                                                 (3, 4500.00, 12, 3),
+                                                                 (1, 60000.00, 12, 4),
+                                                                 (2, 15000.00, 13, 1),
+                                                                 (1, 5000.00, 13, 6),
+                                                                 (2, 20000.00, 14, 2),
+                                                                 (1, 7500.00, 14, 5),
+                                                                 (3, 10000.00, 15, 4),
+                                                                 (1, 70000.00, 15, 1);
