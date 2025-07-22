@@ -24,7 +24,16 @@ export class InicioComponent {
     this.SideBar = !this.SideBar;
   }
 
-  constructor(private router: Router) {}
+  closeSideBar() {
+    this.SideBar = false;
+  }
+
+  constructor(private router: Router) {
+    // Cierra el sidebar al navegar a otra ruta
+    this.router.events.subscribe(() => {
+      this.closeSideBar();
+    });
+  }
 
   nombre: string | null = '';
   apellido: string | null = '';
