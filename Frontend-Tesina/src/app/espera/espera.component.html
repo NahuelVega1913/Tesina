@@ -26,8 +26,8 @@
         }}
       </p>
       <p class="text-2xl text-sky-950 text-center">
-        Si estas de acuerdo, podes proceder a pagar la seña y luego llevar tu
-        vehiculo a nuestra sucursal
+        Si estás de acuerdo, podés proceder a pagar la seña y luego llevar tu
+        vehículo a nuestra sucursal
       </p>
       <div class="flex flex-row justify-center mt-5">
         <button
@@ -59,12 +59,12 @@
 
     <p class="text-sky-900 mt-1 text-2xl text-center">Isaac Albeniz 3622</p>
     <p class="font-semibold text-2xl text-center text-sky-950">
-      Podes reservar un turno en la seccion de turnos, recorda que lo que tengan
-      turno tendrar prioridad para la atencion.
+      Podés reservar un turno en la sección de turnos, recordá que los que
+      tengan turno tendrán prioridad para la atención.
     </p>
     @if(Object.paymentStatus == 'UNPAID_DEPOSIT'){
     <p class="text-center text-2xl mt-5 font-normal text-sky-800">
-      Antes de poder revisar tu vehiculo necesitamos que haga un pago de seña
+      Antes de poder revisar tu vehículo necesitamos que haga un pago de seña
     </p>
     <div (click)="pagarSena()" id="wallet_container"></div>
     }
@@ -126,13 +126,13 @@
     </div>
     <div></div>
     <div class="text-center text-sky-950 font-bold text-5xl mt-30">
-      Su vehiculo se encuentra en espera para ser atendido
+      Su vehículo se encuentra en espera para ser atendido
     </div>
     <div class="text-center text-sky-500 font-semibold text-2xl mt-10">
-      Pronto sera revisado por nuestros mejores profesionales
+      Pronto será revisado por nuestros mejores profesionales
     </div>
     <p class="text-center bg-sky-100 text-sky-950 font-bold text-lg mb-10">
-      Tenes alguna duda o incoveniente? Comunicate al +54 351 7466695
+      ¿Tenés alguna duda o inconveniente? Comunicate al +54 351 7466695
     </p>
   </div>
   }
@@ -200,13 +200,13 @@
     </div>
     <div></div>
     <div class="text-center text-sky-950 font-bold text-5xl mt-30">
-      Su vehiculo esta siendo atendido por nuestros mejores profesionales
+      Su vehículo está siendo atendido por nuestros mejores profesionales
     </div>
     <div class="text-center text-sky-500 font-semibold text-2xl mt-5">
       En cuanto terminemos con el proceso, le avisaremos
     </div>
     <p class="text-center bg-sky-100 text-sky-950 font-bold text-lg mb-10">
-      Tenes alguna duda o incoveniente? Comunicate al +54 351 7466695
+      ¿Tenés alguna duda o inconveniente? Comunicate al +54 351 7466695
     </p>
   </div>
   }
@@ -300,12 +300,12 @@
         <p>{{ Object.modelo }}</p>
       </div>
       <div class="font-normal flex flex-row justify-between text-md mt-1">
-        <p><strong>Observaciones Previas:</strong></p>
+        <p><strong>Observaciones previas:</strong></p>
         <p>{{ Object.observacionesPrevias }}</p>
       </div>
       @if(Object.type == 'INSPECTION'){
       <div class="font-normal flex flex-row justify-betwee text-md mt-1">
-        <p><strong>Estado General:</strong></p>
+        <p><strong>Estado general:</strong></p>
         <p>{{ Object.estadoGeneral }}</p>
       </div>
       <div class="font-normal flex flex-row justify-betwee text-md mt-1">
@@ -322,15 +322,15 @@
       <!--REPAIR-->
       @if(Object.type == 'REPAIR'){
       <div class="font-normal flex flex-row justify-between text-md mt-1">
-        <p><strong>Diagnostico Tecnico:</strong></p>
+        <p><strong>Diagnóstico Técnico:</strong></p>
         <p>{{ Object.techniclaDiagnosis }}</p>
       </div>
       <div class="font-normal flex flex-row justify-between text-md mt-1">
-        <p><strong>Tareas Realizadas:</strong></p>
+        <p><strong>Tareas realizadas:</strong></p>
         <p>{{ Object.tasksPerformed }}</p>
       </div>
       <div class="font-normal flex flex-row justify-between text-md mt-1 text-">
-        <p><strong>Repuestos Usados:</strong></p>
+        <p><strong>Repuestos usados:</strong></p>
         <p>{{ Object.materialsUsed }}</p>
       </div>
       }
@@ -338,14 +338,13 @@
       <!--CUSTOMIZATION-->
       @if(Object.type == 'CUSTOMIZATION'){
       <div class="font-normal flex flex-row justify-between text-md mt-1">
-        <p><strong>Tareas Realizadas:</strong></p>
+        <p><strong>Tareas realizadas:</strong></p>
         <p>{{ Object.tasksPerformed }}</p>
       </div>
       <div class="font-normal flex flex-row justify-between text-md mt-1">
-        <p><strong>Repuestos Usados:</strong></p>
+        <p><strong>Repuestos usados:</strong></p>
         <p>{{ Object.materialsUsed }}</p>
       </div>
-
       } @if(Object.paymentStatus =='UNPAID'){
       <div class="flex flex-row w-full justify-between">
         <p class="font-bold text-xl mt-3">Costo Total:</p>
@@ -360,7 +359,7 @@
       }
     </div>
     <p class="text-center bg-sky-100 text-sky-950 font-bold text-lg mb-10">
-      Tenes alguna duda o incoveniente? Comunicate al +54 351 7466695
+      ¿Tenés alguna duda o inconveniente? Comunicate al +54 351 7466695
     </p>
   </div>
   }

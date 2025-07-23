@@ -11,7 +11,7 @@ import { UsuarioService } from '../services/usuario.service';
   styleUrl: './inicio.component.css',
 })
 export class InicioComponent {
-  SideBar = false;
+  SideBar = window.innerWidth >= 640; // true en escritorio, false en mobile
   UserMenu = false;
   notificaciones = '';
   haveService = false;
@@ -24,14 +24,20 @@ export class InicioComponent {
     this.SideBar = !this.SideBar;
   }
 
+  isMobile(): boolean {
+    return window.innerWidth < 640;
+  }
+
   closeSideBar() {
     this.SideBar = false;
   }
 
   constructor(private router: Router) {
-    // Cierra el sidebar al navegar a otra ruta
+    // Solo cierra el sidebar al navegar si es mobile
     this.router.events.subscribe(() => {
-      this.closeSideBar();
+      if (this.isMobile()) {
+        this.closeSideBar();
+      }
     });
   }
 
@@ -53,7 +59,7 @@ export class InicioComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.SideBar = false;
+    this.SideBar = window.innerWidth >= 640;
     this.UserMenu = false;
     this.nombre = localStorage.getItem('name');
     this.apellido = localStorage.getItem('lastname');
