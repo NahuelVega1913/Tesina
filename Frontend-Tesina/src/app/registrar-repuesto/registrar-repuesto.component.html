@@ -7,7 +7,7 @@
     <p
       class="text-sky-950 text-6xl text-center tex pt-5 sm:mb-5 md:mt-5 font-bold"
     >
-      Registrar Repuesto
+      Registrar repuesto
     </p>
     <form [formGroup]="form" (submit)="save()" class="p-10">
       <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -159,17 +159,17 @@
           <label
             for="company"
             class="block mb-2 text-sm font-medium text-sky-950"
-            >Categoria</label
+            >Categoría</label
           >
           <select
             id="countries"
             formControlName="category"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
           >
-            <option value="" selected>Elige una categoria</option>
+            <option value="" selected>Elige una categoría</option>
             <option value="MOTOR">Motor</option>
-            <option value="REFRIGERACION">Refrigeracion</option>
-            <option value="LUBRICACION">Lubricacion</option>
+            <option value="REFRIGERACION">Refrigeración</option>
+            <option value="LUBRICACION">Lubricación</option>
           </select>
           @if(form.get('category')?.value == "" &&
           form.get('category')?.touched){
@@ -215,7 +215,7 @@
           <label
             for="company"
             class="block mb-2 text-sm font-medium text-sky-950"
-            >Imagenes</label
+            >Imágenes</label
           >
           <input
             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
@@ -236,7 +236,7 @@
             formControlName="provider"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 inline w-full md:w-80 p-2.5"
           >
-            <option value="" selected>Elige una categoria</option>
+            <option value="" selected>Elige un proveedor</option>
             @for (item of lstProviders; track $index) {
             <option value="{{ item.id }}">{{ item.name }}</option>
             }
@@ -251,7 +251,7 @@
       <label
         for="message"
         class="block mb-2 mt-3 text-sm font-medium text-sky-950"
-        >Descripcion</label
+        >Descripción</label
       >
       <textarea
         id="message"
