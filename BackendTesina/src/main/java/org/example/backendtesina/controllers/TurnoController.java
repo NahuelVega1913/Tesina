@@ -2,6 +2,7 @@ package org.example.backendtesina.controllers;
 
 import org.example.backendtesina.DTOs.Post.PostTurno;
 import org.example.backendtesina.DTOs.Get.GetTurno;
+import org.example.backendtesina.DTOs.Post.PutTurno;
 import org.example.backendtesina.entities.services.TurnoEntity;
 import org.example.backendtesina.services.TurnoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,14 @@ public class TurnoController {
            return ResponseEntity.ok(response);
 
 
+    }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @GetMapping("/hoy")
+    public ResponseEntity<?> getTurnosDeHoy() {
+        List<PutTurno> turnosDeHoy = turnoService.getTurnosDeHoy();
+        if (turnosDeHoy.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(turnosDeHoy);
     }
 }

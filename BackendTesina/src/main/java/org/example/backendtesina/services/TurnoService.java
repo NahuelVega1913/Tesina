@@ -1,6 +1,7 @@
 package org.example.backendtesina.services;
 
 import org.example.backendtesina.DTOs.Post.PostTurno;
+import org.example.backendtesina.DTOs.Post.PutTurno;
 import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.entities.services.ServiceEntity;
 import org.example.backendtesina.entities.services.TurnoEntity;
@@ -246,5 +247,26 @@ public class TurnoService {
         dto.setHoraFin(turno.getHoraFin());
 
         return dto;
+    }
+    public List<PutTurno> getTurnosDeHoy() {
+        LocalDateTime inicioDia = LocalDate.now().atStartOfDay();
+        LocalDateTime finDia = inicioDia.plusDays(1).minusSeconds(1);
+
+        List<TurnoEntity> turnosDeHoy = repository.findAllByHoraInicioBetween(inicioDia, finDia);
+        List<PutTurno> dtos = new ArrayList<>();
+
+        for (TurnoEntity turno : turnosDeHoy) {
+            PutTurno dto = new PutTurno();
+            dto.setId(turno.getId());
+            dto.setFecha(java.sql.Date.valueOf(turno.getHoraInicio().toLocalDate()));
+            dto.setHoraInicio(turno.getHoraInicio());
+            dto.setHoraFin(turno.getHoraFin());
+            dto.setEstado(turno.getEstado());
+            dto.setNombreUser(turno.getUser() != null ? turno.getUser().getName() : null);
+            dto.setServiceId(turno.getService() != null ? turno.getService().getId() : null);
+            dtos.add(dto);
+        }
+
+        return dtos;
     }
 }
