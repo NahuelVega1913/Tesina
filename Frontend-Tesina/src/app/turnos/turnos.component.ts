@@ -13,6 +13,7 @@ export class TurnosComponent {
   private service = inject(TurnosService);
 
   turnos: any[] = [];
+  turnosHoy: any[] = [];
   turnoSeleccionado: any = null;
   isAdmin: boolean = false;
   isUser: boolean = false;
@@ -34,6 +35,11 @@ export class TurnosComponent {
     this.service?.getAllTurnos().subscribe((turnos) => {
       this.turnos = turnos;
     });
+    if (this.isAdmin) {
+      this.service?.getAllTurnosHoy().subscribe((turnosHoy) => {
+        this.turnosHoy = turnosHoy;
+      });
+    }
 
     // Si el usuario es USER y no hay turnoSeleccionado, inicializa con un objeto vacío para mostrar el botón
     if (this.isUser && !this.turnoSeleccionado) {

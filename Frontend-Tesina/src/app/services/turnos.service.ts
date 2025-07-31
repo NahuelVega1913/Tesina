@@ -18,6 +18,14 @@ export class TurnosService {
       },
     });
   }
+  getAllTurnosHoy() {
+    return this.http.get<any>(this.url + `turnos/hoy`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
+  }
   postTurno(body: any) {
     return this.http.post<any>(this.url + `turnos/postturno`, body, {
       headers: {

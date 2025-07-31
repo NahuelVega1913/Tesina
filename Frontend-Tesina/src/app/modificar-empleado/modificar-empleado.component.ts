@@ -87,14 +87,18 @@ export class ModificarEmpleadoComponent {
         const fechaFormateada = `${año}-${mes}-${dia}`;
 
         const fecha1 = new Date(res.dateOfEntry);
-        const año1 = fecha.getFullYear();
+        const año1 = fecha1.getFullYear();
         const mes1 = String(fecha1.getMonth() + 1).padStart(2, '0');
         const dia1 = String(fecha1.getDate()).padStart(2, '0');
         const fechaFormateada1 = `${año1}-${mes1}-${dia1}`;
+
         this.form.patchValue({
           ...res,
           birthDate: fechaFormateada,
           dateOfEntry: fechaFormateada1,
+          bancaryNumber: res.bancaryNumber
+            ? this.toPlainString(res.bancaryNumber)
+            : '',
         });
       },
       error: (err) => {
@@ -102,10 +106,28 @@ export class ModificarEmpleadoComponent {
       },
     });
   }
+
+  // Convierte notación científica a string decimal
+  toPlainString(num: any): string {
+    if (typeof num === 'string') return num;
+    if (typeof num === 'number') {
+      // Si es notación científica, conviértelo
+      const str = num.toString();
+      if (str.indexOf('e') !== -1) {
+        return num.toLocaleString('fullwide', { useGrouping: false });
+      }
+      return str;
+    }
+    return '';
+  }
+
   save() {
     if (this.form.valid) {
       const entity: any = this.form.value;
       entity.id = localStorage.getItem('idEmpleado');
+      entity.bancaryNumber = entity.bancaryNumber
+        ? entity.bancaryNumber.toString()
+        : ''; // <-- conversión a string al guardar
       console.log(entity);
       const addSubscription = this.service.putEmployee(entity).subscribe({
         next: () => {

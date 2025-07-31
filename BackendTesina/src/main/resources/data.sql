@@ -134,16 +134,16 @@ INSERT INTO EMPLOYEES (
     birthDate,CUIT, typeOfContract, workingDay, bancaryNumber, fullName,
     salary, address, phone, email, position, dateOfEntry, remarks
 ) VALUES
-      ('1990-05-10',200000000, 'PERMANENT', 'FULLTIME', 12345678, 'Juan Pérez',
-       850000.00, 'Av. Siempre Viva 123', 1122334455, 'juan.perez@email.com',
+      ('1990-05-10',20074504039, 'PERMANENT', 'FULLTIME', 8743518309234563439575, 'Juan Pérez',
+       850000.00, 'Av. Siempre Viva 123', 543512233445, 'juan.perez@email.com',
        'Tecnico Automotor', '2022-01-15', 'Empleado con buen desempeño'),
 
-      ('1985-08-22',200000000, 'TEMPORARY', 'PART_TIME', 87654321, 'Ana Gómez',
-       700000.00, 'Calle Falsa 456', 1199887766, 'ana.gomez@email.com',
+      ('1985-08-22',20301230034, 'TEMPORARY', 'PART_TIME', 6543217323952474164726, 'Ana Gómez',
+       700000.00, 'Calle Falsa 456', 543519988776, 'ana.gomez@email.com',
        'Personalizacion de Carroceria', '2023-06-01', 'Contrato temporal por 6 meses'),
 
-      ('1992-12-01',200000000, 'PERMANENT', 'FULLTIME', 11223344, 'Carlos Ruiz',
-       950000.00, 'Pasaje Luna 789', 1133445566, 'carlos.ruiz@email.com',
+      ('1992-12-01',21300153054, 'PERMANENT', 'FULLTIME', 1123344934863052082331, 'Carlos Ruiz',
+       950000.00, 'Pasaje Luna 789', 543514556912, 'carlos.ruiz@email.com',
        'Tecnico Electromecanico', '2021-09-10', 'Trabaja desde el exterior');
 
 
@@ -151,16 +151,16 @@ INSERT INTO EMPLOYEES (
     birthDate, CUIT, typeOfContract, workingDay, bancaryNumber, fullName,
     salary, address, phone, email, position, dateOfEntry, remarks
 ) VALUES
-      ('1991-07-15', 20345678901, 'PERMANENT', 'FULLTIME', 98765432, 'Lucía Fernández',
-       880000.00, 'Calle Principal 123', 1145678901, 'lucia.fernandez@email.com',
+      ('1991-07-15', 20345678901, 'PERMANENT', 'FULLTIME', 2850590940093281723567, 'Lucía Fernández',
+       880000.00, 'Calle Principal 123', 543514567891, 'lucia.fernandez@email.com',
        'Administradora', '2020-03-01', 'Excelente desempeño en liderazgo'),
 
-      ('1988-11-20', 20456789012, 'TEMPORARY', 'PART_TIME', 87654321, 'Martín López',
-       720000.00, 'Av. Libertad 456', 1156789012, 'martin.lopez@email.com',
+      ('1988-11-20', 20456789012, 'TEMPORARY', 'PART_TIME', 7209335762301984537663, 'Martín López',
+       720000.00, 'Av. Libertad 456', 543515679012, 'martin.lopez@email.com',
        'Mecanico', '2023-07-15', 'Contrato temporal por 1 año'),
 
-      ('1993-02-10', 20567890123, 'PERMANENT', 'REMOTE', 11223344, 'Sofía Martínez',
-       940000.00, 'Pasaje Estrella 789', 1167890123, 'sofia.martinez@email.com',
+      ('1993-02-10', 20567890123, 'PERMANENT', 'REMOTE', 1430019256148200375501, 'Sofía Martínez',
+       940000.00, 'Pasaje Estrella 789', 543516780123, 'sofia.martinez@email.com',
        'Tecnino Automotor', '2021-10-01', 'Especialista en análisis de grandes volúmenes de datos');
 
 -- CUSTOMIZATION
