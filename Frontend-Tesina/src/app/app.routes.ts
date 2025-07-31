@@ -154,6 +154,7 @@ export const routes: Routes = [
       { path: 'historial-servicios', component: HistorialServiciosComponent },
       { path: 'generar-presupuesto', component: GenerarPresupuestoComponent },
       { path: 'turnos', component: TurnosComponent },
+      { path: 'inicio', component: LandingComponent },
     ],
   },
 ];

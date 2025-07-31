@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <div class="flex flex-wrap justify-center gap-4 p-10">
+    <div class="flex flex-wrap justify-center gap-4 p-5">
       @for (item of obtenerProximosDias(); track $index) { @if(item.valueOf() !=
       "domingo") {
       <div class="flex flex-col">
@@ -57,7 +57,7 @@
         } @else {
         <!-- Horarios -->
         <div
-          class="h-30 w-60 rounded-2xl font-bold border-gray-100 p-3 m-2 hover:bg-blue-300 relative"
+          class="h-30 w-60 rounded-2xl font-bold border-gray-100 p-3 m-1 hover:bg-blue-300 relative"
           (click)="
             seleccionarTurno({
               dia: item,
@@ -298,33 +298,38 @@
       </button>
     </div>
   </ng-container>
-</div>
-@if(isAdmin){
-<div class="flex flex-col justify-center mt-1 w-full md:w-2/3 mx-auto">
-  <p class="text-4xl font-bold mb-4 text-center">Turnos hoy</p>
-  @for (item of turnosHoy; track $index) {
-  <div
-    class="flex flex-row justify-around mx-auto items-center w-1/2 border-b py-2 px-4 mb-1"
-  >
-    <span class="font-semibold text-blue-900">
-      {{ item.horaInicio ? (item.horaInicio | date : "HH:mm") : "" }} -
-      {{ item.horaFin ? (item.horaFin | date : "HH:mm") : "" }}
-    </span>
-    <span
-      class="text-sm px-2 py-1 rounded-lg"
-      [ngClass]="{
-        'bg-green-200 text-green-800': item.estado === 'pendiente',
-        'bg-yellow-200 text-yellow-800': item.estado === 'confirmado',
-        'bg-red-200 text-red-800': item.estado === 'cancelado'
-      }"
+
+  @if(isAdmin){
+  <div class="flex flex-col justify-center mt-1 w-full md:w-2/3 mx-auto">
+    <p class="text-4xl font-bold mb-4 text-center">Turnos para hoy</p>
+    @if(turnosHoy.length === 0){
+    <div class="text-center text-gray-500 text-lg py-4">
+      No hay turnos para hoy.
+    </div>
+    } @for (item of turnosHoy; track $index) {
+    <div
+      class="flex flex-row justify-around mx-auto items-center w-1/2 border-b py-2 px-4 mb-1"
     >
-      {{ item.estado }}
-    </span>
-    <span class="font-medium text-gray-800">
-      {{ item.nombreUser || item.emailUser || "Sin usuario" }}
-    </span>
+      <span class="font-semibold text-blue-900">
+        {{ item.horaInicio ? (item.horaInicio | date : "HH:mm") : "" }} -
+        {{ item.horaFin ? (item.horaFin | date : "HH:mm") : "" }}
+      </span>
+      <span
+        class="text-sm px-2 py-1 rounded-lg"
+        [ngClass]="{
+          'bg-green-200 text-green-800': item.estado === 'pendiente',
+          'bg-yellow-200 text-yellow-800': item.estado === 'confirmado',
+          'bg-red-200 text-red-800': item.estado === 'cancelado'
+        }"
+      >
+        {{ item.estado }}
+      </span>
+      <span class="font-medium text-gray-800">
+        {{ item.nombreUser || item.emailUser || "Sin usuario" }}
+      </span>
+    </div>
+    }
   </div>
   }
+  <!--TURNOS-->
 </div>
-}
-<!--TURNOS-->
