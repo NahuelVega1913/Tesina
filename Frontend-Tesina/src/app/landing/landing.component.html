@@ -126,6 +126,49 @@
       </p>
     </div>
   </section>
+  <!-- Nuestros servicios Section -->
+  <section class="bg-white py-12 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-sky-800 mb-4">
+        Nuestros servicios
+      </h2>
+      <p class="text-lg text-gray-700 mb-8">
+        Ofrecemos soluciones integrales para el mantenimiento y reparación de tu
+        vehículo.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div
+          class="bg-sky-100 rounded-xl p-6 shadow flex flex-col items-center"
+          (click)="navigate('registrar-reparacion')"
+        >
+          <h3 class="font-bold text-xl text-sky-700 mb-2">Reparacion</h3>
+          <p class="text-gray-600">
+            Diagnóstico, reparación y mantenimiento de motor, frenos, suspensión
+            y más.
+          </p>
+        </div>
+        <div
+          class="bg-sky-100 rounded-xl p-6 shadow flex flex-col items-center"
+          (click)="navigate('registrar-inspeccion')"
+        >
+          <h3 class="font-bold text-xl text-sky-700 mb-2">
+            Inspeccion y diagnóstico
+          </h3>
+          <p class="text-gray-600">
+            Solución de problemas eléctricos, batería, luces y sistemas
+            electrónicos.
+          </p>
+        </div>
+        <div
+          class="bg-sky-100 rounded-xl p-6 shadow flex flex-col items-center"
+          (click)="navigate('registrar-personalizacion')"
+        >
+          <h3 class="font-bold text-xl text-sky-700 mb-2">Customizacion</h3>
+          <p class="text-gray-600">Cambia la pintura, tapizado y mucho más.</p>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- Footer -->
   <footer class="bg-sky-800 text-white text-center py-4 mt-auto">
     © 2025 Servicios 351. Todos los derechos reservados.
