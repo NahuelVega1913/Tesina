@@ -177,8 +177,6 @@ INSERT INTO service_entity (
           'PAID', 'CUSTOMIZATION', '2025-05-05 14:00:00', '2025-05-06 12:00:00', 20000.0,
           'CustomizationEntity', 'Cuero negro, hilo rojo', 'Tapizado de volante personalizado'
       );
-
-
 -- INSPECTION
 -- INSPECTION
 INSERT INTO service_entity (
@@ -231,10 +229,7 @@ INSERT INTO service_entity (
              'PAID', 'INSPECTION', '2025-05-07 08:15:00', '2025-05-07 09:10:00', 95000.0,
              'InspectionEntity', 'Apto con observaciones', 'Revisar frenos en 3 meses', 'Condicional'
          );
-
-
 -- REPAIR
-
 -- REPAIR
 INSERT INTO service_entity (
     nombre_completo, observaciones_previas, auto, modelo, status,
@@ -322,21 +317,45 @@ INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES(28
 
 
 INSERT INTO sale_entity (type_payment, user_id, date) VALUES
-                                                          ('CASH', 'maria.lopez@gmail.com', '2024-05-10'),
-                                                          ('CASH', 'carlos.garcia@gmail.com', '2024-05-12'),
+                                                          ('CASH', 'maria.lopez@gmail.com', '2025-05-10'),
+                                                          ('CASH', 'carlos.garcia@gmail.com', '2025-05-12'),
                                                           ('CASH', 'ana.martinez@gmail.com', '2024-08-15'),
-                                                          ('CASH', 'juan.gomez@gmail.com', '2024-05-18'),
-                                                          ('CASH', 'sofia.fernandez@gmail.com', '2024-05-20'),
-                                                          ('CASH', 'lucas.perez@gmail.com', '2024-06-10'),
-                                                          ('CASH', 'valeria.suarez@gmail.com', '2024-06-15'),
+                                                          ('CASH', 'juan.gomez@gmail.com', '2025-05-18'),
+                                                          ('CASH', 'sofia.fernandez@gmail.com', '2025-05-20'),
+                                                          ('CASH', 'lucas.perez@gmail.com', '2025-06-10'),
+                                                          ('CASH', 'valeria.suarez@gmail.com', '2025-06-15'),
                                                           ('CASH', 'diego.mendez@gmail.com', '2024-07-01'),
-                                                          ('MERCADO_PAGO', 'andrea.nunez@gmail.com', '2024-07-10'),
-                                                          ('MERCADO_PAGO', 'pedro.alvarado@gmail.com', '2024-07-20'),
-                                                          ('MERCADO_PAGO', 'maria.lopez@gmail.com', '2024-05-22'),
-                                                          ('MERCADO_PAGO', 'carlos.garcia@gmail.com', '2024-07-25'),
-                                                          ('MERCADO_PAGO', 'ana.martinez@gmail.com', '2024-06-28'),
-                                                          ('MERCADO_PAGO', 'juan.gomez@gmail.com', '2024-06-01'),
-                                                          ('MERCADO_PAGO', 'sofia.fernandez@gmail.com', '2024-06-03');
+                                                          ('CASH', 'sofia.fernandez@gmail.com', '2024-08-15'),
+                                                          ('CASH', 'pedro.alvarado@gmail.com', '2024-08-20'),
+                                                          ('CASH', 'andrea.nunez@gmail.com', '2024-09-05'),
+                                                          ('MERCADO_PAGO', 'diego.mendez@gmail.com', '2024-09-10'),
+                                                          ('CASH', 'juan.gomez@gmail.com', '2024-10-01'),
+                                                          ('CASH', 'pedro.alvarado@gmail.com', '2024-10-15'),
+                                                          ('MERCADO_PAGO', 'juan.gomez@gmail.com', '2024-11-05'),
+                                                          ('MERCADO_PAGO', 'andrea.nunez@gmail.com', '2024-11-20'),
+                                                          ('MERCADO_PAGO', 'andrea.nunez@gmail.com', '2025-07-10'),
+                                                          ('MERCADO_PAGO', 'pedro.alvarado@gmail.com', '2025-07-20'),
+                                                          ('MERCADO_PAGO', 'maria.lopez@gmail.com', '2025-05-22'),
+                                                          ('MERCADO_PAGO', 'carlos.garcia@gmail.com', '2025-07-25'),
+                                                          ('MERCADO_PAGO', 'ana.martinez@gmail.com', '2025-06-28'),
+                                                          ('MERCADO_PAGO', 'juan.gomez@gmail.com', '2025-06-01'),
+                                                          ('MERCADO_PAGO', 'sofia.fernandez@gmail.com', '2024-06-03'),
+                                                          ('CASH', 'maria.lopez@gmail.com', '2024-12-10'),
+                                                          ('CASH', 'carlos.garcia@gmail.com', '2025-01-15'),
+                                                          ('CASH', 'ana.martinez@gmail.com', '2025-02-20'),
+                                                          ('CASH', 'juan.gomez@gmail.com', '2025-03-05'),
+                                                          ('CASH', 'sofia.fernandez@gmail.com', '2025-04-10'),
+                                                          ('MERCADO_PAGO', 'lucas.perez@gmail.com', '2025-05-15'),
+                                                          ('MERCADO_PAGO', 'valeria.suarez@gmail.com', '2025-06-20'),
+                                                          ('MERCADO_PAGO', 'diego.mendez@gmail.com', '2025-07-01'),
+                                                          ('CASH', 'pedro.alvarado@gmail.com', '2024-12-25'),
+                                                          ('CASH', 'andrea.nunez@gmail.com', '2025-01-30'),
+                                                          ('MERCADO_PAGO', 'maria.lopez@gmail.com', '2025-02-28'),
+                                                          ('MERCADO_PAGO', 'carlos.garcia@gmail.com', '2025-03-15'),
+                                                          ('CASH', 'ana.martinez@gmail.com', '2025-04-05'),
+                                                          ('CASH', 'juan.gomez@gmail.com', '2025-05-10'),
+                                                          ('MERCADO_PAGO', 'sofia.fernandez@gmail.com', '2025-06-25'),
+                                                          ('MERCADO_PAGO', 'pedro.alvarado@gmail.com', '2025-07-05');
 
 INSERT INTO detail_sale_entity (cuantity, price, sale_id, spare_id) VALUES
                                                                  (2, 15000.00, 1, 1),
@@ -363,4 +382,28 @@ INSERT INTO detail_sale_entity (cuantity, price, sale_id, spare_id) VALUES
                                                                  (2, 20000.00, 14, 2),
                                                                  (1, 7500.00, 14, 5),
                                                                  (3, 10000.00, 15, 4),
-                                                                 (1, 70000.00, 15, 1);
+                                                                 (1, 70000.00, 15, 1),
+                                                                 (2, 24000.00, 16, 1), -- Venta de Aceite 10W40
+                                                                 (1, 4500.00, 16, 2),  -- Venta de Filtro de Aire
+                                                                 (1, 25000.00, 17, 3), -- Venta de Radiador Compacto
+                                                                 (4, 24000.00, 18, 4), -- Venta de Bujías Iridium
+                                                                 (1, 35000.00, 19, 5), -- Venta de Batería 12V 65Ah
+                                                                 (3, 9000.00, 20, 6),  -- Venta de Filtro de Aceite
+                                                                 (1, 18000.00, 21, 7), -- Venta de Ventilador Eléctrico
+                                                                 (2, 15000.00, 22, 8),
+                                                                 (1, 15000.00, 23, 1), -- Venta de Aceite 10W40
+                                                                 (2, 4500.00, 23, 2),  -- Venta de Filtro de Aire
+                                                                 (1, 25000.00, 24, 3), -- Venta de Radiador Compacto
+                                                                 (3, 24000.00, 25, 4), -- Venta de Bujías Iridium
+                                                                 (1, 35000.00, 26, 5), -- Venta de Batería 12V 65Ah
+                                                                 (2, 9000.00, 27, 6),  -- Venta de Filtro de Aceite
+                                                                 (1, 18000.00, 28, 7), -- Venta de Ventilador Eléctrico
+                                                                 (2, 15000.00, 29, 8), -- Venta de Correa Dentada
+                                                                 (1, 12000.00, 30, 1), -- Venta de Aceite 10W40
+                                                                 (2, 5000.00, 31, 2),  -- Venta de Filtro de Aire
+                                                                 (1, 26000.00, 32, 3), -- Venta de Radiador Compacto
+                                                                 (4, 25000.00, 33, 4), -- Venta de Bujías Iridium
+                                                                 (1, 36000.00, 34, 5), -- Venta de Batería 12V 65Ah
+                                                                 (3, 9500.00, 35, 6),  -- Venta de Filtro de Aceite
+                                                                 (1, 18500.00, 36, 7), -- Venta de Ventilador Eléctrico
+                                                                 (2, 15500.00, 37, 8); -- Venta de Correa Dentada-- Venta de Correa Dentada

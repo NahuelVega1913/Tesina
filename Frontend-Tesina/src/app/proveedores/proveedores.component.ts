@@ -19,6 +19,10 @@ export class ProveedoresComponent {
   search: string = '';
   lst: any[] = [];
   lstFiltered: any[] = [];
+  lstPaged: any[] = [];
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 1;
 
   constructor(private router: Router) {}
   ngOnInit(): void {
@@ -57,6 +61,38 @@ export class ProveedoresComponent {
         (this.category === '' || item.category === this.category)
       );
     });
+    this.totalPages = Math.max(
+      1,
+      Math.ceil(this.lstFiltered.length / this.pageSize)
+    );
+    this.currentPage = Math.min(this.currentPage, this.totalPages);
+    this.updatePaged();
+  }
+
+  updatePaged() {
+    const start = (this.currentPage - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.lstPaged = this.lstFiltered.slice(start, end);
+  }
+
+  goToPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.updatePaged();
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaged();
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaged();
+    }
   }
 
   setProveedor(id: number) {
@@ -72,7 +108,7 @@ export class ProveedoresComponent {
     const getSubscription = this.service.getProveedores().subscribe({
       next: (res) => {
         this.lst = res;
-        this.lstFiltered = res;
+        this.filter();
         console.log(this.lst);
       },
       error: (err) => {

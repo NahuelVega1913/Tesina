@@ -153,13 +153,10 @@
           <th scope="col" class="px-6 py-3 text-sky-950">Categoría</th>
           <th scope="col" class="px-6 py-3 text-sky-950">Teléfono</th>
           <th scope="col" class="px-6 py-3 text-sky-950">Estado</th>
-          <th scope="col" class="px-6 py-3">
-            <span class="sr-only">Ver</span>
-          </th>
         </tr>
       </thead>
       <tbody class="rounded-b-2xl">
-        @for (i of lstFiltered; track $index) {
+        @for (i of lstPaged; track $index) {
         <tr
           class="bg-white border-b border-gray-200 hover:bg-sky-50 transition"
         >
@@ -175,9 +172,7 @@
           <td class="px-6 py-4 capitalize">{{ toLowerCase(i.category) }}</td>
           <td class="px-6 py-4">{{ i.phone }}</td>
           @if(i.state == true){
-          <td
-            class="px-6 py-4 text-green-600 font-bold flex items-center gap-1"
-          >
+          <td class="px-6 py-4 text-green-600 font-bold flex items-center">
             <svg
               class="w-4 h-4 text-green-500 inline"
               fill="none"
@@ -194,7 +189,7 @@
             Activo
           </td>
           } @else {
-          <td class="px-6 py-4 text-red-600 font-bold flex items-center gap-1">
+          <td class="px-6 py-4 text-red-600 font-bold flex items-center">
             <svg
               class="w-4 h-4 text-red-500 inline"
               fill="none"
@@ -252,5 +247,25 @@
         }
       </tbody>
     </table>
+    <!-- Controles de paginación -->
+    <div class="flex justify-center items-center mt-4 gap-2">
+      <button
+        (click)="prevPage()"
+        [disabled]="currentPage === 1"
+        class="px-3 py-1 rounded-lg bg-sky-200 text-sky-900 font-semibold hover:bg-sky-300 disabled:opacity-50"
+      >
+        Anterior
+      </button>
+      <span class="mx-2 text-sky-950 font-bold">
+        Página {{ currentPage }} de {{ totalPages }}
+      </span>
+      <button
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages"
+        class="px-3 py-1 rounded-lg bg-sky-200 text-sky-900 font-semibold hover:bg-sky-300 disabled:opacity-50"
+      >
+        Siguiente
+      </button>
+    </div>
   </div>
 </div>

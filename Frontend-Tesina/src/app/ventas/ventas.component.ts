@@ -21,6 +21,10 @@ export class VentasComponent implements AfterViewInit {
   dateFrom: any;
   dateTo: any;
   lstFiltered: any[] = [];
+  lstPaged: any[] = [];
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 1;
   private service: MercadoPagoService = inject(MercadoPagoService);
   private chart: Chart | null = null;
   private pieChart: Chart | null = null;
@@ -78,18 +82,80 @@ export class VentasComponent implements AfterViewInit {
   }
 
   exportarExcel() {
-    const tabla = document.getElementById('tabla');
-    const wb = XLSX.utils.table_to_book(tabla, { sheet: 'Datos' });
+    // Crear tabla temporal con todos los datos filtrados
+    const tempTable = document.createElement('table');
+    tempTable.innerHTML = `
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Cliente</th>
+          <th>Método de pago</th>
+          <th>Total</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${this.lstFiltered
+          .map(
+            (item) => `
+          <tr>
+            <td>${
+              item.date ? new Date(item.date).toLocaleDateString() : ''
+            }</td>
+            <td>${item.user}</td>
+            <td>${this.tipoDePago(item.typePayment)}</td>
+            <td>$ ${item.total}</td>
+            <td>Ver detalles</td>
+          </tr>
+        `
+          )
+          .join('')}
+      </tbody>
+    `;
+    document.body.appendChild(tempTable);
+    const wb = XLSX.utils.table_to_book(tempTable, { sheet: 'Datos' });
     const fecha = this.getFechaActual();
     XLSX.writeFile(wb, `ventas_${fecha}.xlsx`);
+    document.body.removeChild(tempTable);
   }
 
   exportarPDF() {
+    // Crear tabla temporal con todos los datos filtrados
+    const tempTable = document.createElement('table');
+    tempTable.innerHTML = `
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Cliente</th>
+          <th>Método de pago</th>
+          <th>Total</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${this.lstFiltered
+          .map(
+            (item) => `
+          <tr>
+            <td>${
+              item.date ? new Date(item.date).toLocaleDateString() : ''
+            }</td>
+            <td>${item.user}</td>
+            <td>${this.tipoDePago(item.typePayment)}</td>
+            <td>$ ${item.total}</td>
+            <td>Ver detalles</td>
+          </tr>
+        `
+          )
+          .join('')}
+      </tbody>
+    `;
+    document.body.appendChild(tempTable);
     const doc = new jsPDF();
     const fecha = this.getFechaActual();
-
-    autoTable(doc, { html: '#tabla' }); // usa el id de tu tabla
+    autoTable(doc, { html: tempTable });
     doc.save(`ventas_${fecha}.pdf`);
+    document.body.removeChild(tempTable);
     return;
   }
 
@@ -114,9 +180,41 @@ export class VentasComponent implements AfterViewInit {
 
       return matchesCategory && matchesDate && matchesSearch;
     });
+    this.totalPages = Math.max(
+      1,
+      Math.ceil(this.lstFiltered.length / this.pageSize)
+    );
+    this.currentPage = Math.min(this.currentPage, this.totalPages);
+    this.updatePaged();
     this.updateCountChart();
     this.updateChart();
     this.updatePieChart();
+  }
+
+  updatePaged() {
+    const start = (this.currentPage - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.lstPaged = this.lstFiltered.slice(start, end);
+  }
+
+  goToPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.updatePaged();
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaged();
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaged();
+    }
   }
 
   getVentas() {
