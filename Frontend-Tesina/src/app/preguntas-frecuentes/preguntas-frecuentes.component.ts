@@ -11,8 +11,26 @@ import { FormsModule } from '@angular/forms';
 export class PreguntasFrecuentesComponent {
   rol: any = '';
   // Estados de los acordeones para USER y para otros roles
-  userOpen: boolean[] = [false, false, false, false];
-  otherOpen: boolean[] = [false, false, false, false];
+  userOpen: boolean[] = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
+  otherOpen: boolean[] = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
 
   ngOnInit(): void {
     this.rol = localStorage.getItem('role');

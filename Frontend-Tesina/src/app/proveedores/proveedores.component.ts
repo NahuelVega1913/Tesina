@@ -84,4 +84,10 @@ export class ProveedoresComponent {
   redirectTo(url: string) {
     this.router.navigate([`${url}`]);
   }
+
+  openWhatsApp(phone: string) {
+    // Elimina espacios y caracteres no numéricos, por si acaso
+    const url = `https://wa.me/${phone}?text=hola buenos dias soy de servicios 351 estoy buscando repuestos`;
+    window.open(url, '_blank');
+  }
 }
