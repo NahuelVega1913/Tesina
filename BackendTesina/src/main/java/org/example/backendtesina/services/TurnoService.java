@@ -94,18 +94,16 @@ public class TurnoService {
             }
         }
 
-        // Crear los GetTurno para los horarios disponibles
+        // Crear los GetTurno para los horarios disponibles, incluyendo los que tienen 0 lugares
         for (Map.Entry<LocalDateTime, Integer> entry : disponibilidadPorHorario.entrySet()) {
             LocalDateTime inicioIntervalo = entry.getKey();
             int lugaresLibres = entry.getValue();
-            if (lugaresLibres > 0) {
-                GetTurno dto = new GetTurno();
-                dto.setFecha(java.sql.Date.valueOf(inicioIntervalo.toLocalDate()));
-                dto.setHoraInicio(inicioIntervalo.toLocalTime().toString());
-                dto.setHoraFin(inicioIntervalo.plusHours(2).toLocalTime().toString());
-                dto.setLugaresLibres(lugaresLibres);
-                dtos.add(dto);
-            }
+            GetTurno dto = new GetTurno();
+            dto.setFecha(java.sql.Date.valueOf(inicioIntervalo.toLocalDate()));
+            dto.setHoraInicio(inicioIntervalo.toLocalTime().toString());
+            dto.setHoraFin(inicioIntervalo.plusHours(2).toLocalTime().toString());
+            dto.setLugaresLibres(lugaresLibres);
+            dtos.add(dto);
         }
 
         return dtos;

@@ -49,7 +49,7 @@ export class ModificarRepuestoComponent {
     ]),
     stock: new UntypedFormControl('', [
       this.noNegativeValidator,
-      Validators.min(1),
+      Validators.min(0),
     ]),
     brand: new UntypedFormControl('', []),
     category: new UntypedFormControl('', []),
@@ -81,6 +81,7 @@ export class ModificarRepuestoComponent {
     const value = control.value;
     if (value == null || value === '') return null;
     const num = Number(value);
+    // Permite cero como valor válido
     return isNaN(num) || num < 0 ? { negativeValue: true } : null;
   }
   getProviders() {
@@ -206,12 +207,24 @@ export class ModificarRepuestoComponent {
 
       // Agregar campos normales
       formData.append('name', this.form.value.name || '');
-      formData.append('price', this.form.value.price || '');
-      formData.append('discaunt', this.form.value.discaunt || '');
+      formData.append(
+        'price',
+        this.form.value.price != null ? this.form.value.price : ''
+      );
+      formData.append(
+        'discaunt',
+        this.form.value.discaunt != null ? this.form.value.discaunt : ''
+      );
       formData.append('providerId', this.form.value.provider || '');
       formData.append('id', localStorage.getItem('idRepuesto') || '');
-      formData.append('stars', this.form.value.stars || '');
-      formData.append('stock', this.form.value.stock || '');
+      formData.append(
+        'stars',
+        this.form.value.stars != null ? this.form.value.stars : ''
+      );
+      formData.append(
+        'stock',
+        this.form.value.stock != null ? this.form.value.stock : ''
+      );
       formData.append('brand', this.form.value.brand || '');
       formData.append('category', this.form.value.category || '');
       formData.append('description', this.form.value.description || '');
@@ -232,7 +245,7 @@ export class ModificarRepuestoComponent {
         next: () => {
           Swal.fire({
             icon: 'success',
-            title: '¡Repuesto creado!',
+            title: '¡Repuesto modificado!',
             text: 'El repuesto fue modificado exitosamente',
             confirmButtonColor: '#3085d6',
           });

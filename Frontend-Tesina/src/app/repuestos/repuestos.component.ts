@@ -5,10 +5,11 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { RespuestosService } from '../services/respuestos.service';
 import { FormsModule, NgModel } from '@angular/forms';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-repuestos',
-  imports: [NgScrollbarModule, FormsModule],
+  imports: [NgScrollbarModule, FormsModule, NgClass],
   templateUrl: './repuestos.component.html',
   styleUrl: './repuestos.component.css',
 })
