@@ -73,6 +73,22 @@ public class NotificationService {
         repository.save(notification);
         return notification;
     }
+    public NotificationEntity pocoStock(UserEntity user, String repuesto){
+        NotificationEntity notification = new NotificationEntity();
+        notification.setDateTime(LocalDateTime.now());
+        notification.setTitle("Se acaban los repuestos!!!");
+        notification.setMessage("Que poco stock del articulo: "+repuesto);
+        notification.setType(typeNotificationEntity.COMPRA);
+        notification.setState(StateNotification.UNSEEN);
+        notification.setUser(user);
+
+        List<NotificationEntity> notifications = new ArrayList<>();
+        notifications.add(notification);
+        user.setNotifications(notifications);
+
+        repository.save(notification);
+        return notification;
+    }
     public NotificationEntity notificationServiceFinished(UserEntity user){
         NotificationEntity notification = new NotificationEntity();
         notification.setDateTime(LocalDateTime.now());

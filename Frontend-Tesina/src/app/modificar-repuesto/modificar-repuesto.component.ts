@@ -233,7 +233,7 @@ export class ModificarRepuestoComponent {
           Swal.fire({
             icon: 'success',
             title: '¡Repuesto creado!',
-            text: 'El repuesto fue registrado exitosamente',
+            text: 'El repuesto fue modificado exitosamente',
             confirmButtonColor: '#3085d6',
           });
 
@@ -243,7 +243,7 @@ export class ModificarRepuestoComponent {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Ocurrió un error al registrar el repuesto',
+            text: 'Ocurrió un error al modificar el repuesto',
           });
         },
       });
