@@ -2,9 +2,11 @@ package org.example.backendtesina.services;
 
 import org.example.backendtesina.DTOs.Get.GetSpareDTO;
 import org.example.backendtesina.DTOs.Post.PostSpareDTO;
+import org.example.backendtesina.entities.personal.NotificationEntity;
 import org.example.backendtesina.entities.personal.ProviderEntity;
 import org.example.backendtesina.entities.payment.SpareEntity;
 import org.example.backendtesina.entities.enums.CategorySpareEntity;
+import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.repositories.ProviderRepository;
 import org.example.backendtesina.repositories.SpareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,10 @@ public class SpareService {
     SpareRepository repository;
     @Autowired
     ProviderRepository providerRepository;
+    @Autowired
+    NotificationService notificationService;
+    @Autowired
+    UserService userService;
 
     @Value("${upload.dir:uploads}")
     private String uploadDir;
@@ -144,6 +150,10 @@ public class SpareService {
         spare.setPrice(price);
         spare.setDiscaunt(discaunt);
         spare.setStock(stock);
+        if(spare.getStock() <= 5){
+            UserEntity user = userService.getEntity("admin@gmail.com");
+            notificationService.pocoStock(user,spare.getName() +" "+ spare.getBrand());
+        }
         spare.setBrand(brand);
         spare.setStars(stars);
         spare.setCategory(CategorySpareEntity.valueOf(category));
@@ -171,6 +181,7 @@ public class SpareService {
         spare.setStars(dto.getStars());
         spare.setDiscaunt(dto.getDiscaunt());
         spare.setStock(dto.getStock());
+
         spare.setBrand(dto.getBrand());
         spare.setCategory(CategorySpareEntity.valueOf(dto.getCategory()));
         spare.setDescription(dto.getDescription());
