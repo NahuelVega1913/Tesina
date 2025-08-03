@@ -164,7 +164,7 @@ INSERT INTO service_entity (
       ),
       (
           'Andrea Núñez', 'Agregar vinilo decorativo', 'Mazda 3', 2023, 'WITHDRAW',
-          'UNPAID', 'CUSTOMIZATION', '2025-05-09 09:00:00', '2025-05-09 13:00:00', 300.0,
+          'UNPAID', 'CUSTOMIZATION', '2025-05-09 09:00:00', '2025-05-09 13:00:00', 3000.0,
           'CustomizationEntity', 'Vinilo negro mate', 'Aplicación de vinilo en capó y laterales'
       ),
       (
@@ -273,12 +273,12 @@ INSERT INTO service_entity (
          ),
          (
              'Valeria Suárez', 'Frenos fallan', 'Volkswagen Gol', 2017, 'WITHDRAW',
-             'UNPAID', 'REPAIR', '2025-05-10 09:30:00', '2025-05-11 13:45:00', 380.0,
+             'UNPAID', 'REPAIR', '2025-05-10 09:30:00', '2025-05-11 13:45:00', 38000.0,
              'RepairEntity', 'Discos desgastados', 'Cambio de discos y pastillas', 'Discos, pastillas de freno'
          ),
          (
              'Martín López', 'Luces traseras no funcionan', 'Fiat Argo', 2019, 'WITHDRAW',
-             'PAID', 'REPAIR', '2025-05-08 10:00:00', '2025-05-08 11:30:00', 150.0,
+             'PAID', 'REPAIR', '2025-05-08 10:00:00', '2025-05-08 11:30:00', 15000.0,
              'RepairEntity', 'Cables sueltos en sistema de luces', 'Reparación de conexión eléctrica', 'Cableado'
          );
 
@@ -359,16 +359,16 @@ INSERT INTO sale_entity (type_payment, user_id, date,retired) VALUES
 
 INSERT INTO detail_sale_entity (cuantity, price, sale_id, spare_id) VALUES
                                                                  (2, 15000.00, 1, 1),
-                                                                 (1, 500.00, 1, 3),
+                                                                 (1, 5000.00, 1, 3),
                                                                  (3, 6000.00, 2, 2),
                                                                  (1, 7500.00, 3, 5),
-                                                                 (2, 4900.00, 4, 6),
+                                                                 (2, 49000.00, 4, 6),
                                                                  (1, 50000.00, 5, 4),
                                                                  (1, 70000.00, 5, 1),
                                                                  (1, 12000.00, 6, 2),
                                                                  (2, 3500.00, 6, 3),
-                                                                 (1, 8000.00, 7, 5),
-                                                                 (3, 400.00, 7, 6),
+                                                                 (1, 80000.00, 7, 5),
+                                                                 (3, 40000.00, 7, 6),
                                                                  (2, 10000.00, 8, 1),
                                                                  (1, 50000.00, 9, 4),
                                                                  (2, 15000.00, 9, 2),
