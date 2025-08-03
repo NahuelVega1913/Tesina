@@ -18,6 +18,14 @@ export class UsuarioService {
       },
     });
   }
+  getAllUsers() {
+    return this.http.get<any>(this.url + `users/getall`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
+  }
   getUsuarioInformation() {
     return this.http.get<any>(this.url + `users/getUserInformation`, {
       headers: {

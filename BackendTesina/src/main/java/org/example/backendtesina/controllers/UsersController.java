@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 @CrossOrigin("*")
@@ -47,9 +49,14 @@ public class UsersController {
         }
         return ResponseEntity.status(403).build();
     }
-    @GetMapping(value = "getAll")
+    @GetMapping(value = "getall")
     public ResponseEntity<?> getAll(){
-        return null;
+        List<RegisterDto> lst = service.getAllUsers();
+        if(lst.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }else{
+            return ResponseEntity.ok(lst);
+        }
     }
 
 

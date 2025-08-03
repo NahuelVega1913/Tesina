@@ -6,6 +6,7 @@ import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import org.example.backendtesina.DTOs.Get.GetSaleDTO;
 import org.example.backendtesina.DTOs.Post.PostPayDTO;
+import org.example.backendtesina.entities.payment.SaleEntity;
 import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.services.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,32 @@ public class SaleController {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(lst);
+    }
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
+    @PostMapping(value = "payCash")
+    public ResponseEntity<?> payCash(@RequestBody PostPayDTO entity, @RequestParam String email) {
+
+            SaleEntity s = service.payCash(email, entity);
+            if(s == null) {
+                return ResponseEntity.badRequest().build();
+            }else{
+                return ResponseEntity.ok().build();
+
+            }
+
+    }
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
+    @PostMapping(value = "payCashcart")
+    public ResponseEntity<?> payCashCart(@RequestBody List<PostPayDTO> entity, @RequestParam String email) {
+
+        SaleEntity s = service.payCashCart(email, entity);
+        if(s == null) {
+            return ResponseEntity.badRequest().build();
+        }else{
+            return ResponseEntity.ok().build();
+
+        }
+
     }
 
 }

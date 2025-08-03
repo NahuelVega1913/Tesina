@@ -21,6 +21,19 @@ public class SaleEntity {
 
     private LocalDate date;
 
+    public Boolean getRetired() {
+        return retired;
+    }
+
+    public void setRetired(Boolean retired) {
+        this.retired = retired;
+    }
+
+    private Boolean retired ;
+
+
+
+
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetailSaleEntity> details = new ArrayList<>();
 
@@ -35,6 +48,7 @@ public class SaleEntity {
     public LocalDate getDate() {
         return date;
     }
+
 
     public void setDate(LocalDate date) {
         this.date = date;
@@ -63,4 +77,6 @@ public class SaleEntity {
     public void setUser(UserEntity user) {
         this.user = user;
     }
+
+
 }

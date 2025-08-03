@@ -67,6 +67,18 @@ export class MercadoPagoService {
       { headers }
     );
   }
+  payCash(body: { idSpare: number; quantity: number }, email: string) {
+    return this.http.post<any>(
+      this.url + `sales/payCash?email=${encodeURIComponent(email)}`,
+      body,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
 
   constructor() {}
 }

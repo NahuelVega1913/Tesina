@@ -12,6 +12,7 @@ import {
 import Swal from 'sweetalert2';
 import { MercadoPagoService } from '../services/mercado-pago.service';
 import { CommentsService } from '../services/comments.service';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-repuesto',
@@ -24,6 +25,10 @@ export class RepuestoComponent {
   cantidad: number = 1;
   text: string = '';
   rol: any = '';
+
+  showModalComprar: boolean = false;
+  usuariosFicticios: any[] = [];
+  usuarioSeleccionado: string = '';
 
   constructor(private router: Router) {
     this.mp = new (window as any).MercadoPago(
@@ -39,6 +44,7 @@ export class RepuestoComponent {
   private cartService: CartService = inject(CartService);
   private mpService: MercadoPagoService = inject(MercadoPagoService);
   private commentService: CommentsService = inject(CommentsService);
+  private usuarioService: UsuarioService = inject(UsuarioService);
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -46,6 +52,7 @@ export class RepuestoComponent {
     this.getRepuesto();
     this.rol = localStorage.getItem('role');
     this.getAllComments();
+
     this.mp.bricks().create('wallet', 'wallet_container', {
       initialization: {
         preferenceId: 'YOUR_PREFERENCE_ID', // Reemplaza con tu ID de preferencia
@@ -161,5 +168,70 @@ export class RepuestoComponent {
           console.log(err);
         },
       });
+  }
+
+  abrirModalComprar() {
+    if (this.rol === 'ADMIN') {
+      this.usuarioService.getAllUsers().subscribe({
+        next: (res) => {
+          this.usuariosFicticios = res.map((u: any) => ({
+            id: u.id,
+            nombre: u.nombre || u.name || u.email || 'Sin nombre',
+            email: u.email,
+          }));
+        },
+        error: () => {
+          this.usuariosFicticios = [];
+        },
+      });
+      this.showModalComprar = true;
+    } else {
+      this.comprarRepuesto();
+    }
+  }
+  cerrarModalComprar() {
+    this.showModalComprar = false;
+    this.usuarioSeleccionado = '';
+  }
+
+  confirmarCompraAdmin() {
+    // Ahora usuarioSeleccionado es el email directamente
+    const email = this.usuarioSeleccionado;
+    if (!email) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Usuario no seleccionado',
+        text: 'Seleccione un usuario antes de confirmar.',
+        confirmButtonColor: '#3085d6',
+      });
+      return;
+    }
+
+    const idSpare = Number(localStorage.getItem('idRepuesto')) || 0;
+    const body = {
+      idSpare: idSpare,
+      quantity: this.cantidad,
+    };
+
+    this.mpService.payCash(body, email).subscribe({
+      next: () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Pago en efectivo registrado exitosamente',
+          confirmButtonColor: '#3085d6',
+        });
+      },
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al registrar el pago',
+          text: 'Intente nuevamente mas tarde',
+          confirmButtonColor: '#3085d6',
+        });
+      },
+    });
+
+    this.showModalComprar = false;
+    this.usuarioSeleccionado = '';
   }
 }

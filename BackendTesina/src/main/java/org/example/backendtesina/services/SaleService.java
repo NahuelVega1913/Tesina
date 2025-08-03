@@ -129,6 +129,7 @@ public class SaleService {
         //REGISTRO DE ENTIDADES
         SaleEntity sale = new SaleEntity();
         sale.setUser(user);
+        sale.setRetired(Boolean.FALSE);
         sale.setDate(LocalDate.now());
         List<DetailSaleEntity> lstDetails = new ArrayList<>();
         DetailSaleEntity detail = new DetailSaleEntity();
@@ -181,6 +182,7 @@ public class SaleService {
         SaleEntity sale = new SaleEntity();
         sale.setDate(LocalDate.now());
         sale.setUser(user);
+        sale.setRetired(false);
         List<DetailSaleEntity> lstDetails = new ArrayList<>();
        for (PostPayDTO dto:lstPay){
            SpareEntity spare = spareRepository.findById(dto.getIdSpare()).get();
@@ -240,6 +242,7 @@ public class SaleService {
         for (SaleEntity s:sales){
             GetSaleDTO dto = new GetSaleDTO();
             dto.setDate(s.getDate());
+            dto.setRetired(s.getRetired());
             dto.setUser(s.getUser().getName() +" "+s.getUser().getLastname());
             dto.setTypePayment(s.getTypePayment());
             dto.setId(s.getId());
@@ -272,5 +275,89 @@ public class SaleService {
         dto.setTotal(total);
         dto.setDetails(details);
         return dto;
+    }
+
+
+    public SaleEntity payCash(String email, PostPayDTO payDTO) {
+        // Obtener el usuario desde el correo electrónico
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Obtener el repuesto y verificar stock
+        SpareEntity spare = spareRepository.findById(payDTO.getIdSpare()).orElseThrow(() -> new RuntimeException("Repuesto no encontrado"));
+        if (payDTO.getQuantity() > spare.getStock()) {
+            throw new RuntimeException("Stock insuficiente");
+        }
+
+        // Actualizar el stock del repuesto
+        spare.setStock(spare.getStock() - payDTO.getQuantity());
+        spareRepository.save(spare);
+
+        // Registrar la venta
+        SaleEntity sale = new SaleEntity();
+        sale.setUser(user);
+        sale.setRetired(Boolean.FALSE);
+        sale.setDate(LocalDate.now());
+        sale.setTypePayment(typePaymentEntity.CASH);
+
+        // Registrar el detalle de la venta
+        DetailSaleEntity detail = new DetailSaleEntity();
+        detail.setPrice(new BigDecimal((spare.getPrice() - (spare.getPrice() * spare.getDiscaunt()) / 100)));
+        detail.setCuantity(payDTO.getQuantity());
+        detail.setSpare(spare);
+        detail.setSale(sale);
+
+        // Guardar la venta y el detalle
+        sale.getDetails().add(detail);
+        repository.save(sale);
+
+        // Notificar al usuario
+        notificationService.purchasedProduct(user);
+        return sale;
+    }
+    public SaleEntity payCashCart(String email, List<PostPayDTO> payDTOList) {
+        // Obtener el usuario desde el correo electrónico
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Crear la venta
+        SaleEntity sale = new SaleEntity();
+        sale.setUser(user);
+        sale.setRetired(Boolean.FALSE);
+        sale.setDate(LocalDate.now());
+        sale.setTypePayment(typePaymentEntity.CASH);
+
+        List<DetailSaleEntity> details = new ArrayList<>();
+
+        // Procesar cada producto en el carrito
+        for (PostPayDTO payDTO : payDTOList) {
+            // Obtener el repuesto y verificar stock
+            SpareEntity spare = spareRepository.findById(payDTO.getIdSpare()).orElseThrow(() -> new RuntimeException("Repuesto no encontrado"));
+            if (payDTO.getQuantity() > spare.getStock()) {
+                throw new RuntimeException("Stock insuficiente para el producto: " + spare.getName());
+            }
+
+            // Actualizar el stock del repuesto
+            spare.setStock(spare.getStock() - payDTO.getQuantity());
+            spareRepository.save(spare);
+
+            // Crear el detalle de la venta
+            DetailSaleEntity detail = new DetailSaleEntity();
+            detail.setPrice(new BigDecimal((spare.getPrice() - (spare.getPrice() * spare.getDiscaunt()) / 100)));
+            detail.setCuantity(payDTO.getQuantity());
+            detail.setSpare(spare);
+            detail.setSale(sale);
+
+            details.add(detail);
+        }
+
+        // Asociar los detalles a la venta
+        sale.setDetails(details);
+
+        // Guardar la venta
+        repository.save(sale);
+
+        // Notificar al usuario
+        notificationService.purchasedProduct(user);
+
+        return sale;
     }
 }

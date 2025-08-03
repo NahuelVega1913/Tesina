@@ -11,6 +11,16 @@ public class GetSaleDTO {
     private String user;
     private Double total;
 
+    public Boolean getRetired() {
+        return retired;
+    }
+
+    public void setRetired(Boolean retired) {
+        this.retired = retired;
+    }
+
+    private Boolean retired;
+
     private typePaymentEntity typePayment;
 
     private List<DetailSaleDto> details;
