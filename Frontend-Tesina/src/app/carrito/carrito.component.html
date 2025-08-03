@@ -121,10 +121,47 @@
       type="button"
       id=""
       class="text-white mt-15 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      (click)="abrirModalComprar()"
     >
       Continuar compra
     </button>
     }
     <div (click)="comprarRepuesto()" id="wallet_container" class="mt-2"></div>
+
+    <!-- Modal para seleccionar cliente (solo visible si showModalComprar es true) -->
+    @if(showModalComprar) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+    >
+      <div class="bg-white rounded-lg p-6 w-96">
+        <h2 class="text-xl font-bold mb-4">Seleccione al cliente</h2>
+        <select
+          [(ngModel)]="usuarioSeleccionado"
+          class="w-full mb-4 p-2 border border-gray-300 rounded"
+        >
+          @for (user of usuariosFicticios; track user.id) {
+          <option [value]="user.email">
+            {{ user.nombre }} {{ user.apellido }} ({{ user.email }})
+          </option>
+          }
+        </select>
+        <div class="flex justify-end gap-2">
+          <button
+            class="bg-gray-300 text-gray-700 px-4 py-2 rounded"
+            (click)="cerrarModalComprar()"
+          >
+            Cancelar
+          </button>
+          <button
+            class="bg-green-600 text-white px-4 py-2 rounded"
+            (click)="confirmarCompraAdminCarrito()"
+            [disabled]="!usuarioSeleccionado"
+          >
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+    }
   </div>
 </div>

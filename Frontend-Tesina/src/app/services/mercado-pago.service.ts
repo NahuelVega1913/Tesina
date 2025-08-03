@@ -79,6 +79,18 @@ export class MercadoPagoService {
       }
     );
   }
+  payCashCart(body: { idSpare: number; quantity: number }[], email: string) {
+    return this.http.post<any>(
+      this.url + `sales/payCashcart?email=${encodeURIComponent(email)}`,
+      body,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
 
   constructor() {}
 }

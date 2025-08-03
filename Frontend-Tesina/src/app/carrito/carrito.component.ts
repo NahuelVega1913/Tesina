@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MercadoPagoService } from '../services/mercado-pago.service';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-carrito',
@@ -27,6 +28,10 @@ export class CarritoComponent {
     Cantidades: new UntypedFormArray([]),
   });
   mp = {} as any;
+  showModalComprar: boolean = false;
+  usuariosFicticios: any[] = [];
+  usuarioSeleccionado: string = '';
+  private usuarioService: UsuarioService = inject(UsuarioService);
 
   constructor(private router: Router) {
     this.mp = new (window as any).MercadoPago(
@@ -137,5 +142,67 @@ export class CarritoComponent {
     } else {
       this.productos[index].cantidad++;
     }
+  }
+  abrirModalComprar() {
+    if (this.rol === 'ADMIN' || this.rol === 'SUPERADMIN') {
+      this.usuarioService.getAllUsers().subscribe({
+        next: (res) => {
+          this.usuariosFicticios = res.map((u: any) => ({
+            id: u.id,
+            nombre: u.nombre || u.name || u.email || 'Sin nombre',
+            email: u.email,
+          }));
+        },
+        error: () => {
+          this.usuariosFicticios = [];
+        },
+      });
+      this.showModalComprar = true;
+    } else {
+      this.comprarRepuesto();
+    }
+  }
+
+  cerrarModalComprar() {
+    this.showModalComprar = false;
+    this.usuarioSeleccionado = '';
+  }
+
+  confirmarCompraAdminCarrito() {
+    const email = this.usuarioSeleccionado;
+    if (!email) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Usuario no seleccionado',
+        text: 'Seleccione un usuario antes de confirmar.',
+        confirmButtonColor: '#3085d6',
+      });
+      return;
+    }
+    const body = this.productos.map((producto) => ({
+      idSpare: producto.id,
+      quantity: producto.cantidad,
+    }));
+
+    this.mpService.payCashCart(body, email).subscribe({
+      next: () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Pago en efectivo registrado exitosamente',
+          confirmButtonColor: '#3085d6',
+        });
+      },
+      error: () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al registrar el pago',
+          text: 'Intente nuevamente mas tarde',
+          confirmButtonColor: '#3085d6',
+        });
+      },
+    });
+
+    this.showModalComprar = false;
+    this.usuarioSeleccionado = '';
   }
 }

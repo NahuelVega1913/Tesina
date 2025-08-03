@@ -295,7 +295,7 @@ public class SaleService {
         // Registrar la venta
         SaleEntity sale = new SaleEntity();
         sale.setUser(user);
-        sale.setRetired(Boolean.FALSE);
+        sale.setRetired(Boolean.TRUE);
         sale.setDate(LocalDate.now());
         sale.setTypePayment(typePaymentEntity.CASH);
 
@@ -321,7 +321,7 @@ public class SaleService {
         // Crear la venta
         SaleEntity sale = new SaleEntity();
         sale.setUser(user);
-        sale.setRetired(Boolean.FALSE);
+        sale.setRetired(Boolean.TRUE);
         sale.setDate(LocalDate.now());
         sale.setTypePayment(typePaymentEntity.CASH);
 

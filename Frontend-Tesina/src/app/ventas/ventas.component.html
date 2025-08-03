@@ -156,6 +156,7 @@
               <th scope="col" class="px-6 py-3">Cliente</th>
               <th scope="col" class="px-6 py-3">Método de pago</th>
               <th scope="col" class="px-6 py-3">Total</th>
+              <th scope="col" class="px-6 py-3">Estado</th>
               <th scope="col" class="px-6 py-3">Acción</th>
             </tr>
           </thead>
@@ -173,6 +174,11 @@
               <td class="px-6 py-4">{{ item.user }}</td>
               <td class="px-6 py-4">{{ tipoDePago(item.typePayment) }}</td>
               <td class="px-6 py-4">$ {{ item.total }}</td>
+              @if(item.retired == 'false') {
+              <td class="px-6 py-4 text-yellow-600 font-semibold">Pendiente</td>
+              } @else if(item.retired == 'true') {
+              <td class="px-6 py-4 text-green-600 font-semibold">Completada</td>
+              }
               <td class="px-6 py-4">
                 <a
                   (click)="redirectTo('detalles-venta', item.id)"
