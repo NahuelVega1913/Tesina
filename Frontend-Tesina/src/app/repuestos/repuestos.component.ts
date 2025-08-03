@@ -53,12 +53,12 @@ export class RepuestosComponent {
   }
 
   redirectTo(url: string, id: number) {
-    window.location.href = url;
+    // window.location.href = url;
     localStorage.setItem('idRepuesto', id.toString());
-    // this.router.navigate([`${url}`]);
+    this.router.navigate([`${url}`]);
   }
   redirectToTo(url: string) {
-    window.location.href = url;
+    this.router.navigate([`${url}`]);
     // this.router.navigate([`${url}`]);
   }
 

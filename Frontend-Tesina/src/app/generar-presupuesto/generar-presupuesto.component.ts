@@ -7,6 +7,7 @@ import {
   UntypedFormGroup,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-generar-presupuesto',
@@ -15,6 +16,8 @@ import Swal from 'sweetalert2';
   styleUrl: './generar-presupuesto.component.css',
 })
 export class GenerarPresupuestoComponent {
+  constructor(private router: Router) {}
+
   private serviceEmpleados: EmpleadosService = inject(EmpleadosService);
   private service: ServiciosService = inject(ServiciosService);
 
@@ -92,7 +95,8 @@ export class GenerarPresupuestoComponent {
             text: 'El presupuesto se ha generado correctamente.',
             confirmButtonColor: '#3085d6',
           });
-          window.location.href = '/consultarServicios';
+          this.router.navigate(['consultarServicios']);
+          //   window.location.href = '/consultarServicios';
         },
         error: (err) => {
           Swal.fire({

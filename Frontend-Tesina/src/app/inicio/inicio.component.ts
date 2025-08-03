@@ -107,7 +107,8 @@ export class InicioComponent {
     this.router.navigate([`${url}`]);
   }
   moveTo(url: string) {
-    window.location.href = url;
+    this.router.navigate([`${url}`]);
+    //  window.location.href = url;
   }
   salir(url: string) {
     localStorage.clear();
