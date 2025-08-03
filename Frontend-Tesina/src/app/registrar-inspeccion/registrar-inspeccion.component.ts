@@ -48,7 +48,7 @@ export class RegistrarInspeccionComponent {
       console.log(entity);
       const addSubscription = this.service.postService(entity).subscribe({
         next: () => {
-          window.location.href = '/espera';
+          this.router.navigate(['/espera']);
 
           Swal.fire({
             icon: 'success',

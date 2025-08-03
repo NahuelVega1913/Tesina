@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-unauthorized',
-  imports: [],
   templateUrl: './unauthorized.component.html',
-  styleUrl: './unauthorized.component.css',
+  styleUrls: ['./unauthorized.component.css'],
 })
 export class UnauthorizedComponent {
+  constructor(private router: Router) {}
+
   volver() {
-    window.location.href = '';
+    this.router.navigate(['']);
   }
 }
