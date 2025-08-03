@@ -11,7 +11,6 @@ export class LandingComponent {
   constructor(private router: Router) {}
 
   navigate(route: string) {
-    // Implement navigation logic here
     this.router.navigate([route]);
   }
 }

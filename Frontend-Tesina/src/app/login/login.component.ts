@@ -14,7 +14,7 @@ export class LoginComponent {
   constructor(private router: Router) {}
 
   goToRegister() {
-    window.location.href = '/registrarse';
+    this.router.navigate(['/registrarse']);
   }
 
   login() {
