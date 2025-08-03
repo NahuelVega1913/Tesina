@@ -64,18 +64,18 @@ export class ConsultarServiciosComponent {
   }
 
   redirectTo(url: string, id: number) {
-    window.location.href = url;
+    this.router.navigate([`${url}`]);
     localStorage.setItem('status', 'IN_QUEUE');
     localStorage.setItem('idServicio', id.toString());
     // this.router.navigate([`${url}`]);
   }
   redirectToProccess(url: string, id: number) {
-    window.location.href = url;
+    this.router.navigate([`${url}`]);
     localStorage.setItem('status', 'PROCESS');
     localStorage.setItem('idServicio', id.toString());
   }
   redirectToTo(url: string) {
-    window.location.href = url;
+    this.router.navigate([`${url}`]);
     // this.router.navigate([`${url}`]);
   }
   moveTo(id: number, type: string) {
