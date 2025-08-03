@@ -1,0 +1,13 @@
+services:
+  tesina-backend:
+    container_name: tesis-backend
+    image: nahuelvega1913/tesis-backend:latest
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:mem:testdb
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD:
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.H2Dialect

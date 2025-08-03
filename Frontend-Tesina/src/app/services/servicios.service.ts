@@ -59,22 +59,19 @@ export class ServiciosService {
     });
 
     return this.http.post<any>(
-      `http://localhost:8080/services/declineBudget/` + id,
+      this.url + `services/declineBudget/` + id,
       {},
       { headers }
     );
   }
 
   getServiceStatus() {
-    return this.http.get<any>(
-      `http://localhost:8080/services/getStatusService`,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    return this.http.get<any>(this.url + `services/getStatusService`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
   }
   registrarIngreso(id: number) {
     const headers = new HttpHeaders({
@@ -83,7 +80,7 @@ export class ServiciosService {
     });
 
     return this.http.post<any>(
-      `http://localhost:8080/services/registerEntry/` + id,
+      this.url + `services/registerEntry/` + id,
       {},
       { headers }
     );
@@ -95,7 +92,7 @@ export class ServiciosService {
     });
 
     return this.http.post<any>(
-      `http://localhost:8080/services/payService/` + id,
+      this.url + `services/payService/` + id,
       {},
       { headers }
     );
@@ -107,74 +104,54 @@ export class ServiciosService {
     });
 
     return this.http.post<any>(
-      `http://localhost:8080/services/retireCar/` + id,
+      this.url + `services/retireCar/` + id,
       {},
       { headers }
     );
   }
   postService(body: any) {
-    return this.http.post<any>(
-      `http://localhost:8080/services/postService`,
-      body,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    return this.http.post<any>(this.url + `services/postService`, body, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
   }
   postReparacion(body: any) {
-    return this.http.post<any>(
-      `http://localhost:8080/services/postRepair`,
-      body,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    return this.http.post<any>(this.url + `services/postRepair`, body, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
   }
   postCustomizacion(body: any) {
-    return this.http.post<any>(
-      `http://localhost:8080/services/postCustomization`,
-      body,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    return this.http.post<any>(this.url + `services/postCustomization`, body, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
   }
   finishInspection(body: any) {
-    return this.http.post<any>(
-      `http://localhost:8080/services/finishInspection`,
-      body,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    return this.http.post<any>(this.url + `services/finishInspection`, body, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
   }
   finishRepair(body: any) {
-    return this.http.post<any>(
-      `http://localhost:8080/services/finishRepair`,
-      body,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    return this.http.post<any>(this.url + `services/finishRepair`, body, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
   }
   finishCustomization(body: any) {
     return this.http.post<any>(
-      `http://localhost:8080/services/finishCustomization`,
+      this.url + `services/finishCustomization`,
       body,
       {
         headers: {
@@ -185,15 +162,12 @@ export class ServiciosService {
     );
   }
   getServiceById(id: number) {
-    return this.http.get<any>(
-      `http://localhost:8080/services/getService/${id}`,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    return this.http.get<any>(this.url + `services/getService/${id}`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
   }
   pasarAProceso(id: number, idEmpleado: number) {
     const headers = new HttpHeaders({
@@ -202,13 +176,13 @@ export class ServiciosService {
     });
 
     return this.http.put<any>(
-      `http://localhost:8080/services/putEmployees/${id}/${idEmpleado}`,
+      this.url + `services/putEmployees/${id}/${idEmpleado}`,
       {}, // el cuerpo va vacío si no necesitas enviar datos
       { headers } // opciones, incluyendo headers
     );
   }
   getServices() {
-    return this.http.get<any>(`http://localhost:8080/services/getAll`, {
+    return this.http.get<any>(this.url + `services/getAll`, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
         'Content-Type': 'application/json',

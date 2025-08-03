@@ -45,7 +45,7 @@ export class RegistrarPersonalizacionComponent {
       console.log(entity);
       const addSubscription = this.service.postCustomizacion(entity).subscribe({
         next: () => {
-          window.location.href = '/espera';
+          this.router.navigate(['/espera']);
 
           Swal.fire({
             icon: 'success',

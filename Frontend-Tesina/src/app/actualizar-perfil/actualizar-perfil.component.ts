@@ -87,7 +87,7 @@ export class ActualizarPerfilComponent {
           });
         } else if (result.isDenied) {
           Swal.fire('Los cambios no se guardaran', '', 'info');
-          window.location.href = '/inicio';
+          this.router.navigate(['/inicio']);
         }
       });
     }
