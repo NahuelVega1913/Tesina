@@ -91,6 +91,14 @@ export class MercadoPagoService {
       }
     );
   }
+  retirarVenta(id: number) {
+    return this.http.get<any>(this.url + `sales/retiresale/${id}`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
+  }
 
   constructor() {}
 }

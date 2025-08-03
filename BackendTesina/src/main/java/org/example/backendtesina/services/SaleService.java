@@ -360,4 +360,10 @@ public class SaleService {
 
         return sale;
     }
+    public SaleEntity retireSale (int id){
+       SaleEntity entity =  this.repository.findById(id).get();
+       entity.setRetired(Boolean.TRUE);
+       repository.save(entity);
+       return entity;
+    }
 }

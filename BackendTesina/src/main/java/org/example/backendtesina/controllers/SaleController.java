@@ -101,5 +101,14 @@ public class SaleController {
         }
 
     }
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
+    @GetMapping(value = "retiresale/{id}")
+    public ResponseEntity<?> retire(@PathVariable int id) {
+        SaleEntity sale = service.retireSale(id);
+        if (sale == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().build();
+    }
 
 }

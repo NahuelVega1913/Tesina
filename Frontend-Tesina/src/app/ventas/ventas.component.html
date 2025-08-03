@@ -175,7 +175,18 @@
               <td class="px-6 py-4">{{ tipoDePago(item.typePayment) }}</td>
               <td class="px-6 py-4">$ {{ item.total }}</td>
               @if(item.retired == false) {
-              <td class="px-6 py-4 text-yellow-600 font-semibold">Pendiente</td>
+              <td
+                class="px-6 py-4 text-yellow-600 font-semibold flex items-center gap-2"
+              >
+                Pendiente
+                <button
+                  type="button"
+                  class="ml-2 px-3 py-1 rounded-lg bg-green-500 text-white font-semibold hover:bg-green-700 transition"
+                  (click)="retirarVenta(item.id)"
+                >
+                  Retirar
+                </button>
+              </td>
               } @else if(item.retired == true) {
               <td class="px-6 py-4 text-green-600 font-semibold">Retirado</td>
               }

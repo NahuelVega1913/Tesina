@@ -439,4 +439,16 @@ export class VentasComponent implements AfterViewInit {
     const data = Object.keys(typeMap).map((key) => typeMap[key]);
     return { labels, data };
   }
+
+  retirarVenta(id: number) {
+    this.service.retirarVenta(id).subscribe({
+      next: () => {
+        this.getVentas(); // Actualiza la lista después de retirar
+      },
+      error: (err) => {
+        alert('No se pudo retirar la venta.');
+        console.log(err);
+      },
+    });
+  }
 }
