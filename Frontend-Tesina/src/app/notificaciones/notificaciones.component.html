@@ -95,7 +95,7 @@
           {{ item.message }}
         </div>
         <div class="mb-1 text-sm font-normal">
-          Hace {{ calculateTimeDiff(item.dateTime) }}
+          {{ item.dateTime | date : "HH:mm" }}
         </div>
       </div>
     </div>

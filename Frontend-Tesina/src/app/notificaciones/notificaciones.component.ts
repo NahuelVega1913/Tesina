@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificacionesService } from '../services/notificaciones.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-notificaciones',
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './notificaciones.component.html',
   styleUrl: './notificaciones.component.css',
 })
@@ -20,21 +21,6 @@ export class CasillaComponent {
     //Add 'implements OnInit' to the class.
     this.getNotificaciones();
     this.marksAsRead();
-  }
-  calculateTimeDiff(date: string) {
-    const currentDate = new Date();
-    const notificationDate = new Date(date);
-    const timeDiff = currentDate.getTime() - notificationDate.getTime();
-
-    if (timeDiff < 60000) {
-      return `${Math.floor(timeDiff / 1000)} segundos`;
-    } else if (timeDiff < 3600000) {
-      return `${Math.floor(timeDiff / 60000)} minutos`;
-    } else if (timeDiff < 86400000) {
-      return `${Math.floor(timeDiff / 3600000)} horas`;
-    } else {
-      return `${Math.floor(timeDiff / 86400000)} días`;
-    }
   }
 
   getNotificaciones() {
