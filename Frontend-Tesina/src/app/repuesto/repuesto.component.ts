@@ -13,10 +13,11 @@ import Swal from 'sweetalert2';
 import { MercadoPagoService } from '../services/mercado-pago.service';
 import { CommentsService } from '../services/comments.service';
 import { UsuarioService } from '../services/usuario.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-repuesto',
-  imports: [FormsModule],
+  imports: [FormsModule, NgClass],
   templateUrl: './repuesto.component.html',
   styleUrl: './repuesto.component.css',
 })
@@ -29,6 +30,8 @@ export class RepuestoComponent {
   showModalComprar: boolean = false;
   usuariosFicticios: any[] = [];
   usuarioSeleccionado: string = '';
+
+  currentImageIndex: number = 0;
 
   constructor(private router: Router) {
     this.mp = new (window as any).MercadoPago(

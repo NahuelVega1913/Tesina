@@ -95,19 +95,56 @@ public class SaleService {
         return null;
     }
 
-    public String confirmPayment(String webhookPayload){
+
+    public String confirmPayment(String webhookPayload) {
         try {
-            // Convertir el string recibido a un objeto JSON
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(webhookPayload);
 
-            // Extraer el paymentId del JSON (ajusta el campo según la estructura del webhook)
             String paymentId = jsonNode.get("data").get("id").asText();
-
-            // Consultar el estado del pago en la API de Mercado Pago
             String paymentStatus = consultarPago(paymentId);
 
-            // Retornar el estado del pago o cualquier información relevante
+            if ("approved".equals(paymentStatus)) {
+                // Procesar la venta
+                JsonNode metadata = jsonNode.get("metadata");
+                String email = metadata.get("email").asText();
+                List<PostPayDTO> items = objectMapper.convertValue(
+                        metadata.get("items"),
+                        objectMapper.getTypeFactory().constructCollectionType(List.class, PostPayDTO.class)
+                );
+
+                UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                SaleEntity sale = new SaleEntity();
+                sale.setUser(user);
+                sale.setRetired(Boolean.FALSE);
+                sale.setDate(LocalDate.now());
+                sale.setTypePayment(typePaymentEntity.MERCADO_PAGO);
+
+                List<DetailSaleEntity> details = new ArrayList<>();
+                for (PostPayDTO dto : items) {
+                    SpareEntity spare = spareRepository.findById(dto.getIdSpare()).orElseThrow(() -> new RuntimeException("Repuesto no encontrado"));
+                    if (dto.getQuantity() > spare.getStock()) {
+                        throw new RuntimeException("Stock insuficiente para el producto: " + spare.getName());
+                    }
+
+                    spare.setStock(spare.getStock() - dto.getQuantity());
+                    spareRepository.save(spare);
+
+                    DetailSaleEntity detail = new DetailSaleEntity();
+                    detail.setPrice(new BigDecimal((spare.getPrice() - (spare.getPrice() * spare.getDiscaunt()) / 100)));
+                    detail.setCuantity(dto.getQuantity());
+                    detail.setSpare(spare);
+                    detail.setSale(sale);
+
+                    details.add(detail);
+                }
+
+                sale.setDetails(details);
+                repository.save(sale);
+
+                notificationService.purchasedProduct(user);
+            }
+
             return paymentStatus;
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,123 +153,79 @@ public class SaleService {
     }
 
     @Transactional
-    public String payMercadoPago(String token,PostPayDTO payDTO) throws MPException, MPApiException {
-        //CONTROL
+    public String payMercadoPago(String token, PostPayDTO payDTO) throws MPException, MPApiException {
         String email = jwtService.getEmailFromToken(token);
-        UserEntity user = userRepository.findByEmail(email).orElse(null);
-        SpareEntity spare = spareRepository.findById(payDTO.getIdSpare()).get();
-        if(payDTO.getQuantity() > spare.getStock()){
-            return null;
-        }
-        spare.setStock(spare.getStock() - payDTO.getQuantity());
-        spareRepository.save(spare);
-        //REGISTRO DE ENTIDADES
-        SaleEntity sale = new SaleEntity();
-        sale.setUser(user);
-        sale.setRetired(Boolean.FALSE);
-        sale.setDate(LocalDate.now());
-        List<DetailSaleEntity> lstDetails = new ArrayList<>();
-        DetailSaleEntity detail = new DetailSaleEntity();
-        detail.setPrice(new BigDecimal((spare.getPrice() -(spare.getPrice() * spare.getDiscaunt())/100)));
-        detail.setCuantity(payDTO.getQuantity());
-        detail.setSpare(spare);
-        detail.setSale(sale);
-        lstDetails.add(detail);
-        sale.setDetails(lstDetails);
-        sale.setTypePayment(typePaymentEntity.MERCADO_PAGO);
-        repository.save(sale);
-        notificationService.purchasedProduct(user);
-        //MERCADO PAGO
-        PreferenceItemRequest itemRequest =
-                PreferenceItemRequest.builder()
-                        .id(String.valueOf(spare.getId()))
-                        .title(spare.getName())
-                        .description(spare.getDescription())
-                        .pictureUrl(spare.getImage1())
-                        .categoryId(spare.getCategory().toString())
-                        .quantity(payDTO.getQuantity())
-                        .unitPrice(new BigDecimal((spare.getPrice() -(spare.getPrice() * spare.getDiscaunt())/100)))
-                        .build();
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        SpareEntity spare = spareRepository.findById(payDTO.getIdSpare()).orElseThrow(() -> new RuntimeException("Repuesto no encontrado"));
+
+        // Crear preferencia de pago
+        PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
+                .id(String.valueOf(spare.getId()))
+                .title(spare.getName())
+                .description(spare.getDescription())
+                .pictureUrl(spare.getImage1())
+                .categoryId(spare.getCategory().toString())
+                .quantity(payDTO.getQuantity())
+                .unitPrice(new BigDecimal((spare.getPrice() - (spare.getPrice() * spare.getDiscaunt()) / 100)))
+                .build();
+
         List<PreferenceItemRequest> items = new ArrayList<>();
-        PreferenceBackUrlsRequest backUrls =
-                PreferenceBackUrlsRequest.builder()
-                        .success("https://localhost:4200/repuestos")
-                        .pending("https://localhost:4200/repuestos")
-                        .failure("https://localhost:4200/repuestos")
-                        .build();
-        //PreferenceRequest request = PreferenceRequest.builder().backUrls(backUrls).build();
         items.add(itemRequest);
+
+        PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
+                .success("https://servicios351.netlify.app")
+                .pending("https://servicios351.netlify.app")
+                .failure("https://servicios351.netlify.app")
+                .build();
+
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()
                 .items(items)
                 .backUrls(backUrls)
                 .autoReturn("approved")
                 .build();
+
         PreferenceClient client = new PreferenceClient();
         Preference preference = client.create(preferenceRequest);
+
         return preference.getInitPoint();
     }
     @Transactional
-    public String payProductos(String token,List<PostPayDTO> lstPay)throws MPException, MPApiException{
+    public String payProductos(String token, List<PostPayDTO> lstPay) throws MPException, MPApiException {
         String email = jwtService.getEmailFromToken(token);
-        UserEntity user = userRepository.findByEmail(email).orElse(null);
-     //REGISTRO DE ENTIDADES
-        notificationService.purchasedProduct(user);
-        
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        SaleEntity sale = new SaleEntity();
-        sale.setDate(LocalDate.now());
-        sale.setUser(user);
-        sale.setRetired(false);
-        List<DetailSaleEntity> lstDetails = new ArrayList<>();
-       for (PostPayDTO dto:lstPay){
-           SpareEntity spare = spareRepository.findById(dto.getIdSpare()).get();
-           if(dto.getQuantity() > spare.getStock()){
-               return null;
-           }
-           else{
-               spare.setStock(spare.getStock()- dto.getQuantity());
-           }
-           spareRepository.save(spare);
-
-           DetailSaleEntity detail = new DetailSaleEntity();
-           detail.setSpare(spare);
-           detail.setCuantity(dto.getQuantity());
-           detail.setSale(sale);
-           detail.setPrice(new BigDecimal((spare.getPrice() -(spare.getPrice() * spare.getDiscaunt())/100)));
-           lstDetails.add(detail);
-       }
-       sale.setDetails(lstDetails);
-       sale.setTypePayment(typePaymentEntity.MERCADO_PAGO);
-       repository.save(sale);
-       //MERCADO PAGO
         List<PreferenceItemRequest> items = new ArrayList<>();
-        for (PostPayDTO dto:lstPay){
-            SpareEntity spare = spareRepository.findById(dto.getIdSpare()).get();
-            PreferenceItemRequest itemRequest =
-                    PreferenceItemRequest.builder()
-                            .id(String.valueOf(dto.getIdSpare()))
-                            .title(spare.getName())
-                            .description(spare.getDescription())
-                            .pictureUrl(spare.getImage1())
-                            .categoryId(spare.getCategory().toString())
-                            .quantity(dto.getQuantity())
-                            .unitPrice(new BigDecimal((spare.getPrice() -(spare.getPrice() * spare.getDiscaunt())/100)))
-                            .build();
+        for (PostPayDTO dto : lstPay) {
+            SpareEntity spare = spareRepository.findById(dto.getIdSpare()).orElseThrow(() -> new RuntimeException("Repuesto no encontrado"));
+
+            PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
+                    .id(String.valueOf(spare.getId()))
+                    .title(spare.getName())
+                    .description(spare.getDescription())
+                    .pictureUrl(spare.getImage1())
+                    .categoryId(spare.getCategory().toString())
+                    .quantity(dto.getQuantity())
+                    .unitPrice(new BigDecimal((spare.getPrice() - (spare.getPrice() * spare.getDiscaunt()) / 100)))
+                    .build();
+
             items.add(itemRequest);
         }
-        PreferenceBackUrlsRequest backUrls =
-                PreferenceBackUrlsRequest.builder()
-                        .success("https://localhost:4200/repuestos")
-                        .pending("https://localhost:4200/repuestos")
-                        .failure("https://localhost:4200/repuestos")
-                        .build();
+
+        PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
+                .success("https://servicios351.netlify.app")
+                .pending("https://servicios351.netlify.app")
+                .failure("https://servicios351.netlify.app")
+                .build();
+
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()
                 .items(items)
                 .backUrls(backUrls)
                 .autoReturn("approved")
                 .build();
+
         PreferenceClient client = new PreferenceClient();
         Preference preference = client.create(preferenceRequest);
+
         return preference.getInitPoint();
     }
 
