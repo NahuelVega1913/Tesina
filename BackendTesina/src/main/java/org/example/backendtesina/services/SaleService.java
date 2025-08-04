@@ -98,15 +98,27 @@ public class SaleService {
 
     public String confirmPayment(String webhookPayload) {
         try {
+            // Parsear el payload del webhook
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(webhookPayload);
 
+            // Extraer el ID del pago
             String paymentId = jsonNode.get("data").get("id").asText();
-            String paymentStatus = consultarPago(paymentId);
 
+            // Consultar el estado del pago en la API de Mercado Pago
+            String paymentResponse = consultarPago(paymentId);
+            if (paymentResponse == null) {
+                return "Error al consultar el estado del pago.";
+            }
+
+            // Parsear la respuesta de la API de Mercado Pago
+            JsonNode paymentData = objectMapper.readTree(paymentResponse);
+            String paymentStatus = paymentData.get("status").asText();
+
+            // Verificar si el pago fue aprobado
             if ("approved".equals(paymentStatus)) {
                 // Procesar la venta
-                JsonNode metadata = jsonNode.get("metadata");
+                JsonNode metadata = paymentData.get("metadata");
                 String email = metadata.get("email").asText();
                 List<PostPayDTO> items = objectMapper.convertValue(
                         metadata.get("items"),
@@ -143,12 +155,13 @@ public class SaleService {
                 repository.save(sale);
 
                 notificationService.purchasedProduct(user);
+                return "Pago procesado correctamente.";
+            } else {
+                return "El pago no fue aprobado. Estado: " + paymentStatus;
             }
-
-            return paymentStatus;
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error al procesar el webhook";
+            return "Error al procesar el webhook.";
         }
     }
 
