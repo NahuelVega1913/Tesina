@@ -87,26 +87,29 @@ export class HistorialServiciosComponent {
       // Filtro por categoría
       if (this.category && item.type !== this.category) return false;
 
-      // Filtro por búsqueda de cliente
-      if (
-        this.search &&
-        (!item.nombreCompleto ||
-          !item.nombreCompleto
-            .toLowerCase()
-            .includes(this.search.toLowerCase()))
-      )
-        return false;
+      // Filtro por búsqueda de cliente o vehículo
+      if (this.search) {
+        const searchLower = this.search.toLowerCase();
+        const nombreCompleto = item.nombreCompleto
+          ? item.nombreCompleto.toLowerCase()
+          : '';
+        const auto = item.auto ? item.auto.toLowerCase() : '';
+        const modelo = item.modelo ? item.modelo.toLowerCase() : '';
+        if (
+          !nombreCompleto.includes(searchLower) &&
+          !auto.includes(searchLower) &&
+          !modelo.includes(searchLower)
+        )
+          return false;
+      }
 
       // Filtro por fechas
-      // dateExit viene como "2025-04-15T09:00:00"
       const itemDate = item.dateExit ? new Date(item.dateExit) : null;
       if (this.dateFrom) {
-        // dateFrom viene como "YYYY-MM-DD"
         const fromDate = new Date(this.dateFrom + 'T00:00:00');
         if (!itemDate || itemDate < fromDate) return false;
       }
       if (this.dateTo) {
-        // dateTo viene como "YYYY-MM-DD"
         const toDate = new Date(this.dateTo + 'T23:59:59');
         if (!itemDate || itemDate > toDate) return false;
       }
