@@ -294,20 +294,22 @@ public class SaleService {
         List<SaleEntity> sales = repository.findAll();
         List<GetSaleDTO> reponse = new ArrayList<>();
         for (SaleEntity s:sales){
-            GetSaleDTO dto = new GetSaleDTO();
-            dto.setDate(s.getDate());
-            dto.setRetired(s.getRetired());
-            if(s.getUser() != null) {
-                dto.setUser(s.getUser().getName() + " " + s.getUser().getLastname());
+            if(s.getStatus().equals("approved")) {
+                GetSaleDTO dto = new GetSaleDTO();
+                dto.setDate(s.getDate());
+                dto.setRetired(s.getRetired());
+                if (s.getUser() != null) {
+                    dto.setUser(s.getUser().getName() + " " + s.getUser().getLastname());
+                }
+                dto.setTypePayment(s.getTypePayment());
+                dto.setId(s.getId());
+                Double total = 0.00;
+                for (DetailSaleEntity detail : s.getDetails()) {
+                    total += new BigDecimal(detail.getCuantity()).multiply(detail.getPrice()).doubleValue();
+                }
+                dto.setTotal(total);
+                reponse.add(dto);
             }
-            dto.setTypePayment(s.getTypePayment());
-            dto.setId(s.getId());
-            Double total = 0.00;
-            for (DetailSaleEntity detail:s.getDetails()){
-                total += new BigDecimal(detail.getCuantity()).multiply(detail.getPrice()).doubleValue();
-            }
-            dto.setTotal(total);
-            reponse.add(dto);
         }
         return reponse;
     }

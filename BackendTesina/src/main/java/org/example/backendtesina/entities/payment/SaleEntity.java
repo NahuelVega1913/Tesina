@@ -39,7 +39,7 @@ public class SaleEntity {
         this.retired = retired;
     }
 
-    private Boolean retired ;
+    private Boolean retired;
 
 
 
