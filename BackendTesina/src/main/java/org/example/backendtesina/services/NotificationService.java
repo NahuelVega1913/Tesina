@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class NotificationService {
 
     public NotificationEntity createUserNotification(UserEntity user){
         NotificationEntity notification = new NotificationEntity();
-        notification.setDateTime(LocalDateTime.now());
+        notification.setDateTime(ZonedDateTime.now(ZoneId.of("America/Argentina/Buenos_Aires")).toLocalDateTime());
         notification.setTitle("Bienvenido!!!");
         notification.setMessage("El equipo de MechanicTech te desea una gran bienvenida!");
         notification.setType(typeNotificationEntity.OTHER);
@@ -43,7 +45,7 @@ public class NotificationService {
 
     public NotificationEntity createAdminComment(UserEntity user, String repuesto){
         NotificationEntity notification = new NotificationEntity();
-        notification.setDateTime(LocalDateTime.now());
+        notification.setDateTime(ZonedDateTime.now(ZoneId.of("America/Argentina/Buenos_Aires")).toLocalDateTime());
         notification.setTitle("Un usuario a añadido una pregunta!");
         notification.setMessage("El comentario se añadio en la publicacion del repuesto: "+repuesto);
         notification.setType(typeNotificationEntity.COMMENT);
@@ -59,7 +61,7 @@ public class NotificationService {
     }
     public NotificationEntity createUserComment(UserEntity user, String repuesto){
         NotificationEntity notification = new NotificationEntity();
-        notification.setDateTime(LocalDateTime.now());
+        notification.setDateTime(ZonedDateTime.now(ZoneId.of("America/Argentina/Buenos_Aires")).toLocalDateTime());
         notification.setTitle("Se ha respondiso su pregunta!!!");
         notification.setMessage("La respuesta se añadio en la publicacion del repuesto: "+repuesto);
         notification.setType(typeNotificationEntity.COMMENT);
@@ -75,7 +77,7 @@ public class NotificationService {
     }
     public NotificationEntity pocoStock(UserEntity user, String repuesto){
         NotificationEntity notification = new NotificationEntity();
-        notification.setDateTime(LocalDateTime.now());
+        notification.setDateTime(ZonedDateTime.now(ZoneId.of("America/Argentina/Buenos_Aires")).toLocalDateTime());
         notification.setTitle("Se acaban los repuestos!!!");
         notification.setMessage("Que poco stock del articulo: "+repuesto);
         notification.setType(typeNotificationEntity.COMPRA);
@@ -91,7 +93,7 @@ public class NotificationService {
     }
     public NotificationEntity notificationServiceFinished(UserEntity user){
         NotificationEntity notification = new NotificationEntity();
-        notification.setDateTime(LocalDateTime.now());
+        notification.setDateTime(ZonedDateTime.now(ZoneId.of("America/Argentina/Buenos_Aires")).toLocalDateTime());
         notification.setTitle("Servicio Finalizado!!!");
         notification.setMessage("Te esperamos para retirar tu vehiculo!");
         notification.setType(typeNotificationEntity.SERVICIO);
@@ -125,9 +127,9 @@ public class NotificationService {
     public NotificationEntity purchasedProduct(UserEntity user){
 
         NotificationEntity notification = new NotificationEntity();
-        notification.setDateTime(LocalDateTime.now());
+        notification.setDateTime(ZonedDateTime.now(ZoneId.of("America/Argentina/Buenos_Aires")).toLocalDateTime());
         notification.setTitle("Felicitaciones por tu compra!!!");
-        notification.setMessage("Esperamos que disfrutes de tu producto!");
+        notification.setMessage("Retira tu repuesto en Isaac Albeniz 3622!");
         notification.setType(typeNotificationEntity.COMPRA);
         notification.setState(StateNotification.UNSEEN);
         notification.setUser(user);

@@ -247,8 +247,11 @@
           <input
             type="text"
             formControlName="bancaryNumber"
+            (input)="onBancaryNumberChange($event)"
+            pattern="\d*"
+            (keypress)="onlyNumberInput($event)"
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full md:w-80 p-2.5"
-            placeholder="777777777777"
+            placeholder="7777777777777"
             required
           />
 
@@ -268,9 +271,7 @@
       </div>
       <!--ULTIMA FILA -DIRECCION Y NUMERO BANCARIO -->
 
-      <label
-        for="message"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-sky-950"
+      <label for="message" class="block mb-2 text-sm font-medium text-sky-950"
         >Observaciones</label
       >
       <textarea

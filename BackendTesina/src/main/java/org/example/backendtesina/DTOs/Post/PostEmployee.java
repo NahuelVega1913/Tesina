@@ -23,7 +23,7 @@ public class PostEmployee {
     private String address;
     private String phone;
     private String email;
-    private BigInteger bancaryNumber;
+    private String bancaryNumber;
     private String position;
     private Date dateOfEntry;
     private String remarks;
@@ -137,11 +137,11 @@ public class PostEmployee {
         this.salary = salary;
     }
 
-    public BigInteger getBancaryNumber() {
+    public String getBancaryNumber() {
         return bancaryNumber;
     }
 
-    public void setBancaryNumber(BigInteger bancaryNumber) {
+    public void setBancaryNumber(String bancaryNumber) {
         this.bancaryNumber = bancaryNumber;
     }
 

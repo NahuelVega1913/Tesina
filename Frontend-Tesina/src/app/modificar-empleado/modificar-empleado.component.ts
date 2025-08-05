@@ -37,6 +37,7 @@ export class ModificarEmpleadoComponent {
     position: new UntypedFormControl('', []),
     remarks: new UntypedFormControl('', []),
   });
+
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -77,9 +78,7 @@ export class ModificarEmpleadoComponent {
     const id = localStorage.getItem('idEmpleado') || 0;
     const getSubscription = this.service.getEmployee(Number(id)).subscribe({
       next: (res) => {
-        this.form.patchValue(res);
-        console.log(res);
-        console.log(this.form.value);
+        // Formatea fechas
         const fecha = new Date(res.birthDate);
         const año = fecha.getFullYear();
         const mes = String(fecha.getMonth() + 1).padStart(2, '0');
@@ -92,19 +91,33 @@ export class ModificarEmpleadoComponent {
         const dia1 = String(fecha1.getDate()).padStart(2, '0');
         const fechaFormateada1 = `${año1}-${mes1}-${dia1}`;
 
+        // PatchValue solo con los campos seguros
         this.form.patchValue({
-          ...res,
-          birthDate: fechaFormateada,
+          fullName: res.fullName,
+          cuit: res.cuit,
+          phone: res.phone,
+          address: res.address,
+          category: res.category,
+          typeOfContract: res.typeOfContract,
           dateOfEntry: fechaFormateada1,
-          bancaryNumber: res.bancaryNumber
-            ? this.toPlainString(res.bancaryNumber)
-            : '',
+          birthDate: fechaFormateada,
+          email: res.email,
+          salary: res.salary,
+          workingDay: res.workingDay,
+          position: res.position,
+          remarks: res.remarks,
+          bancaryNumber: res.bancaryNumber ?? '',
         });
       },
       error: (err) => {
         console.log(err);
       },
     });
+  }
+
+  onBancaryNumberChange(event: any) {
+    const value = event.target.value;
+    this.form.get('bancaryNumber')?.setValue(value);
   }
 
   // Convierte notación científica a string decimal
@@ -125,9 +138,21 @@ export class ModificarEmpleadoComponent {
     if (this.form.valid) {
       const entity: any = this.form.value;
       entity.id = localStorage.getItem('idEmpleado');
-      entity.bancaryNumber = entity.bancaryNumber
-        ? entity.bancaryNumber.toString()
-        : ''; // <-- conversión a string al guardar
+      // Convertir número de cuenta bancaria a string
+      if (entity.bancaryNumber != null) {
+        entity.bancaryNumber = entity.bancaryNumber.toString();
+      }
+      // Sumar un día a las fechas antes de enviar
+      if (entity.dateOfEntry) {
+        const date = new Date(entity.dateOfEntry);
+        date.setDate(date.getDate() + 1);
+        entity.dateOfEntry = date.toISOString().split('T')[0];
+      }
+      if (entity.birthDate) {
+        const date = new Date(entity.birthDate);
+        date.setDate(date.getDate() + 1);
+        entity.birthDate = date.toISOString().split('T')[0];
+      }
       console.log(entity);
       const addSubscription = this.service.putEmployee(entity).subscribe({
         next: () => {
@@ -193,5 +218,13 @@ export class ModificarEmpleadoComponent {
         Swal.fire('Changes are not saved', '', 'info');
       }
     });
+  }
+
+  onlyNumberInput(event: KeyboardEvent) {
+    const charCode = event.key.charCodeAt(0);
+    // Permite solo números (0-9)
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
   }
 }

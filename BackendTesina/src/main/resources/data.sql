@@ -115,15 +115,15 @@ INSERT INTO EMPLOYEES (
     birthDate,CUIT, typeOfContract, workingDay, bancaryNumber, fullName,
     salary, address, phone, email, position, dateOfEntry, remarks
 ) VALUES
-      ('1990-05-10',20074504039, 'PERMANENT', 'FULLTIME', 8743518309234563439575, 'Juan Pérez',
+      ('1990-05-10',20074504039, 'PERMANENT', 'FULLTIME', '8743518309234563439575', 'Juan Pérez',
        850000.00, 'Av. Siempre Viva 123', 543512233445, 'juan.perez@email.com',
        'Tecnico Automotor', '2022-01-15', 'Empleado con buen desempeño'),
 
-      ('1985-08-22',20301230034, 'TEMPORARY', 'PART_TIME', 6543217323952474164726, 'Ana Gómez',
+      ('1985-08-22',20301230034, 'TEMPORARY', 'PART_TIME', '6543217323952474164726', 'Ana Gómez',
        700000.00, 'Calle Falsa 456', 543519988776, 'ana.gomez@email.com',
        'Personalizacion de Carroceria', '2023-06-01', 'Contrato temporal por 6 meses'),
 
-      ('1992-12-01',21300153054, 'PERMANENT', 'FULLTIME', 1123344934863052082331, 'Carlos Ruiz',
+      ('1992-12-01',21300153054, 'PERMANENT', 'FULLTIME', '1123344934863052082331', 'Carlos Ruiz',
        950000.00, 'Pasaje Luna 789', 543514556912, 'carlos.ruiz@email.com',
        'Tecnico Electromecanico', '2021-09-10', 'Trabaja desde el exterior');
 
@@ -132,15 +132,15 @@ INSERT INTO EMPLOYEES (
     birthDate, CUIT, typeOfContract, workingDay, bancaryNumber, fullName,
     salary, address, phone, email, position, dateOfEntry, remarks
 ) VALUES
-      ('1991-07-15', 20345678901, 'PERMANENT', 'FULLTIME', 2850590940093281723567, 'Lucía Fernández',
+      ('1991-07-15', 20345678901, 'PERMANENT', 'FULLTIME', '2850590940093281723567', 'Lucía Fernández',
        880000.00, 'Calle Principal 123', 543514567891, 'lucia.fernandez@email.com',
        'Administradora', '2020-03-01', 'Excelente desempeño en liderazgo'),
 
-      ('1988-11-20', 20456789012, 'TEMPORARY', 'PART_TIME', 7209335762301984537663, 'Martín López',
+      ('1988-11-20', 20456789012, 'TEMPORARY', 'PART_TIME', '7209335762301984537663', 'Martín López',
        720000.00, 'Av. Libertad 456', 543515679012, 'martin.lopez@email.com',
        'Mecanico', '2023-07-15', 'Contrato temporal por 1 año'),
 
-      ('1993-02-10', 20567890123, 'PERMANENT', 'REMOTE', 1430019256148200375501, 'Sofía Martínez',
+      ('1993-02-10', 20567890123, 'PERMANENT', 'REMOTE', '1430019256148200375501', 'Sofía Martínez',
        940000.00, 'Pasaje Estrella 789', 543516780123, 'sofia.martinez@email.com',
        'Tecnino Automotor', '2021-10-01', 'Especialista en análisis de grandes volúmenes de datos');
 
@@ -159,7 +159,7 @@ INSERT INTO service_entity (
        'CustomizationEntity', 'Luces LED blancas', 'Instalación de luces LED en cabina y baúl'),
       (
           'Luis Fernández', 'Quiere cambiar tapizado', 'Chevrolet Onix', 2021, 'WAITING',
-          'PAID', 'CUSTOMIZATION', '2025-04-28 10:00:00', '2025-05-04 18:00:00', 75000.0,
+          'PAID', 'CUSTOMIZATION', '2025-04-28 10:00:00', '2025-04-29 18:00:00', 75000.0,
           'CustomizationEntity', 'Cuero ecológico, pegamento industrial', 'Cambio completo de tapizado interior'
       ),
       (
@@ -313,6 +313,16 @@ INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (2
 INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (26, 6);
 INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES (27, 4);
 INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES(28,5);
+
+DELETE FROM service_entity_empleados;
+
+-- Reasignar servicios equitativamente entre los empleados
+INSERT INTO service_entity_empleados (service_entity_id, empleados_id) VALUES
+                                                                           (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6),
+                                                                           (7, 1), (8, 2), (9, 3), (10, 4), (11, 5), (12, 6),
+                                                                           (13, 1), (14, 2), (15, 3), (16, 4), (17, 5), (18, 6),
+                                                                           (19, 1), (20, 2), (21, 3), (22, 4), (23, 5), (24, 6),
+                                                                           (25, 1), (26, 2), (27, 3), (28, 4);
 
 
 

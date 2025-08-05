@@ -27,7 +27,7 @@ public class EmployeeEntity {
     @Column(name = "WORKINGDAY")
     private WorkinDayEntity workingDay;
     @Column(name = "BANCARYNUMBER")
-    private BigInteger bancaryNumber;
+    private String bancaryNumber;
     private Boolean state;
     @Column(name = "FULLNAME")
     private String fullName;
@@ -164,11 +164,11 @@ public class EmployeeEntity {
         this.CUIT = CUIT;
     }
 
-    public BigInteger getBancaryNumber() {
+    public String getBancaryNumber() {
         return bancaryNumber;
     }
 
-    public void setBancaryNumber(BigInteger bancaryNumber) {
+    public void setBancaryNumber(String bancaryNumber) {
         this.bancaryNumber = bancaryNumber;
     }
 

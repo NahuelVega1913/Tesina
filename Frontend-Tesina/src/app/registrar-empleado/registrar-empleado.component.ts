@@ -68,6 +68,14 @@ export class RegistrarEmpleadoComponent {
     };
   }
 
+  onlyNumberInput(event: KeyboardEvent) {
+    const charCode = event.key.charCodeAt(0);
+    // Permite solo números (0-9)
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
+  }
+
   save() {
     if (this.form.valid) {
       const entity: any = this.form.value;
