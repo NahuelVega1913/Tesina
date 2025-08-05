@@ -23,6 +23,8 @@ import org.example.backendtesina.repositories.CartRepository;
 import org.example.backendtesina.repositories.SaleRepository;
 import org.example.backendtesina.repositories.SpareRepository;
 import org.example.backendtesina.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,19 +65,23 @@ public class SaleService {
 
 
     public String consultarPago(String paymentId) {
+        Logger logger = LoggerFactory.getLogger(SaleService.class);
+        String accessToken = "APP_USR-6697469370584294-043012-15ec1f5d090244f4491e77dc501f75e0-2417547238";
+        String url = "https://api.mercadopago.com/v1/payments/" + paymentId;
+
         try {
-            URL url = new URL("https://api.mercadopago.com/v1/payments/" + paymentId);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Authorization", "Bearer TU_ACCESS_TOKEN");
-            connection.setRequestProperty("Content-Type", "application/json");
+            logger.info("Consultando estado del pago con ID: {}", paymentId);
 
-            int responseCode = connection.getResponseCode();
+            // Configuración de la conexión HTTP
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Authorization", "Bearer " + accessToken);
 
+            // Leer la respuesta
+            int responseCode = con.getResponseCode();
             if (responseCode == 200) {
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(connection.getInputStream())
-                );
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String inputLine;
                 StringBuilder response = new StringBuilder();
 
@@ -84,84 +90,88 @@ public class SaleService {
                 }
                 in.close();
 
-                return response.toString(); // JSON crudo con los datos del pago
+                return response.toString();
             } else {
-                System.out.println("Error al consultar pago. Código: " + responseCode);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Error al realizar la consulta del pago.", e);
+            return null;
         }
-
         return null;
     }
 
 
+
+
     public String confirmPayment(String webhookPayload) {
+        Logger logger = LoggerFactory.getLogger(SaleService.class);
+        String accessToken = "APP_USR-6697469370584294-043012-15ec1f5d090244f4491e77dc501f75e0-2417547238";
+
         try {
-            // Parsear el payload del webhook
+            logger.info("Payload recibido: {}", webhookPayload);
+
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonNode = objectMapper.readTree(webhookPayload);
+            JsonNode root = objectMapper.readTree(webhookPayload);
 
-            // Extraer el ID del pago
-            String paymentId = jsonNode.get("data").get("id").asText();
-
-            // Consultar el estado del pago en la API de Mercado Pago
-            String paymentResponse = consultarPago(paymentId);
-            if (paymentResponse == null) {
-                return "Error al consultar el estado del pago.";
+            // Extraer el id de pago desde data.id
+            if (!root.has("data") || !root.get("data").has("id")) {
+                logger.error("No se encontró el campo data.id en el webhook.");
+                return "Error: No se encontró el campo data.id en el webhook.";
             }
+            String paymentId = root.get("data").get("id").asText();
 
-            // Parsear la respuesta de la API de Mercado Pago
-            JsonNode paymentData = objectMapper.readTree(paymentResponse);
-            String paymentStatus = paymentData.get("status").asText();
+            logger.info("Consultando estado del pago con ID: {}", paymentId);
 
-            // Verificar si el pago fue aprobado
-            if ("approved".equals(paymentStatus)) {
-                // Procesar la venta
-                JsonNode metadata = paymentData.get("metadata");
-                String email = metadata.get("email").asText();
-                List<PostPayDTO> items = objectMapper.convertValue(
-                        metadata.get("items"),
-                        objectMapper.getTypeFactory().constructCollectionType(List.class, PostPayDTO.class)
-                );
+            // Consultar a Mercado Pago por el pago real
+            String url = "https://api.mercadopago.com/v1/payments/" + paymentId;
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Authorization", "Bearer " + accessToken);
 
-                UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-                SaleEntity sale = new SaleEntity();
-                sale.setUser(user);
-                sale.setRetired(Boolean.FALSE);
-                sale.setDate(LocalDate.now());
-                sale.setTypePayment(typePaymentEntity.MERCADO_PAGO);
+            int responseCode = con.getResponseCode();
+            if (responseCode == 200) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
 
-                List<DetailSaleEntity> details = new ArrayList<>();
-                for (PostPayDTO dto : items) {
-                    SpareEntity spare = spareRepository.findById(dto.getIdSpare()).orElseThrow(() -> new RuntimeException("Repuesto no encontrado"));
-                    if (dto.getQuantity() > spare.getStock()) {
-                        throw new RuntimeException("Stock insuficiente para el producto: " + spare.getName());
-                    }
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
 
-                    spare.setStock(spare.getStock() - dto.getQuantity());
-                    spareRepository.save(spare);
+                JsonNode paymentData = objectMapper.readTree(response.toString());
 
-                    DetailSaleEntity detail = new DetailSaleEntity();
-                    detail.setPrice(new BigDecimal((spare.getPrice() - (spare.getPrice() * spare.getDiscaunt()) / 100)));
-                    detail.setCuantity(dto.getQuantity());
-                    detail.setSpare(spare);
-                    detail.setSale(sale);
-
-                    details.add(detail);
+                if (!paymentData.has("status") || !paymentData.has("external_reference")) {
+                    logger.error("El campo 'status' o 'external_reference' no está presente en el payload.");
+                    return "Error: El campo 'status' o 'external_reference' no está presente en el payload.";
                 }
 
-                sale.setDetails(details);
+                String paymentStatus = paymentData.get("status").asText();
+                String externalReference = paymentData.get("external_reference").asText();
+
+                // Validar que el external_reference corresponda a una venta local
+                SaleEntity sale = repository.findById(Integer.parseInt(externalReference))
+                        .orElseThrow(() -> new RuntimeException("Venta no encontrada para el external_reference: " + externalReference));
+
+                if (!"approved".equals(paymentStatus)) {
+                    logger.error("Estado del pago no válido: {}", paymentStatus);
+                    return "Estado del pago no válido: " + paymentStatus;
+                }
+
+                // Actualizar el estado de la venta a "approved"
+                sale.setStatus("approved");
                 repository.save(sale);
 
-                notificationService.purchasedProduct(user);
+                logger.info("Venta actualizada a estado 'approved'. ID de venta: {}", sale.getId());
                 return "Pago procesado correctamente.";
             } else {
-                return "El pago no fue aprobado. Estado: " + paymentStatus;
+                logger.error("Error al consultar el pago en Mercado Pago. Código de respuesta: {}", responseCode);
+                return "Error al consultar el pago en Mercado Pago.";
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            return "Error al procesar el webhook.";
+            logger.error("Error al procesar el pago: {}", e.getMessage(), e);
+            return "Error al procesar el pago.";
         }
     }
 
@@ -171,6 +181,23 @@ public class SaleService {
         UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         SpareEntity spare = spareRepository.findById(payDTO.getIdSpare()).orElseThrow(() -> new RuntimeException("Repuesto no encontrado"));
 
+        // Registrar la venta con estado "pending"
+        SaleEntity sale = new SaleEntity();
+        sale.setUser(user);
+        sale.setRetired(Boolean.FALSE);
+        sale.setDate(LocalDate.now());
+        sale.setTypePayment(typePaymentEntity.MERCADO_PAGO);
+        sale.setStatus("pending");
+
+        DetailSaleEntity detail = new DetailSaleEntity();
+        detail.setPrice(new BigDecimal((spare.getPrice() - (spare.getPrice() * spare.getDiscaunt()) / 100)));
+        detail.setCuantity(payDTO.getQuantity());
+        detail.setSpare(spare);
+        detail.setSale(sale);
+
+        sale.getDetails().add(detail);
+        repository.save(sale);
+
         // Crear preferencia de pago
         PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
                 .id(String.valueOf(spare.getId()))
@@ -179,11 +206,8 @@ public class SaleService {
                 .pictureUrl(spare.getImage1())
                 .categoryId(spare.getCategory().toString())
                 .quantity(payDTO.getQuantity())
-                .unitPrice(new BigDecimal((spare.getPrice() - (spare.getPrice() * spare.getDiscaunt()) / 100)))
+                .unitPrice(detail.getPrice())
                 .build();
-
-        List<PreferenceItemRequest> items = new ArrayList<>();
-        items.add(itemRequest);
 
         PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
                 .success("https://servicios351.netlify.app")
@@ -192,9 +216,10 @@ public class SaleService {
                 .build();
 
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()
-                .items(items)
+                .items(List.of(itemRequest))
                 .backUrls(backUrls)
                 .autoReturn("approved")
+                .externalReference(String.valueOf(sale.getId())) // Asociar el ID de la venta
                 .build();
 
         PreferenceClient client = new PreferenceClient();
@@ -207,20 +232,42 @@ public class SaleService {
         String email = jwtService.getEmailFromToken(token);
         UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        List<PreferenceItemRequest> items = new ArrayList<>();
+        // Registrar la venta con estado "pending"
+        SaleEntity sale = new SaleEntity();
+        sale.setUser(user);
+        sale.setRetired(Boolean.FALSE);
+        sale.setDate(LocalDate.now());
+        sale.setTypePayment(typePaymentEntity.MERCADO_PAGO);
+        sale.setStatus("pending");
+
+        List<DetailSaleEntity> details = new ArrayList<>();
         for (PostPayDTO dto : lstPay) {
             SpareEntity spare = spareRepository.findById(dto.getIdSpare()).orElseThrow(() -> new RuntimeException("Repuesto no encontrado"));
 
-            PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
-                    .id(String.valueOf(spare.getId()))
-                    .title(spare.getName())
-                    .description(spare.getDescription())
-                    .pictureUrl(spare.getImage1())
-                    .categoryId(spare.getCategory().toString())
-                    .quantity(dto.getQuantity())
-                    .unitPrice(new BigDecimal((spare.getPrice() - (spare.getPrice() * spare.getDiscaunt()) / 100)))
-                    .build();
+            DetailSaleEntity detail = new DetailSaleEntity();
+            detail.setPrice(new BigDecimal((spare.getPrice() - (spare.getPrice() * spare.getDiscaunt()) / 100)));
+            detail.setCuantity(dto.getQuantity());
+            detail.setSpare(spare);
+            detail.setSale(sale);
 
+            details.add(detail);
+        }
+
+        sale.setDetails(details);
+        repository.save(sale);
+
+        // Crear preferencia de pago
+        List<PreferenceItemRequest> items = new ArrayList<>();
+        for (DetailSaleEntity detail : details) {
+            PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
+                    .id(String.valueOf(detail.getSpare().getId()))
+                    .title(detail.getSpare().getName())
+                    .description(detail.getSpare().getDescription())
+                    .pictureUrl(detail.getSpare().getImage1())
+                    .categoryId(detail.getSpare().getCategory().toString())
+                    .quantity(detail.getCuantity())
+                    .unitPrice(detail.getPrice())
+                    .build();
             items.add(itemRequest);
         }
 
@@ -234,6 +281,7 @@ public class SaleService {
                 .items(items)
                 .backUrls(backUrls)
                 .autoReturn("approved")
+                .externalReference(String.valueOf(sale.getId())) // Asociar el ID de la venta
                 .build();
 
         PreferenceClient client = new PreferenceClient();
@@ -249,7 +297,9 @@ public class SaleService {
             GetSaleDTO dto = new GetSaleDTO();
             dto.setDate(s.getDate());
             dto.setRetired(s.getRetired());
-            dto.setUser(s.getUser().getName() +" "+s.getUser().getLastname());
+            if(s.getUser() != null) {
+                dto.setUser(s.getUser().getName() + " " + s.getUser().getLastname());
+            }
             dto.setTypePayment(s.getTypePayment());
             dto.setId(s.getId());
             Double total = 0.00;

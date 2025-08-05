@@ -48,8 +48,8 @@ public class SaleController {
     @PostMapping(value = "webhook")
     public ResponseEntity<?> confirmPay(@RequestBody String s){
         String response = this.service.confirmPayment(s);
-        if(!s.equals("")){
-            return ResponseEntity.ok("");
+        if(response != null){
+            return ResponseEntity.ok().build();
         }else{
             return ResponseEntity.badRequest().build();
         }
