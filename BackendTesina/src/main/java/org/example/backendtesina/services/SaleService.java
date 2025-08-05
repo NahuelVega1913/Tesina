@@ -290,11 +290,11 @@ public class SaleService {
         return preference.getInitPoint();
     }
 
-    public List<GetSaleDTO> getAllSales(){
+    public List<GetSaleDTO> getAllSales() {
         List<SaleEntity> sales = repository.findAll();
-        List<GetSaleDTO> reponse = new ArrayList<>();
-        for (SaleEntity s:sales){
-            if(s.getStatus().equals("approved")) {
+        List<GetSaleDTO> response = new ArrayList<>();
+        for (SaleEntity s : sales) {
+            if (s.getStatus().equals("approved")) {
                 GetSaleDTO dto = new GetSaleDTO();
                 dto.setDate(s.getDate());
                 dto.setRetired(s.getRetired());
@@ -308,10 +308,12 @@ public class SaleService {
                     total += new BigDecimal(detail.getCuantity()).multiply(detail.getPrice()).doubleValue();
                 }
                 dto.setTotal(total);
-                reponse.add(dto);
+                response.add(dto);
             }
         }
-        return reponse;
+        // Ordenar por fecha de la más reciente a la más antigua
+        response.sort((sale1, sale2) -> sale2.getDate().compareTo(sale1.getDate()));
+        return response;
     }
     public GetSaleDTO getDetails(int id){
         Optional<SaleEntity> sale = repository.findById(id);

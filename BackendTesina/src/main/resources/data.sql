@@ -353,9 +353,8 @@ INSERT INTO sale_entity (type_payment, user_id, date,retired,status) VALUES
                                                           ('MERCADO_PAGO', 'maria.lopez@gmail.com', '2025-02-28',TRUE,'approved'),
                                                           ('MERCADO_PAGO', 'carlos.garcia@gmail.com', '2025-03-15',TRUE,'approved'),
                                                           ('CASH', 'ana.martinez@gmail.com', '2025-04-05',TRUE,'approved'),
-                                                          ('CASH', 'juan.gomez@gmail.com', '2025-05-10',TRUE,'approved'),
-                                                          ('MERCADO_PAGO', 'sofia.fernandez@gmail.com', '2025-06-25',TRUE,'approved'),
-                                                          ('MERCADO_PAGO', 'pedro.alvarado@gmail.com', '2025-07-05',TRUE,'approved');
+                                                          ('CASH', 'juan.gomez@gmail.com', '2025-05-10',TRUE,'approved');
+
 
 INSERT INTO detail_sale_entity (cuantity, price, sale_id, spare_id) VALUES
                                                                  (2, 15000.00, 1, 1),
@@ -404,6 +403,4 @@ INSERT INTO detail_sale_entity (cuantity, price, sale_id, spare_id) VALUES
                                                                  (1, 26000.00, 32, 3), -- Venta de Radiador Compacto
                                                                  (4, 25000.00, 33, 4), -- Venta de Bujías Iridium
                                                                  (1, 36000.00, 34, 5), -- Venta de Batería 12V 65Ah
-                                                                 (3, 9500.00, 35, 6),  -- Venta de Filtro de Aceite
-                                                                 (1, 18500.00, 36, 7), -- Venta de Ventilador Eléctrico
-                                                                 (2, 15500.00, 37, 8); -- Venta de Correa Dentada-- Venta de Correa Dentada
+                                                                 (3, 9500.00, 35, 6);  -- Venta de Filtro de Aceite
