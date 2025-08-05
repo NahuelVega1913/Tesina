@@ -58,17 +58,39 @@ export class HistorialServiciosComponent {
   }
 
   exportarExcel() {
-    const tabla = document.getElementById('tabla');
-    const wb = XLSX.utils.table_to_book(tabla, { sheet: 'Datos' });
+    // Crea una tabla temporal con todos los datos filtrados
+    const headers = ['Fecha', 'Cliente', 'Vehículo', 'Tipo', 'Total'];
+    const data = this.lstFiltered.map((item) => [
+      item.dateExit ? new Date(item.dateExit).toLocaleDateString() : '',
+      item.nombreCompleto ?? '',
+      (item.auto ?? '') + ' ' + (item.modelo ?? ''),
+      this.tipo(item.type),
+      item.cost ?? '',
+    ]);
+    const ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Datos');
     const fecha = this.getFechaActual();
     XLSX.writeFile(wb, `servicios_${fecha}.xlsx`);
   }
 
   exportarPDF() {
+    // Crea una tabla temporal con todos los datos filtrados
+    const headers = ['Fecha', 'Cliente', 'Vehículo', 'Tipo', 'Total'];
+    const body = this.lstFiltered.map((item) => [
+      item.dateExit ? new Date(item.dateExit).toLocaleDateString() : '',
+      item.nombreCompleto ?? '',
+      (item.auto ?? '') + ' ' + (item.modelo ?? ''),
+      this.tipo(item.type),
+      item.cost ?? '',
+    ]);
     const doc = new jsPDF();
     const fecha = this.getFechaActual();
-
-    autoTable(doc, { html: '#tabla' }); // usa el id de tu tabla
+    autoTable(doc, {
+      head: [headers],
+      body: body,
+      styles: { fontSize: 9 },
+    });
     doc.save(`servicios_${fecha}.pdf`);
     return;
   }
@@ -90,11 +112,11 @@ export class HistorialServiciosComponent {
       // Filtro por búsqueda de cliente o vehículo
       if (this.search) {
         const searchLower = this.search.toLowerCase();
-        const nombreCompleto = item.nombreCompleto
-          ? item.nombreCompleto.toLowerCase()
-          : '';
-        const auto = item.auto ? item.auto.toLowerCase() : '';
-        const modelo = item.modelo ? item.modelo.toLowerCase() : '';
+        const nombreCompleto = (item.nombreCompleto ?? '')
+          .toString()
+          .toLowerCase();
+        const auto = (item.auto ?? '').toString().toLowerCase();
+        const modelo = (item.modelo ?? '').toString().toLowerCase();
         if (
           !nombreCompleto.includes(searchLower) &&
           !auto.includes(searchLower) &&

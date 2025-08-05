@@ -3,14 +3,15 @@
     <p
       class="text-center text-5xl text-sky-950 mx-auto font-bold tracking-tight"
     >
-      Preguntas Frecuentes
+      Preguntas frecuentes
     </p>
     <p class="text-center text-lg text-sky-700 mt-2">
-      Resuelve tus dudas rápidamente
+      Resuelve tus dudas rápidamente.
     </p>
   </div>
   <div class="max-w-full mx-auto">
     @if (rol == 'USER') {
+    <!-- Sección de preguntas para usuarios -->
     <div
       class="flex flex-col justify-center mt-3 bg-white rounded-2xl p-5 shadow-lg space-y-4"
     >
@@ -125,19 +126,15 @@
         <div class="bg-white animate-fade-in">
           <div class="p-5 border border-gray-200 rounded-b-2xl">
             <p class="mb-2 text-gray-600 text-base">
-              Una vez realizado tu pedido, en el menú izquierdo podrás consultar
-              el estado en que se encuentra tu servicio.
+              Una vez realizado tu pedido, en el menú izquierdo en la sección
+              "Servicios" podrás consultar el estado en que se encuentra tu
+              servicio.
             </p>
-            <img src="servicios.png" class="rounded-2xl m-3 shadow" alt="" />
+
             <p class="mb-2 text-gray-600 mt-2 text-base">
               Una vez finalizado el servicio te llegará una notificación en la
               página remarcando la finalización del mismo.
             </p>
-            <img
-              src="serviciofinalizado.png"
-              class="rounded-2xl h-20 m-3 shadow"
-              alt=""
-            />
           </div>
         </div>
         }
@@ -193,7 +190,7 @@
             <p class="mb-2 text-gray-600 text-base">
               Actualmente solo se acepta
               <span class="font-semibold text-sky-700">Mercado Pago</span> y
-              efectivo.
+              efectivo en nuestra sucursal.
             </p>
           </div>
         </div>
@@ -250,15 +247,200 @@
             <p class="mb-2 text-gray-600 text-base">
               Todos los productos que se compren mediante esta página deberán
               ser retirados presencialmente en
-              <span class="font-semibold text-sky-700">Isaac Albeniz 3622</span
+              <span class="font-semibold text-sky-700">
+                <a
+                  href="https://www.google.com/maps/place/Isaac+Albeniz+3622,+X5010+C%C3%B3rdoba/@-31.4167019,-64.2391058,2332m/data=!3m1!1e3!4m6!3m5!1s0x943298a8c2cddb35:0x43f8949590f416ed!8m2!3d-31.4187365!4d-64.2328082!16s%2Fg%2F11cs95j8s9?entry=ttu&g_ep=EgoyMDI1MDczMC4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="underline hover:text-sky-900"
+                >
+                  Isaac Albeniz 3622
+                </a> </span
               >.
+            </p>
+            <img
+              src="assets/leaflet/images/map.png"
+              alt="Mapa ubicación"
+              class="rounded-2xl m-3 h-150 w-300 shadow scale-100"
+            />
+          </div>
+        </div>
+        }
+      </div>
+      <!-- Pregunta 5 -->
+
+      <!-- Pregunta 6 -->
+      <div class="m-2">
+        <h2 class="rounded-xl">
+          <button
+            type="button"
+            class="flex items-center rounded-2xl justify-between w-full p-5 font-semibold text-gray-700 border border-gray-200 bg-white gap-3 transition hover:shadow-lg hover:bg-sky-50"
+            (click)="toggleAccordion(5, true)"
+            [ngClass]="{ 'bg-sky-100': userOpen[5] }"
+            style="background-color: #fff !important; color: #0c223a !important"
+          >
+            <span class="flex items-center text-sky-950">
+              <svg
+                class="w-5 h-5 mr-2 text-sky-600"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 8v4l3 3"
+                ></path>
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg>
+              ¿Cómo cancelo un servicio solicitado?
+            </span>
+            <svg
+              [ngClass]="{ 'rotate-180': userOpen[5] }"
+              class="w-4 h-4 shrink-0 transition-transform text-sky-700"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5 5 1 1 5"
+              />
+            </svg>
+          </button>
+        </h2>
+        @if (userOpen[5]) {
+        <div class="bg-white animate-fade-in">
+          <div class="p-5 border border-gray-200 rounded-b-2xl">
+            <p class="mb-2 text-gray-600 text-base">
+              Para cancelar un servicio, comunícate con el taller por teléfono o
+              correo electrónico y solicita la cancelación indicando tus datos y
+              el servicio.
+            </p>
+          </div>
+        </div>
+        }
+      </div>
+      <!-- Pregunta 7: Horarios de atención -->
+      <div class="m-2">
+        <h2 class="rounded-xl">
+          <button
+            type="button"
+            class="flex items-center rounded-2xl justify-between w-full p-5 font-semibold text-gray-700 border border-gray-200 bg-white gap-3 transition hover:shadow-lg hover:bg-sky-50"
+            (click)="toggleAccordion(6, true)"
+            [ngClass]="{ 'bg-sky-100': userOpen[6] }"
+            style="background-color: #fff !important; color: #0c223a !important"
+          >
+            <span class="flex items-center text-sky-950">
+              <svg
+                class="w-5 h-5 mr-2 text-sky-600"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 8v4l3 3"
+                ></path>
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg>
+              ¿Cuáles son los horarios de atención?
+            </span>
+            <svg
+              [ngClass]="{ 'rotate-180': userOpen[6] }"
+              class="w-4 h-4 shrink-0 transition-transform text-sky-700"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5 5 1 1 5"
+              />
+            </svg>
+          </button>
+        </h2>
+        @if (userOpen[6]) {
+        <div class="bg-white animate-fade-in">
+          <div class="p-5 border border-gray-200 rounded-b-2xl">
+            <p class="mb-2 text-gray-600 text-base">
+              Nuestro taller atiende de lunes a viernes de 8:00 a 18:00 hs y los
+              sábados se encuentra cerrado.
+            </p>
+          </div>
+        </div>
+        }
+      </div>
+      <!-- Pregunta 8: Qué hacer después de comprar un repuesto -->
+      <div class="m-2">
+        <h2 class="rounded-xl">
+          <button
+            type="button"
+            class="flex items-center rounded-2xl justify-between w-full p-5 font-semibold text-gray-700 border border-gray-200 bg-white gap-3 transition hover:shadow-lg hover:bg-sky-50"
+            (click)="toggleAccordion(7, true)"
+            [ngClass]="{ 'bg-sky-100': userOpen[7] }"
+            style="background-color: #fff !important; color: #0c223a !important"
+          >
+            <span class="flex items-center text-sky-950">
+              <svg
+                class="w-5 h-5 mr-2 text-sky-600"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 8v4l3 3"
+                ></path>
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg>
+              ¿Qué debo hacer después de comprar un repuesto?
+            </span>
+            <svg
+              [ngClass]="{ 'rotate-180': userOpen[7] }"
+              class="w-4 h-4 shrink-0 transition-transform text-sky-700"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5 5 1 1 5"
+              />
+            </svg>
+          </button>
+        </h2>
+        @if (userOpen[7]) {
+        <div class="bg-white animate-fade-in">
+          <div class="p-5 border border-gray-200 rounded-b-2xl">
+            <p class="mb-2 text-gray-600 text-base">
+              Luego de comprar un repuesto, debes acercarte al taller con tu
+              comprobante de Mercado Pago de tu compra para retirarlo.
             </p>
           </div>
         </div>
         }
       </div>
     </div>
-    } @else {
+    } @else if (rol == 'ADMIN') {
+    <!-- Sección de preguntas para administradores -->
     <div
       class="flex flex-col justify-center mt-3 bg-white rounded-2xl p-5 shadow-lg space-y-4"
     >
@@ -287,7 +469,7 @@
                 ></path>
                 <circle cx="12" cy="12" r="10"></circle>
               </svg>
-              ¿Cómo me contacto con un empleado?
+              ¿Cómo gestiono los servicios?
             </span>
             <svg
               [ngClass]="{ 'rotate-180': otherOpen[0] }"
@@ -311,14 +493,9 @@
         <div class="bg-white animate-fade-in">
           <div class="p-5 border border-gray-200 rounded-b-2xl">
             <p class="mb-2 text-gray-600 text-base">
-              Puedes llamarnos al
-              <span class="font-semibold text-sky-700">+54 351 7466695</span>.
-            </p>
-            <p class="mb-2 text-gray-600 text-base">
-              O puedes enviarnos un mail a
-              <span class="font-semibold text-sky-700"
-                >mechanictechgmail.com</span
-              >
+              Puedes gestionar los servicios desde el panel de servicios, donde
+              puedes crear, modificar y eliminar servicios, así como asignar
+              empleados y cambiar estados.
             </p>
           </div>
         </div>
@@ -349,7 +526,7 @@
                 ></path>
                 <circle cx="12" cy="12" r="10"></circle>
               </svg>
-              ¿Cómo registro un pago en efectivo?
+              ¿Cómo registro pagos en efectivo?
             </span>
             <svg
               [ngClass]="{ 'rotate-180': otherOpen[1] }"
@@ -373,10 +550,12 @@
         <div class="bg-white animate-fade-in">
           <div class="p-5 border border-gray-200 rounded-b-2xl">
             <p class="mb-2 text-gray-600 text-base">
-              Los pagos en efectivo solo están disponibles de manera presencial
-              en nuestra sucursal.
+              Para registrar pagos en efectivo primero debes registrar al
+              cliente como si fuera un usuario nuevo, después te diriges al
+              repuesto a comprar y seleccionas la opción de comprar, luego
+              seleccionas el usuario previamente registrado y por último
+              confirmas el pago.
             </p>
-            <img src="servicios.png" class="rounded-2xl m-3 shadow" alt="" />
           </div>
         </div>
         }
@@ -406,7 +585,7 @@
                 ></path>
                 <circle cx="12" cy="12" r="10"></circle>
               </svg>
-              ¿Qué medios de pago aceptan?
+              ¿Cómo exporto reportes de servicios?
             </span>
             <svg
               [ngClass]="{ 'rotate-180': otherOpen[2] }"
@@ -428,11 +607,11 @@
         </h2>
         @if (otherOpen[2]) {
         <div class="bg-white animate-fade-in">
-          <div class="p-5 border border-t-0 border-gray-200 rounded-b-2xl">
+          <div class="p-5 border border-gray-200 rounded-b-2xl">
             <p class="mb-2 text-gray-600 text-base">
-              Actualmente solo se acepta
-              <span class="font-semibold text-sky-700">Mercado Pago</span> y
-              efectivo.
+              Puedes exportar reportes en formato PDF o Excel desde la sección
+              de historial de servicios, utilizando los botones de exportación
+              disponibles.
             </p>
           </div>
         </div>
@@ -440,7 +619,7 @@
       </div>
       <!-- Pregunta 4 -->
       <div class="m-2">
-        <h2 class="rounded-xl fw-bold">
+        <h2 class="rounded-xl">
           <button
             type="button"
             class="flex items-center rounded-2xl justify-between w-full p-5 font-semibold text-gray-700 border border-gray-200 bg-white gap-3 transition hover:shadow-lg hover:bg-sky-50"
@@ -448,7 +627,7 @@
             [ngClass]="{ 'bg-sky-100': otherOpen[3] }"
             style="background-color: #fff !important; color: #0c223a !important"
           >
-            <span class="flex items-center text-sky-950 fw-bold">
+            <span class="flex items-center text-sky-950">
               <svg
                 class="w-5 h-5 mr-2 text-sky-600"
                 fill="none"
@@ -463,7 +642,7 @@
                 ></path>
                 <circle cx="12" cy="12" r="10"></circle>
               </svg>
-              ¿Tienen envío a domicilio?
+              ¿Cómo agrego o elimino empleados?
             </span>
             <svg
               [ngClass]="{ 'rotate-180': otherOpen[3] }"
@@ -485,12 +664,182 @@
         </h2>
         @if (otherOpen[3]) {
         <div class="bg-white animate-fade-in">
-          <div class="p-5 border border-t-0 border-gray-200 rounded-b-2xl">
+          <div class="p-5 border border-gray-200 rounded-b-2xl">
             <p class="mb-2 text-gray-600 text-base">
-              Todos los productos que se compren mediante esta página deberán
-              ser retirados presencialmente en
-              <span class="font-semibold text-sky-700">Isaac Albeniz 3622</span
-              >.
+              Puedes gestionar empleados desde el panel de empleados, en la
+              sección de usuarios, donde puedes agregar nuevos empleados o
+              eliminar los existentes.
+            </p>
+          </div>
+        </div>
+        }
+      </div>
+      <!-- Pregunta 5: ¿Cómo asigno servicios a empleados? -->
+      <div class="m-2">
+        <h2 class="rounded-xl">
+          <button
+            type="button"
+            class="flex items-center rounded-2xl justify-between w-full p-5 font-semibold text-gray-700 border border-gray-200 bg-white gap-3 transition hover:shadow-lg hover:bg-sky-50"
+            (click)="toggleAccordion(4, false)"
+            [ngClass]="{ 'bg-sky-100': otherOpen[4] }"
+            style="background-color: #fff !important; color: #0c223a !important"
+          >
+            <span class="flex items-center text-sky-950">
+              <svg
+                class="w-5 h-5 mr-2 text-sky-600"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 8v4l3 3"
+                ></path>
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg>
+              ¿Cómo asigno servicios a empleados?
+            </span>
+            <svg
+              [ngClass]="{ 'rotate-180': otherOpen[4] }"
+              class="w-4 h-4 shrink-0 transition-transform text-sky-700"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5 5 1 1 5"
+              />
+            </svg>
+          </button>
+        </h2>
+        @if (otherOpen[4]) {
+        <div class="bg-white animate-fade-in">
+          <div class="p-5 border border-gray-200 rounded-b-2xl">
+            <p class="mb-2 text-gray-600 text-base">
+              Puedes asignar servicios a empleados desde el panel de servicios,
+              editando el servicio y seleccionando el empleado responsable.
+            </p>
+          </div>
+        </div>
+        }
+      </div>
+      <!-- Pregunta 6: ¿Cómo veo el historial de pagos y servicios? -->
+      <div class="m-2">
+        <h2 class="rounded-xl">
+          <button
+            type="button"
+            class="flex items-center rounded-2xl justify-between w-full p-5 font-semibold text-gray-700 border border-gray-200 bg-white gap-3 transition hover:shadow-lg hover:bg-sky-50"
+            (click)="toggleAccordion(5, false)"
+            [ngClass]="{ 'bg-sky-100': otherOpen[5] }"
+            style="background-color: #fff !important; color: #0c223a !important"
+          >
+            <span class="flex items-center text-sky-950">
+              <svg
+                class="w-5 h-5 mr-2 text-sky-600"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 8v4l3 3"
+                ></path>
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg>
+              ¿Cómo veo el historial de pagos y servicios?
+            </span>
+            <svg
+              [ngClass]="{ 'rotate-180': otherOpen[5] }"
+              class="w-4 h-4 shrink-0 transition-transform text-sky-700"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5 5 1 1 5"
+              />
+            </svg>
+          </button>
+        </h2>
+        @if (otherOpen[5]) {
+        <div class="bg-white animate-fade-in">
+          <div class="p-5 border border-gray-200 rounded-b-2xl">
+            <p class="mb-2 text-gray-600 text-base">
+              El historial de pagos y servicios está disponible en la sección de
+              ventas e historial de servicios respectivamente, donde puedes
+              filtrar y exportar la información.
+            </p>
+          </div>
+        </div>
+        }
+      </div>
+      <!-- Pregunta 7: ¿Cómo edito los datos de un usuario? -->
+
+      <!-- Pregunta 8: ¿Cómo cambio mi contraseña de administrador? -->
+      <div class="m-2">
+        <h2 class="rounded-xl">
+          <button
+            type="button"
+            class="flex items-center rounded-2xl justify-between w-full p-5 font-semibold text-gray-700 border border-gray-200 bg-white gap-3 transition hover:shadow-lg hover:bg-sky-50"
+            (click)="toggleAccordion(7, false)"
+            [ngClass]="{ 'bg-sky-100': otherOpen[7] }"
+            style="background-color: #fff !important; color: #0c223a !important"
+          >
+            <span class="flex items-center text-sky-950">
+              <svg
+                class="w-5 h-5 mr-2 text-sky-600"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 8v4l3 3"
+                ></path>
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg>
+              ¿Cómo cambio mi contraseña de administrador?
+            </span>
+            <svg
+              [ngClass]="{ 'rotate-180': otherOpen[7] }"
+              class="w-4 h-4 shrink-0 transition-transform text-sky-700"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5 5 1 1 5"
+              />
+            </svg>
+          </button>
+        </h2>
+        @if (otherOpen[7]) {
+        <div class="bg-white animate-fade-in">
+          <div class="p-5 border border-gray-200 rounded-b-2xl">
+            <p class="mb-2 text-gray-600 text-base">
+              Puedes cambiar tu contraseña desde la sección de perfil en el
+              panel de administración.
             </p>
           </div>
         </div>
@@ -500,7 +849,3 @@
     }
   </div>
 </div>
-
-<!-- Pregunta 2 -->
-
-<!--ENVIO A DOMICILIO-->
