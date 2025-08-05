@@ -19,8 +19,8 @@ export class HistorialServiciosComponent {
   category: string = '';
   search: string = '';
   lst: any[] = [];
-  dateFrom: any;
-  dateTo: any;
+  dateFrom: string = '';
+  dateTo: string = '';
   lstFiltered: any[] = [];
   private service: ServiciosService = inject(ServiciosService);
 
@@ -31,7 +31,15 @@ export class HistorialServiciosComponent {
   page: number = 1;
   pageSize: number = 8;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    const today = new Date();
+    const lastYear = new Date();
+    lastYear.setFullYear(today.getFullYear() - 1);
+
+    // Formato YYYY-MM-DD
+    this.dateFrom = lastYear.toISOString().slice(0, 10);
+    this.dateTo = today.toISOString().slice(0, 10);
+  }
 
   redirectTo(url: string, id: number) {
     localStorage.setItem('idServicio', id.toString());
