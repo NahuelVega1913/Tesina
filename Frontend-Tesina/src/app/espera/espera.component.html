@@ -66,13 +66,27 @@
     <p class="text-center text-2xl mt-5 font-normal text-sky-800">
       Antes de poder revisar tu vehículo necesitamos que haga un pago de seña
     </p>
-    <div (click)="pagarSena()" id="wallet_container"></div>
+    <div id="wallet_container"></div>
     }
-    <div
-      #mapContainer
-      id="map"
-      class="w-full mt-7 rounded-2xl shadow-2xl"
-    ></div>
+    <!-- Mapa y enlace a Google Maps -->
+    <div class="flex flex-col items-center justify-center mt-7">
+      <h2 class="text-lg font-semibold mb-2 text-gray-800">
+        Estamos en Isaac Albeniz 3622
+      </h2>
+      <img
+        src="assets/leaflet/images/map.png"
+        alt="Mapa ubicación"
+        class="w-full max-w-3xl rounded shadow-lg mb-4"
+      />
+      <a
+        href="https://www.google.com/maps/place/Isaac+Albeniz+3622,+X5010+C%C3%B3rdoba/@-31.419842,-64.2358509,1347m/data=!3m1!1e3!4m6!3m5!1s0x943298a8c2cddb35:0x43f8949590f416ed!8m2!3d-31.4187365!4d-64.2328082!16s%2Fg%2F11cs95j8s9?entry=ttu&g_ep=EgoyMDI1MDczMC4wIKXMDSoASAFQAw%3D%3D"
+        target="_blank"
+        rel="noopener"
+        class="text-blue-700 underline hover:text-blue-900 font-semibold"
+      >
+        Ver en Google Maps
+      </a>
+    </div>
   </div>
   }
   <!--ESPERANDO-->

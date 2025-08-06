@@ -84,6 +84,7 @@ export class ConsultarInspeccionComponent {
           ...res,
           registerDate: fechaFormateada,
         });
+        this.status = res.status; // <-- Asegura que status se actualiza con el valor real del servicio
       },
       error: (err) => {
         console.log(err);

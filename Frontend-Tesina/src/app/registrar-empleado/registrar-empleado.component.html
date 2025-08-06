@@ -259,10 +259,8 @@
             >Número de Cuenta Bancaria</label
           >
           <input
-            type="text"
+            type="number"
             formControlName="bancaryNumber"
-            pattern="\d*"
-            (keypress)="onlyNumberInput($event)"
             class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full md:w-80 p-2.5"
             placeholder="7777777777777"
             required

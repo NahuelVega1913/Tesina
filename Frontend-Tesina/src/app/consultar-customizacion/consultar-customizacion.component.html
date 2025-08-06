@@ -198,6 +198,7 @@
         }
       </div>
       <div class="flex w-full justify-end">
+        @if (status !== 'WITHDRAW') {
         <button
           (click)="cancelService()"
           type="button"
@@ -205,6 +206,7 @@
         >
           Dar de baja
         </button>
+        }
       </div>
     </form>
   </div>

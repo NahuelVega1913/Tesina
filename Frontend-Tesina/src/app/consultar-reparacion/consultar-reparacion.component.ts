@@ -79,11 +79,12 @@ export class ConsultarReparacionComponent {
         const mes = String(fecha.getMonth() + 1).padStart(2, '0');
         const dia = String(fecha.getDate()).padStart(2, '0');
         const fechaFormateada = `${año}-${mes}-${dia}`;
-
+        this.status = res.status;
         this.form.patchValue({
           ...res,
           registerDate: fechaFormateada,
         });
+        this.status = res.status; // <-- Asegura que status se actualiza con el valor real del servicio
       },
       error: (err) => {
         console.log(err);
