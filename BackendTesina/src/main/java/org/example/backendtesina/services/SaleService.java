@@ -140,8 +140,10 @@ public class SaleService {
                 }
                 in.close();
 
+                // Convertir la respuesta en un objeto JSON
+                JsonNode paymentData = objectMapper.readTree(response.toString());
+
                 if (!paymentData.has("status") || !paymentData.has("external_reference")) {
-                    logger.error("El campo 'status' o 'external_reference' no está presente en el payload.");
                     return "Error: El campo 'status' o 'external_reference' no está presente en el payload.";
                 }
 
@@ -155,7 +157,6 @@ public class SaleService {
 
                 // Lógica para manejar diferentes tipos de external_reference
                 if (externalReference.startsWith("repuesto_")) {
-                    // Guardar la venta (SaleEntity)
                     int saleId = Integer.parseInt(externalReference.split("_")[1]);
                     SaleEntity sale = repository.findById(saleId)
                             .orElseThrow(() -> new RuntimeException("Venta no encontrada para el external_reference: " + externalReference));
@@ -163,7 +164,6 @@ public class SaleService {
                     repository.save(sale);
                     logger.info("Venta actualizada a estado 'approved'. ID de venta: {}", sale.getId());
                 } else if (externalReference.startsWith("servicio_") || externalReference.startsWith("seña_")) {
-                    // Guardar el servicio (ServiceEntity)
                     int serviceId = Integer.parseInt(externalReference.split("_")[1]);
                     ServiceEntity service = serviceRepository.findById(serviceId)
                             .orElseThrow(() -> new RuntimeException("Servicio no encontrado para el external_reference: " + externalReference));
@@ -234,7 +234,7 @@ public class SaleService {
                 .items(List.of(itemRequest))
                 .backUrls(backUrls)
                 .autoReturn("approved")
-                .externalReference("repuesto_" + spare.getId()) // Cambiar a "repuesto_ID"
+                .externalReference("repuesto_" + sale.getId()) // Cambiar a "repuesto_ID"
                 .build();
 
         PreferenceClient client = new PreferenceClient();
