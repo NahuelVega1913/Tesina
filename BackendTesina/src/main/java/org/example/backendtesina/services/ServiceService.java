@@ -156,64 +156,74 @@ public class ServiceService {
 
     public String payMercadoPagoService(int id) throws MPException, MPApiException {
         ServiceEntity entity = repository.findById(id).get();
-        entity.setPaymentStatus(PaymentStatus.PAID);
-        repository.save(entity);
-        PreferenceItemRequest itemRequest =
-                PreferenceItemRequest.builder()
-                        .id(String.valueOf(entity.getId()))
-                        .title(entity.getAuto() + entity.getModelo())
-                        .description(entity.getObservacionesPrevias())
-                        .categoryId(entity.getType().toString())
-                        .quantity(1)
-                        .unitPrice(new BigDecimal(entity.getCost()))
-                        .build();
+
+        // Crear el item de preferencia
+        PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
+                .id(String.valueOf(entity.getId()))
+                .title(entity.getAuto() + entity.getModelo())
+                .description(entity.getObservacionesPrevias())
+                .categoryId(entity.getType().toString())
+                .quantity(1)
+                .unitPrice(new BigDecimal(entity.getCost()))
+                .build();
+
         List<PreferenceItemRequest> items = new ArrayList<>();
-        PreferenceBackUrlsRequest backUrls =
-                PreferenceBackUrlsRequest.builder()
-                        .success("https://localhost:4200/repuestos")
-                        .pending("https://localhost:4200/repuestos")
-                        .failure("https://localhost:4200/repuestos")
-                        .build();
-        //PreferenceRequest request = PreferenceRequest.builder().backUrls(backUrls).build();
         items.add(itemRequest);
+
+        // Configurar las URLs de retorno
+        PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
+                .success("https://servicios351.netlify.app/espera")
+                .pending("https://servicios351.netlify.app/espera")
+                .failure("https://servicios351.netlify.app/espera")
+                .build();
+
+        // Crear la preferencia con la external_reference específica
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()
                 .items(items)
                 .backUrls(backUrls)
                 .autoReturn("approved")
+                .externalReference("servicio_" + entity.getId()) // External reference para servicios
                 .build();
+
         PreferenceClient client = new PreferenceClient();
         Preference preference = client.create(preferenceRequest);
+
         return preference.getInitPoint();
     }
     public String payMercadoPagoSeña(int id) throws MPException, MPApiException {
         ServiceEntity entity = repository.findById(id).get();
-        entity.setPaymentStatus(PaymentStatus.PAID_DEPOSIT);
-        repository.save(entity);
-        PreferenceItemRequest itemRequest =
-                PreferenceItemRequest.builder()
-                        .id(String.valueOf(entity.getId()))
-                        .title(entity.getAuto() + entity.getModelo())
-                        .description("Seña del servicio")
-                        .categoryId(entity.getType().toString())
-                        .quantity(1)
-                        .unitPrice(new BigDecimal(10000))
-                        .build();
+
+        // Crear el item de preferencia
+        PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
+                .id(String.valueOf(entity.getId()))
+                .title(entity.getAuto() + entity.getModelo())
+                .description("Seña del servicio")
+                .categoryId(entity.getType().toString())
+                .quantity(1)
+                .unitPrice(new BigDecimal(10000))
+                .build();
+
         List<PreferenceItemRequest> items = new ArrayList<>();
-        PreferenceBackUrlsRequest backUrls =
-                PreferenceBackUrlsRequest.builder()
-                        .success("https://localhost:4200/repuestos")
-                        .pending("https://localhost:4200/repuestos")
-                        .failure("https://localhost:4200/repuestos")
-                        .build();
-        //PreferenceRequest request = PreferenceRequest.builder().backUrls(backUrls).build();
         items.add(itemRequest);
+
+        // Configurar las URLs de retorno
+        PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
+                .success("https://servicios351.netlify.app/espera")
+                .pending("https://servicios351.netlify.app/espera")
+                .failure("https://servicios351.netlify.app/espera")
+                .build();
+
+        // Crear la preferencia con la external_reference específica
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()
                 .items(items)
                 .backUrls(backUrls)
                 .autoReturn("approved")
+                .externalReference("seña_" + entity.getId()) // External reference para señas
                 .build();
+
         PreferenceClient client = new PreferenceClient();
         Preference preference = client.create(preferenceRequest);
+
         return preference.getInitPoint();
     }
 

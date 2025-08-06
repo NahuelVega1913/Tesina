@@ -13,16 +13,16 @@ import jakarta.transaction.Transactional;
 import org.example.backendtesina.DTOs.Get.DetailSaleDto;
 import org.example.backendtesina.DTOs.Get.GetSaleDTO;
 import org.example.backendtesina.DTOs.Post.PostPayDTO;
+import org.example.backendtesina.entities.enums.PaymentStatus;
 import org.example.backendtesina.entities.payment.DetailSaleEntity;
 import org.example.backendtesina.entities.payment.SaleEntity;
 import org.example.backendtesina.entities.payment.SpareEntity;
+
 import org.example.backendtesina.entities.personal.UserEntity;
 import org.example.backendtesina.entities.enums.typePaymentEntity;
+import org.example.backendtesina.entities.services.ServiceEntity;
 import org.example.backendtesina.jwt.JwtService;
-import org.example.backendtesina.repositories.CartRepository;
-import org.example.backendtesina.repositories.SaleRepository;
-import org.example.backendtesina.repositories.SpareRepository;
-import org.example.backendtesina.repositories.UserRepository;
+import org.example.backendtesina.repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +49,8 @@ public class SaleService {
     @Autowired
     UserRepository userRepository;
 
-
-
+    @Autowired
+    SeviceRepository serviceRepository;
 
     @Autowired
     NotificationService notificationService;
@@ -140,8 +140,6 @@ public class SaleService {
                 }
                 in.close();
 
-                JsonNode paymentData = objectMapper.readTree(response.toString());
-
                 if (!paymentData.has("status") || !paymentData.has("external_reference")) {
                     logger.error("El campo 'status' o 'external_reference' no está presente en el payload.");
                     return "Error: El campo 'status' o 'external_reference' no está presente en el payload.";
@@ -150,20 +148,37 @@ public class SaleService {
                 String paymentStatus = paymentData.get("status").asText();
                 String externalReference = paymentData.get("external_reference").asText();
 
-                // Validar que el external_reference corresponda a una venta local
-                SaleEntity sale = repository.findById(Integer.parseInt(externalReference))
-                        .orElseThrow(() -> new RuntimeException("Venta no encontrada para el external_reference: " + externalReference));
-
                 if (!"approved".equals(paymentStatus)) {
                     logger.error("Estado del pago no válido: {}", paymentStatus);
                     return "Estado del pago no válido: " + paymentStatus;
                 }
 
-                // Actualizar el estado de la venta a "approved"
-                sale.setStatus("approved");
-                repository.save(sale);
+                // Lógica para manejar diferentes tipos de external_reference
+                if (externalReference.startsWith("repuesto_")) {
+                    // Guardar la venta (SaleEntity)
+                    int saleId = Integer.parseInt(externalReference.split("_")[1]);
+                    SaleEntity sale = repository.findById(saleId)
+                            .orElseThrow(() -> new RuntimeException("Venta no encontrada para el external_reference: " + externalReference));
+                    sale.setStatus("approved");
+                    repository.save(sale);
+                    logger.info("Venta actualizada a estado 'approved'. ID de venta: {}", sale.getId());
+                } else if (externalReference.startsWith("servicio_") || externalReference.startsWith("seña_")) {
+                    // Guardar el servicio (ServiceEntity)
+                    int serviceId = Integer.parseInt(externalReference.split("_")[1]);
+                    ServiceEntity service = serviceRepository.findById(serviceId)
+                            .orElseThrow(() -> new RuntimeException("Servicio no encontrado para el external_reference: " + externalReference));
+                    if (externalReference.startsWith("seña_")) {
+                        service.setPaymentStatus(PaymentStatus.PAID_DEPOSIT);
+                    } else {
+                        service.setPaymentStatus(PaymentStatus.PAID);
+                    }
+                    serviceRepository.save(service);
+                    logger.info("Servicio actualizado. ID de servicio: {}", service.getId());
+                } else {
+                    logger.error("Tipo de external_reference no reconocido: {}", externalReference);
+                    return "Error: Tipo de external_reference no reconocido.";
+                }
 
-                logger.info("Venta actualizada a estado 'approved'. ID de venta: {}", sale.getId());
                 return "Pago procesado correctamente.";
             } else {
                 logger.error("Error al consultar el pago en Mercado Pago. Código de respuesta: {}", responseCode);
@@ -219,7 +234,7 @@ public class SaleService {
                 .items(List.of(itemRequest))
                 .backUrls(backUrls)
                 .autoReturn("approved")
-                .externalReference(String.valueOf(sale.getId())) // Asociar el ID de la venta
+                .externalReference("repuesto_" + spare.getId()) // Cambiar a "repuesto_ID"
                 .build();
 
         PreferenceClient client = new PreferenceClient();
@@ -281,7 +296,7 @@ public class SaleService {
                 .items(items)
                 .backUrls(backUrls)
                 .autoReturn("approved")
-                .externalReference(String.valueOf(sale.getId())) // Asociar el ID de la venta
+                .externalReference("repuesto_" + sale.getId()) // Cambiar a "repuesto_ID"
                 .build();
 
         PreferenceClient client = new PreferenceClient();
