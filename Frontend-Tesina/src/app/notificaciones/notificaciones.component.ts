@@ -26,7 +26,15 @@ export class CasillaComponent {
   getNotificaciones() {
     const getSubscription = this.service.getAllNotifications().subscribe({
       next: (res) => {
-        this.notifications = res;
+        // Restar 2 horas a cada dateTime
+        this.notifications = res.map((item: any) => {
+          if (item.dateTime) {
+            const date = new Date(item.dateTime);
+            date.setHours(date.getHours() - 2);
+            return { ...item, dateTime: date };
+          }
+          return item;
+        });
       },
       error: (err) => {
         console.log(err);

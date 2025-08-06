@@ -23,13 +23,34 @@ export class TurnosComponent {
     const rol = (localStorage.getItem('role') || '').toUpperCase();
     this.isAdmin = rol === 'ADMIN' || rol === 'SUPERADMIN';
     this.isUser = rol === 'USER';
-    // Nuevo: obtener hasService de localStorage (guardado como string 'true'/'false')
     this.hasService = localStorage.getItem('hasService') === 'true';
 
-    // Si es usuario y no tiene servicio, no cargar turnos
     if (this.isUser && !this.hasService) {
-      // Mostrar cartel en el HTML, no cargar turnos
       return;
+    }
+
+    // Llamada al endpoint para obtener el turno del usuario
+    if (this.isUser) {
+      this.service.getTurnoByUser().subscribe({
+        next: (turno) => {
+          if (turno && turno.horaInicio && turno.horaFin) {
+            // Formatea fecha y horario para mostrar en el mensaje
+            const fecha = turno.horaInicio.substring(0, 10);
+            const horaInicio = turno.horaInicio.substring(11, 16);
+            const horaFin = turno.horaFin.substring(11, 16);
+            this.turnoSeleccionado = {
+              ...turno,
+              fecha,
+              hora: `${horaInicio} - ${horaFin}`,
+            };
+          } else {
+            this.turnoSeleccionado = null;
+          }
+        },
+        error: () => {
+          this.turnoSeleccionado = null;
+        },
+      });
     }
 
     this.service?.getAllTurnos().subscribe((turnos) => {
@@ -39,11 +60,6 @@ export class TurnosComponent {
       this.service?.getAllTurnosHoy().subscribe((turnosHoy) => {
         this.turnosHoy = turnosHoy;
       });
-    }
-
-    // Si el usuario es USER y no hay turnoSeleccionado, inicializa con un objeto vacío para mostrar el botón
-    if (this.isUser && !this.turnoSeleccionado) {
-      this.turnoSeleccionado = {};
     }
   }
 
@@ -66,11 +82,12 @@ export class TurnosComponent {
     if (
       this.isUser &&
       this.turnoSeleccionado &&
-      Object.keys(this.turnoSeleccionado).length > 0
+      this.turnoSeleccionado.fecha &&
+      this.turnoSeleccionado.hora
     ) {
       Swal.fire(
         'Ya tienes un turno',
-        'No puedes seleccionar otro turno hasta cancelar el actual.',
+        `No puedes seleccionar otro turno hasta cancelar el actual.`,
         'info'
       );
       return;

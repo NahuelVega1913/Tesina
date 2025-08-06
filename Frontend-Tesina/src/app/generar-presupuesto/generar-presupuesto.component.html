@@ -108,7 +108,11 @@
           />
         </div>
         @if(form.get('budget')?.invalid && form.get('budget')?.touched){
-        <div class="text-sky-950">Complete el presupuesto</div>
+        <div class="text-red-500">
+          @if(form.get('budget')?.errors?.['required']){ Complete el presupuesto
+          } @if(form.get('budget')?.errors?.['notPositive']){ El presupuesto
+          debe ser mayor a cero }
+        </div>
         }
       </div>
       <div class="w-full flex justify-end">

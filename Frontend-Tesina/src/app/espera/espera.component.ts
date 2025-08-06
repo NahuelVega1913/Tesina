@@ -26,7 +26,8 @@ export class EsperaComponent implements AfterViewInit {
   @ViewChild('mapContainer') mapContainer!: ElementRef;
   status: string = '';
   private mapInitialized = false;
-  private mercadoPagoRendered = false;
+  private mercadoPagoRenderedSena = false;
+  private mercadoPagoRenderedFinal = false;
 
   constructor(private router: Router) {
     this.mp = new (window as any).MercadoPago(
@@ -47,16 +48,16 @@ export class EsperaComponent implements AfterViewInit {
   }
 
   ngAfterViewChecked(): void {
-    // Renderiza el botón de Mercado Pago solo si corresponde y no se ha renderizado aún
+    // Renderiza el botón de Mercado Pago para la seña
     if (
-      !this.mercadoPagoRendered &&
+      !this.mercadoPagoRenderedSena &&
       this.status === 'WAITING' &&
       this.Object?.paymentStatus === 'UNPAID_DEPOSIT' &&
       document.getElementById('wallet_container')
     ) {
       this.mp.bricks().create('wallet', 'wallet_container', {
         initialization: {
-          preferenceId: 'YOUR_PREFERENCE_ID', // Reemplaza con tu ID de preferencia
+          preferenceId: 'YOUR_PREFERENCE_ID_SENA', // Reemplaza con tu ID de preferencia para la seña
         },
         customization: {
           texts: {
@@ -65,7 +66,28 @@ export class EsperaComponent implements AfterViewInit {
           },
         },
       });
-      this.mercadoPagoRendered = true;
+      this.mercadoPagoRenderedSena = true;
+    }
+
+    // Renderiza el botón de Mercado Pago para el pago final
+    if (
+      !this.mercadoPagoRenderedFinal &&
+      this.status === 'FINISHED' &&
+      this.Object?.paymentStatus === 'UNPAID' &&
+      document.getElementById('wallet_container_final')
+    ) {
+      this.mp.bricks().create('wallet', 'wallet_container_final', {
+        initialization: {
+          preferenceId: 'YOUR_PREFERENCE_ID_FINAL', // Reemplaza con tu ID de preferencia para el pago final
+        },
+        customization: {
+          texts: {
+            action: 'pay',
+            valueProp: 'security_details',
+          },
+        },
+      });
+      this.mercadoPagoRenderedFinal = true;
     }
   }
 

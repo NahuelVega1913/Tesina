@@ -57,7 +57,6 @@
       Lleva tu vehiculo a nuestra sucursal
     </p>
 
-    <p class="text-sky-900 mt-1 text-2xl text-center">Isaac Albeniz 3622</p>
     <p class="font-semibold text-2xl text-center text-sky-950">
       Podés reservar un turno en la sección de turnos, recordá que los que
       tengan turno tendrán prioridad para la atención.
@@ -66,7 +65,7 @@
     <p class="text-center text-2xl mt-5 font-normal text-sky-800">
       Antes de poder revisar tu vehículo necesitamos que haga un pago de seña
     </p>
-    <div id="wallet_container"></div>
+    <div (click)="pagarSena()" id="wallet_container"></div>
     }
     <!-- Mapa y enlace a Google Maps -->
     <div class="flex flex-col items-center justify-center mt-7">
@@ -318,15 +317,15 @@
         <p>{{ Object.observacionesPrevias }}</p>
       </div>
       @if(Object.type == 'INSPECTION'){
-      <div class="font-normal flex flex-row justify-betwee text-md mt-1">
+      <div class="font-normal flex flex-row justify-between text-md mt-1">
         <p><strong>Estado general:</strong></p>
         <p>{{ Object.estadoGeneral }}</p>
       </div>
-      <div class="font-normal flex flex-row justify-betwee text-md mt-1">
+      <div class="font-normal flex flex-row justify-between text-md mt-1">
         <p><strong>Resultado:</strong></p>
         <p>{{ Object.resultado }}</p>
       </div>
-      <div class="font-normal flex flex-row justify-betwee text-md mt-1">
+      <div class="font-normal flex flex-row justify-between text-md mt-1">
         <p><strong>Recomendaciones:</strong></p>
         <p>{{ Object.recomendaciones }}</p>
       </div>
@@ -364,7 +363,7 @@
         <p class="font-bold text-xl mt-3">Costo Total:</p>
         <p class="font-bold text-xl mt-3">${{ Object.cost }}</p>
       </div>
-      <div (click)="pagarServicio()" id="wallet_container"></div>
+      <div (click)="pagarServicio()" id="wallet_container_final"></div>
       }@else {
       <div class="font-bold text-center text-xl mt-3">
         Retira tu vehiculo en Isaac Albeniz 3622

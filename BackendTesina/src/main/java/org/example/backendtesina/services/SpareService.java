@@ -234,6 +234,6 @@ public class SpareService {
         Path filePath = uploadPath.resolve(fileName);
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-        return "http://localhost:8080/uploads/" + fileName;
+        return "https://tesis-backend-f1x5.onrender.com/uploads/" + fileName;
     }
 }

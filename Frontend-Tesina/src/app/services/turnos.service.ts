@@ -42,4 +42,14 @@ export class TurnosService {
       },
     });
   }
+
+  // Nuevo método para obtener el turno del usuario actual
+  getTurnoByUser() {
+    return this.http.get<any>(this.url + `turnos/user`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    });
+  }
 }

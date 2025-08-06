@@ -4,6 +4,7 @@ import org.example.backendtesina.DTOs.Post.PostTurno;
 import org.example.backendtesina.DTOs.Get.GetTurno;
 import org.example.backendtesina.DTOs.Post.PutTurno;
 import org.example.backendtesina.entities.services.TurnoEntity;
+import org.example.backendtesina.jwt.JwtService;
 import org.example.backendtesina.services.TurnoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,8 @@ public class TurnoController {
 
     @Autowired
     private TurnoService turnoService;
+    @Autowired
+    private JwtService jwtService;
 
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @GetMapping( "/getall")
@@ -62,6 +65,18 @@ public class TurnoController {
            return ResponseEntity.ok(response);
 
 
+    }
+    @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
+    @GetMapping("/user")
+    public ResponseEntity<?> getTurnosByUser(@RequestHeader("Authorization") String authorizationHeader) {
+        String token = authorizationHeader.substring(7);
+        String email = jwtService.getEmailFromToken(token);
+        PostTurno turno = turnoService.getTurnoDeUsuario(email);
+
+        if (turno == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(turno);
     }
     @PreAuthorize("hasAnyRole('USER','ADMIN','SUPERADMIN')")
     @GetMapping("/hoy")

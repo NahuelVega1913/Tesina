@@ -30,7 +30,7 @@ public class NotificationService {
         NotificationEntity notification = new NotificationEntity();
         notification.setDateTime(ZonedDateTime.now(ZoneId.of("America/Argentina/Buenos_Aires")).toLocalDateTime());
         notification.setTitle("Bienvenido!!!");
-        notification.setMessage("El equipo de MechanicTech te desea una gran bienvenida!");
+        notification.setMessage("El equipo de Servicios 351 te desea una gran bienvenida!");
         notification.setType(typeNotificationEntity.OTHER);
         notification.setState(StateNotification.UNSEEN);
         notification.setUser(user);

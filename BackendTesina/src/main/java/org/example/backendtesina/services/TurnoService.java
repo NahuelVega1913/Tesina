@@ -186,7 +186,31 @@ public class TurnoService {
         return p;
 
     }
-    public PostTurno cancelarTurno(String token) {
+    public PostTurno getTurnoDeUsuario(String email) {
+        // Buscar el usuario por email
+        UserEntity user = userRepository.findByEmail(email).orElse(null);
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
+        }
+
+        // Buscar el turno asociado al usuario
+        TurnoEntity turno = repository.findByUser(user).orElse(null);
+        if (turno == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El usuario no tiene turnos asignados");
+        }
+
+        // Crear y devolver el DTO del turno
+        PostTurno dto = new PostTurno();
+        dto.setId(turno.getId());
+        dto.setServiceId(turno.getService().getId());
+        dto.setEmailUser(turno.getUser().getEmail());
+        dto.setHoraInicio(turno.getHoraInicio());
+        dto.setHoraFin(turno.getHoraFin());
+        dto.setEstado(turno.getEstado());
+        return dto;
+    }
+
+        public PostTurno cancelarTurno(String token) {
         String email = jwtService.getEmailFromToken(token);
         UserEntity user = userRepository.findByEmail(email).orElse(null);
 

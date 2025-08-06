@@ -5,9 +5,21 @@ import {
   ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
+  Validators,
+  ValidatorFn,
+  AbstractControl,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+
+// Validador personalizado para presupuesto mayor a cero
+export function positiveBudgetValidator(): ValidatorFn {
+  return (control: AbstractControl) => {
+    const value = control.value;
+    if (value === null || value === undefined || value === '') return null;
+    return value > 0 ? null : { notPositive: true };
+  };
+}
 
 @Component({
   selector: 'app-generar-presupuesto',
@@ -38,7 +50,10 @@ export class GenerarPresupuestoComponent {
     status: new UntypedFormControl('', []),
     type: new UntypedFormControl('', []),
     materialsUsed: new UntypedFormControl('', []),
-    budget: new UntypedFormControl('', []),
+    budget: new UntypedFormControl('', [
+      Validators.required,
+      positiveBudgetValidator(),
+    ]),
   });
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -84,6 +99,10 @@ export class GenerarPresupuestoComponent {
   registerBudget() {
     const id = localStorage.getItem('idServicio') || 0;
     const budgetControl = this.form.get('budget');
+    if (budgetControl?.invalid) {
+      budgetControl.markAsTouched();
+      return;
+    }
     const budget = budgetControl ? budgetControl.value : null;
     const getSubscription = this.service
       .registerBudget(Number(id), budget)
