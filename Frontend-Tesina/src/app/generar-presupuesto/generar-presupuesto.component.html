@@ -91,13 +91,22 @@
         <label for="budget" class="block mb-2 text-sm font-medium text-sky-950"
           >Presupuesto</label
         >
-        <input
-          type="number"
-          formControlName="budget"
-          id="budget"
-          class="border border-gray-300 text-end text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          placeholder=""
-        />
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-stretch">
+            <span
+              class="bg-gray-200 border border-gray-300 border-r-0 rounded-l-lg px-3 text-black font-bold text-base flex items-center h-full"
+            >
+              $
+            </span>
+          </span>
+          <input
+            type="number"
+            formControlName="budget"
+            id="budget"
+            class="border border-gray-300 text-end text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pl-12"
+            placeholder=""
+          />
+        </div>
         @if(form.get('budget')?.invalid && form.get('budget')?.touched){
         <div class="text-sky-950">Complete el presupuesto</div>
         }

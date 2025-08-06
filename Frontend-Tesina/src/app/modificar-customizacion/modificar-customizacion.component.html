@@ -170,14 +170,23 @@
           class="block mb-2 text-sm font-medium text-sky-950"
           >Costo</label
         >
-        <input
-          type="number"
-          formControlName="cost"
-          id="first_name "
-          class="bg-white border text-end border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5"
-          placeholder="70000"
-          required=""
-        />
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-stretch">
+            <span
+              class="bg-gray-200 border border-gray-300 border-r-0 rounded-l-lg px-3 text-black font-bold text-base flex items-center h-full"
+            >
+              $
+            </span>
+          </span>
+          <input
+            type="number"
+            formControlName="cost"
+            id="first_name"
+            class="bg-white border text-end border-gray-300 text-black text-sm rounded-lg focus:ring-sky-300 focus:border-sky-400 block w-full p-2.5 pl-12"
+            placeholder="70000"
+            required=""
+          />
+        </div>
         @if(form.get('cost')?.invalid && form.get('cost')?.touched){
         <div class="text-red-500">Complete el Costo</div>
         }
