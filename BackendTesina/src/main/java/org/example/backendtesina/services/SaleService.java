@@ -161,6 +161,15 @@ public class SaleService {
                     SaleEntity sale = repository.findById(saleId)
                             .orElseThrow(() -> new RuntimeException("Venta no encontrada para el external_reference: " + externalReference));
                     UserEntity user = sale.getUser();
+                    for (DetailSaleEntity detail : sale.getDetails()) {
+                        SpareEntity spare = detail.getSpare();
+                        if (spare.getStock() < detail.getCuantity()) {
+                            logger.error("Stock insuficiente para el repuesto ID: {}", spare.getId());
+                            return "Error: Stock insuficiente para el repuesto ID: " + spare.getId();
+                        }
+                        spare.setStock(spare.getStock() - detail.getCuantity());
+                        spareRepository.save(spare);
+                    }
 
                     if (user != null) {
                         notificationService.purchasedProduct(user);
