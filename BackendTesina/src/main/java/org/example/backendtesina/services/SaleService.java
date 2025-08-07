@@ -161,6 +161,7 @@ public class SaleService {
                     SaleEntity sale = repository.findById(saleId)
                             .orElseThrow(() -> new RuntimeException("Venta no encontrada para el external_reference: " + externalReference));
                     UserEntity user = sale.getUser();
+
                     if (user != null) {
                         notificationService.purchasedProduct(user);
                     } else {
@@ -377,6 +378,7 @@ public class SaleService {
         SaleEntity sale = new SaleEntity();
         sale.setUser(user);
         sale.setRetired(Boolean.TRUE);
+        sale.setStatus("approved");
         sale.setDate(LocalDate.now());
         sale.setTypePayment(typePaymentEntity.CASH);
 
@@ -403,6 +405,7 @@ public class SaleService {
         SaleEntity sale = new SaleEntity();
         sale.setUser(user);
         sale.setRetired(Boolean.TRUE);
+        sale.setStatus("approved");
         sale.setDate(LocalDate.now());
         sale.setTypePayment(typePaymentEntity.CASH);
 

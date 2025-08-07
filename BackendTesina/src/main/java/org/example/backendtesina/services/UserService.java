@@ -21,6 +21,8 @@ public class UserService {
     UserRepository repository;
     @Autowired
     PasswordEncoder encoder;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
     public RegisterDto getUser(String mail){
@@ -54,12 +56,13 @@ public class UserService {
             entity.setName(dto.getName());
             entity.setLastname(dto.getLastname());
             entity.setPhone(dto.getPhone());
+            entity.setPassword(passwordEncoder.encode(dto.getPassword()));
             repository.save(entity);
             response.setAddress(entity.getAddress());
             response.setEmail(entity.getEmail());
             response.setLastname(entity.getLastname());
             response.setName(entity.getName());
-            response.setPassword(encoder.encode(entity.getPassword()));
+            response.setPassword(entity.getPassword());
             response.setPhone(entity.getPhone());
             return response;
         }
