@@ -158,7 +158,7 @@ INSERT INTO service_entity (
        'UNPAID', 'CUSTOMIZATION', '2025-05-17 09:00:00', '2025-05-17 12:00:00', 25000.0,
        'CustomizationEntity', 'Luces LED blancas', 'Instalación de luces LED en cabina y baúl'),
       (
-          'Luis Fernández', 'Quiere cambiar tapizado', 'Chevrolet Onix', 2021, 'WAITING',
+          'Luis Fernández', 'Quiere cambiar tapizado', 'Chevrolet Onix', 2021, 'WITHDRAW',
           'PAID', 'CUSTOMIZATION', '2025-04-28 10:00:00', '2025-04-29 18:00:00', 75000.0,
           'CustomizationEntity', 'Cuero ecológico, pegamento industrial', 'Cambio completo de tapizado interior'
       ),
@@ -215,7 +215,7 @@ INSERT INTO service_entity (
           'UNPAID', 'INSPECTION', '2025-06-03 08:00:00', '2025-06-03 08:45:00', 11000.0,
           'InspectionEntity', 'Apto', 'Revisar nivel de aceite en 2 meses', 'Apto'),
          (
-             'Juan Pérez', 'Ruido en motor', 'Toyota Corolla', 2020, 'FINISHED',
+             'Juan Pérez', 'Ruido en motor', 'Toyota Corolla', 2020, 'WITHDRAW',
              'UNPAID', 'INSPECTION', '2025-05-01 09:00:00', '2025-05-01 10:00:00', 100000.0,
              'InspectionEntity', 'Apto', 'Revisar cada 6 meses', 'Apto'
          ),
@@ -267,7 +267,7 @@ INSERT INTO service_entity (
           'UNPAID', 'REPAIR', '2025-05-21 08:30:00', '2025-05-21 12:00:00', 35000.0,
           'RepairEntity', 'Fusibles quemados', 'Reemplazo de fusibles y revisión de cableado', 'Fusibles, cableado'),
          (
-             'María Gómez', 'No enciende', 'Ford Focus', 2018, 'PROCESS',
+             'María Gómez', 'No enciende', 'Ford Focus', 2018, 'WITHDRAW',
              'UNPAID', 'REPAIR', '2025-05-02 08:30:00', '2025-05-03 15:00:00', 50000.0,
              'RepairEntity', 'Fallo en sistema eléctrico', 'Cambio de fusibles y revisión de cableado', 'Fusibles, batería'
          ),

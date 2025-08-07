@@ -76,12 +76,12 @@ export class InicioComponent {
         localStorage.setItem('hasService', String(this.haveService));
         if (localStorage.getItem('firstTime') == 'true') {
           if (this.rol == 'USER' && !this.haveService) {
-            this.router.navigate(['servicios']);
+            this.router.navigate(['inicio']);
           } else if (this.rol == 'USER' && this.haveService) {
             this.router.navigate(['espera']);
           }
           if (this.rol == 'ADMIN') {
-            this.router.navigate(['consultarServicios']);
+            this.router.navigate(['inicio']);
           }
           localStorage.setItem('firstTime', 'false');
         }

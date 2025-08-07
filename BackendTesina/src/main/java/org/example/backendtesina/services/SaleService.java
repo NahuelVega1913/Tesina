@@ -160,6 +160,12 @@ public class SaleService {
                     int saleId = Integer.parseInt(externalReference.split("_")[1]);
                     SaleEntity sale = repository.findById(saleId)
                             .orElseThrow(() -> new RuntimeException("Venta no encontrada para el external_reference: " + externalReference));
+                    UserEntity user = sale.getUser();
+                    if (user != null) {
+                        notificationService.purchasedProduct(user);
+                    } else {
+                        logger.warn("Usuario no encontrado para la venta ID: {}", saleId);
+                    }
                     sale.setStatus("approved");
                     repository.save(sale);
                     logger.info("Venta actualizada a estado 'approved'. ID de venta: {}", sale.getId());
@@ -225,9 +231,9 @@ public class SaleService {
                 .build();
 
         PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-                .success("https://servicios351.netlify.app")
-                .pending("https://servicios351.netlify.app")
-                .failure("https://servicios351.netlify.app")
+                .success("https://servicios351.netlify.app/notificaciones")
+                .pending("https://servicios351.netlify.app/notificaciones")
+                .failure("https://servicios351.netlify.app/notificaciones")
                 .build();
 
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()
@@ -287,9 +293,9 @@ public class SaleService {
         }
 
         PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-                .success("https://servicios351.netlify.app")
-                .pending("https://servicios351.netlify.app")
-                .failure("https://servicios351.netlify.app")
+                .success("https://servicios351.netlify.app/notificaciones")
+                .pending("https://servicios351.netlify.app/notificaciones")
+                .failure("https://servicios351.netlify.app/notificaciones")
                 .build();
 
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()

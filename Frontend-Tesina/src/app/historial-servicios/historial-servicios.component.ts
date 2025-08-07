@@ -146,13 +146,13 @@ export class HistorialServiciosComponent {
 
   tipo(tipo: string) {
     if (tipo == 'REPAIR') {
-      return 'Reparacion';
+      return 'Reparación';
     }
     if (tipo == 'CUSTOMIZATION') {
-      return 'Customizacion';
+      return 'Customización';
     }
     if (tipo == 'INSPECTION') {
-      return 'Inspeccion';
+      return 'Inspección';
     }
     return 'Error';
   }

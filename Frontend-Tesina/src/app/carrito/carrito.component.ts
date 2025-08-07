@@ -60,6 +60,15 @@ export class CarritoComponent {
     this.rol = localStorage.getItem('role');
   }
   comprarRepuesto() {
+    if (this.productos.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Carrito vacío',
+        text: 'No hay productos en el carrito para comprar.',
+        confirmButtonColor: '#3085d6',
+      });
+      return;
+    }
     const body = this.productos.map((producto) => ({
       idSpare: producto.id,
       quantity: producto.cantidad,
@@ -144,6 +153,15 @@ export class CarritoComponent {
     }
   }
   abrirModalComprar() {
+    if (this.productos.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Carrito vacío',
+        text: 'No hay productos en el carrito para comprar.',
+        confirmButtonColor: '#3085d6',
+      });
+      return;
+    }
     if (this.rol === 'ADMIN' || this.rol === 'SUPERADMIN') {
       this.usuarioService.getAllUsers().subscribe({
         next: (res) => {
@@ -169,6 +187,15 @@ export class CarritoComponent {
   }
 
   confirmarCompraAdminCarrito() {
+    if (this.productos.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Carrito vacío',
+        text: 'No hay productos en el carrito para comprar.',
+        confirmButtonColor: '#3085d6',
+      });
+      return;
+    }
     const email = this.usuarioSeleccionado;
     if (!email) {
       Swal.fire({

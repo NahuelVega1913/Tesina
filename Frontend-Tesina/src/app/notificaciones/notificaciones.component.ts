@@ -30,7 +30,7 @@ export class CasillaComponent {
         this.notifications = res.map((item: any) => {
           if (item.dateTime) {
             const date = new Date(item.dateTime);
-            date.setHours(date.getHours() - 2);
+            date.setHours(date.getHours());
             return { ...item, dateTime: date };
           }
           return item;
