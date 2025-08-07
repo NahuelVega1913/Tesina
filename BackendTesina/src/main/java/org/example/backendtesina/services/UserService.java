@@ -59,7 +59,7 @@ public class UserService {
             response.setEmail(entity.getEmail());
             response.setLastname(entity.getLastname());
             response.setName(entity.getName());
-            response.setPassword(entity.getPassword());
+            response.setPassword(encoder.encode(entity.getPassword()));
             response.setPhone(entity.getPhone());
             return response;
         }
