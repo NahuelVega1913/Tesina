@@ -80,13 +80,18 @@ export class RegistrarEmpleadoComponent {
     };
   }
 
+  onBancaryNumberChange(event: any) {
+    const value = event.target.value;
+    this.form.get('bancaryNumber')?.setValue(value);
+  }
+
   save() {
     if (this.form.valid) {
       const entity: any = this.form.value;
       console.log(entity);
 
       if (entity.bancaryNumber != null) {
-        entity.bancaryNumber = this.toPlainString(entity.bancaryNumber);
+        entity.bancaryNumber = entity.bancaryNumber.toString();
       }
       const addSubscription = this.service.registerEmployee(entity).subscribe({
         next: () => {
