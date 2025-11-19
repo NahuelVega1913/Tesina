@@ -46,6 +46,18 @@ export class RegistrarEmpleadoComponent {
       return digits === length ? null : { digitLength: true };
     };
   }
+  toPlainString(num: any): string {
+    if (typeof num === 'string') return num;
+    if (typeof num === 'number') {
+      // Si es notación científica, conviértelo
+      const str = num.toString();
+      if (str.indexOf('e') !== -1) {
+        return num.toLocaleString('fullwide', { useGrouping: false });
+      }
+      return str;
+    }
+    return '';
+  }
   noNegativeValidator() {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
@@ -72,6 +84,10 @@ export class RegistrarEmpleadoComponent {
     if (this.form.valid) {
       const entity: any = this.form.value;
       console.log(entity);
+
+      if (entity.bancaryNumber != null) {
+        entity.bancaryNumber = entity.bancaryNumber.toString();
+      }
       const addSubscription = this.service.registerEmployee(entity).subscribe({
         next: () => {
           Swal.fire({
