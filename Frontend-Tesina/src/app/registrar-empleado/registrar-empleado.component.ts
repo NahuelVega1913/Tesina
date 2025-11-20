@@ -84,6 +84,13 @@ export class RegistrarEmpleadoComponent {
     const value = event.target.value;
     this.form.get('bancaryNumber')?.setValue(value);
   }
+  onlyNumberInput(event: KeyboardEvent) {
+    const charCode = event.key.charCodeAt(0);
+    // Permite solo números (0-9)
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
+  }
 
   save() {
     if (this.form.valid) {
