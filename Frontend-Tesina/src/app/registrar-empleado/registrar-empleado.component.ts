@@ -98,7 +98,7 @@ export class RegistrarEmpleadoComponent {
       console.log(entity);
 
       if (entity.bancaryNumber != null) {
-        entity.bancaryNumber = entity.bancaryNumber.toString();
+        entity.bancaryNumber = this.toPlainString(entity.bancaryNumber);
       }
       const addSubscription = this.service.registerEmployee(entity).subscribe({
         next: () => {
